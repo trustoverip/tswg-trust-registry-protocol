@@ -1,0 +1,31 @@
+
+{
+  "specs": [
+    {
+      "title": "ToIP Template Specification",
+      "spec_directory": "./spec",
+      "output_path": "./docs",
+      "markdown_paths": [
+        "title.md", 
+        "header.md",
+        "toc.md",
+        "foreword.md",
+        "introduction.md",
+        "scope.md",
+        "normative_references.md",
+        "terms_and_definitions.md",
+        "clauses.md",
+        "annex.md",
+        "biblio.md"
+      ],
+      "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
+      "logo_link": "https://github.com/trustoverip/specification-template",
+      "katex": true,
+      "source": {
+        "host": "github",
+        "account": "trustoverip",
+        "repo": "specification-template"
+      }
+    }
+  ]
+}
