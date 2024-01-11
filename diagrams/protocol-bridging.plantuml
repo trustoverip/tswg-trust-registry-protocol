@@ -1,0 +1,30 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Context.puml
+
+
+title Native and Bridged Support for TRP
+
+Person(Integrator, "Integrator", "Ecosystem Developer")
+
+System(Bridge, "TR Protocol Bridge")
+System(TRAIN, "TRAIN")
+System(EUTrustedList, "EU Trusted List")
+System(NativeSupport, "SystemX"," w Native TRP Support")
+
+System(OpenDataBridge, "OpenData Bridge")
+
+
+Rel(Integrator, Bridge, "TRP")
+Rel(Bridge, TRAIN,"bridges")
+Rel(Bridge, EUTrustedList, "bridges")
+
+Rel(Integrator, OpenDataBridge,"TRP")
+Rel(OpenDataBridge,NativeSupport,"ODPS")
+
+Rel(Integrator, NativeSupport,"TRP")
+
+
+
+@enduml 

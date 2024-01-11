@@ -24,6 +24,7 @@ editing is:
 
 - Install the prerequisites: `node` and `npm`
 - Run `npm install` from the root of the repository
+- Run `npm install spec-up` to install `spec-up`.
 - Run `npm run edit` from the root of the repository to render the document with
   live updates to the `docs/index.html` as
   you edit the source files.

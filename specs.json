@@ -8,10 +8,12 @@
       "markdown_paths": [
         "title.md", 
         "header.md",
+        "revision_history.md",
         "toc.md",
         "foreword.md",
         "introduction.md",
         "scope.md",
+        "requirements.md",
         "normative_references.md",
         "terms_and_definitions.md",
         "clauses.md",

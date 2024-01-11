@@ -27,10 +27,10 @@
   "homepage": "https://github.com/decentralized-identity/spec-up#readme",
   "dependencies": {
     "@traptitech/markdown-it-katex": "3.3.0",
-    "axios": "0.21.2",
+    "axios": "^1.6.3",
     "find-pkg-dir": "2.0.0",
     "fs-extra": "8.1.0",
-    "gulp": "4.0.2",
+    "gulp": "^3.9.1",
     "gulp-clean-css": "4.3.0",
     "gulp-concat": "2.6.1",
     "gulp-terser": "1.2.0",
@@ -56,5 +56,8 @@
     "pkg-dir": "4.2.0",
     "prismjs": ">=1.24.0",
     "yargs": "16.2.0"
+  },
+  "overrides": {
+    "graceful-fs": "^4.2.11"
   }
 }
