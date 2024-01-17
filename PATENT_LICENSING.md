@@ -6,7 +6,9 @@
  
  
 1.  The Purpose of this Agreement.  This Agreement sets forth the terms under which I make certain patent rights available to you for your Permitted Uses of the Specification.  Capitalized terms are defined in the Agreement’s last section.
+
 2. Patents.
+
 2.1.   Patent Non-Assert.
  
 2.1.1. The Promise.  I, on behalf of myself and my successors in interest and assigns, irrevocably promise not to assert my Granted Claims against you for your Permitted Uses, subject to the terms and conditions of Section 2.1.  This is a personal promise directly from me to you, and you acknowledge as a condition of benefiting from it that no rights from me are received from suppliers, distributors, or otherwise in connection with this promise. This promise also applies to your Permitted Uses of any other specifications incorporating all required portions of the Specification.
@@ -21,8 +23,8 @@
  
 2.1.4. Bankruptcy.  Solely for purposes of Section 365(n) of Title 11, United States Bankruptcy Code and any equivalent law in any foreign jurisdiction, this promise will be treated as if it were a license and you may elect to retain your rights under this promise if I (or any owner of any patents or patent applications referenced herein), as a debtor in possession, or a bankruptcy trustee, reject this non-assert.
  
-2.2.  Patent License Commitment.  In addition to rights granted in 2.1, on behalf of me and my successors in interest and assigns, I agree to grant to you a no charge, royalty free license to my Granted Claims on reasonable and non-discriminatory terms, where such license applies only to those Granted Claims infringed by the implementation of the Specification, solely for your Permitted Uses.
- 
+2.2.  Patent License Commitment.  In addition to rights granted in 2.1. on behalf of me and my successors in interest and assigns, I agree to grant to you a no charge, royalty free license to my Granted Claims on reasonable and non-discriminatory terms, where such license applies only to those Granted Claims infringed by the implementation of the Specification, solely for your Permitted Uses.
+
 3.  No Other Rights. Except as specifically set forth in this Agreement, no other express or implied patent, trademark, copyright, or other property rights are granted under this Agreement, including by implication, waiver, or estoppel.
  
 4.  Antitrust Compliance.  I acknowledge that I may compete with other participants, that I am under no obligation to implement the Specification, that each participant is free to develop competing technologies and standards, and that each party is free to license its patent rights to third parties, including for the purpose of enabling competing technologies and standards.

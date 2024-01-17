@@ -39,18 +39,4 @@ A Registry of Registries (RoR), is a form of **trust registry** that primarily s
   - Which trust registry is known to manage a list of professionals (e.g. CPAs, lawyers, engineers) that have particular signing rights (authorizations)?
 3. Which **trust registry** are known to operate under a given **EGF**.
 
-### Use of the Trust Registry Protocol.
 
-The TRP is intended to be used in at least two key ways:
-
-* Native Support - systems may directly implement access using the TRP.
-* Bridged - systems may create access "bridges" that provide TRP access to their systems.
-
-![C4 Systems Model - showing native TRP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](../out/diagrams/protocol-bridging/protocol-bridging.png).
-
-
-### Object Model
-
-We provide a high-level object model (NOTE: source of truth is the Swagger as this diagram may be out of date during development)
-
-![High Level Object Model](../out/diagrams/highlevel/highlevel.png)

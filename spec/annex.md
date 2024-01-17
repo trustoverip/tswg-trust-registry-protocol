@@ -9,7 +9,7 @@
 
 [//]: # (With some more text)
 
-##  Appendix A: Consolidated Requirements
+##  Annex A: Consolidated Requirements
 
 For ease of reference, the following table consolidates all normative requirements in this specification. Each requirement is linked to the section in which it appears.
 
@@ -27,7 +27,7 @@ TODO: Finalize table once requirements (earlier).
 |A.3.2| The [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241). Note that this includes the requirement that the **EGF** and all **governed parties** (which includes **authorized issuers** and **authorized verifiers**) |[LINK]|
 
 
-## Appendix B: OpenAPI Specification
+## Annex B: OpenAPI Specification
 
 The OpenAPI Specification (v3.0.1) is the first "concrete" API specification. 
 
@@ -38,3 +38,20 @@ It is provided as an Open API Specification v3 YAML file.
 [Redoc Rendering (static HTML) of specification](../api/redoc-static.html)
 
 
+## Annex C - Uses and Data Model Reference
+
+### Use of the Trust Registry Protocol.
+
+The TRP is intended to be used in at least two key ways:
+
+* Native Support - systems may directly implement access using the TRP.
+* Bridged - systems may create access "bridges" that provide TRP access to their systems.
+
+![C4 Systems Model - showing native TRP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](../out/diagrams/protocol-bridging/protocol-bridging.png).
+
+
+### Object Model
+
+We provide a high-level object model (NOTE: source of truth is the Swagger as this diagram may be out of date during development)
+
+![High Level Object Model](../out/diagrams/highlevel/highlevel.png)

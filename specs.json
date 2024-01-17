@@ -2,7 +2,7 @@
 {
   "specs": [
     {
-      "title": "ToIP Template Specification",
+      "title": "ToIP Trust Registry Protocol v2 TF DRAFT",
       "spec_directory": "./spec",
       "output_path": "./docs",
       "markdown_paths": [
@@ -13,9 +13,9 @@
         "foreword.md",
         "introduction.md",
         "scope.md",
-        "requirements.md",
         "normative_references.md",
         "terms_and_definitions.md",
+        "requirements.md",
         "clauses.md",
         "annex.md",
         "biblio.md"

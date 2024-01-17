@@ -432,8 +432,6 @@ components:
       
       default:
         description: Generic Error
-  schemas:
-    
     Uri:
       type: string
       format: uri

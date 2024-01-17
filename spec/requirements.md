@@ -78,7 +78,7 @@ TODO: Add normative ref to [ToIP Governance Architecture Specification](https://
 
 ### Trust Registry Service Property [TRSP-*] 
 
-The **DID document** for the **DID** that identifies an **EGF** compliant with this specification MUST include a service property that meets the **requirements** [in section 5.4 of the W3C Decentralized Identifiers (DIDs) 1.0 specification](https://www.w3.org/TR/did-core/#services) plus the following additional **requirements**:
+The **DID document** for the **DID** that identifies an **EGF** compliant with this specification MUST include a service property that meets the **requirements** in section 5.4 of [[spec-norm:DID-CORE]] plus the following additional **requirements**:
 
 * The value of the `type` property MUST be `TrustRegistry`.
 * The value of the `serviceEndpoint` property MUST be exactly one HTTPS URI.
@@ -118,7 +118,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
         - a. The value labels MUST be:
             - i. `AuthorizationStartDate`
             - ii. `AuthorizationEndDate`
-        - b. The values MUST be formatted to comply with [RFC 3339](https://tools.ietf.org/html/rfc3339) in the UTC/Z time zone with no offset.
+        - b. The values MUST be formatted to comply with [[spec-norm:RFC3339]] in the UTC/Z time zone with no offset.
         - c. The `AuthorizationStartDate` MUST be the date that the **registered party’s** authorization began.
         - d. The `AuthorizationEndDate` MUST be either:
             - i. `Null` for an entry whose **status value** is `Current` at the time of the query.
