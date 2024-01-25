@@ -11,8 +11,8 @@
 
 The following queries relate to receiving answers related to entities and other trust registries.
 
-* [RQ-1] MUST support query operations for the current status of a **registered entity**.
-* [RQ-2] MUST support querying about ---TODO: 
+* [RQ-1] The system MUST support query operations for the current status of a **registered entity**.
+* [RQ-2] The system MUST support querying about ---TODO: 
 
 ### Configuration Queries [CQ-*]
 
@@ -83,9 +83,13 @@ The **DID document** for the **DID** that identifies an **EGF** compliant with t
 * The value of the `type` property MUST be `TrustRegistry`.
 * The value of the `serviceEndpoint` property MUST be exactly one HTTPS URI.
 
+::: issue 
+https://github.com/trustoverip/tswg-trust-registry-protocol/issues/5 
+- Should align with DID Profiles
+:::
 
-[`TODO:` reconcile above with Profiles concept. ]
-
+[[ref: Registered entities]] MUST indicate which registries they are part of. 
+* Registered entities MUST indicate the primary trust registry for a particular [[ref: permission]].
 [`TODO:` The issuer/verifier needs to state their primary trust registry affiliation (a trust relationship) - is this a new section?]
 
 ### Trust Registry Protocol [TRP-*]

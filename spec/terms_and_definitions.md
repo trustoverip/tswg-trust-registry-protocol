@@ -24,7 +24,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 ~ The primary trust registry plus all secondary trust registries are collectively referred to as the authorized trust registries.
 
 [[def: action]]
-~ a discrete property (string) that an entity can be authorized for, in the form of an [[ref: authorization]] response.
+~ a discrete property (string) that an entity can be authorized for, in the form of a [permission](https://trustoverip.github.io/ctwg-main-glossary/#term:permission) response.
 
 [[def: action namespace]]
 ~ A well-known string that is used in an EGF to indicate a discrete authorization. Examples (non-exhaustive): "canada:driver-license", "eu:trusted-list.authorized-timestamp", "global:tsm"
@@ -34,6 +34,11 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 [[def: registered entity]]
 ~ An entity that is listed in the system (i.e. the [[ref: trust registry]]) that is being queried. 
+
+[[def: permission]]
+~ 1. Authorization, either tacit or explicit, allowing some thing or action. – 2. Computing · Access controls that grant users the ability to perform specific, often limited, actions in a system.
+
+* source: [InterPARES](https://interparestrustai.org/terminology/term/permission/en)
 
 [[def: primary trust registry]]
 ~ TODO:
