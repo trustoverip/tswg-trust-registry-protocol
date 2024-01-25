@@ -20,6 +20,10 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 [[def: authorization]]
 ~ Access privileges granted to an entity; conveys an “official” sanction to perform a cryptographic function or other sensitive activity.
 * source: [NIST](https://csrc.nist.gov/glossary/term/permission) NIST SP 800-57 Part 2 Rev.1 under Authorization
+::: issue 
+https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
+- May need a `governed authorization` term to help link tech+governance.
+:::
 
 [[def:authorized trust registries]]
 ~ The primary trust registry plus all secondary trust registries are collectively referred to as the authorized trust registries.
