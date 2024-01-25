@@ -102,7 +102,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
 * [TRP-2] MUST return responses to queries for the **status value** of a **registry entry** that satisfies one or more of the following sets of query parameters:
 
 * Entity
-* Entity Authorization
+* The entity authorization that is being validated.
 * Registry
 
 

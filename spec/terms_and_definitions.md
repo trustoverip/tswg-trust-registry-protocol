@@ -18,7 +18,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 ~ TODO: 
 
 [[def: authorization]]
-~ an acknowlegement by the responding system that an entity has (or does not have) is authorized to conduct for a particular [[ref: action]] at the time of query.
+~ Access privileges granted to an entity; conveys an “official” sanction to perform a cryptographic function or other sensitive activity.
+* source: [NIST](https://csrc.nist.gov/glossary/term/permission) NIST SP 800-57 Part 2 Rev.1 under Authorization
 
 [[def:authorized trust registries]]
 ~ The primary trust registry plus all secondary trust registries are collectively referred to as the authorized trust registries.
@@ -36,9 +37,9 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 ~ An entity that is listed in the system (i.e. the [[ref: trust registry]]) that is being queried. 
 
 [[def: permission]]
-~ 1. Authorization, either tacit or explicit, allowing some thing or action. – 2. Computing · Access controls that grant users the ability to perform specific, often limited, actions in a system.
+~  Authorization to perform some action on a system.
 
-* source: [InterPARES](https://interparestrustai.org/terminology/term/permission/en)
+* source: [NIST](https://csrc.nist.gov/glossary/term/permission)
 
 [[def: primary trust registry]]
 ~ TODO:
