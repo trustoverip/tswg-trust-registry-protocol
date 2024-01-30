@@ -57,6 +57,10 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 [[def: trust registry]] 
 ~ A registry that serves as an **authoritative source** for **trust graphs** or other **governed information** describing one or more **trust communities**. A trust registry is typically **authorized** by a **governance framework**.  See also: trust list
 
+[[def: trusted party]]
+~ A party that is trusted by an entity to faithfully perform certain services for that entity. An entity may choose to act as a trusted party for itself.
+- source: [NIST SP 800-56B Rev. 2](https://doi.org/10.6028/NIST.SP.800-56Br2) under Trusted party
+
 [[def: VID Type]]
 ~ TODO: 
 
