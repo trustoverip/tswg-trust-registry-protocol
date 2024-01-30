@@ -85,7 +85,7 @@ The **DID document** for the **DID** that identifies an **EGF** compliant with t
 
 ::: issue 
 https://github.com/trustoverip/tswg-trust-registry-protocol/issues/5 
-- Should align with DID Profiles
+- Should align with Service Profiles/[Service Discovery] efforts
 :::
 
 [[ref: Registered entities]] MUST indicate which registries they are part of. 
