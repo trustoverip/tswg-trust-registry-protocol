@@ -22,7 +22,7 @@ List significant changes (non-normative):
 
 ### On Trust, Trustworthy, and Trustworthiness
 
-The terms [[ref:trust]] is loaded with varied meanings that often conflict. In the context of [[ref:trust registries]] we need to establish the scope of what we are talking about when we apply the term "trust" to trust registires. There are baseline definitions that follow this limiting scope. 
+The term [[ref:trust]] is loaded with varied meanings that often conflict. In the context of [[ref:trust registries]] we need to establish the scope of what we are talking about when we apply the term "trust" to trust registires. There are baseline definitions that follow this limiting scope. 
 
 A trust registry does not create trust. The decision for one entity to "trust" another is their decision. A trust registry may provide information that helps the *consuming party*  in deciding that an entity is [[ref: trustworthy]]. 
 
