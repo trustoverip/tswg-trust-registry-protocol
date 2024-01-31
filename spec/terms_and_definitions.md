@@ -17,6 +17,14 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 [[def: assurance levels]]
 ~ TODO: 
 
+[[def: authentication]] (copied from ToIP Glossary)
+~ Verifying the identity of a user, process, or device, often  as a prerequisite to allowing access to resources in an information system. source: [NIST Special Publication 800-39](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-39.pdf)
+
+[[def: authenticity]] (copied from ToIP Glossary)
+~ The property of being genuine and being able to be verified and trusted; confidence in the validity of a transmission, a message, or message originator. source: [NIST Special Publication 800-39](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-39.pdf)
+
+
+
 [[def: authorization]]
 ~ Access privileges granted to an entity; conveys an “official” sanction to perform a cryptographic function or other sensitive activity.
 * source: [NIST](https://csrc.nist.gov/glossary/term/permission) NIST SP 800-57 Part 2 Rev.1 under Authorization
@@ -51,10 +59,13 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 [[def:secondary trust registry, secondary trust registries]]
 ~ TODO: 
 
+[[def: trust decision]]
+~ A decision that a party needs to make about whether to engage in a specific interaction or transaction with another entity that involves real or perceived risks. source: [ToIP Glossary](https://docs.google.com/document/d/1fZByfuSOwszDRkE7ARQLeElSYmVznoOyJK4sxRvJpyM/edit#heading=h.m8c86ccqis9r)
+
 [[def: trust list]]
 ~ A one-dimensional trust graph in which an authoritative source publishes a list of entities that are trusted in a specific trust context. A trust list can be considered a simplified form of a trust registry.
 
-[[def: trust registry]] 
+[[def: trust registry, trust registries]] 
 ~ A registry that serves as an **authoritative source** for **trust graphs** or other **governed information** describing one or more **trust communities**. A trust registry is typically **authorized** by a **governance framework**.  See also: trust list
 
 [[def: trusted party]]

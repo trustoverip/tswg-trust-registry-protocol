@@ -22,13 +22,19 @@ List significant changes (non-normative):
 
 ### On Trust, Trustworthy, and Trustworthiness
 
-The terms [[ref:trust]], [[ref: trustworthy]], and [[ref: trustworthiness]] are loaded with varied meanings that often conflict. In the context of [[ref:trust registries]] we need to establish the scope of what we are talking about when we apply these terms to trust registires. There are baseline definitions that follow this limiting scope. 
+The terms [[ref:trust]] is loaded with varied meanings that often conflict. In the context of [[ref:trust registries]] we need to establish the scope of what we are talking about when we apply the term "trust" to trust registires. There are baseline definitions that follow this limiting scope. 
 
-A trust registry does not create trust. The decision for one entity to "trust" another is their decision. A trust registry may provide information that helps the consuming party (TODO: ref "consuming party" - find better term) in deciding that an entity is "trustworthy" (ie.. they are worthy of trust). 
+A trust registry does not create trust. The decision for one entity to "trust" another is their decision. A trust registry may provide information that helps the *consuming party*  in deciding that an entity is [[ref: trustworthy]]. 
+
+::: todo 
+  define term "*consuming party*" - OR find better term and capture definition.
+:::
 
 The results on a [[ref: trust decision]] based on input from a trust registry may range from:
-* immedidate decision that the entity meets or cannot meet the full requirement of the [[ref:trust relationship]]; or
+* immediate decision that the entity meets or cannot meet the full requirement of the [[ref:trust relationship]]; or
 * further input is required before trust decision can be made. 
+
+These decisions relate to a determination that a relationship is (or is not) sufficiently [[ref: trustworthy]] to establish a [[ref: trust relationship]]. To reach that determination, each party may have its own way of determining the [[ref: trustworthiness]] of their counterparty for the [[ref: trust relationship]] that they require.
 
 The following terms are presented to help create a general understanding and may be only indirectly related to trust registry efforts:
 
