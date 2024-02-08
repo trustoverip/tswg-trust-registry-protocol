@@ -66,7 +66,8 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 ~ A one-dimensional trust graph in which an authoritative source publishes a list of entities that are trusted in a specific trust context. A trust list can be considered a simplified form of a trust registry.
 
 [[def: trust registry, trust registries]] 
-~ A registry that serves as an **authoritative source** for **trust graphs** or other **governed information** describing one or more **trust communities**. A trust registry is typically **authorized** by a **governance framework**.  See also: trust list
+~ A registry that serves as an authoritative source for trust graphs or other governed information describing one or more trust communities. A trust registry is typically authorized by a governance framework.  
+* See also: [[ref: trust list]]
 
 [[def: trusted party]]
 ~ A party that is trusted by an entity to faithfully perform certain services for that entity. An entity may choose to act as a trusted party for itself.

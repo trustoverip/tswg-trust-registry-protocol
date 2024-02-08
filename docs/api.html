@@ -1,0 +1,1332 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ToIP Trust Registry Protocol v2</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>ToIP Trust Registry Protocol v2</h1>
+    <div class="app-desc"><h1>Trust Registry capabilities</h1>
+<ul>
+<li>Allow querying for critical items in a digital trust ecosystem:
+Entities, Registries, and Resources that are required to operate
+in the ecosysystem.</li>
+</ul>
+<h1>Registry of Registries (RoR) capabilities.</h1>
+<p>RoR capabilities include:</p>
+<ul>
+<li>Listing Registries that are known (to the registry being queried).</li>
+<li>list the acknowledged trust registries that the RoR recognizes and what
+that may mean in the context of a particular governance framework.</li>
+</ul>
+</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="darrell.odonnell@continuumloop.com">darrell.odonnell@continuumloop.com</a></div>
+    <div class="app-desc">Version: 0.2.0</div>
+    <div class="app-desc">BasePath:/darrellodonnell/ToIP.TrustRegistry/0.1.0</div>
+    <div class="license-info">Apache 2.0</div>
+    <div class="license-url">http://www.apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li></li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Lookups">Lookups</a></h4>
+  <ul>
+  <li><a href="#lookupAssurancelevelsGet"><code><span class="http-method">get</span> /lookup/assurancelevels</code></a></li>
+  <li><a href="#lookupAuthorizationsGet"><code><span class="http-method">get</span> /lookup/authorizations</code></a></li>
+  <li><a href="#lookupNamespacesGet"><code><span class="http-method">get</span> /lookup/namespaces</code></a></li>
+  <li><a href="#lookupVidmethodsGet"><code><span class="http-method">get</span> /lookup/vidmethods</code></a></li>
+  </ul>
+  <h4><a href="#Metadata">Metadata</a></h4>
+  <ul>
+  <li><a href="#metadataGet"><code><span class="http-method">get</span> /metadata</code></a></li>
+  </ul>
+  <h4><a href="#Offline">Offline</a></h4>
+  <ul>
+  <li><a href="#getOfflineFile"><code><span class="http-method">get</span> /offline/exportfile</code></a></li>
+  <li><a href="#getTED"><code><span class="http-method">get</span> /offline/trustestablishmentdocument</code></a></li>
+  </ul>
+  <h4><a href="#Registry">Registry</a></h4>
+  <ul>
+  <li><a href="#entitiesEntityVIDAuthorizationsGet"><code><span class="http-method">get</span> /entities/{entityVID}/authorizations</code></a></li>
+  <li><a href="#entititiesEntityidGet"><code><span class="http-method">get</span> /entitities/{entityid}</code></a></li>
+  <li><a href="#registriesRecognizedRegistriesGet"><code><span class="http-method">get</span> /registries/recognized-registries</code></a></li>
+  <li><a href="#registriesRegistryVIDGet"><code><span class="http-method">get</span> /registries/{registryVID}/</code></a></li>
+  <li><a href="#registriesRegistryVIDRecognizedRegistriesGet"><code><span class="http-method">get</span> /registries/{registryVID}/recognized-registries/</code></a></li>
+  </ul>
+
+  <h1><a name="Lookups">Lookups</a></h1>
+  <div class="method"><a name="lookupAssurancelevelsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /lookup/assurancelevels</code></pre></div>
+    <div class="method-summary">Get a list of the assurance levels that are in use by this Trust Registry (and its governing EGF). (<span class="nickname">lookupAssurancelevelsGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">egfURI (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The URI-based identifier of the Ecosystem Governance Framework that the assurance levels apply to. Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AssuranceLevelListType">AssuranceLevelListType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "identifier" : "did:example:123",
+  "name" : "LOA2",
+  "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+}, {
+  "identifier" : "did:example:123",
+  "name" : "LOA2",
+  "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#AssuranceLevelListType">AssuranceLevelListType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="lookupAuthorizationsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /lookup/authorizations</code></pre></div>
+    <div class="method-summary">Get a list of Rights that are used in this Trust Registry. (<span class="nickname">lookupAuthorizationsGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">egfURI (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The URI-based identifier of a DID or X.509 Issuer. Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AuthorizationListType">AuthorizationListType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "identifier" : "did:example:abc",
+  "simplename" : "country:role"
+}, {
+  "identifier" : "did:example:abcd",
+  "simplename" : "canada:professional:engineer"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#AuthorizationListType">AuthorizationListType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="lookupNamespacesGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /lookup/namespaces</code></pre></div>
+    <div class="method-summary">Get the namespaces that are supported in this trust Registry. (<span class="nickname">lookupNamespacesGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#NamespaceListType">NamespaceListType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "identifier" : "did:example:123",
+  "description" : "description",
+  "canonicalString" : "[\"ca.issuer.driverlicense\",\"mining.tsm\"]",
+  "egfURI" : "[\"did:example:GlobalDriverLicenseDID\"]"
+}, {
+  "identifier" : "did:example:123",
+  "description" : "description",
+  "canonicalString" : "[\"ca.issuer.driverlicense\",\"mining.tsm\"]",
+  "egfURI" : "[\"did:example:GlobalDriverLicenseDID\"]"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#NamespaceListType">NamespaceListType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="lookupVidmethodsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /lookup/vidmethods</code></pre></div>
+    <div class="method-summary">Get a list of DID Methods that are supported by a particular Governance Framework. (<span class="nickname">lookupVidmethodsGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">egfURI (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Provides a list of DID-methods that are supported by this trust registry. MAY include Maximum Assurance Level
+that a DID Method is set at under the EGF. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#VIDMethodListType">VIDMethodListType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "identifier" : "identifier",
+  "maximumAssuranceLevel" : {
+    "identifier" : "did:example:123",
+    "name" : "LOA2",
+    "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+  }
+}, {
+  "identifier" : "identifier",
+  "maximumAssuranceLevel" : {
+    "identifier" : "did:example:123",
+    "name" : "LOA2",
+    "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+  }
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#VIDMethodListType">VIDMethodListType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Metadata">Metadata</a></h1>
+  <div class="method"><a name="metadataGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /metadata</code></pre></div>
+    <div class="method-summary">Provides metadata object. (<span class="nickname">metadataGet</span>)</div>
+    <div class="method-notes">Metadata object.</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#MetadataType">MetadataType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "languages" : [ "en", "en-CA", "fr-CA" ],
+  "lastupdated" : "2000-01-23T04:56:07.000+00:00"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#MetadataType">MetadataType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Offline">Offline</a></h1>
+  <div class="method"><a name="getOfflineFile"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /offline/exportfile</code></pre></div>
+    <div class="method-summary">Access a full data file that can be used offline. (<span class="nickname">getOfflineFile</span>)</div>
+    <div class="method-notes">Allows querying to determine the status of an Issuer, as identified by their Identifier (unique),
+credential type, and EGF that they are operating under.</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ExportFile">ExportFile</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "extractdatetime" : "2000-01-23T04:56:07.000+00:00",
+  "lookups" : {
+    "Namespaces" : [ {
+      "identifier" : "did:example:123",
+      "description" : "description",
+      "canonicalString" : "[\"ca.issuer.driverlicense\",\"mining.tsm\"]",
+      "egfURI" : "[\"did:example:GlobalDriverLicenseDID\"]"
+    }, {
+      "identifier" : "did:example:123",
+      "description" : "description",
+      "canonicalString" : "[\"ca.issuer.driverlicense\",\"mining.tsm\"]",
+      "egfURI" : "[\"did:example:GlobalDriverLicenseDID\"]"
+    } ],
+    "Authorizations" : [ {
+      "identifier" : "did:example:abc",
+      "simplename" : "country:role"
+    }, {
+      "identifier" : "did:example:abcd",
+      "simplename" : "canada:professional:engineer"
+    } ],
+    "AssuranceLevels" : [ {
+      "identifier" : "did:example:123",
+      "name" : "LOA2",
+      "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+    }, {
+      "identifier" : "did:example:123",
+      "name" : "LOA2",
+      "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+    } ],
+    "VIDMethods" : [ {
+      "identifier" : "identifier",
+      "maximumAssuranceLevel" : {
+        "identifier" : "did:example:123",
+        "name" : "LOA2",
+        "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+      }
+    }, {
+      "identifier" : "identifier",
+      "maximumAssuranceLevel" : {
+        "identifier" : "did:example:123",
+        "name" : "LOA2",
+        "description" : "Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity"
+      }
+    } ]
+  },
+  "entities" : [ {
+    "identifier" : "did:example:123",
+    "authorizations" : [ {
+      "identifier" : "did:example:abc",
+      "simplename" : "country:role"
+    }, {
+      "identifier" : "did:example:abcd",
+      "simplename" : "canada:professional:engineer"
+    } ],
+    "statusDetail" : "statusDetail",
+    "validity" : {
+      "validFromDT" : "2000-01-23T04:56:07.000+00:00",
+      "validUntilDT" : "2000-01-23T04:56:07.000+00:00"
+    },
+    "governanceFrameworkVID" : "did:example:456",
+    "DIDDocument" : "DIDDocument",
+    "status" : "current"
+  }, {
+    "identifier" : "did:example:123",
+    "authorizations" : [ {
+      "identifier" : "did:example:abc",
+      "simplename" : "country:role"
+    }, {
+      "identifier" : "did:example:abcd",
+      "simplename" : "canada:professional:engineer"
+    } ],
+    "statusDetail" : "statusDetail",
+    "validity" : {
+      "validFromDT" : "2000-01-23T04:56:07.000+00:00",
+      "validUntilDT" : "2000-01-23T04:56:07.000+00:00"
+    },
+    "governanceFrameworkVID" : "did:example:456",
+    "DIDDocument" : "DIDDocument",
+    "status" : "current"
+  } ],
+  "validity" : {
+    "validFromDT" : "2000-01-23T04:56:07.000+00:00",
+    "validUntilDT" : "2000-01-23T04:56:07.000+00:00"
+  },
+  "registries" : [ {
+    "identifier" : "did:example:123",
+    "name" : "Professional Engineers Ontario",
+    "description" : "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province.",
+    "peerType" : "peer"
+  }, {
+    "identifier" : "did:example:123",
+    "name" : "Professional Engineers Ontario",
+    "description" : "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province.",
+    "peerType" : "peer"
+  } ],
+  "version" : "version"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    JSON file array of offline list of Issuers
+        <a href="#ExportFile">ExportFile</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getTED"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /offline/trustestablishmentdocument</code></pre></div>
+    <div class="method-summary">Access a full data file that can be used offline. (<span class="nickname">getTED</span>)</div>
+    <div class="method-notes">Allows querying to determine the status of an Issuer, as identified by their Identifier (unique),
+credential type, and EGF that they are operating under.</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#TrustEstablishmentDocument">TrustEstablishmentDocument</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "TBD" : "TBD"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    JSON file array of offline list of Issuers
+        <a href="#TrustEstablishmentDocument">TrustEstablishmentDocument</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Registry">Registry</a></h1>
+  <div class="method"><a name="entitiesEntityVIDAuthorizationsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /entities/{entityVID}/authorizations</code></pre></div>
+    <div class="method-summary">Determine whether an Entity has a particular Authorization. (<span class="nickname">entitiesEntityVIDAuthorizationsGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">entityVID (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; The VID-based identifier of a VID/DID/AID or X.509 Issuer. Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AuthorizationListType">AuthorizationListType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "identifier" : "did:example:abc",
+  "simplename" : "country:role"
+}, {
+  "identifier" : "did:example:abcd",
+  "simplename" : "canada:professional:engineer"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#AuthorizationListType">AuthorizationListType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="entititiesEntityidGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /entitities/{entityid}</code></pre></div>
+    <div class="method-summary">Returns Registry Information about a particular entity that is represented in the queried system. (<span class="nickname">entititiesEntityidGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">entityid (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; The URI-based identifier of a DID or X.509 Issuer. Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">authorization (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; The identifier of the Authorization that is being queried for this Entity. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#EntityType">EntityType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "identifier" : "did:example:123",
+  "authorizations" : [ {
+    "identifier" : "did:example:abc",
+    "simplename" : "country:role"
+  }, {
+    "identifier" : "did:example:abcd",
+    "simplename" : "canada:professional:engineer"
+  } ],
+  "statusDetail" : "statusDetail",
+  "validity" : {
+    "validFromDT" : "2000-01-23T04:56:07.000+00:00",
+    "validUntilDT" : "2000-01-23T04:56:07.000+00:00"
+  },
+  "governanceFrameworkVID" : "did:example:456",
+  "DIDDocument" : "DIDDocument",
+  "status" : "current"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#EntityType">EntityType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="registriesRecognizedRegistriesGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /registries/recognized-registries</code></pre></div>
+    <div class="method-summary">Query this Trust Registry about its recognition of another Trust Registry. (<span class="nickname">registriesRecognizedRegistriesGet</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">namespace-VID (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Filter in only the namespace requested - show all registries otherwise. The URI-based Verifiable Identifier (VID) (e.g. DID or X.509 VID). Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>      <div class="param">EGF-VID (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Filter in only the registries under the specified EGF (by EGF DID). Defaults to be limited to the EGFURI that is being queried at the root.
+The URI-based Verifiable Identifier (VID) (e.g. DID or X.509 VID). Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RegistryListType">RegistryListType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "identifier" : "did:example:123",
+  "name" : "Professional Engineers Ontario",
+  "description" : "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province.",
+  "peerType" : "peer"
+}, {
+  "identifier" : "did:example:123",
+  "name" : "Professional Engineers Ontario",
+  "description" : "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province.",
+  "peerType" : "peer"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#RegistryListType">RegistryListType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="registriesRegistryVIDGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /registries/{registryVID}/</code></pre></div>
+    <div class="method-summary">Get resource data indicated by DID. (<span class="nickname">registriesRegistryVIDGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">registryVID (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; The URI-based identifier of a DID or X.509 Issuer. Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#inline_response_200">inline_response_200</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#inline_response_200">inline_response_200</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="registriesRegistryVIDRecognizedRegistriesGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /registries/{registryVID}/recognized-registries/</code></pre></div>
+    <div class="method-summary">Query this Trust Registry about its recognition of a specific Trust Registry.
+TODO: determine RoR (registry of registry) impacts here. (<span class="nickname">registriesRegistryVIDRecognizedRegistriesGet</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">registryVID (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; The URI-based identifier of a DID or X.509 Issuer. Allows reserved characters per RFC3986.
+Do &lt;strong&gt;NOT&lt;/strong&gt; escape the URI. </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RegistryListType">RegistryListType</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "identifier" : "did:example:123",
+  "name" : "Professional Engineers Ontario",
+  "description" : "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province.",
+  "peerType" : "peer"
+}, {
+  "identifier" : "did:example:123",
+  "name" : "Professional Engineers Ontario",
+  "description" : "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province.",
+  "peerType" : "peer"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/problem+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    search results matching criteria
+        <a href="#RegistryListType">RegistryListType</a>
+    <h4 class="field-label">400</h4>
+    Bad Request
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">401</h4>
+    Unauthorized
+        <a href="#ProblemDetails">ProblemDetails</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#ProblemDetails">ProblemDetails</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#AssuranceLevelListType"><code>AssuranceLevelListType</code></a></li>
+    <li><a href="#AssuranceLevelType"><code>AssuranceLevelType</code></a></li>
+    <li><a href="#AuthorizationListType"><code>AuthorizationListType</code></a></li>
+    <li><a href="#AuthorizationType"><code>AuthorizationType</code></a></li>
+    <li><a href="#EntityListType"><code>EntityListType</code></a></li>
+    <li><a href="#EntityType"><code>EntityType</code></a></li>
+    <li><a href="#ExportFile"><code>ExportFile</code></a></li>
+    <li><a href="#ExportLookups"><code>ExportLookups</code></a></li>
+    <li><a href="#IntegrityType"><code>IntegrityType</code></a></li>
+    <li><a href="#MetadataType"><code>MetadataType</code></a></li>
+    <li><a href="#NamespaceListType"><code>NamespaceListType</code></a></li>
+    <li><a href="#NamespaceType"><code>NamespaceType</code></a></li>
+    <li><a href="#PLACEHOLDER-REMOVE-SOON"><code>PLACEHOLDER-REMOVE-SOON</code></a></li>
+    <li><a href="#ProblemDetails"><code>ProblemDetails</code></a></li>
+    <li><a href="#RegistryListType"><code>RegistryListType</code></a></li>
+    <li><a href="#RegistryType"><code>RegistryType</code></a></li>
+    <li><a href="#ResourceDirectType"><code>ResourceDirectType</code></a></li>
+    <li><a href="#ResourceReferencedType"><code>ResourceReferencedType</code></a></li>
+    <li><a href="#TrustEstablishmentDocument"><code>TrustEstablishmentDocument</code></a></li>
+    <li><a href="#Uri"><code>Uri</code></a></li>
+    <li><a href="#VID"><code>VID</code></a></li>
+    <li><a href="#VIDMethodListType"><code>VIDMethodListType</code></a></li>
+    <li><a href="#VIDMethodType"><code>VIDMethodType</code></a></li>
+    <li><a href="#ValidityDatesType"><code>ValidityDatesType</code></a></li>
+    <li><a href="#inline_response_200"><code>inline_response_200</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="AssuranceLevelListType"><code>AssuranceLevelListType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AssuranceLevelType"><code>AssuranceLevelType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Creates assurance level as a top-level/first-class-citizen of a Trust Registry. AssuranceLevel values
+MUST be defined in an EGF if they are used.</div>
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: URI</div>
+          <div class="param-desc"><span class="param-type">example: did:example:123</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: LOA2</span></div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Level of Assurance 2 - see EGF for definition, terms, obligations, liabilities, and indemnity</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AuthorizationListType"><code>AuthorizationListType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AuthorizationType"><code>AuthorizationType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: VID</div>
+          <div class="param-desc"><span class="param-type">example: did:example:123</span></div>
+<div class="param">simplename </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">assuranceLevel (optional)</div><div class="param-desc"><span class="param-type"><a href="#AssuranceLevelType">AssuranceLevelType</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EntityListType"><code>EntityListType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EntityType"><code>EntityType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: VID</div>
+          <div class="param-desc"><span class="param-type">example: did:example:123</span></div>
+<div class="param">authorizations (optional)</div><div class="param-desc"><span class="param-type"><a href="#AuthorizationListType">AuthorizationListType</a></span>  </div>
+<div class="param">governanceFrameworkVID (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: VID</div>
+          <div class="param-desc"><span class="param-type">example: did:example:456</span></div>
+<div class="param">DIDDocument (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> (TODO: REMOVE? redundant and confusing)Provides a URI that resolves to the DID Document for the Identifier. format: URI</div>
+<div class="param">validity (optional)</div><div class="param-desc"><span class="param-type"><a href="#ValidityDatesType">ValidityDatesType</a></span>  </div>
+<div class="param">status </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> &lt;p&gt;Provides a current status for entity (issuer or verifier)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;current - the entity is currently authorized, as of time of the query.&lt;/li&gt;
+&lt;li&gt;expired - entity rights have expired.&lt;/li&gt;
+&lt;li&gt;terminated - entity has voluntarily ceased Issuer role under the specific EGF.&lt;/li&gt;
+&lt;li&gt;revoked - entity authority under specific EGF was terminated by the governing authority.&lt;/li&gt;
+&lt;/ul&gt;
+ </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">current</div><div class="param-enum">expired</div><div class="param-enum">terminated</div><div class="param-enum">revoked</div>
+<div class="param">statusDetail (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Optional free text that expands on the status parameter. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ExportFile"><code>ExportFile</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">extractdatetime </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span> The time of the data extraction. format: date-time</div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Version string [OPTIONAL] </div>
+<div class="param">validity (optional)</div><div class="param-desc"><span class="param-type"><a href="#ValidityDatesType">ValidityDatesType</a></span>  </div>
+<div class="param">lookups (optional)</div><div class="param-desc"><span class="param-type"><a href="#ExportLookups">ExportLookups</a></span>  </div>
+<div class="param">registries (optional)</div><div class="param-desc"><span class="param-type"><a href="#RegistryListType">RegistryListType</a></span>  </div>
+<div class="param">entities (optional)</div><div class="param-desc"><span class="param-type"><a href="#EntityListType">EntityListType</a></span>  </div>
+<div class="param">resources (optional)</div><div class="param-desc"><span class="param-type"><a href="#RegistryListType">RegistryListType</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ExportLookups"><code>ExportLookups</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">VIDMethods (optional)</div><div class="param-desc"><span class="param-type"><a href="#VIDMethodListType">VIDMethodListType</a></span>  </div>
+<div class="param">AssuranceLevels (optional)</div><div class="param-desc"><span class="param-type"><a href="#AssuranceLevelListType">AssuranceLevelListType</a></span>  </div>
+<div class="param">Authorizations (optional)</div><div class="param-desc"><span class="param-type"><a href="#AuthorizationListType">AuthorizationListType</a></span>  </div>
+<div class="param">Namespaces (optional)</div><div class="param-desc"><span class="param-type"><a href="#NamespaceListType">NamespaceListType</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="IntegrityType"><code>IntegrityType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Integrity object</div>
+    <div class="field-items">
+      <div class="param">hashtype </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Hashing algorithm well-known-name. TODO: Reference to some list? </div>
+          <div class="param-desc"><span class="param-type">example: sha-256</span></div>
+<div class="param">hash </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> asdf </div>
+          <div class="param-desc"><span class="param-type">example: 64ee532ac8a4871e21ccf0397ac8154efb747ec37a2a116c35fc8b810cbf24bd</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MetadataType"><code>MetadataType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">lastupdated </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">languages (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> language codes (RFC 4646 - https://datatracker.ietf.org/doc/html/rfc4646) </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;en&quot;,&quot;en-CA&quot;,&quot;fr-CA&quot;]</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="NamespaceListType"><code>NamespaceListType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="NamespaceType"><code>NamespaceType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Namespace object - formal name, EGF that governs namespace, VC/DIDAuth/etc.</div>
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: VID</div>
+          <div class="param-desc"><span class="param-type">example: did:example:123</span></div>
+<div class="param">canonicalString </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;ca.issuer.driverlicense&quot;,&quot;mining.tsm&quot;]</span></div>
+<div class="param">egfURI (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> URI of the EGF that defines the namespace. </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;did:example:GlobalDriverLicenseDID&quot;]</span></div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PLACEHOLDER-REMOVE-SOON"><code>PLACEHOLDER-REMOVE-SOON</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>TODO REPLACE.</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ProblemDetails"><code>ProblemDetails</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>A Problem Details object (RFC 7807)</div>
+    <div class="field-items">
+      <div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> An absolute URI that identifies the problem type format: uri</div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> A short summary of the problem type. Written in English and readable for engineers (usually not suited for non technical stakeholders and not localized). </div>
+          <div class="param-desc"><span class="param-type">example: Service Unavailable</span></div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The HTTP status code generated by the origin server for this occurrence of the problem. format: int32</div>
+<div class="param">detail (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> A human-readable explanation specific to this occurrence of the problem </div>
+<div class="param">instance (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> An absolute URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced. format: uri</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RegistryListType"><code>RegistryListType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Array of RegistryQueryType</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RegistryType"><code>RegistryType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Data structure for basic Trust Registry indication of what the queried TR will state about another TR.</div>
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: VID</div>
+          <div class="param-desc"><span class="param-type">example: did:example:123</span></div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Professional Engineers Ontario</span></div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province.</span></div>
+<div class="param">peerType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> &lt;p&gt;Relationship types - how does the TR that is being queried consider the other TR.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;peer - registy is recognized as a peer under another jurisdiction or governance mechanism.&lt;/li&gt;
+&lt;li&gt;superior - registry is above this TR in a hierarchy.&lt;/li&gt;
+&lt;li&gt;subordinate - registry is subordinate to this TR in a hierarchy.&lt;/li&gt;
+&lt;li&gt;metaregistry - registry being queried is considered (by this TR) to be a metaregistry (aka registry of registries)&lt;/li&gt;
+&lt;/ul&gt;
+ </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">peer</div><div class="param-enum">superior</div><div class="param-enum">subordinate</div><div class="param-enum">metaregistry</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ResourceDirectType"><code>ResourceDirectType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Resource that is served directly by this trust registry.</div>
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: VID</div>
+          <div class="param-desc"><span class="param-type">example: did:example:123</span></div>
+<div class="param">lastupdated </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">datatype </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> TODO: DECIDE about mimeType vs. dataType as property name
+The &lt;code&gt;kind&lt;/code&gt; of resource (e.g. credential-definition, schema-definition, revocation-registry). intended
+to be used by recipient for processing of the data payload. </div>
+<div class="param">resourceURI (optional)</div><div class="param-desc"><span class="param-type"><a href="#Uri">Uri</a></span>  </div>
+<div class="param">payloadJSON (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> JSON object </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ResourceReferencedType"><code>ResourceReferencedType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Resource that is provided by reference to a different source.</div>
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: VID</div>
+          <div class="param-desc"><span class="param-type">example: did:example:123</span></div>
+<div class="param">lastupdated </div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">datatype </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> TODO: DECIDE about mimeType vs. dataType as property name
+The &lt;code&gt;kind&lt;/code&gt; of resource (e.g. credential-definition, schema-definition, revocation-registry). intended
+to be used by recipient for processing of the data payload. </div>
+<div class="param">resourceURI </div><div class="param-desc"><span class="param-type"><a href="#Uri">Uri</a></span>  </div>
+<div class="param">integrity (optional)</div><div class="param-desc"><span class="param-type"><a href="#IntegrityType">IntegrityType</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="TrustEstablishmentDocument"><code>TrustEstablishmentDocument</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Trust Establishment Document per https://identity.foundation/trust-establishment/</div>
+    <div class="field-items">
+      <div class="param">TBD </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Uri"><code>Uri</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>string providing an URI formatted according to IETF RFC 3986.</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="VID"><code>VID</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>string providing an URI formatted according to IETF RFC 3986.</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="VIDMethodListType"><code>VIDMethodListType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="VIDMethodType"><code>VIDMethodType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>DID Method supported by the trust registry. May include the maximum</div>
+    <div class="field-items">
+      <div class="param">identifier </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> as &amp;quot;maintained&amp;quot; at https://w3c.github.io/did-spec-registries/#did-methods TODO: do better... </div>
+<div class="param">maximumAssuranceLevel (optional)</div><div class="param-desc"><span class="param-type"><a href="#AssuranceLevelType">AssuranceLevelType</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ValidityDatesType"><code>ValidityDatesType</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>Date and Time of validity.</div>
+    <div class="field-items">
+      <div class="param">validFromDT (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span> Indicates that the Identifier status applies at the indicated time. A time in the past indicates when the last status change was recorded in the Trust Registry. format: date-time</div>
+<div class="param">validUntilDT (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span> Indicates the validity ends/ended at this date and time. A time in the past may indicate that the data have expired. format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="inline_response_200"><code>inline_response_200</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

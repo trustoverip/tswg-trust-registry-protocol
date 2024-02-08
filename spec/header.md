@@ -15,6 +15,7 @@ The following links will be helpful for editors and reviewers during the DRAFT s
 
 * Source Code - [https://github.com/trustoverip/tswg-trust-registry-protocol](https://github.com/trustoverip/tswg-trust-registry-protocol)
 * Rendered Specification (github.io Pages) - [https://trustoverip.github.io/tswg-trust-registry-protocol/](https://trustoverip.github.io/tswg-trust-registry-protocol/) 
+* Browseable Swagger API - [https://app.swaggerhub.com/apis-docs/continuumloop/trust-over_ip_trust_registry_protocol_res_tful_api_v_2/2.0.alpha](https://app.swaggerhub.com/apis-docs/continuumloop/trust-over_ip_trust_registry_protocol_res_tful_api_v_2/2.0.alpha) - note there is no endpoint responding.
 
 ### Editors
 

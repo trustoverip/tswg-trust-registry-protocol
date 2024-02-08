@@ -15,7 +15,7 @@ info:
       * list the acknowledged trust registries that the RoR recognizes and what 
     that may mean in the context of a particular governance framework.
   version: "0.2.0"
-  title: Trust Over IP Trust Registry Protocol (RESTful API) v2 
+  title: ToIP Trust Registry Protocol v2 
   contact:
     email: darrell.odonnell@continuumloop.com
   license:
@@ -77,7 +77,7 @@ paths:
       summary: Determine whether an Entity has a particular Authorization.
       parameters:
         - in: path
-          name: entityid 
+          name: entityVID 
           required: true
           schema:
             $ref: '#/components/schemas/VID'
@@ -173,7 +173,7 @@ paths:
         -  registry
       summary: Get resource data indicated by DID.
       parameters:
-        - in: query
+        - in: path
           name: registryVID 
           required: true
           schema:
@@ -354,7 +354,7 @@ paths:
       tags:
         - offline
       summary: Access a full data file that can be used offline.
-      operationId: getOfflineFile
+      operationId: getTED
       description: |
         Allows querying to determine the status of an Issuer, as identified by their Identifier (unique), 
         credential type, and EGF that they are operating under.
@@ -374,64 +374,64 @@ paths:
 
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    NotFound:
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    Conflict:
+      description: Conflict
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    ServiceUnavailable:
+      description: Service Unavailable
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetails'
+    
+    default:
+      description: Generic Error
   schemas:
-    securitySchemes:
-      bearerAuth:
-        type: http
-        scheme: bearer
-        bearerFormat: JWT
-    responses:
-      BadRequest:
-        description: Bad Request
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      Unauthorized:
-        description: Unauthorized
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      Forbidden:
-        description: Forbidden
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      NotFound:
-        description: Not Found
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      NotAcceptable:
-        description: Not Acceptable
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      Conflict:
-        description: Conflict
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      InternalServerError:
-        description: Internal Server Error
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      ServiceUnavailable:
-        description: Service Unavailable
-        content:
-          application/problem+json:
-            schema:
-              $ref: '#/components/schemas/ProblemDetails'
-      
-      default:
-        description: Generic Error
     Uri:
       type: string
       format: uri
