@@ -6,3 +6,22 @@ The spec is written in W3C's [respec](https://dev.w3.org/2008/video/mediaann/ReS
 To browse the spec, see the [rendering on GitHub pages](https://trustoverip.github.io/tswg-did-method-webs-specification/index.html). To contribute to the spec, submit PRs that modify the .md files that are used to generate the .html files in this folder.
 
 Before submitting a PR, please see the [Editing The Spec](./EditingTheSpec.md) document for guidance on generating the specification locally for review.
+
+
+## Rendering Spec-Up
+
+To run Spec-up in live edit mode (will re-render upon save), in project folder run:
+
+```
+npm run edit
+```
+
+
+## Rendering OpenAPI Specification
+
+In the `./api` folder, run:
+
+```
+npx @redocly/cli build-docs toip-tswg-trustregistryprotocol-v2.yaml
+
+```
