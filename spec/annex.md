@@ -47,14 +47,14 @@ The TRP is intended to be used in at least two key ways:
 * Native Support - systems may directly implement access using the TRP.
 * Bridged - systems may create access "bridges" that provide TRP access to their systems.
 
-![C4 Systems Model - showing native TRP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](../assets/out/diagrams/protocol-bridging/protocol-bridging.png).
+![C4 Systems Model - showing native TRP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](../assets/protocol-bridging.png).
 
 
 ### Object Model
 
 We provide a high-level object model (NOTE: source of truth is the Swagger as this diagram may be out of date during development)
 
-![High Level Object Model](../assets/out/diagrams/highlevel/highlevel.png)
+![High Level Object Model](../assets/highlevel.png)
 
 ## Annex D - Guides (for future breakout)
 
