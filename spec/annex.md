@@ -55,3 +55,10 @@ The TRP is intended to be used in at least two key ways:
 We provide a high-level object model (NOTE: source of truth is the Swagger as this diagram may be out of date during development)
 
 ![High Level Object Model](../assets/out/diagrams/highlevel/highlevel.png)
+
+## Annex D - Guides (for future breakout)
+
+We will need to provide guides and other thought pieces that explain many aspects of trust registries. A notional (short bullet) list of items could include:
+* "why do I need a trust registry?" - blog article or position paper to explain why trust registries help.
+* "I have the data, but how do I use the TRP?" - paper about how adding TRP to a bridge or native integration.
+* "where do I learn about the governance changes that I have?"
