@@ -57,6 +57,14 @@ paths:
           description: |
             The identifier of the Authorization that is being queried for this Entity.
           allowReserved: true # allow reserved characters per RFC3986
+        - in: query
+          name: effectiveDateTime
+          required: false
+          schema:
+            type: string
+            format: date-time #RFC 3339, Section 5.6
+
+          
       responses:
         '200':
           description: search results matching criteria
