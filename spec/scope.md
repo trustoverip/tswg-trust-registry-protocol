@@ -7,7 +7,7 @@
 
 ## Scope
 
-The Trust Registry Protocol serves to provide a simple interface to the plethora of systems that contain answers that are required to make trust decisions. 
+The Trust Registry Protocol serves to provide a simple interface to enable access to systems of record that provide the information that drives a trust registry. There are a plethora of systems that contain answers that are required to make trust decisions. The protocol is intended to make the communication with any particular system-of-record consistent and simple.
 
 The TRP does not:  
   * create a trust registry - it allows (read-only) access to a system-of-record that has the data needed to generate answers that a trust registry provides.
@@ -19,7 +19,6 @@ The TRP does not:
 ### Purpose
 
 The purpose of this **ToIP specification** is to define a standard interoperable protocol for interacting with a global web of **peer trust registries**, each of which can answer queries about whether a particular **party** is trusted and authorized, to perform a particular **action** in a particular **digital trust ecosystem** (defined under an **EGF**), as well as which **peer trust registries** trust each other.
-
 
 ### Motivations
 
