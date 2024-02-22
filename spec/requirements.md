@@ -100,16 +100,17 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
 
 * [TRP-1] MUST maintain the service implementing this protocol at the HTTPS URI specified in the _[Trust Registry Service Property](#trust-registry-service-property)_ section.
 * [TRP-2] SHOULD support queries that are at a point in time in the past. 
-  * [TRP-2-1] The datetime value provided MUST be formatted per [[spec-norm:RFC3339]] using the UTC (Zulu) null offset (e.g. "2018-03-20T09:12:28Z". 
-  * [TRP-2-2] If the system does NOT support non-current data the system MUST return and http 405 (Method not allowed.) error.
+  * [TRP-2-1] The parameter for the point in time must be named `queryTime`.
+  * [TRP-2-2] The datetime value provided MUST be formatted per [[spec-norm:RFC3339]] using the UTC (Zulu) null offset (e.g. "2018-03-20T09:12:28Z". 
+  * [TRP-2-3] If the system does NOT support non-current data the system MUST return and http 405 (Method not allowed.) error.
 * [TRP-3] MUST return responses to queries for the **status value** of a **registry entry** that satisfies one or more of the following sets of query parameters:
 
     - [TRP-3-1] **Entity Authorization**: Given the `entityDID`, and `authorization` return the status of that registered entity, MUST return exactly one of the following **status values** for a **registry entry** satisfying the query parameters:
-        - `Not found` (http 404)
-        - `Current` - authorization for the registered entity is current as of the time of query, or as of the time requested.
-        - `Expired` (not renewed after the previous valid registration period)
-        - `Terminated` (voluntary termination by the **registered entity**)
-        - `Revoked` (involuntary termination by the **governing authority**) 
+        - `Not Found` + http code 404 - entry not found.
+        - `Current` + http code 200 - authorization for the registered entity is current as of the time of query, or as of the time requested.
+        - `Expired` + http code 200 - authorization has expired (e.g. not renewed after the previous valid registration period)
+        - `Terminated` + http code 200 - authorization was terminated (e.g. voluntary termination by the **registered entity**)
+        - `Revoked` + http code 200 - authorization was revoked (e.g. involuntary termination by the **governing authority**) 
     - [TRP-3-2] **Entity Authorizations**: Given only the `entityDID` the system SHOULD return the array of Authorization strings for the entity identified by `entityDID`. 
     - ii. [TRP-3-2] **Recognized Registry:** Given the entityDID the system SHOULD return the list of [[def:trust registries]] that the entity has indicated it is registered in. 
         - [TRP-3-2-1] The system MUST NOT return more than one trust registry in the array designated as a [[def: primary registry]].
@@ -118,21 +119,23 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
   CREATE TrustRegistryType and TrustRegistryListType in OAS.
 :::
 
-3. MUST return responses using the data model specified in the OpenAPI Specification . 
+[TRP-4] MUST return responses using the data model specified in the OpenAPI Specification . 
 
-5. For queries returning a **status value** other than `Not Found`, the response MUST return the following values:
-    - i. The parameter values exactly as supplied in the query (so responses can be stateless).
-   - ii. The **status value**.
-   - iii. Exactly two **datetime values** conforming to the following requirements:
-        - a. The value labels MUST be:
+[TRP-5] For queries returning a **status value** other than `Not Found`, the response MUST return the following values:
+  - [TRP-5-1] The system must return the parameter values exactly as supplied in the query (so responses can be stateless).
+  - [TRP-5-2] The system must return the **status value** for the entity (per TRP-3-1).
+  - [TRP-5-3] The system must return exactly two **datetime values** conforming to the following requirements:
+        - [TRP-5-3-1]The value labels MUST be:
             - i. `AuthorizationStartDate`
             - ii. `AuthorizationEndDate`
-        - b. The values MUST be formatted to comply with [[spec-norm:RFC3339]] in the UTC/Z time zone with no offset.
-        - c. The `AuthorizationStartDate` MUST be the date that the **registered entity** authorization began.
-        - d. The `AuthorizationEndDate` MUST be either:
-            - i. `Null` for an entry whose **status value** is `Current` at the time of the query.
-            - ii. A specific date value if the **registered entity** **status value** is `Expired`, `Terminated` or `Revoked.`
-        - e. If a **registered entity** has multiple entries (representing an authorization history), the most recent value MUST be returned. 
+        - [TRP-5-3-2] The datetime values MUST be formatted to comply with [[spec-norm:RFC3339]] in the UTC/Z time zone with no offset.
+        - [TRP-5-3-3] The `AuthorizationStartDate` MUST be the date that the **registered entity** authorization began.
+        - [TRP-5-3-4] The `AuthorizationEndDate` MUST be either:
+            - [TRP-5-3-4-1] `Null` for an entry whose **status value** is `Current` at the time of the query.
+            - [TRP-5-3-4-2] A specific datetime value if the **registered entity** **status value** is `Expired`, `Terminated` or `Revoked.`
+        - [TRP-5-3-5] If a **registered entity** has multiple entries in the system (representing an authorization history), the value that is active at the time indicated must be returned:
+          - [TRP-5-3-5-1] when no `queryTime` value is provided the value that is active at time of the query MUST be returned.
+          - [TRP-5-3-5-2] when a `queryTime` parameter is provided the entry that is active at that time (i.e. indicted by `queryTime`) MUST be returned. 
 
 ### Anti-Requirements
 
