@@ -101,8 +101,9 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
 * [TRP-1] MUST maintain the service implementing this protocol at the HTTPS URI specified in the _[Trust Registry Service Property](#trust-registry-service-property)_ section.
 * [TRP-2] SHOULD support queries that are at a point in time in the past. 
   * [TRP-2-1] The parameter for the point in time must be named `queryTime`.
-  * [TRP-2-2] The datetime value provided MUST be formatted per [[spec-norm:RFC3339]] using the UTC (Zulu) null offset (e.g. "2018-03-20T09:12:28Z". 
-  * [TRP-2-3] If the system does NOT support non-current data the system MUST return and http 405 (Method not allowed.) error.
+  * [TRP-2-2] The datetime value provided MUST be formatted per [[spec-norm:RFC3339]] using the UTC (i.e. Z for Zulu) zero offset (e.g. "2018-03-20T09:12:28Z". 
+  * [TRP-2-3] If the system does not support non-current data, and the the `queryTime` parameter is present, the system MUST NOT return entity data and must se http error code 405 (Method not allowed).
+  
 * [TRP-3] MUST return responses to queries for the **status value** of a **registry entry** that satisfies one or more of the following sets of query parameters:
 
     - [TRP-3-1] **Entity Authorization**: Given the `entityDID`, and `authorization` return the status of that registered entity, MUST return exactly one of the following **status values** for a **registry entry** satisfying the query parameters:
