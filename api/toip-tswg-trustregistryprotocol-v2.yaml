@@ -630,7 +630,6 @@ components:
         description:
           type: string
           example: "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province."
-        
         peerType:
           type: string
           enum:
@@ -668,6 +667,18 @@ components:
           type: string
           format: VID
           example: 'did:example:456'
+        primaryTrustRegistryVID:
+          type: string
+          format: VID
+          example: 'did:example:456'
+          description: "A VID identifying the registered entity's Primary Trust Registry"
+        additionalTrustRegistries:
+          type: array
+          items:
+            type: string
+            format: VID
+            example: 'did:example:456'
+            description: "A VID identifying the a Trust Registry"
         DIDDocument:
           type: string
           format: URI
