@@ -12,15 +12,9 @@
     "render": "node -e \"require('./index')({ nowatch: true })\"",
     "dev": "node -e \"require('./index')({ dev: true })\""
   },
-  "keywords": [
-    "spec",
-    "specs",
-    "markdown",
-    "editor",
-    "standards"
-  ],
+  "keywords": ["spec", "specs", "markdown", "editor", "standards"],
   "author": "Daniel Buchner",
-  "license": "Apache 2.0",
+  "license": "apache-2.0",
   "bugs": {
     "url": "https://github.com/decentralized-identity/spec-up/issues"
   },
@@ -58,6 +52,9 @@
     "yargs": "16.2.0"
   },
   "overrides": {
+    "graceful-fs": "^4.2.11"
+  },
+  "resolutions": {
     "graceful-fs": "^4.2.11"
   }
 }

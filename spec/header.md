@@ -40,10 +40,10 @@ To comply with the intellectual property rights protections in[ the charter of t
 * Jacques Latour, CIRA
 * Christine Martin, Continuum Loop Inc.
 
-- 
-
 ### Participate 
-**[[SECTION will be removed before going to Review]]**
+::: warning 
+SECTION will be removed before going to Review]
+:::
 
 Participation is welcome. 
 

@@ -7,10 +7,7 @@
 
 [//]: # (: file format defined by ISO 32000-2)
 
-
-
 ## Terms & Definitions
-
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [[spec-inform:RFC2119]] when, and only when, they appear in all capitals, as shown here.
 
@@ -54,10 +51,12 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 * source: [NIST](https://csrc.nist.gov/glossary/term/permission)
 
 [[def: primary trust registry]]
-~ TODO:
+::: todo 
+:::
 
 [[def:secondary trust registry, secondary trust registries]]
-~ TODO: 
+::: todo 
+:::
 
 [[def: trust decision]]
 ~ A decision that a party needs to make about whether to engage in a specific interaction or transaction with another entity that involves real or perceived risks. source: [ToIP Glossary](https://docs.google.com/document/d/1fZByfuSOwszDRkE7ARQLeElSYmVznoOyJK4sxRvJpyM/edit#heading=h.m8c86ccqis9r)
@@ -74,5 +73,6 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 - source: [NIST SP 800-56B Rev. 2](https://doi.org/10.6028/NIST.SP.800-56Br2) under Trusted party
 
 [[def: VID Type]]
-~ TODO: 
+::: todo 
+:::
 
