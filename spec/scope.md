@@ -16,6 +16,8 @@ The TRP does not:
   * make decisions - the TRP serves up data that are inputs to trust decisions.
   * assign Roles or Rights, though a consuming system may take information that is received via the TRP and assign these.
 
+It is most crucial to understand that a Trust Registry does NOT create authority. As Jacques Latour says "the authority of a trust registry is an outcome of governance". 
+
 ### Purpose
 
 The purpose of this **ToIP specification** is to define a standard interoperable protocol for interacting with a global web of **peer trust registries**, each of which can answer queries about whether a particular **party** is trusted and authorized, to perform a particular **action** in a particular **digital trust ecosystem** (defined under an **EGF**), as well as which **peer trust registries** trust each other.
