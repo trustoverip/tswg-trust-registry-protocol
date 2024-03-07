@@ -35,7 +35,10 @@ It is provided as an Open API Specification v3 YAML file.
 
 [OAS (.yaml) for TRP v2](../api/toip-tswg-trustregistryprotocol-v2.yaml). 
 
-[Redoc Rendering (static HTML) of specification](../api/redoc-static.html)
+There are several renderings of the OAS specification:
+
+* Inline - this rendering is managed in this repository [Redoc Rendering (static HTML) of specification](../api/redoc-static.html)
+* SwaggerHub - this rendering is manually updated from time to time and may be out of date: [SwaggerHub](https://app.swaggerhub.com/apis/CULedger/CULedger.Identity/0.3.1-oas3.1) 
 
 
 ## Annex C - Uses and Data Model Reference
