@@ -477,13 +477,6 @@ components:
       format: uri
       description: string providing an URI formatted according to IETF RFC 3986.
 
-
-    PLACEHOLDER-REMOVE-SOON:
-      type: string
-      format: uri
-      description: TODO REPLACE.
-
-    
 # MAIN DATA TYPES
     AssuranceLevelType: 
       type: object
@@ -524,7 +517,8 @@ components:
           type: string
         assuranceLevel: 
           description: The Assurance Level for the Authorization. Defined in the EGF. [OPTIONAL]
-          $ref: '#/components/schemas/AssuranceLevelType'
+          allOf: 
+            - $ref: '#/components/schemas/AssuranceLevelType'
     AuthorizationResponseType:
       type: object 
       required:
@@ -540,12 +534,15 @@ components:
           type: string
         description:
           type: string
-        assuranceLevel: 
+        authorizationAssuranceLevel: 
           description: The Assurance Level for the Authorization. Defined in the EGF. [OPTIONAL]
-          $ref: '#/components/schemas/AssuranceLevelType'
+          allOf:
+            - $ref: '#/components/schemas/AssuranceLevelType'
         authorizationValidity:
-          $ref: '#/components/schemas/ValidityDatesType'
-          description: The Validate dates related to this particular authorization.
+          description: The Validity dates related to this particular authorization.
+          allOf:
+            - $ref: '#/components/schemas/ValidityDatesType'
+          
         status:
           type: string
           enum:
@@ -581,10 +578,11 @@ components:
           description: |
             as "maintained" at https://w3c.github.io/did-spec-registries/#did-methods TODO: do better...
         maximumAssuranceLevel:
-          $ref: '#/components/schemas/AssuranceLevelType'
           description: |
             A DID Method may, due to technical or human trust considerations be limited in the assurance 
             level that it can provide.
+          allOf: 
+            - $ref: '#/components/schemas/AssuranceLevelType'
         
     IntegrityType:
       type: object
@@ -788,10 +786,11 @@ components:
     AuthorizationResponseListType:
       type: array
       items:  
-        $ref: '#/components/schemas/AuthorizationType'
+        $ref: '#/components/schemas/AuthorizationResponseType'
       example:
         - identifier: "did:example:abc"
           simplename: "country:role"
+          
         - identifier: "did:example:abcd"
           simplename: "canada:professional:engineer"
     NamespaceListType:
@@ -860,7 +859,7 @@ components:
         validUntilDT:
           type: string
           format: date-time
-          description: 'Indicates the validity ends/ended at this date and time. A time in the past may indicate that the data have expired.'
+          description: 'Indicates the validity ends/ended at this date and time. A time in the past may indicate that the data have expired. A blank response indicates that the validity does not have an end value (i.e. does not or has not expired yet).'
         
         
     ExportFile:
