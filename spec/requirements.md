@@ -11,7 +11,7 @@
 
 The following queries relate to receiving answers related to entities and other trust registries.
 
-* [RQ-1] The system MUST support query operations for the current status of a **registered entity**.
+* [RQ-1] The system MUST support query operations for the current status of a [[ref: registered entity]].
 * [RQ-2] The system MUST support querying about ---TODO: 
 
 ### Configuration Queries [CQ-*]
@@ -19,11 +19,11 @@ The following queries relate to receiving answers related to entities and other 
 The following queries relate to configuration of systems that will interact with the trust registry.
 
 
-* [CQ-1] MUST provide a list of [[ref: action namespace]] that are supported by the responding system.
+* [CQ-1] MUST provide a list of [[ref: authorization]] namespaces that are supported by the responding system.
 * [CQ-2] MUST provide 
 * [CQ-2] MUST provide a list of [[ref: VID Type]] (i.e. VID Types) that are supported by the responding system.
-* [CQ-3] MUST provide a list of  [[ref: assurance level]] that are supported by the responding system.
-* 
+* [CQ-3] MUST provide a list of  [[xref: TOIP, assurance levels]] that are supported by the responding system.
+
 
 
 ### Metadata Queries [MQ-*]
@@ -31,8 +31,8 @@ The following queries relate to configuration of systems that will interact with
 * [MQ-1] MUST provide a list of [[ref: ecosystem governance frameworks]] (EGFs) that the system is operating under. This data will be comprised of the following elements:
   * [MQ-1-1] MUST provide the VID of the EGF.
   * [MQ-1-2] MAY provide the name of the EGF.
-1. [MQ-2] SHOULD provide the legal name and jurisdiction of the **governing authority** for the **trust registry** service.
-2. [MQ-3] SHOULD provide the legal name and jurisdiction of the **administering authority** for the **trust registry** operator (if different from **governing authority**).
+1. [MQ-2] SHOULD provide the legal name and jurisdiction of the [[xref: TOIP, governing authority]] for the [[ref: trust registry]] service.
+2. [MQ-3] SHOULD provide the legal name and jurisdiction of the [[xref: TOIP, administering authority]] for the [[xref:TOIP, trust registry]] operator (if different from [[xref: TOIP, governing body]]).
 3. [MQ-4] SHOULD provide a textual description of the trust registry mandate.
 
 
@@ -46,9 +46,9 @@ The following queries relate to configuration of systems that will interact with
 
 > The [[ref:primary trust registry]] plus all [[ref: secondary trust registries]] are collectively referred to as the [[ref:authorized trust registries]].
 
-* [GA-3] MUST publish an [[ref: EGF]] that meets the **requirements** of:
+* [GA-3] MUST publish an [[ref: EGF]] that meets the requirements of:
   * [GA-3-1] This specification.
-  * [GA-3-2] The [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241). Note that this includes the requirement that the **EGF** and all **governed parties** (which includes **authorized issuers** and **authorized verifiers**) must be identified with a **DID**.
+  * [GA-3-2] The [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241). Note that this includes the requirement that the [[xref: TOIP, EGF]] and all [[xref: TOIP, governed parties]] must be identified with a **DID**.
 
 TODO: Add normative ref to [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241)
 
@@ -62,7 +62,7 @@ TODO: Add normative ref to [ToIP Governance Architecture Specification](https://
     * [GA-6-4] MAY provide Legal contracts.
 * [GA-7] MUST specify in its **EGF** (or in any referenced documents) **requirements** for:
     - [GA-7-1] MUST provide all [[ref: authorization]] values that are used by the trust registry.
-    - [GA-7-2] MUST provide all [[ref: assurance levels]], specified with unique names, that are service by the trust registry, and what [[ref: authorization]] values they apply to.
+    - [GA-7-2] MUST provide all [[xref: TOIP, assurance levels]], specified with unique names, that are service by the trust registry, and what [[ref: authorization]] values they apply to.
     - [GA-7-3] MUST provide a list of all [[ref: VID Types]] that are supported by the ecosystem, and serviced by the trust registry.
     - [GA-7-4] SHOULD provide `resources (TODO: TERM IS VAGUE)` that are required by systems integrating into the ecosystem that the system serves. 
     - [GA-7-5] `???any metadata required by implementors (e.g. claim name that is mandatory if pointing a credential back to an EGF.) [this is a weak example]???`

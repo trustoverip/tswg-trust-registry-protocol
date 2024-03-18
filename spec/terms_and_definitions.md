@@ -14,9 +14,6 @@
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [[spec-inform:RFC2119]] when, and only when, they appear in all capitals, as shown here.
 
-[[def: assurance levels]]
-~ TODO: 
-
 [[def: authentication]] (copied from ToIP Glossary)
 ~ Verifying the identity of a user, process, or device, often  as a prerequisite to allowing access to resources in an information system. source: [NIST Special Publication 800-39](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-39.pdf)
 
@@ -42,10 +39,12 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 [[def: action namespace]]
 ~ A well-known string that is used in an EGF to indicate a discrete authorization. Examples (non-exhaustive): "canada:driver-license", "eu:trusted-list.authorized-timestamp", "global:tsm"
 
+
+
 [[def: ecosystem governance framework, ecosystem governance frameworks, EGF]]
 ~ TODO: replace this ChatGPT definiton: refers to a structured set of principles, rules, and mechanisms that guide and regulate the management and decision-making processes within an ecosystem. Ecosystem governance is typically associated with natural or environmental systems, where various stakeholders, such as governments, communities, businesses, and non-governmental organizations, work together to sustainably manage and protect ecosystems.
 
-[[def: registered entity]]
+[[def: registered entity, registered entities]]
 ~ An entity that is listed in the system (i.e. the [[ref: trust registry]]) that is being queried. 
 
 [[def: permission]]
@@ -73,6 +72,6 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 ~ A party that is trusted by an entity to faithfully perform certain services for that entity. An entity may choose to act as a trusted party for itself.
 - source: [NIST SP 800-56B Rev. 2](https://doi.org/10.6028/NIST.SP.800-56Br2) under Trusted party
 
-[[def: VID Type]]
+[[def: VID Type, VID Types]]
 ~ TODO: 
 
