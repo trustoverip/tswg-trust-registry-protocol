@@ -20,7 +20,7 @@ It is most crucial to understand that a Trust Registry does NOT create authority
 
 ### Purpose
 
-The purpose of this **ToIP specification** is to define a standard interoperable protocol for interacting with a global web of **peer** [[xref: trust registries]], each of which can answer queries about whether a particular **entity** holds an [[ref:authorization]], in a particular [[xref: TOIP, digital trust ecosystem]] (defined under an [[xref: TOIP, EGF]]), as well as which **peer trust registries** trust each other.
+The purpose of this **ToIP specification** is to define a standard interoperable protocol for interacting with a global web of **peer** [[xref: TOIP, trust registries]], each of which can answer queries about whether a particular **entity** holds an [[ref:authorization]], in a particular [[xref: TOIP, digital trust ecosystem]] (defined under an [[xref: TOIP, EGF]]), as well as which **peer trust registries** trust each other.
 
 ### Motivations
 
