@@ -28,7 +28,7 @@ The following queries relate to configuration of systems that will interact with
 
 ### Metadata Queries [MQ-*]
 
-* [MQ-1] MUST provide a list of [[ref: ecosystem governance frameworks]] (EGFs) that the system is operating under. This data will be comprised of the following elements:
+* [MQ-1] MUST provide a list of [[xref: TOIP, ecosystem governance frameworks]] (EGFs) that the system is operating under. This data will be comprised of the following elements:
   * [MQ-1-1] MUST provide the VID of the EGF.
   * [MQ-1-2] MAY provide the name of the EGF.
 1. [MQ-2] SHOULD provide the legal name and jurisdiction of the [[xref: TOIP, governing authority]] for the [[ref: trust registry]] service.
@@ -46,21 +46,21 @@ The following queries relate to configuration of systems that will interact with
 
 > The [[ref:primary trust registry]] plus all [[ref: secondary trust registries]] are collectively referred to as the [[ref:authorized trust registries]].
 
-* [GA-3] MUST publish an [[ref: EGF]] that meets the requirements of:
+* [GA-3] MUST publish an [[xref: TOIP, EGF]] that meets the requirements of:
   * [GA-3-1] This specification.
-  * [GA-3-2] The [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241). Note that this includes the requirement that the [[xref: TOIP, EGF]] and all [[xref: TOIP, governed parties]] must be identified with a **DID**.
+  * [GA-3-2] The [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241). Note that this includes the requirement that the [[xref: TOIP, EGF]] and all [[xref: TOIP, governed parties]] must be identified with a [[xref: TOIP, DID]].
 
 TODO: Add normative ref to [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241)
 
-* [GA-4] MUST publish, in the **DID document** associated with the **DID** identifying its **EGF**, a **service property **specifying the **service endpoint** for its **primary trust registry** that meets the **requirements** in the _[Trust Registry Service Property](#trust-registry-service-property)_ section.
-[GA-5] MUST publish in its **EGF** a list of any other EGFs governing **secondary trust registries.**
-[GA-6] MUST specify in the EGF any additional **requirements** for an **authorized trust registry**. This data will be comprised of the following elements::
+* [GA-4] MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]] for its [[ref: primary trust registry]] that meets the requirements in the _[Trust Registry Service Property](#trust-registry-service-property)_ section.
+[GA-5] MUST publish in its EGF a list of any other EGFs governing [[ref: secondary trust registries]].
+[GA-6] MUST specify in the EGF any additional requirements for an [[ref: authorized trust registry]]. This data will be comprised of the following elements::
 
-    * [GA-6-1] SHOULD provide **Information trust requirements**.
-    * [GA-6-2] SHOULD provide Technical **requirements**.
-    * [GA-6-3] SHOULD provide Operational **requirements**.
+    * [GA-6-1] SHOULD provide Information Trust requirements.
+    * [GA-6-2] SHOULD provide Technical requirements.
+    * [GA-6-3] SHOULD provide Operational requirements.
     * [GA-6-4] MAY provide Legal contracts.
-* [GA-7] MUST specify in its **EGF** (or in any referenced documents) **requirements** for:
+* [GA-7] MUST specify in its **EGF** (or in any referenced documents) requirements for:
     - [GA-7-1] MUST provide all [[ref: authorization]] values that are used by the trust registry.
     - [GA-7-2] MUST provide all [[xref: TOIP, assurance levels]], specified with unique names, that are service by the trust registry, and what [[ref: authorization]] values they apply to.
     - [GA-7-3] MUST provide a list of all [[ref: VID Types]] that are supported by the ecosystem, and serviced by the trust registry.
@@ -68,7 +68,7 @@ TODO: Add normative ref to [ToIP Governance Architecture Specification](https://
     - [GA-7-5] `???any metadata required by implementors (e.g. claim name that is mandatory if pointing a credential back to an EGF.) [this is a weak example]???`
     - [GA-7-6] `???a statement about the basis the trust registry claims to be authoritative???`
     - [GA-7-7] `???means by which others are able to verify the asserted authority???`
-* [GA-8] SHOULD specify in the **EGF** the following **requirements** for an **authorized trust registry** and any **registered party** (i.e., issuer, verifier, or peer trust registry):
+* [GA-8] SHOULD specify in the **EGF** the following requirements for an **authorized trust registry** and any **registered party** (i.e., issuer, verifier, or peer trust registry):
     - [GA-8-1] The **requirements** to become authorized.
     - [GA-8-2] How to request registration.
     - [GA-8-3] The **requirements** for assignment of each **authorization** for a **registry entry**.
@@ -78,7 +78,7 @@ TODO: Add normative ref to [ToIP Governance Architecture Specification](https://
 
 ### Trust Registry Service Property [TRSP-*] 
 
-The **DID document** for the **DID** that identifies an **EGF** compliant with this specification MUST include a service property that meets the **requirements** in section 5.4 of [[spec-norm:DID-CORE]] plus the following additional **requirements**:
+The [[xref: TOIP, DID document]] for the **DID** that identifies an **EGF** compliant with this specification MUST include a service property that meets the **requirements** in section 5.4 of [[spec-norm:DID-CORE]] plus the following additional **requirements**:
 
 * The value of the `type` property MUST be `TrustRegistry`.
 * The value of the `serviceEndpoint` property MUST be exactly one HTTPS URI.
@@ -89,7 +89,7 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/5
 :::
 
 [[ref: Registered entities]] MUST indicate which registries they are part of. 
-* Registered entities MUST indicate the primary trust registry for a particular [[ref: permission]].
+* Registered entities MUST indicate the [[ref: primary trust registry]]] for a particular [[ref: authorization]].
 [`TODO:` The issuer/verifier needs to state their primary trust registry affiliation (a trust relationship) - is this a new section?]
 
 ### Trust Registry Protocol [TRP-*]
@@ -112,12 +112,16 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
         - `Expired` + http code 200 - authorization has expired (e.g. not renewed after the previous valid registration period)
         - `Terminated` + http code 200 - authorization was terminated (e.g. voluntary termination by the **registered entity**)
         - `Revoked` + http code 200 - authorization was revoked (e.g. involuntary termination by the **governing authority**) 
-    - [TRP-3-2] **Entity Authorizations**: Given only the `entityDID` the system SHOULD return the array of Authorization strings for the entity identified by `entityDID`. 
+    - [TRP-3-2] **Entity Authorizations**: Given only the `entityDID` the system SHOULD return the array of Authorization objects for the entity identified by `entityDID`. 
     - ii. [TRP-3-2] **Recognized Registry:** Given the entityDID the system SHOULD return the list of [[def:trust registries]] that the entity has indicated it is registered in. 
         - [TRP-3-2-1] The system MUST NOT return more than one trust registry in the array designated as a [[def: primary registry]].
 
 ::: TODO: 
   CREATE TrustRegistryType and TrustRegistryListType in OAS.
+:::
+
+::: TODO: 
+  Align VID or DID terminology.
 :::
 
 [TRP-4] MUST return responses using the data model specified in the OpenAPI Specification . 
