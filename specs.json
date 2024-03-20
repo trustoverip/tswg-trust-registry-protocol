@@ -1,4 +1,4 @@
-
+o
 {
   "specs": [
     {
@@ -25,7 +25,7 @@
       "katex": true,
       "source": {
         "host": "github",
-        "account": "trustoverip",
+        "account": "darrellodonnell",
         "repo": "tswg-trust-registry-protocol"
       },
       "external_specs": [

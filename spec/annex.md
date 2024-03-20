@@ -29,7 +29,7 @@ TODO: Finalize table once requirements (earlier).
 
 ## Annex B: OpenAPI Specification
 
-The OpenAPI Specification (v3.0.1) is the first "concrete" API specification. 
+The OpenAPI Specification (v3.1.0) is the first "concrete" API specification. 
 
 It is provided as an Open API Specification v3 YAML file. 
 
@@ -50,14 +50,14 @@ The TRP is intended to be used in at least two key ways:
 * Native Support - systems may directly implement access using the TRP.
 * Bridged - systems may create access "bridges" that provide TRP access to their systems.
 
-![C4 Systems Model - showing native TRP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](../assets/protocol-bridging.png).
+![C4 Systems Model - showing native TRP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](./images/puml/protocol-bridging.png).
 
 
 ### Object Model
 
 We provide a high-level object model (NOTE: source of truth is the Swagger as this diagram may be out of date during development)
 
-![High Level Object Model](../assets/highlevel.png)
+![High Level Object Model](./images/puml/highlevel.png)
 
 ## Annex D - Guides (for future breakout)
 
