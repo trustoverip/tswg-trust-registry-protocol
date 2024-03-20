@@ -148,8 +148,8 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
         
 [AR-2] SHALL NOT include support for a DIDComm interface, only a RESTful (i.e. OpenAPI Specification) interface. When a repeatable **trust task** specification approach is created, a DIDComm/**trust task** approach should be considered as a work effort.
 
-[AR-3]]SHALL NOT support automated **rules** processing.
+[AR-3]]SHALL NOT support automated rules processing in the protocol. A rules engine can certainly use the protocol.
 
-[AR-4] Anyting other than read-only INSERT, UPDATE and DELETE operations. The TRP is a read-only (RETRIEVE in the CRUD sense) protocol.
+[AR-4] Anything other than read-only operations. The TRP is a read-only (RETRIEVE in the CRUD sense) protocol.
 
 
