@@ -542,7 +542,7 @@ components:
           description: The Validity dates related to this particular authorization.
           allOf:
             - $ref: '#/components/schemas/ValidityDatesType'
-          
+
         status:
           type: string
           enum:

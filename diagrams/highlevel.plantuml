@@ -65,6 +65,7 @@ TrustRegistry <|-- Lookup
 
 package QueryDataObjects {
     
+
     class RegistryList
     class ResourceList
     class EntityList
@@ -72,10 +73,23 @@ package QueryDataObjects {
     class Entity {
         identifier: VID
         didmethod: DIDMethod
-        Authorizations[]
+        Authorizations[]: EntityAuthorizationList
         registryListings[]
         Namespaces[]
         HasAuthorization(Authorization)
+    }
+
+    class EntityAuthorization {
+        entityID: VID
+        authorizationID: VID
+        simplename: string
+        description: string
+        assuranceLevel: string
+        status: AuthorizationStatus 
+        ' ValidityDatesType (TODO: remove type?)
+        validFromDT: datetime
+        validToDT: datetime 
+
     }
 
     object Registry {
@@ -93,9 +107,17 @@ package QueryDataObjects {
         payloadURI: string
         integrity: Integrity
     }
+
+    object Integrity
+
+    enum AuthorizationStatus { 
+        current, expired, terminated, revoked 
+    }
 }
 
-object Integrity
+
+
+
 
 package Lookups {
     package LookupLists {
@@ -111,17 +133,21 @@ package Lookups {
     }
 
     object Authorization {
+        authorizationIdentifier: VID 
         authorization: string 
+        description: string 
     }
-
   
-    object Namespace
+    object Namespace {
+        namespaceName: string
+        namespaceID: VID
+        description: string
+        reference: URI
+    }
     object AssuranceLevel {
         identifier: string
         name: string
-        'TODO multilingual
     }
-
 
 }
 
@@ -149,12 +175,19 @@ EntityList o-- "0..n" Entity
 RegistryList  o-- "0..n" Registry
 ResourceList  o-- "0..n" Resource 
 
-Resource::integrity --> Integrity
+Resource::integrity o-- "0..1" Integrity
 
 Lookup::VIDTypes --> VIDTypeList
 Lookup::Authorizations --> AuthorizationList
 Lookup::AssuranceLevels --> AssuranceLevelList
 Lookup::Namespaces --> NamespaceList
+
+' Entity-related objects
+Entity::Authorizations o-- "0...n" EntityAuthorization
+EntityAuthorization::status --> AuthorizationStatus
+EntityAuthorization::authorizationID --> Authorization 
+EntityAuthorization::assuranceLevel --> AssuranceLevel
+
 
 ' METADATA related objects
 TrustRegistry --> Metadata 
