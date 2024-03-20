@@ -29,7 +29,7 @@ TODO: Finalize table once requirements (earlier).
 
 ## Annex B: OpenAPI Specification
 
-The OpenAPI Specification (v3.0.1) is the first "concrete" API specification. 
+The OpenAPI Specification (v3.1.0) is the first "concrete" API specification. 
 
 It is provided as an Open API Specification v3 YAML file. 
 
