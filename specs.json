@@ -26,7 +26,7 @@
       "source": {
         "host": "github",
         "account": "trustoverip",
-        "repo": "specification-template"
+        "repo": "tswg-trust-registry-protocol"
       }
     }
   ]
