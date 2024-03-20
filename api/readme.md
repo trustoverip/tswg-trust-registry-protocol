@@ -1,6 +1,11 @@
 
-# Rendering API Tool
 
+## Rendering OpenAPI Specification
 
-TODO: find alternative
-- Scalar? https://github.com/scalar/scalar
+In the `./api` folder, run:
+
+```
+npx @redocly/cli build-docs toip-tswg-trustregistryprotocol-v2.yaml
+```
+
+That produces the [Redoc Rendered OpenAPI Spec](redoc-static.html)

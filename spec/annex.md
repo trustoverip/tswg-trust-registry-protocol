@@ -20,9 +20,9 @@ TODO: Finalize table once requirements (earlier).
 | Req # | Description | Section |
 |---------|--------------|-----------|
 | | **Governing Authority Requirements**| |
-| GA-1 | [[ref: EGF]] MUST have exactly one [[ref: primary trust registry]]. | [#governing-authorities-ga-] |
-| GA-2 | [[ref: EGF]] MAY have one or more [[ref: secondary trust registries]].| [[#governing-authorities-ga-]|
-|A.3|MUST publish an [[ref: EGF]] that meets the **requirements** in: 
+| GA-1 | [[xref: TOIP, EGF]] MUST have exactly one [[ref: primary trust registry]]. | [#governing-authorities-ga-] |
+| GA-2 | [[xref: TOIP, EGF]] MAY have one or more [[ref: secondary trust registries]].| [[#governing-authorities-ga-]|
+|A.3|MUST publish an [[xref: TOIP, EGF]] that meets the **requirements** in: 
 |A.3.1|    This specification. | [LINK]
 |A.3.2| The [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241). Note that this includes the requirement that the **EGF** and all **governed parties** (which includes **authorized issuers** and **authorized verifiers**) |[LINK]|
 

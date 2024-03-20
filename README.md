@@ -17,11 +17,6 @@ npm run edit
 ```
 
 
-## Rendering OpenAPI Specification
 
-In the `./api` folder, run:
-
-```
-npx @redocly/cli build-docs toip-tswg-trustregistryprotocol-v2.yaml
 
 ```

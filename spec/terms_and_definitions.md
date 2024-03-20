@@ -14,18 +14,7 @@
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [[spec-inform:RFC2119]] when, and only when, they appear in all capitals, as shown here.
 
-[[def: assurance levels]]
-~ TODO: 
-
-[[def: authentication]] (copied from ToIP Glossary)
-~ Verifying the identity of a user, process, or device, often  as a prerequisite to allowing access to resources in an information system. source: [NIST Special Publication 800-39](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-39.pdf)
-
-[[def: authenticity]] (copied from ToIP Glossary)
-~ The property of being genuine and being able to be verified and trusted; confidence in the validity of a transmission, a message, or message originator. source: [NIST Special Publication 800-39](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-39.pdf)
-
-
-
-[[def: authorization]]
+[[def: authorization, authorizations]]:
 ~ Access privileges granted to an entity; conveys an “official” sanction to perform a cryptographic function or other sensitive activity.
 * source: [NIST](https://csrc.nist.gov/glossary/term/permission) NIST SP 800-57 Part 2 Rev.1 under Authorization
 ::: issue 
@@ -33,46 +22,51 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 - May need a `governed authorization` term to help link tech+governance.
 :::
 
-[[def:authorized trust registries]]
+
+[[def: authorized trust registry, authorized trust registries]]
 ~ The primary trust registry plus all secondary trust registries are collectively referred to as the authorized trust registries.
 
-[[def: action]]
-~ a discrete property (string) that an entity can be authorized for, in the form of a [permission](https://trustoverip.github.io/ctwg-main-glossary/#term:permission) response.
 
-[[def: action namespace]]
+[[def: authorization namespace]]:
 ~ A well-known string that is used in an EGF to indicate a discrete authorization. Examples (non-exhaustive): "canada:driver-license", "eu:trusted-list.authorized-timestamp", "global:tsm"
 
-[[def: ecosystem governance framework, ecosystem governance frameworks, EGF]]
-~ TODO: replace this ChatGPT definiton: refers to a structured set of principles, rules, and mechanisms that guide and regulate the management and decision-making processes within an ecosystem. Ecosystem governance is typically associated with natural or environmental systems, where various stakeholders, such as governments, communities, businesses, and non-governmental organizations, work together to sustainably manage and protect ecosystems.
 
-[[def: registered entity]]
-~ An entity that is listed in the system (i.e. the [[ref: trust registry]]) that is being queried. 
+[[def: registered entity, registered entities]]:
+~ An [[xref: TOIP, entity]] that is listed in the system (i.e. the [[xref: TOIP, trust registry]]) that is being queried. 
 
-[[def: permission]]
+
+[[def: permission]]:
 ~  Authorization to perform some action on a system.
 
-* source: [NIST](https://csrc.nist.gov/glossary/term/permission)
+* Source: [NIST](https://csrc.nist.gov/glossary/term/permission)
 
-[[def: primary trust registry]]
-~ TODO:
 
-[[def:secondary trust registry, secondary trust registries]]
+[[def: primary trust registry]]:
+~ The single [[xref: TOIP, trust registry]] that is considered the primary source for information of a particular type in an ecosystem.
+
+[[def:secondary trust registry, secondary trust registries]]:
+~ A trust registry that has copies of information based on the ecosystem's [[def:primary trust registry]]. 
+
+[[def: service endpoint]]:
+~ A network address, such as an HTTP URL, at which services operate on behalf of a DID subject.
+
+~ Source: [[spec-norm:DID-CORE]]
+
+[[def: service property]]:
 ~ TODO: 
 
-[[def: trust decision]]
-~ A decision that a party needs to make about whether to engage in a specific interaction or transaction with another entity that involves real or perceived risks. source: [ToIP Glossary](https://docs.google.com/document/d/1fZByfuSOwszDRkE7ARQLeElSYmVznoOyJK4sxRvJpyM/edit#heading=h.m8c86ccqis9r)
+* in context of: [TRP-1] ...MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]]
 
-[[def: trust list]]
-~ A one-dimensional trust graph in which an authoritative source publishes a list of entities that are trusted in a specific trust context. A trust list can be considered a simplified form of a trust registry.
 
-[[def: trust registry, trust registries]] 
+[[def: trust registry, trust registries]]: 
 ~ A registry that serves as an authoritative source for trust graphs or other governed information describing one or more trust communities. A trust registry is typically authorized by a governance framework.  
-* See also: [[ref: trust list]]
+* See also: [[xref: TOIP, trust list]]
 
-[[def: trusted party]]
+
+[[def: trusted party]]:
 ~ A party that is trusted by an entity to faithfully perform certain services for that entity. An entity may choose to act as a trusted party for itself.
 - source: [NIST SP 800-56B Rev. 2](https://doi.org/10.6028/NIST.SP.800-56Br2) under Trusted party
 
-[[def: VID Type]]
-~ TODO: 
+[[def: VID Type, VID Types]]:
+~ A specific kind of [[xref: TOIP, VID]].
 
