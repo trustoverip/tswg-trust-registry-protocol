@@ -25,7 +25,7 @@ o
       "katex": true,
       "source": {
         "host": "github",
-        "account": "darrellodonnell",
+        "account": "trustoverip",
         "repo": "tswg-trust-registry-protocol"
       },
       "external_specs": [
