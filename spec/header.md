@@ -21,6 +21,17 @@ Shift to Implementer Review Draft before going to Implementer Review.
 :::
 ## Draft Specification
 
+### Note to Implementers and Reviewers
+
+The intent of this Implmenters Review Draft Deliverable is to drive input for the specification. Comments 
+
+Provide input via:
+* GitHub Issues - for items that need to be tracked. These will be formally dispositioned t
+
+::: TODO: 
+TODO: complete this preamble. @darrellodonnell 
+:::
+
 ### Source
 
 The following links will be helpful for editors and reviewers during the DRAFT stage.

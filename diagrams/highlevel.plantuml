@@ -71,25 +71,29 @@ package QueryDataObjects {
     class EntityList
 
     class Entity {
-        identifier: VID
-        didmethod: DIDMethod
-        Authorizations[]: EntityAuthorizationList
-        registryListings[]
-        Namespaces[]
+        entityVID: VID
+        name: string
+        metadata: object
+        description: string 
+        primaryTrustRegistry: VID
+        registrationStatus: string
+        registrationStatusDetail: string
+        secondaryTrustRegistries[]
+        authorizations[]: EntityAuthorizationList
+        participatingNamespaces[]
         HasAuthorization(Authorization)
     }
 
     class EntityAuthorization {
         entityID: VID
+        authorizationUniqueString: string
         authorizationID: VID
-        simplename: string
         description: string
         assuranceLevel: string
         status: AuthorizationStatus 
+        statusDetail: string
         ' ValidityDatesType (TODO: remove type?)
-        validFromDT: datetime
-        validToDT: datetime 
-
+        authorizationValidity: ValidityDatesType
     }
 
     object Registry {
@@ -162,8 +166,6 @@ class ExportFile {
     Resources: ResourceList 
     Metadata 
     Validity
-
-
 }
 
 Class ValidityDatesType {
