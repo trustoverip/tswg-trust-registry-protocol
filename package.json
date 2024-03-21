@@ -8,9 +8,9 @@
     "url": "git+https://github.com/decentralized-identity/spec-up.git"
   },
   "scripts": {
-    "edit": "node -e \"require('./index')()\"",
-    "render": "node -e \"require('./index')({ nowatch: true })\"",
-    "dev": "node -e \"require('./index')({ dev: true })\""
+    "edit": "node -e \"require('spec-up')()\"",
+    "render": "node -e \"require('spec-up')({ nowatch: true })\"",
+    "dev": "node -e \"require('spec-up')({ dev: true })\""
   },
   "keywords": ["spec", "specs", "markdown", "editor", "standards"],
   "author": "Daniel Buchner",
@@ -49,6 +49,7 @@
     "merge-stream": "2.0.0",
     "pkg-dir": "4.2.0",
     "prismjs": ">=1.24.0",
+    "spec-up": "github:brianorwhatever/spec-up#fix-refs",
     "yargs": "16.2.0"
   },
   "overrides": {

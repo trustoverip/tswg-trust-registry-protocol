@@ -32,7 +32,7 @@ A trust registry does not create trust. The decision for one entity to "trust" a
   define term "*consuming party*" - OR find better term and capture definition.
 :::
 
-The results on a [[ref: trust decision]] based on input from a trust registry may range from:
+The results on a [[xref: TOIP, trust decision]] based on input from a trust registry may range from:
 * immediate decision that the entity meets or cannot meet the full requirement of the [[ref:trust relationship]]; or
 * further input is required before trust decision can be made. 
 
