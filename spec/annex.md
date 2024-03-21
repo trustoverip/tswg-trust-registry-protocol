@@ -37,7 +37,7 @@ It is provided as an Open API Specification v3 YAML file.
 
 There are several renderings of the OAS specification:
 
-* Inline - this rendering is managed in this repository [Redoc Rendering (static HTML) of specification](../api/redoc-static.html)
+* Inline - this rendering is managed in this repository [Redoc Rendering (static HTML) of specification](./api/redoc-static.html)
 * SwaggerHub - this rendering is manually updated from time to time and may be out of date: [SwaggerHub](https://app.swaggerhub.com/apis/CULedger/CULedger.Identity/0.3.1-oas3.1) 
 
 
