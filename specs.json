@@ -28,7 +28,7 @@
         "repo": "tswg-trust-registry-protocol"
       },
       "external_specs": [
-        {"TOIP": "https://darrellodonnell.github.io/ctwg-main-glossary/"}
+        {"TOIP": "https://trustoverip.github.io/ctwg-main-glossary/"}
       ]
     }
   ]
