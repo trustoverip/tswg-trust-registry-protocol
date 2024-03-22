@@ -11,10 +11,10 @@
 [//]: # (:::)
 
 * [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241)
-* 
-*  
 
-TODO: Finish up alignging with `spec-up` spec linkging
+::: todo 
+Finish up alignging with `spec-up` spec linkging
+:::
 
 [[spec-norm]]
 

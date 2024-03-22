@@ -12,7 +12,9 @@
 
 ToIP (Trust Over IP Foundation) create a _____ 
 
-* TODO: Preamble along the lines of an ISO Foreword.
+::: todo 
+Preamble along the lines of an ISO Foreword.
+:::
 
 List significant changes (non-normative):
 

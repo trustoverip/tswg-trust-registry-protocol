@@ -18,13 +18,12 @@ The following queries relate to receiving answers related to entities and other 
 
 The following queries relate to configuration of systems that will interact with the trust registry.
 
-
 * [CQ-1] MUST provide a list of [[ref: authorization]] namespaces that are supported by the responding system.
 * [CQ-2] MUST provide 
+* ::: todo 
+:::
 * [CQ-2] MUST provide a list of [[ref: VID Type]] (i.e. VID Types) that are supported by the responding system.
 * [CQ-3] MUST provide a list of  [[xref: TOIP, assurance levels]] that are supported by the responding system.
-
-
 
 ### Metadata Queries [MQ-*]
 
@@ -34,8 +33,6 @@ The following queries relate to configuration of systems that will interact with
 1. [MQ-2] SHOULD provide the legal name and jurisdiction of the [[xref: TOIP, governing authority]] for the [[ref: trust registry]] service.
 2. [MQ-3] SHOULD provide the legal name and jurisdiction of the [[xref: TOIP, administering authority]] for the [[xref:TOIP, trust registry]] operator (if different from [[xref: TOIP, governing body]]).
 3. [MQ-4] SHOULD provide a textual description of the trust registry mandate.
-
-
 
 ### Governing Authorities [GA-*]
 
@@ -50,7 +47,9 @@ The following queries relate to configuration of systems that will interact with
   * [GA-3-1] This specification.
   * [GA-3-2] The [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241). Note that this includes the requirement that the [[xref: TOIP, EGF]] and all [[xref: TOIP, governed parties]] must be identified with a [[xref: TOIP, DID]].
 
-TODO: Add normative ref to [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241)
+::: todo 
+Add normative ref to [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241)
+:::
 
 * [GA-4] MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]] for its [[ref: primary trust registry]] that meets the requirements in the _[Trust Registry Service Property](#trust-registry-service-property)_ section.
 [GA-5] MUST publish in its EGF a list of any other EGFs governing [[ref: secondary trust registries]].
@@ -83,14 +82,34 @@ The [[xref: TOIP, DID document]] for the **DID** that identifies an **EGF** comp
 * The value of the `type` property MUST be `TrustRegistry`.
 * The value of the `serviceEndpoint` property MUST be exactly one HTTPS URI.
 
-::: issue 
-https://github.com/trustoverip/tswg-trust-registry-protocol/issues/5 
-- Should align with Service Profiles/[Service Discovery] efforts
+::: todo
+FIX
 :::
 
 [[ref: Registered entities]] MUST indicate which registries they are part of. 
 * Registered entities MUST indicate the [[ref: primary trust registry]]] for a particular [[ref: authorization]].
 [`TODO:` The issuer/verifier needs to state their primary trust registry affiliation (a trust relationship) - is this a new section?]
+
+
+#### Service Profile Recommendation
+
+_the following recommendation is non-normative_
+
+
+It is recommended that the service leverage the [Service Profile
+Specification](https://github.com/trustoverip/tswg-trust-registry-service-profile/blob/main/spec.md).
+Trust Over IP hosts a [Service Profile]() with the following pointer: 
+
+```json
+{
+  "integrity": "<>",
+  "profile": "<>"
+  "uri": "<your service endpoint uri here>"
+}
+```
+
+By implementing service profiles, it enables easier interoperability and
+discovery of service capabilities for the trust registry being implemented.
 
 ### Trust Registry Protocol [TRP-*]
 
@@ -116,7 +135,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
     - ii. [TRP-3-2] **Recognized Registry:** Given the entityDID the system SHOULD return the list of [[def:trust registries]] that the entity has indicated it is registered in. 
         - [TRP-3-2-1] The system MUST NOT return more than one trust registry in the array designated as a [[def: primary registry]].
 
-::: TODO: 
+::: todo 
   CREATE TrustRegistryType and TrustRegistryListType in OAS.
 :::
 
@@ -149,6 +168,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
 [AR-2] SHALL NOT include support for a DIDComm interface, only a RESTful (i.e. OpenAPI Specification) interface. When a repeatable **trust task** specification approach is created, a DIDComm/**trust task** approach should be considered as a work effort.
 
 [AR-3]]SHALL NOT support automated rules processing in the protocol. A rules engine can certainly use the protocol.
+
 
 [AR-4] Anything other than read-only operations. The TRP is a read-only (RETRIEVE in the CRUD sense) protocol.
 

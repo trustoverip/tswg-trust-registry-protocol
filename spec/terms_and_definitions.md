@@ -7,10 +7,7 @@
 
 [//]: # (: file format defined by ISO 32000-2)
 
-
-
 ## Terms & Definitions
-
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [[spec-inform:RFC2119]] when, and only when, they appear in all capitals, as shown here.
 
@@ -47,6 +44,7 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 [[def:secondary trust registry, secondary trust registries]]:
 ~ A trust registry that has copies of information based on the ecosystem's [[def:primary trust registry]]. 
 
+
 [[def: service endpoint]]:
 ~ A network address, such as an HTTP URL, at which services operate on behalf of a DID subject.
 
@@ -54,6 +52,9 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 
 [[def: service property]]:
 ~ TODO: 
+::: todo 
+:::
+
 
 * in context of: [TRP-1] ...MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]]
 
@@ -69,4 +70,5 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 
 [[def: VID Type, VID Types]]:
 ~ A specific kind of [[xref: TOIP, VID]].
+
 
