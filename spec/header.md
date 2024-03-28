@@ -17,8 +17,6 @@
 Shift `Document Purpose` to Implementer Review Draft before going to Implementer Review.
 :::
 
-
-
 **Note to Implementers and Reviewers**
 
 The intent of this Implementers Review Draft Deliverable is to drive input for the specification. Comments are appreciated and encouraged. During the Implementers Review period (TODO: list dates) feedback may be dispositioned rapidly. 
@@ -54,9 +52,10 @@ To comply with the intellectual property rights protections in[ the charter of t
 * Jacques Latour, CIRA
 * Christine Martin, Continuum Loop Inc.
 
-- 
-
-**Participate **
+### Participate 
+::: warning 
+SECTION will be removed before going to Review]
+:::
 
 Participation is welcomed and encouraged. 
 
