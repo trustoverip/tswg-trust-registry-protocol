@@ -12,7 +12,7 @@
 The following queries relate to receiving answers related to entities and other trust registries.
 
 * [RQ-1] The system MUST support query operations for the current status of a [[ref: registered entity]].
-* [RQ-2] The system MUST support querying about ---TODO: 
+* [RQ-2] The system SHOULD support query operations for a list of related [[xref: TOIP, trust registries]].
 
 ### Configuration Queries [CQ-*]
 
@@ -79,16 +79,17 @@ Add normative ref to [ToIP Governance Architecture Specification](https://wiki.t
 
 The [[xref: TOIP, DID document]] for the **DID** that identifies an **EGF** compliant with this specification MUST include a service property that meets the **requirements** in section 5.4 of [[spec-norm:DID-CORE]] plus the following additional **requirements**:
 
-* The value of the `type` property MUST be `TrustRegistry`.
-* The value of the `serviceEndpoint` property MUST be exactly one HTTPS URI.
+* [TRSP-1] The value of the `type` property MUST be `TrustRegistry`.
+* [TRSP-2] The value of the `serviceEndpoint` property MUST be exactly one HTTPS URI.
+
 
 ::: todo
 FIX
 :::
 
 [[ref: Registered entities]] MUST indicate which registries they are part of. 
-* Registered entities MUST indicate the [[ref: primary trust registry]]] for a particular [[ref: authorization]].
-[`TODO:` The issuer/verifier needs to state their primary trust registry affiliation (a trust relationship) - is this a new section?]
+* [TRSP-3] Registered entities MUST indicate the [[ref: primary trust registry]]] for a particular [[ref: authorization]].
+
 
 
 #### Service Profile Recommendation
@@ -118,7 +119,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
 **Trust registries** implementing this protocol:
 
 * [TRP-1] MUST maintain the service implementing this protocol at the HTTPS URI specified in the _[Trust Registry Service Property](#trust-registry-service-property)_ section.
-* [TRP-2] SHOULD support queries that are at a point in time in the past. 
+* [TRP-2] The system SHOULD support queries that are at a point in time in the past. 
   * [TRP-2-1] The parameter for the point in time must be named `queryTime`.
   * [TRP-2-2] The datetime value provided MUST be formatted per [[spec-norm:RFC3339]] using the UTC (i.e. Z for Zulu) zero offset (e.g. "2018-03-20T09:12:28Z". 
   * [TRP-2-3] If the system does not support non-current data, and the the `queryTime` parameter is present, the system MUST NOT return entity data and must se http error code 405 (Method not allowed).
