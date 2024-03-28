@@ -66,7 +66,7 @@ TODO: Add normative ref to [ToIP Governance Architecture Specification](https://
     - [GA-7-1] MUST provide all [[ref: authorization]] values that are used by the trust registry.
     - [GA-7-2] MUST provide all [[xref: TOIP, assurance levels]], specified with unique names, that are service by the trust registry, and what [[ref: authorization]] values they apply to.
     - [GA-7-3] MUST provide a list of all [[ref: VID Types]] that are supported by the ecosystem, and serviced by the trust registry.
-    - [GA-7-4] SHOULD provide `resources (TODO: TERM IS VAGUE)` that are required by systems integrating into the ecosystem that the system serves. 
+    - [GA-7-4] SHOULD provide `resources` (e.g. logo files, documents, interoperability profile information) that are required by systems integrating into the ecosystem that the system serves. 
     - [GA-7-5] `???any metadata required by implementors (e.g. claim name that is mandatory if pointing a credential back to an EGF.) [this is a weak example]???`
     - [GA-7-6] `???a statement about the basis the trust registry claims to be authoritative???`
     - [GA-7-7] `???means by which others are able to verify the asserted authority???`
@@ -124,7 +124,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
 :::
 
 ::: TODO: 
-  Align VID or DID terminology.
+  Align VID and/or DID terminology.
 :::
 
 [TRP-4] MUST return responses using the data model specified in the OpenAPI Specification . 
