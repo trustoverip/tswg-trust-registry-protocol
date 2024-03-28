@@ -13,8 +13,8 @@ info:
       * Listing Registries that are known (to the registry being queried).
       * list the acknowledged trust registries that the RoR recognizes and what 
     that may mean in the context of a particular governance framework.
-  version: 2.0.alpha
-  title: ToIP Trust Registry Protocol v2 - Working Draft
+  version: 2.0.0
+  title: ToIP Trust Registry (Query) Protocol v2 - Working Draft
   contact:
     email: darrell.odonnell@continuumloop.com
   license:
@@ -379,7 +379,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MetadataType'
+                $ref: '#/components/schemas/RegistryMetadataType'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -749,6 +749,37 @@ components:
           description: URI of the EGF that defines the namespace.
         description:
           type: string
+    RegistryMetadataType:
+      type: object
+      required:
+        - lastupdated
+      properties:
+        lastupdated:
+          type: string
+          format: date-time
+        primaryEGFURI:
+          type: string
+          example: 
+            - "did:example:GlobalDriverLicenseDID"
+          description: URI of the EGF that governs the Trust Registry.
+        additionalEGFURIs:
+          type: array
+          description: "List of URIs of Ecosystem Governance Frameworks that this Trust Registry operates under, in addition to the .primaryEGFURI"
+          items:
+            $ref: '#/components/schemas/Uri'
+        participatingNamepaces:
+          $ref: '#/components/schemas/NamespaceListType'
+        languages:
+          type: array
+          description: >-
+            language codes (RFC 4646 -
+            https://datatracker.ietf.org/doc/html/rfc4646)
+          items:
+            type: string
+          examples:
+            - "en"
+            - "en-CA"
+            - "fr-CA"
     RegistryType:
       type: object
       description: >
@@ -771,6 +802,16 @@ components:
           type: string
           examples: 
             - "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province."
+        primaryEGFURI:
+          type: string
+          example: 
+            - "did:example:GlobalDriverLicenseDID"
+          description: URI of the EGF that governs the Trust Registry.
+        additionalEGFURIs:
+          type: array
+          description: "List of URIs of Ecosystem Governance Frameworks that this Trust Registry operates under, in addition to the .primaryEGFURI"
+          items:
+            $ref: '#/components/schemas/Uri'
         participatingNamepaces:
           $ref: '#/components/schemas/NamespaceListType'
         peerType:
@@ -850,25 +891,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VIDMethodType'
-    MetadataType:
-      type: object
-      required:
-        - lastupdated
-      properties:
-        lastupdated:
-          type: string
-          format: date-time
-        languages:
-          type: array
-          description: >-
-            language codes (RFC 4646 -
-            https://datatracker.ietf.org/doc/html/rfc4646)
-          items:
-            type: string
-          examples:
-            - "en"
-            - "en-CA"
-            - "fr-CA"
+    
     ExportLookups:
       type: object
       properties:
