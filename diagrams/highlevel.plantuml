@@ -45,13 +45,15 @@ class Lookup {
      
 }
 
-class Metadata {
-    EGFURI: URI ' (duplicated above)
+class RegistryMetadata {
+    primaryEGFURI: URI ' (duplicated above)
+    additionalEGFURI[]
     TrustRegistryName: string
     RawAPIEndpoint: URL 
     ' AuthorityClaim: string 
     lastUpdated: datetime 
     namespaces: string[]
+    supportedLanguages[]
     
 
     ' Languages() 
