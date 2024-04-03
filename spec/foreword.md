@@ -10,9 +10,26 @@
 
 ## Foreword
 
-::: todo
-Create Foreword content in advance of Public Review Draft (i.e. no content expected for Implementers Review Draft)
+ToIP (Trust Over IP Foundation) create a _____ 
+
+::: todo 
+Preamble along the lines of an ISO Foreword.
 :::
+
+List significant changes (non-normative):
+
+* Shift away from a pure Issuer/Holder/Verifier approach to support non-credential use cases.
+* Addition of namespacing concep to begin normalization of trust registries naming conventions.
+* Enrichment of registry-of-registry concept to allow for registries that focus primarily on providing a list of registries.
+
+### On Trust, Trustworthy, and Trustworthiness
+
+The term [[ref:trust]] is loaded with varied meanings that often conflict. In the context of [[ref:trust registries]] we need to establish the scope of what we are talking about when we apply the term "trust" to trust registires. There are baseline definitions that follow this limiting scope. 
+
+A trust registry does not create trust. The decision for one entity to "trust" another is their decision. A trust registry may provide information that helps the *consuming party*  in deciding that an entity is [[ref: trustworthy]]. 
+
+::: todo 
+  define term "*consuming party*" - OR find better term and capture definition.
 
 
 ### Copyright Notice
@@ -46,3 +63,6 @@ We need answers to a simple question:
 > Does `Entity X` have `Authorization Y`, in the context of `Ecosystem Governance Framework Z`?
 
 
+[[def: trustworthiness]]
+~ An attribute of a person or organization that provides confidence to others of the qualifications, capabilities, and reliability of that entity to perform specific tasks and fulfill assigned responsibilities. Trustworthiness is also a characteristic of information technology products and systems (see Section 2.6.2 on trustworthiness of information systems). The attribute of trustworthiness, whether applied to people, processes, or technologies, can be measured, at least in relative terms if not quantitatively.48 The determination of trustworthiness plays a key role in establishing trust relationships among persons and organizations. The trust relationships are key factors in risk decisions made by senior leaders/executives. NOTE: Current state-of-the-practice for measuring trustworthiness can reliably differentiate between widely different levels of trustworthiness and is capable of producing a trustworthiness scale that is hierarchical between similar instances of measuring activities (e.g., the results from ISO/IEC 15408 [Common Criteria] evaluations). 
+- source: [NIST Special Publication 800-39](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-39.pdf) p.24

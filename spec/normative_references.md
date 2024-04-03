@@ -11,9 +11,6 @@
 [//]: # (:::)
 
 * [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241)
-* 
-*  
-
 
 
 [[spec-norm]]

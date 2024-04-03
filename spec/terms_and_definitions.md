@@ -7,10 +7,7 @@
 
 [//]: # (: file format defined by ISO 32000-2)
 
-
-
 ## Terms & Definitions
-
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [[spec-inform:RFC2119]] when, and only when, they appear in all capitals, as shown here.
 
@@ -40,7 +37,6 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 
 * Source: [NIST](https://csrc.nist.gov/glossary/term/permission)
 
-
 [[def: primary trust registry]]:
 ~ The single [[xref: TOIP, trust registry]] that is considered the primary source for information of a particular type in an ecosystem.
 
@@ -53,8 +49,6 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 ~ Source: [[spec-norm:DID-CORE]]
 
 [[def: service property]]:
-~ TODO: 
-
 * in context of: [TRP-1] ...MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]]
 
 
