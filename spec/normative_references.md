@@ -12,9 +12,6 @@
 
 * [ToIP Governance Architecture Specification](https://wiki.trustoverip.org/pages/viewpage.action?pageId=71241)
 
-::: todo 
-Finish up alignging with `spec-up` spec linkging
-:::
 
 [[spec-norm]]
 

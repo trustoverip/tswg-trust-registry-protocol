@@ -11,23 +11,22 @@
 :--- | :-------------- 
 [**Document Type**](https://wiki.trustoverip.org/display/HOME/ToIP+Deliverable+Types%2C+Stages%2C+and+Processes) | *Specification*
 **Document Status** | *Draft* 
-**Document Purpose** | *Working Draft*
+**Document Purpose** | *Implementers Draft*
 
-::: todo
-Shift `Document Purpose` to Implementer Review Draft before going to Implementer Review.
-:::
+
 
 **Note to Implementers and Reviewers**
 
-The intent of this Implementers Review Draft Deliverable is to drive input for the specification. Comments are appreciated and encouraged. During the Implementers Review period (TODO: list dates) feedback may be dispositioned rapidly. 
+The intent of this Implementers Review Draft Deliverable is to drive input for the specification. Comments are appreciated and encouraged. During the Implementers Review period (2024-04-03 to 2024-06-03) feedback may be dispositioned rapidly. 
 
 Provide input via:
 * [GitHub Issues](https://github.com/trustoverip/tswg-trust-registry-protocol/issues) - for items that need to be tracked. These will be formally dispositioned. 
 * [GitHub Discussions](https://github.com/trustoverip/tswg-trust-registry-protocol/discussions) - for items that are more discussion level. 
 
-::: todo
-TODO: complete this preamble. @darrellodonnell 
-:::
+This protocol is currently focused on read-only operations.
+
+
+
 
 **Source/Resources:**
 

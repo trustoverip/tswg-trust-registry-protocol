@@ -50,8 +50,10 @@ Add normative ref to [ToIP Governance Architecture Specification](https://wiki.t
 :::
 
 * [GA-4] MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]] for its [[ref: primary trust registry]] that meets the requirements in the _[Trust Registry Service Property](#trust-registry-service-property)_ section.
-[GA-5] MUST publish in its EGF a list of any other EGFs governing [[ref: secondary trust registries]].
-[GA-6] MUST specify in the EGF any additional requirements for an [[ref: authorized trust registry]]. This data will be comprised of the following elements::
+
+* [GA-5] MUST publish in its EGF a list of any other EGFs governing [[ref: secondary trust registries]].
+
+* [GA-6] MUST specify in the EGF any additional requirements for an [[ref: authorized trust registry]]. This data will be comprised of the following elements::
 
     * [GA-6-1] SHOULD provide Information Trust requirements.
     * [GA-6-2] SHOULD provide Technical requirements.
@@ -61,7 +63,7 @@ Add normative ref to [ToIP Governance Architecture Specification](https://wiki.t
     - [GA-7-1] MUST provide all [[ref: authorization]] values that are used by the trust registry.
     - [GA-7-2] MUST provide all [[xref: TOIP, assurance levels]], specified with unique names, that are service by the trust registry, and what [[ref: authorization]] values they apply to.
     - [GA-7-3] MUST provide a list of all [[ref: VID Types]] that are supported by the ecosystem, and serviced by the trust registry.
-    - [GA-7-4] SHOULD provide `resources (TODO: TERM IS VAGUE)` that are required by systems integrating into the ecosystem that the system serves. 
+    - [GA-7-4] SHOULD provide `resources` (e.g. logo files, documents, interoperability profile information) that are required by systems integrating into the ecosystem that the system serves. 
     - [GA-7-5] `???any metadata required by implementors (e.g. claim name that is mandatory if pointing a credential back to an EGF.) [this is a weak example]???`
     - [GA-7-6] `???a statement about the basis the trust registry claims to be authoritative???`
     - [GA-7-7] `???means by which others are able to verify the asserted authority???`
@@ -134,12 +136,9 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
     - ii. [TRP-3-2] **Recognized Registry:** Given the entityDID the system SHOULD return the list of [[def:trust registries]] that the entity has indicated it is registered in. 
         - [TRP-3-2-1] The system MUST NOT return more than one trust registry in the array designated as a [[def: primary registry]].
 
-::: todo 
-  CREATE TrustRegistryType and TrustRegistryListType in OAS.
-:::
 
 ::: TODO: 
-  Align VID or DID terminology.
+  Align VID and/or DID terminology.
 :::
 
 [TRP-4] MUST return responses using the data model specified in the OpenAPI Specification . 
@@ -162,12 +161,14 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
 
 ### Anti-Requirements
 
-[AR-1] SHALL NOT support query operations for the history of a [[ref: registered entity]].   
+The following are considered anti-requirements in that they have been considered in the current design of the TRP:
+
+* [AR-1] SHALL NOT support query operations for the history of a [[ref: registered entity]].   
         
-[AR-2] SHALL NOT include support for a DIDComm interface, only a RESTful (i.e. OpenAPI Specification) interface. When a repeatable **trust task** specification approach is created, a DIDComm/**trust task** approach should be considered as a work effort.
+* [AR-2] SHALL NOT include support for a DIDComm interface, only a RESTful (i.e. OpenAPI Specification) interface. When a repeatable **trust task** specification approach is created, a DIDComm/**trust task** approach should be considered as a work effort.
 
-[AR-3]]SHALL NOT support automated rules processing in the protocol. A rules engine can certainly use the protocol.
+* [AR-3]]SHALL NOT support automated rules processing in the protocol. A rules engine can certainly use the protocol.
 
-[AR-4] Anything other than read-only operations. The TRP is a read-only (RETRIEVE in the CRUD sense) protocol.
+* [AR-4] Anything other than read-only operations. The TRP is a read-only (RETRIEVE in the CRUD sense) protocol.
 
 
