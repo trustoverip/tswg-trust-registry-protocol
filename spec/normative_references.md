@@ -14,7 +14,7 @@
 * 
 *  
 
-TODO: Finish up alignging with `spec-up` spec linkging
+
 
 [[spec-norm]]
 

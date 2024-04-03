@@ -119,9 +119,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
     - ii. [TRP-3-2] **Recognized Registry:** Given the entityDID the system SHOULD return the list of [[def:trust registries]] that the entity has indicated it is registered in. 
         - [TRP-3-2-1] The system MUST NOT return more than one trust registry in the array designated as a [[def: primary registry]].
 
-::: TODO: 
-  CREATE TrustRegistryType and TrustRegistryListType in OAS.
-:::
+
 
 ::: TODO: 
   Align VID and/or DID terminology.
