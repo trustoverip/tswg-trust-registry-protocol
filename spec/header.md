@@ -11,7 +11,7 @@
 :--- | :-------------- 
 [**Document Type**](https://wiki.trustoverip.org/display/HOME/ToIP+Deliverable+Types%2C+Stages%2C+and+Processes) | *Specification*
 **Document Status** | *Draft* 
-**Document Purpose** | *Implementers Review Draft*
+**Document Purpose** | *Implementers Draft*
 
 
 
