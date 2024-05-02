@@ -8,20 +8,40 @@ title Native and Bridged Support for TRP - Implementer Review Draft
 
 Person(Integrator, "Integrator", "Ecosystem Developer")
 
-System(Bridge, "TR Protocol Bridge")
+System(Bridge, "Bridge")
+System(teBridge, "Trust Establishment Bridge")
+
+System(oidcBridge, "OIDF Bridge")
+System(oidfData,"Federation","OIDF")
+
+Rel(Integrator, oidcBridge,"TRP")
+Rel(oidcBridge,oidfData,"OIDF")
+
+
 System(TRAIN, "TRAIN")
+Rel(Bridge, TRAIN,"bridges")
+
+
+
 System(EUTrustedList, "EU Trusted List")
 System(NativeSupport, "SystemX"," w Native TRP Support")
 
-System(OpenDataBridge, "OpenData Bridge")
 
+
+System(teFile, "Trust Establisment FILE")
+
+Rel(teBridge, teFile,"processes")
 
 Rel(Integrator, Bridge, "TRP")
-Rel(Bridge, TRAIN,"bridges")
+Rel(Integrator, teBridge, "TRP")
+
+
 Rel(Bridge, EUTrustedList, "bridges")
 
-Rel(Integrator, OpenDataBridge,"TRP")
-Rel(OpenDataBridge,NativeSupport,"ODPS")
+
+' System(OpenDataBridge, "OpenData Bridge")
+' Rel(Integrator, OpenDataBridge,"TRP")
+' Rel(OpenDataBridge,NativeSupport,"ODPS")
 
 Rel(Integrator, NativeSupport,"TRP")
 
