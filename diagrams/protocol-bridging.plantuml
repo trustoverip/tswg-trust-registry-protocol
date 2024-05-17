@@ -8,8 +8,8 @@ title Native and Bridged Support for TRP - Implementer Review Draft
 
 Person(Integrator, "Integrator", "Ecosystem Developer")
 
-System(Bridge, "Bridge")
-System(teBridge, "Trust Establishment Bridge")
+System(Bridge, "Generic Bridge")
+System(teBridge, "DIF \n Credential Trust Establishment \nBridge","[CTE]")
 
 System(oidcBridge, "OIDF Bridge")
 System(oidfData,"Federation","OIDF")
@@ -18,7 +18,7 @@ Rel(Integrator, oidcBridge,"TRP")
 Rel(oidcBridge,oidfData,"OIDF")
 
 
-System(TRAIN, "TRAIN")
+System(TRAIN, "TRAIN") 
 Rel(Bridge, TRAIN,"bridges")
 
 
@@ -28,7 +28,7 @@ System(NativeSupport, "SystemX"," w Native TRP Support")
 
 
 
-System(teFile, "Trust Establisment FILE")
+System(teFile, "CTE file")
 
 Rel(teBridge, teFile,"processes")
 
