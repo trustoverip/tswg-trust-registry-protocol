@@ -47,7 +47,7 @@ In the web service world the TRP is purely a GET protocol.
 
 Just as important it is to understand what the Trust Registry Protocol does NOT do. The TRP does NOT:
 * affect the operations and governance of the systems that support querying using the TRP.
-* create, update, or delete data in a system. In web services this means the TRP does to PUT, POST, DELETE, and other non-GET operations.
+* create, update, or delete data in a system. In web services this means the TRP does no PUT, POST, DELETE, and other non-GET operations.
 
 As with all layers of the [[xref: TOIP, ToIP stack]], the purpose of a [[xref: TOIP, ToIP specification]] is to enable the technical interoperability necessary to support transitive trust within and between different [[xref: TOIP, trust communities]] implementing the [[xref: TOIP, ToIP stack]]. In this case, the desired interoperability outcome is a common query protocol that works between any number of decentralized peer trust registries operated by independent governing authorities** representing multiple legal and business jurisdictions.
 
