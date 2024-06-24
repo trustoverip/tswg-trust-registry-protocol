@@ -112,9 +112,9 @@ Trust Over IP hosts a [Service Profile]() with the following pointer:
 By implementing service profiles, it enables easier interoperability and
 discovery of service capabilities for the trust registry being implemented.
 
-### Trust Registry Protocol [TRQP-*]
+### Trust Registry Query Protocol [TRQP-*]
 
-The authoritative technical specifications for the API calls in the ToIP Trust Registry Protocol V1 are specified in Appendix A (OpenAPI YAML file). This section contains a textual description of the **requirements**.
+The authoritative technical specifications for the API calls in the ToIP Trust Registry Query Protocol are specified in Appendix A (OpenAPI YAML file). This section contains a textual description of the **requirements**.
 
 **Trust registries** implementing this protocol:
 

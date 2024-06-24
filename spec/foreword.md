@@ -13,7 +13,7 @@ The usefulness of an ecosystem is largely dependant on its ability to assert tru
 The term [[ref:trust]] is loaded with varied meanings that may conflict. In the context of trust registries we want to be clear what we mean, when we apply the term “trust”. A trust registry does not create trust by itself. The decision for one entity to “trust” another is each party's own decision. The purpose of the trust registry is to provide access to a system of record that contains answers to questions that help drive those trust decisions.
 
 A trust registry may provide information that helps the [[ref:consuming party]] in deciding that an entity is [[ref:trustworthy]]. 
-The ToIP Trust Registry Protocol helps ecosystems create the foundation of trust within its governed domain, by providing a common protocol for querying information that helps the consuming party in deciding that an entity is [[ref: trustworthy]].
+The ToIP Trust Registry Query Protocol helps ecosystems create the foundation of trust within its governed domain, by providing a common protocol for querying information that helps the consuming party in deciding that an entity is [[ref: trustworthy]].
 
 In addition to providing information on its own ecosystem, the Trust Registry Query Protocol (TRQP) enables creation of a registry of registries. This is done by allowing an ecosystem to assert trust to other trust registries, and thus ecosystems. This can be achieved by allowing a governance entity to assert that consuming parties that rely on the trust registry, may also utilize information from another trust registry for additional assertions. This effectively creates transitive trust across ecosystems to achieve wider reach.
 

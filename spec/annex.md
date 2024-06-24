@@ -43,7 +43,7 @@ There are several renderings of the OAS specification:
 
 ## Annex C - Uses and Data Model Reference
 
-### Use of the Trust Registry Protocol.
+### Use of the Trust Registry Query Protocol.
 
 The TRQP is intended to be used in at least two key ways:
 
