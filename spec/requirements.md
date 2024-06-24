@@ -133,8 +133,8 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
         - `Terminated` + http code 200 - authorization was terminated (e.g. voluntary termination by the **registered entity**)
         - `Revoked` + http code 200 - authorization was revoked (e.g. involuntary termination by the **governing authority**) 
     - [TRQP-3-2] **Entity Authorizations**: Given only the `entityDID` the system SHOULD return the array of Authorization objects for the entity identified by `entityDID`. 
-    - ii. [TRQP-3-2] **Recognized Registry:** Given the entityDID the system SHOULD return the list of [[def:trust registries]] that the entity has indicated it is registered in. 
-        - [TRQP-3-2-1] The system MUST NOT return more than one trust registry in the array designated as a [[def: primary registry]].
+    - [TRQP-3-3] **Recognized Registry:** Given the entityDID the system SHOULD return the list of [[def:trust registries]] that the entity has indicated it is registered in. 
+      - [TRQP-3-3-1] The system MUST NOT return more than one trust registry in the array designated as a [[def: primary registry]].
 
 
 ::: TODO: 
@@ -154,7 +154,7 @@ The authoritative technical specifications for the API calls in the ToIP Trust R
         - [TRQP-5-3-3] The `AuthorizationStartDate` MUST be the date that the **registered entity** authorization began.
         - [TRQP-5-3-4] The `AuthorizationEndDate` MUST be either:
             - [TRQP-5-3-4-1] `Null` for an entry whose **status value** is `Current` at the time of the query.
-            - [TRQP-5-3-4-2] A specific datetime value if the **registered entity** **status value** is `Expired`, `Terminated` or `Revoked.`
+            - [TRQP-5-3-4-2] A specific datetime value if the **registered entity** **status value** is `Expired`, `Terminated` or `Revoked`.
         - [TRQP-5-3-5] If a **registered entity** has multiple entries in the system (representing an authorization history), the value that is active at the time indicated must be returned:
           - [TRQP-5-3-5-1] when no `queryTime` value is provided the value that is active at time of the query MUST be returned.
           - [TRQP-5-3-5-2] when a `queryTime` parameter is provided the entry that is active at that time (i.e. indicted by `queryTime`) MUST be returned. 
