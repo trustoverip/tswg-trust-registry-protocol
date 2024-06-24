@@ -4,7 +4,7 @@
 ' !include C4_Context.puml
 
 
-title Native and Bridged Support for TRP - Implementer Review Draft
+title Native and Bridged Support for TRQP - Implementer Review Draft
 
 Person(Integrator, "Integrator", "Ecosystem Developer")
 
@@ -40,7 +40,7 @@ Rel(Bridge, EUTrustedList, "bridges")
 
 
 ' System(OpenDataBridge, "OpenData Bridge")
-' Rel(Integrator, OpenDataBridge,"TRP")
+' Rel(Integrator, OpenDataBridge,"TRQP")
 ' Rel(OpenDataBridge,NativeSupport,"ODPS")
 
 Rel(Integrator, NativeSupport,"TRQP")
