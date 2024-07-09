@@ -36,6 +36,14 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 [[def: primary trust registry]]:
 ~ The single [[xref: TOIP, trust registry]] that is considered the primary source for information of a particular type in an ecosystem.
 
+[[def: registry of (trust) registries (RoR)]]:
+~ Helps create a web of connected ecosystems, wiring up the existing disparate trust registries, locally and internationally
+~ A Registry of Registries (RoR), is a form of trust registry that primarily serves information about the trustworthiness of other trust registries
+
+
+[[def:RDAP]]:
+~ The Registration Data Access Protocol (RDAP) provides RESTful web services to retrieve registration data from Domain Name registrars/registries and Regional Internet Registries1. It was developed by the Internet Engineering Task Force (IETF) as a standardized replacement for WHOIS. 
+
 [[def:secondary trust registry, secondary trust registries]]:
 ~ A trust registry that has copies of information based on the ecosystem's [[def:primary trust registry]]. 
 
@@ -60,6 +68,7 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 [[def: trustworthiness]]
 ~ An attribute of a person or organization that provides confidence to others of the qualifications, capabilities, and reliability of that entity to perform specific tasks and fulfill assigned responsibilities. Trustworthiness is also a characteristic of information technology products and systems (see Section 2.6.2 on trustworthiness of information systems). The attribute of trustworthiness, whether applied to people, processes, or technologies, can be measured, at least in relative terms if not quantitatively.48 The determination of trustworthiness plays a key role in establishing trust relationships among persons and organizations. The trust relationships are key factors in risk decisions made by senior leaders/executives. NOTE: Current state-of-the-practice for measuring trustworthiness can reliably differentiate between widely different levels of trustworthiness and is capable of producing a trustworthiness scale that is hierarchical between similar instances of measuring activities (e.g., the results from ISO/IEC 15408 [Common Criteria] evaluations). (source: [NIST Special Publication 800-39](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-39.pdf) p.24)
 
+** should be more specific to trust registries, in that the trustworthiness of a TR should be based on the human interpreration and value of the governance body, it's governing autority and its framework.
 
 [[def: trusted party]]:
 ~ A party that is trusted by an entity to faithfully perform certain services for that entity. An entity may choose to act as a trusted party for itself.(source: [NIST SP 800-56B Rev. 2](https://doi.org/10.6028/NIST.SP.800-56Br2) under Trusted party)
