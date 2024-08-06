@@ -43,7 +43,7 @@ https://github.com/trustoverip/tswg-trust-registry-protocol/issues/6
 ~ A network address, such as an HTTP URL, at which services operate on behalf of a DID subject. (Source: [[spec-norm:DID-CORE]])
 
 [[def: service property]]:
-~ in context of: [TRP-1] ...MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]]
+~ in context of: [TRQP-1] ...MUST publish, in the [[xref: TOIP, DID document]] associated with the **DID** identifying its **EGF**, a [[ref: service property]] specifying the [[ref: service endpoint]]
 
 [[def: trust registry, trust registries]]: 
 ~ A registry that serves as an authoritative source for trust graphs or other governed information describing one or more trust communities. A trust registry is typically authorized by a governance framework.  (See also: [[xref: TOIP, trust list]])

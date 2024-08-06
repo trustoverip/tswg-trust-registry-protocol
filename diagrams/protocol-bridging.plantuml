@@ -4,26 +4,46 @@
 ' !include C4_Context.puml
 
 
-title Native and Bridged Support for TRP - Implementer Review Draft
+title Native and Bridged Support for TRQP - Implementer Review Draft
 
 Person(Integrator, "Integrator", "Ecosystem Developer")
 
-System(Bridge, "TR Protocol Bridge")
-System(TRAIN, "TRAIN")
-System(EUTrustedList, "EU Trusted List")
-System(NativeSupport, "SystemX"," w Native TRP Support")
+System(Bridge, "Generic Bridge")
+System(teBridge, "DIF \n Credential Trust Establishment \nBridge","[CTE]")
 
-System(OpenDataBridge, "OpenData Bridge")
+System(oidcBridge, "OIDF Bridge")
+System(oidfData,"Federation","OIDF\nProfile 1")
+System(oidfDataN,"Federation","OIDF\nProfile N")
+Rel(Integrator, oidcBridge,"TRQP")
+Rel(oidcBridge,oidfData,"OIDF\nProfile 1")
+Rel(oidcBridge,oidfDataN,"OIDF\nProfile N")
 
-
-Rel(Integrator, Bridge, "TRP")
+System(TRAIN, "TRAIN") 
 Rel(Bridge, TRAIN,"bridges")
+
+
+
+System(EUTrustedList, "EU Trusted List")
+System(NativeSupport, "SystemX"," w Native TRQP Support")
+
+
+
+System(teFile, "CTE file")
+
+Rel(teBridge, teFile,"processes")
+
+Rel(Integrator, Bridge, "TRQP")
+Rel(Integrator, teBridge, "TRQP")
+
+
 Rel(Bridge, EUTrustedList, "bridges")
 
-Rel(Integrator, OpenDataBridge,"TRP")
-Rel(OpenDataBridge,NativeSupport,"ODPS")
 
-Rel(Integrator, NativeSupport,"TRP")
+' System(OpenDataBridge, "OpenData Bridge")
+' Rel(Integrator, OpenDataBridge,"TRQP")
+' Rel(OpenDataBridge,NativeSupport,"ODPS")
+
+Rel(Integrator, NativeSupport,"TRQP")
 
 
 

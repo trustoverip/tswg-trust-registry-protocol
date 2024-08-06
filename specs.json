@@ -1,7 +1,7 @@
 {
   "specs": [
     {
-      "title": "ToIP Trust Registry Protocol v2 TF DRAFT",
+      "title": "ToIP Trust Query Registry Protocol v2 TF DRAFT",
       "spec_directory": "./spec",
       "output_path": "./docs",
       "markdown_paths": [
