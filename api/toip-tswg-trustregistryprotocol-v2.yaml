@@ -314,7 +314,7 @@ paths:
           name: egfURI
           required: true
           schema:
-            $ref: '#/components/schemas/VIDMethodListType'
+            $ref: '#/components/schemas/URI'
           description: >
             Provides a list of DID-methods that are supported by this trust
             registry. MAY include Maximum Assurance Level 
