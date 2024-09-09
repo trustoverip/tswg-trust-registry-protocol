@@ -30,7 +30,7 @@ tags:
   - name: offline
     description: Offline operations (i.e. prepare to go offline).
 paths:
-  /entitities/{entityid}:
+  /entities/{entityid}:
     get:
       tags:
         - registry
