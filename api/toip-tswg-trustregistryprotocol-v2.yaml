@@ -596,7 +596,7 @@ components:
         governanceFrameworkVID:
           type: string
           format: uri
-          exampls: 
+          examples: 
             - "did:example:456"
         primaryTrustRegistryVID:
           type: string
