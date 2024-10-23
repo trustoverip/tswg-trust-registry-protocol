@@ -596,7 +596,7 @@ components:
         governanceFrameworkDID:
           type: string
           format: uri
-          exampls:
+          examples: 
             - "did:example:456"
         primaryTrustRegistryDID:
           type: string
