@@ -42,7 +42,7 @@ paths:
           name: entityid
           required: true
           schema:
-            $ref: '#/components/schemas/Uri'
+            $ref: "#/components/schemas/Uri"
           description: >
             The URI-based identifier of a DID or X.509 Issuer. Allows reserved
             characters per RFC3986. 
@@ -50,96 +50,96 @@ paths:
             Do **NOT** escape the URI.
           allowReserved: true
         - in: query
-          name: authorizationVID
+          name: authorizationDID
           required: false
           schema:
-            $ref: '#/components/schemas/Uri'
+            $ref: "#/components/schemas/Uri"
           description: >
             The identifier of the Authorization that is being queried for this
             Entity.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EntityType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-  /entities/{entityVID}/authorization:
+                $ref: "#/components/schemas/EntityType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /entities/{entityDID}/authorization:
     get:
       tags:
         - registry
       summary: Determine whether an Entity has a particular Authorization.
       parameters:
         - in: path
-          name: entityVID
+          name: entityDID
           required: true
           schema:
-            $ref: '#/components/schemas/VID'
+            $ref: "#/components/schemas/DID"
           description: >
-            The VID-based identifier of a VID/DID/AID or X.509 Issuer. Allows
+            The DID-based identifier of a DID/DID/AID or X.509 Issuer. Allows
             reserved characters per RFC3986. 
 
             Do **NOT** escape the URI.
           allowReserved: true
         - in: query
-          name: authorizationVID
+          name: authorizationDID
           required: false
           schema:
-            $ref: '#/components/schemas/Uri'
+            $ref: "#/components/schemas/Uri"
           description: >
             The identifier of the Authorization that is being queried for this
             Entity.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthorizationResponseListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-  /entities/{entityVID}/authorizations:
+                $ref: "#/components/schemas/AuthorizationResponseListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /entities/{entityDID}/authorizations:
     get:
       tags:
         - registry
       summary: Determine whether an Entity has a particular Authorization.
       parameters:
         - in: path
-          name: entityVID
+          name: entityDID
           required: true
           schema:
-            $ref: '#/components/schemas/VID'
+            $ref: "#/components/schemas/DID"
           description: >
-            The VID-based identifier of a VID/DID/AID or X.509 Issuer. Allows
+            The DID-based identifier of a DID/DID/AID or X.509 Issuer. Allows
             reserved characters per RFC3986. 
 
             Do **NOT** escape the URI.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthorizationResponseListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/AuthorizationResponseListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /registries/recognized-registries:
     get:
       tags:
@@ -149,45 +149,45 @@ paths:
         Registry.
       parameters:
         - in: query
-          name: namespace-VID
+          name: namespace-DID
           required: false
           schema:
-            $ref: '#/components/schemas/VID'
+            $ref: "#/components/schemas/DID"
           description: >
             Filter in only the namespace requested - show all registries
-            otherwise. The URI-based Verifiable Identifier (VID) (e.g. DID or
-            X.509 VID). Allows reserved characters per RFC3986. 
+            otherwise. The URI-based Verifiable Identifier (DID) (e.g. DID or
+            X.509 DID). Allows reserved characters per RFC3986.
 
             Do **NOT** escape the URI.
           allowReserved: true
         - in: query
-          name: EGF-VID
+          name: EGF-DID
           required: false
           schema:
-            $ref: '#/components/schemas/VID'
+            $ref: "#/components/schemas/DID"
           description: >
             Filter in only the registries under the specified EGF (by EGF DID).
             Defaults to be limited to the EGFURI that is being queried at the
             root. 
 
-            The URI-based Verifiable Identifier (VID) (e.g. DID or X.509 VID).
+            The URI-based Verifiable Identifier (DID) (e.g. DID or X.509 DID).
             Allows reserved characters per RFC3986. 
 
             Do **NOT** escape the URI.
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RegistryListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-  /registries/{registryVID}/recognized-registries/:
+                $ref: "#/components/schemas/RegistryListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /registries/{registryDID}/recognized-registries/:
     get:
       tags:
         - registry
@@ -198,10 +198,10 @@ paths:
         TODO: determine RoR (registry of registry) impacts here.
       parameters:
         - in: path
-          name: registryVID
+          name: registryDID
           required: true
           schema:
-            $ref: '#/components/schemas/VID'
+            $ref: "#/components/schemas/DID"
           description: >
             The URI-based identifier of a DID or X.509 Issuer. Allows reserved
             characters per RFC3986. 
@@ -209,29 +209,29 @@ paths:
             Do **NOT** escape the URI.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RegistryListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-  /registries/{registryVID}/:
+                $ref: "#/components/schemas/RegistryListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /registries/{registryDID}/:
     get:
       tags:
         - registry
       summary: Get resource data indicated by DID.
       parameters:
         - in: path
-          name: registryVID
+          name: registryDID
           required: true
           schema:
-            $ref: '#/components/schemas/VID'
+            $ref: "#/components/schemas/DID"
           description: >
             The URI-based identifier of a DID or X.509 Issuer. Allows reserved
             characters per RFC3986. 
@@ -239,20 +239,20 @@ paths:
             Do **NOT** escape the URI.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/ResourceReferencedType'
-                  - $ref: '#/components/schemas/ResourceDirectType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                  - $ref: "#/components/schemas/ResourceReferencedType"
+                  - $ref: "#/components/schemas/ResourceDirectType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /lookup/authorizations:
     get:
       tags:
@@ -263,7 +263,7 @@ paths:
           name: egfURI
           required: true
           schema:
-            $ref: '#/components/schemas/Uri'
+            $ref: "#/components/schemas/Uri"
           description: >
             The URI-based identifier of a DID or X.509 Issuer. Allows reserved
             characters per RFC3986. 
@@ -271,18 +271,18 @@ paths:
             Do **NOT** escape the URI.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AuthorizationListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/AuthorizationListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /lookup/namespaces:
     get:
       tags:
@@ -290,19 +290,19 @@ paths:
       summary: Get the namespaces that are supported in this trust Registry.
       parameters: []
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NamespaceListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
-  /lookup/vidmethods:
+                $ref: "#/components/schemas/NamespaceListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /lookup/didmethods:
     get:
       tags:
         - lookups
@@ -314,7 +314,7 @@ paths:
           name: egfURI
           required: true
           schema:
-            $ref: '#/components/schemas/VIDMethodListType'
+            $ref: "#/components/schemas/DIDMethodListType"
           description: >
             Provides a list of DID-methods that are supported by this trust
             registry. MAY include Maximum Assurance Level 
@@ -322,18 +322,18 @@ paths:
             that a DID Method is set at under the EGF.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VIDMethodListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/DIDMethodListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /lookup/assurancelevels:
     get:
       tags:
@@ -346,7 +346,7 @@ paths:
           name: egfURI
           required: true
           schema:
-            $ref: '#/components/schemas/Uri'
+            $ref: "#/components/schemas/Uri"
           description: >
             The URI-based identifier of the Ecosystem Governance Framework that
             the assurance levels apply to. Allows reserved characters per
@@ -355,18 +355,18 @@ paths:
             Do **NOT** escape the URI.
           allowReserved: true
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssuranceLevelListType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/AssuranceLevelListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /metadata:
     get:
       tags:
@@ -374,18 +374,18 @@ paths:
       summary: Provides metadata object.
       description: Metadata object.
       responses:
-        '200':
+        "200":
           description: search results matching criteria
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RegistryMetadataType'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/RegistryMetadataType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /offline/exportfile:
     get:
       tags:
@@ -398,12 +398,12 @@ paths:
 
         credential type, and EGF that they are operating under.
       responses:
-        '200':
+        "200":
           description: JSON file array of offline list of Issuers
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExportFile'
+                $ref: "#/components/schemas/ExportFile"
   /offline/trustestablishmentdocument:
     get:
       tags:
@@ -416,18 +416,18 @@ paths:
 
         credential type, and EGF that they are operating under.
       responses:
-        '200':
+        "200":
           description: JSON file array of offline list of Issuers
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TrustEstablishmentDocument'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schemas/TrustEstablishmentDocument"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
 components:
   securitySchemes:
     bearerAuth:
@@ -440,49 +440,49 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     Unauthorized:
       description: Unauthorized
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     Forbidden:
       description: Forbidden
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     NotFound:
       description: Not Found
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     NotAcceptable:
       description: Not Acceptable
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     Conflict:
       description: Conflict
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     InternalServerError:
       description: Internal Server Error
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     ServiceUnavailable:
       description: Service Unavailable
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/ProblemDetails'
+            $ref: "#/components/schemas/ProblemDetails"
     default:
       description: Generic Error
   schemas:
@@ -490,10 +490,10 @@ components:
       type: string
       format: uri
       description: string providing an URI formatted according to IETF RFC 3986.
-    VID:
+    DID:
       type: string
       format: uri
-      description: string providing an URI formatted according to IETF RFC 3986.
+      description: string providing an URI formatted according to DID Core v1.0
     AssuranceLevelType:
       type: object
       description: >
@@ -509,16 +509,16 @@ components:
         identifier:
           type: string
           format: URI
-          examples: 
+          examples:
             - did:example:123
         name:
           type: string
-          examples: 
+          examples:
             - LOA2
         description:
           type: string
-          examples: 
-            -  "Level of Assurance 2 - see EGF for definition, terms, obligations,liabilities, and indemnity"
+          examples:
+            - "Level of Assurance 2 - see EGF for definition, terms, obligations,liabilities, and indemnity"
     AuthorizationType:
       type: object
       required:
@@ -529,7 +529,7 @@ components:
         identifier:
           type: string
           format: uri
-          examples: 
+          examples:
             - "did:example:123"
         simplename:
           type: string
@@ -540,7 +540,7 @@ components:
             The Assurance Level for the Authorization. Defined in the EGF.
             [OPTIONAL]
           allOf:
-            - $ref: '#/components/schemas/AssuranceLevelType'
+            - $ref: "#/components/schemas/AssuranceLevelType"
     AuthorizationResponseType:
       type: object
       required:
@@ -551,10 +551,10 @@ components:
         entityID:
           type: string
           format: uri
-          examples: 
+          examples:
             - did:example:123
           description: >
-            The VID that identifies the Entity that may (i.e. it may be expired,
+            The DID that identifies the Entity that may (i.e. it may be expired,
             revoked, terminated)  hold the particular Authorization.
         authorizationUniqueString:
           type: string
@@ -562,9 +562,9 @@ components:
         authorizationID:
           type: string
           format: uri
-          examples: 
+          examples:
             - "did:example:123"
-          description: the VID that identifies the particular Authorization.
+          description: the DID that identifies the particular Authorization.
         description:
           type: string
         assuranceLevel:
@@ -572,58 +572,57 @@ components:
             The Assurance Level for the Authorization. Defined in the EGF.
             [OPTIONAL]
           allOf:
-            - $ref: '#/components/schemas/AssuranceLevelType'
+            - $ref: "#/components/schemas/AssuranceLevelType"
         authorizationStatus:
-          $ref: '#/components/schemas/StatusType'
+          $ref: "#/components/schemas/StatusType"
         authorizationValidity:
           description: The Validity dates related to this particular authorization.
           allOf:
-            - $ref: '#/components/schemas/ValidityDatesType'
+            - $ref: "#/components/schemas/ValidityDatesType"
     EntityType:
       type: object
       required:
         - identifier
-        - governanceFrameworkVID
+        - governanceFrameworkDID
         - status
         - validFromDT
       properties:
-        entityVID:
+        entityDID:
           type: string
           format: uri
-          examples: 
+          examples:
             - "did:example:123"
           description: The primary identifier for the Entity (i.e. the primary key)
-        governanceFrameworkVID:
+        governanceFrameworkDID:
           type: string
           format: uri
-          exampls: 
+          exampls:
             - "did:example:456"
-        primaryTrustRegistryVID:
+        primaryTrustRegistryDID:
           type: string
           format: uri
-          examples: 
+          examples:
             - "did:example:123"
-          description: A VID identifying the registered entity's Primary Trust Registry
+          description: A DID identifying the registered entity's Primary Trust Registry
         authorizations:
-          $ref: '#/components/schemas/AuthorizationListType'
+          $ref: "#/components/schemas/AuthorizationListType"
           description: List of the Authorizations that the Entity has.
         secondaryTrustRegistries:
           type: array
           items:
             type: string
             format: uri
-            examples: 
-              ["did:example:456", "did:example:789"]
+            examples: ["did:example:456", "did:example:789"]
             description: >-
-              A VID identifying a secondary trust registry that this Entity is
+              A DID identifying a secondary trust registry that this Entity is
               registered in.
         participatingNamepaces:
-          $ref: '#/components/schemas/NamespaceListType'
+          $ref: "#/components/schemas/NamespaceListType"
         entityDataValidity:
-          $ref: '#/components/schemas/ValidityDatesType'
+          $ref: "#/components/schemas/ValidityDatesType"
         registrationStatus:
-          $ref: '#/components/schemas/StatusType'
-    VIDMethodType:
+          $ref: "#/components/schemas/StatusType"
+    DIDMethodType:
       type: object
       required:
         - identifier
@@ -643,7 +642,7 @@ components:
 
             level that it can provide.
           allOf:
-            - $ref: '#/components/schemas/AssuranceLevelType'
+            - $ref: "#/components/schemas/AssuranceLevelType"
     IntegrityType:
       type: object
       description: Integrity object
@@ -653,14 +652,14 @@ components:
       properties:
         hashtype:
           type: string
-          examples: 
+          examples:
             - "sha2-256"
           description: |
             Hashing algorithm well-known-name. TODO: Reference to some list?
         hash:
           type: string
           description: the hash of the data.
-          examples: 
+          examples:
             - "64ee532ac8a4871e21ccf0397ac8154efb747ec37a2a116c35fc8b810cbf24bd"
     ResourceReferencedType:
       type: object
@@ -674,7 +673,7 @@ components:
         identifier:
           type: string
           format: uri
-          examples: 
+          examples:
             - did:example:123
         lastupdated:
           type: string
@@ -686,12 +685,12 @@ components:
             The `kind` of resource (e.g. credential-definition,
             schema-definition, revocation-registry). intended
 
-            to be used by recipient for processing of the data payload. 
+            to be used by recipient for processing of the data payload.
           type: string
         resourceURI:
-          $ref: '#/components/schemas/Uri'
+          $ref: "#/components/schemas/Uri"
         integrity:
-          $ref: '#/components/schemas/IntegrityType'
+          $ref: "#/components/schemas/IntegrityType"
     ResourceDirectType:
       type: object
       description: Resource that is served directly by this trust registry.
@@ -703,7 +702,7 @@ components:
         identifier:
           type: string
           format: uri
-          examples: 
+          examples:
             - "did:example:123"
         lastupdated:
           type: string
@@ -715,11 +714,11 @@ components:
             The `kind` of resource (e.g. credential-definition,
             schema-definition, revocation-registry). intended
 
-            to be used by recipient for processing of the data payload. 
+            to be used by recipient for processing of the data payload.
           type: string
         resourceURI:
           description: Resource URI for direct reference (to this Trust Registry).
-          $ref: '#/components/schemas/Uri'
+          $ref: "#/components/schemas/Uri"
         payloadJSON:
           type: object
           description: JSON object
@@ -735,7 +734,7 @@ components:
         identifier:
           type: string
           format: uri
-          examples: 
+          examples:
             - "did:example:123"
         canonicalString:
           type: string
@@ -759,16 +758,16 @@ components:
           format: date-time
         primaryEGFURI:
           type: string
-          example: 
+          example:
             - "did:example:GlobalDriverLicenseDID"
           description: URI of the EGF that governs the Trust Registry.
         additionalEGFURIs:
           type: array
           description: "List of URIs of Ecosystem Governance Frameworks that this Trust Registry operates under, in addition to the .primaryEGFURI"
           items:
-            $ref: '#/components/schemas/Uri'
+            $ref: "#/components/schemas/Uri"
         participatingNamepaces:
-          $ref: '#/components/schemas/NamespaceListType'
+          $ref: "#/components/schemas/NamespaceListType"
         languages:
           type: array
           description: >-
@@ -792,28 +791,28 @@ components:
         identifier:
           type: string
           format: uri
-          examples: 
+          examples:
             - "did:example:123"
         name:
           type: string
-          examples: 
+          examples:
             - "Professional Engineers Ontario"
         description:
           type: string
-          examples: 
+          examples:
             - "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province."
         primaryEGFURI:
           type: string
-          example: 
+          example:
             - "did:example:GlobalDriverLicenseDID"
           description: URI of the EGF that governs the Trust Registry.
         additionalEGFURIs:
           type: array
           description: "List of URIs of Ecosystem Governance Frameworks that this Trust Registry operates under, in addition to the .primaryEGFURI"
           items:
-            $ref: '#/components/schemas/Uri'
+            $ref: "#/components/schemas/Uri"
         participatingNamepaces:
-          $ref: '#/components/schemas/NamespaceListType'
+          $ref: "#/components/schemas/NamespaceListType"
         peerType:
           type: string
           enum:
@@ -855,11 +854,11 @@ components:
     AssuranceLevelListType:
       type: array
       items:
-        $ref: '#/components/schemas/AssuranceLevelType'
+        $ref: "#/components/schemas/AssuranceLevelType"
     AuthorizationListType:
       type: array
       items:
-        $ref: '#/components/schemas/AuthorizationType'
+        $ref: "#/components/schemas/AuthorizationType"
       examples:
         - identifier: did:example:abc
           simplename: country:role
@@ -868,7 +867,7 @@ components:
     AuthorizationResponseListType:
       type: array
       items:
-        $ref: '#/components/schemas/AuthorizationResponseType'
+        $ref: "#/components/schemas/AuthorizationResponseType"
       examples:
         - identifier: did:example:abc
           simplename: country:role
@@ -877,32 +876,32 @@ components:
     NamespaceListType:
       type: array
       items:
-        $ref: '#/components/schemas/NamespaceType'
+        $ref: "#/components/schemas/NamespaceType"
     RegistryListType:
       type: array
       description: Array of RegistryQueryType
       items:
-        $ref: '#/components/schemas/RegistryType'
+        $ref: "#/components/schemas/RegistryType"
     EntityListType:
       type: array
       items:
-        $ref: '#/components/schemas/EntityType'
-    VIDMethodListType:
+        $ref: "#/components/schemas/EntityType"
+    DIDMethodListType:
       type: array
       items:
-        $ref: '#/components/schemas/VIDMethodType'
-    
+        $ref: "#/components/schemas/DIDMethodType"
+
     ExportLookups:
       type: object
       properties:
-        VIDMethods:
-          $ref: '#/components/schemas/VIDMethodListType'
+        DIDMethods:
+          $ref: "#/components/schemas/DIDMethodListType"
         AssuranceLevels:
-          $ref: '#/components/schemas/AssuranceLevelListType'
+          $ref: "#/components/schemas/AssuranceLevelListType"
         Authorizations:
-          $ref: '#/components/schemas/AuthorizationListType'
+          $ref: "#/components/schemas/AuthorizationListType"
         Namespaces:
-          $ref: '#/components/schemas/NamespaceListType'
+          $ref: "#/components/schemas/NamespaceListType"
     ValidityDatesType:
       type: object
       description: Date and Time of validity.
@@ -935,15 +934,15 @@ components:
           type: string
           description: Version string [OPTIONAL]
         validity:
-          $ref: '#/components/schemas/ValidityDatesType'
+          $ref: "#/components/schemas/ValidityDatesType"
         lookups:
-          $ref: '#/components/schemas/ExportLookups'
+          $ref: "#/components/schemas/ExportLookups"
         registries:
-          $ref: '#/components/schemas/RegistryListType'
+          $ref: "#/components/schemas/RegistryListType"
         entities:
-          $ref: '#/components/schemas/EntityListType'
+          $ref: "#/components/schemas/EntityListType"
         resources:
-          $ref: '#/components/schemas/RegistryListType'
+          $ref: "#/components/schemas/RegistryListType"
     TrustEstablishmentDocument:
       type: object
       required:
@@ -969,7 +968,7 @@ components:
             A short summary of the problem type. Written in English and readable
             for engineers (usually not suited for non technical stakeholders and
             not localized).
-          examples: 
+          examples:
             - "Service Unavailable"
         status:
           type: integer
