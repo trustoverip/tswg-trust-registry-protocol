@@ -16,7 +16,7 @@ We need answers to a simple question:
 
 > Does `Entity X` have `Authorization Y`, in the context of `Ecosystem Governance Framework Z`?
 
-The Trust Registry Quert Protocol (TRQP) serves to provide a simple interface to enable querying of systems of record that provide the information that drives a trust registry. There are a plethora of systems that contain answers that are required to make trust decisions. The protocol is intended to make the communication with any particular system-of-record consistent and simple.
+The Trust Registry Query Protocol (TRQP) serves to provide a simple interface to enable querying of systems of record that provide the information that drives a trust registry. There are a plethora of systems that contain answers that are required to make trust decisions. The protocol is intended to make the communication with any particular system-of-record consistent and simple.
 
 It is intentionally simple to allow rapid integration into external systems.
 
