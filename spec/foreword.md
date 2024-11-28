@@ -17,7 +17,9 @@ The ToIP Trust Registry Query Protocol helps ecosystems create the foundation of
 
 In addition to providing information on its own ecosystem, the Trust Registry Query Protocol (TRQP) enables creation of a registry of registries. This is done by allowing an ecosystem to assert trust to other trust registries, and thus ecosystems. This can be achieved by allowing a governance entity to assert that consuming parties that rely on the trust registry, may also utilize information from another trust registry for additional assertions. This effectively creates transitive trust across ecosystems to achieve wider reach.
 
-The Trust Registry Query Protocol serves to provide a simple interface to enable querying of systems of record that provide the information that drives a trust registry. There are a plethora of systems that contain answers that are required to make trust decisions. The protocol is intended to make the communication with any particular system-of-record consistent and simple.
+The Trust Registry Query Protocol serves to provide a simple interface to enable querying of systems of record that provide the information that drives a trust registry. There are a plethora of systems that contain answers that are required to make trust decisions. The protocol is intended to make the communication with any particular system-of-record consistent and simple via an "inter-ecosystem trust protocol". That is, the TRQP is a specification that defines an approach to communicate across intra-ecosystem trust frameworks. It describes the common data models , ecosystem requirements, and basic interaction patterns required to answer the question: 
+
+> Does `Entity X` have `Authorization Y`, in the context of `Ecosystem Governance Framework Z`?
 
 ## Foreword
 This specification is subject to the **OWF Contributor License Agreement 1.0 - Copyright** available at
