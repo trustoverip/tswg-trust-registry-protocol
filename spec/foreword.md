@@ -8,6 +8,7 @@
 [//]: # (\newpage)
 
 ## Scope
+
 The usefulness of an ecosystem is largely dependant on its ability to assert trust for and between its members. This is true for traditional ecosystems, but even more so with digital ecosystems. With the growing trend on decentralisation of digital services, we are also seeing increased need to transitively assert trust across ecosystems. 
 
 The term [[ref:trust]] is loaded with varied meanings that may conflict. In the context of trust registries we want to be clear what we mean, when we apply the term “trust”. A trust registry does not create trust by itself. The decision for one entity to “trust” another is each party's own decision. The purpose of the trust registry is to provide access to a system of record that contains answers to questions that help drive those trust decisions.
@@ -17,9 +18,13 @@ The ToIP Trust Registry Query Protocol helps ecosystems create the foundation of
 
 In addition to providing information on its own ecosystem, the Trust Registry Query Protocol (TRQP) enables creation of a registry of registries. This is done by allowing an ecosystem to assert trust to other trust registries, and thus ecosystems. This can be achieved by allowing a governance entity to assert that consuming parties that rely on the trust registry, may also utilize information from another trust registry for additional assertions. This effectively creates transitive trust across ecosystems to achieve wider reach.
 
-The Trust Registry Query Protocol serves to provide a simple interface to enable querying of systems of record that provide the information that drives a trust registry. There are a plethora of systems that contain answers that are required to make trust decisions. The protocol is intended to make the communication with any particular system-of-record consistent and simple via an "inter-ecosystem trust protocol". That is, the TRQP is a specification that defines an approach to communicate across intra-ecosystem trust frameworks. It describes the common data models , ecosystem requirements, and basic interaction patterns required to answer the question: 
+In essence, the TRQP establishes a specification for seamless communication across intra-ecosystem trust frameworks. It outlines an abstract data model, ecosystem requirements, and interaction patterns needed to answer the core question:
 
-> Does `Entity X` have `Authorization Y`, in the context of `Ecosystem Governance Framework Z`?
+> Does `Entity X` have `Authorization Y` within the context of `Ecosystem Governance Framework Z`?
+
+This specification does not cover the specific implementation of ecosystem "drivers" to support the TRQP. While these drivers are vital for enabling ecosystem-specific functionality, their implementation details are left to each ecosystem to define according to their unique requirements. 
+
+The TRQP provides a general framework for facilitating inter-ecosystem trust, offering flexibility in how individual ecosystems bridge intra- and inter-trust frameworks. This approach ensures adaptability while promoting consistent communication standards across diverse ecosystems.
 
 ## Foreword
 This specification is subject to the **OWF Contributor License Agreement 1.0 - Copyright** available at
