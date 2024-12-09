@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Context.puml
 
@@ -20,6 +20,15 @@ Rel(oidcBridge,oidfDataN,"OIDF\nProfile N")
 
 System(TRAIN, "TRAIN") 
 Rel(Bridge, TRAIN,"bridges")
+
+System_Boundary(x509system,"x509"){
+  System(x509,"x509 Ecosystem")
+  System(x509CA,"x509 CA")
+  System(x509bridge, "x509 Bridge")
+  Rel(Integrator,x509bridge,"TRQP")
+  Rel(x509bridge,x509,"bridges")
+  Rel(x509CA, x509,"anchors")
+}
 
 
 
