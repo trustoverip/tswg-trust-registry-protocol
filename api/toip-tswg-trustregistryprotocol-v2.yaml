@@ -97,6 +97,17 @@ paths:
             The identifier of the Authorization that is being queried for this
             Entity.
           allowReserved: true
+        - in: query
+          name: egfURI
+          required: true
+          schema:
+            $ref: '#/components/schemas/Uri'
+          description: >
+            The URI-based identifier of the Ecosystem Governance Framework that
+            the assurance levels apply to. Allows reserved characters per
+            RFC3986. 
+            Do **NOT** escape the URI.        
+          allowReserved: true
       responses:
         '200':
           description: search results matching criteria
@@ -126,6 +137,17 @@ paths:
             reserved characters per RFC3986. 
 
             Do **NOT** escape the URI.
+          allowReserved: true
+        - in: query
+          name: egfURI
+          required: true
+          schema:
+            $ref: '#/components/schemas/Uri'
+          description: >
+            The URI-based identifier of the Ecosystem Governance Framework that
+            the assurance levels apply to. Allows reserved characters per
+            RFC3986. 
+            Do **NOT** escape the URI.        
           allowReserved: true
       responses:
         '200':
