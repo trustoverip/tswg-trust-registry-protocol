@@ -33,24 +33,24 @@ The OpenAPI Specification (v3.1.0) is the first "concrete" API specification.
 
 It is provided as an Open API Specification v3 YAML file. 
 
-[OAS (.yaml) for TRP v2](../api/toip-tswg-trustregistryprotocol-v2.yaml). 
+[OAS (.yaml) for TRQP v2](https://github.com/trustoverip/tswg-trust-registry-protocol/blob/main/api/toip-tswg-trustregistryprotocol-v2.yaml). 
 
 There are several renderings of the OAS specification:
 
 * Inline - this rendering is managed in this repository [Redoc Rendering (static HTML) of specification](./api/redoc-static.html)
-* SwaggerHub - this rendering is manually updated from time to time and may be out of date: [SwaggerHub](https://app.swaggerhub.com/apis/CULedger/CULedger.Identity/0.3.1-oas3.1) 
+* SwaggerHub - this rendering is manually updated from time to time and may be out of date: [SwaggerHub](https://app.swaggerhub.com/apis-docs/continuumloop/trust-over_ip_trust_registry_protocol_res_tful_api_v_2/2.0.0) 
 
 
 ## Annex C - Uses and Data Model Reference
 
-### Use of the Trust Registry Protocol.
+### Use of the Trust Registry Query Protocol.
 
-The TRP is intended to be used in at least two key ways:
+The TRQP is intended to be used in at least two key ways:
 
-* Native Support - systems may directly implement access using the TRP.
-* Bridged - systems may create access "bridges" that provide TRP access to their systems.
+* Native Support - systems may directly implement access using the TRQP.
+* Bridged - systems may create access "bridges" that provide TRQP access to their systems.
 
-![C4 Systems Model - showing native TRP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](./images/puml/protocol-bridging.png).
+![C4 Systems Model - showing native TRQP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](./images/puml/protocol-bridging.png).
 
 
 ### Object Model
@@ -63,5 +63,5 @@ We provide a high-level object model (NOTE: source of truth is the Swagger as th
 
 We will need to provide guides and other thought pieces that explain many aspects of trust registries. A notional (short bullet) list of items could include:
 * "why do I need a trust registry?" - blog article or position paper to explain why trust registries help.
-* "I have the data, but how do I use the TRP?" - paper about how adding TRP to a bridge or native integration.
+* "I have the data, but how do I use the TRQP?" - paper about how adding TRQP to a bridge or native integration.
 * "where do I learn about the governance changes that I have?"

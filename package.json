@@ -1,6 +1,6 @@
 {
   "name": "spec-up",
-  "version": "0.10.6",
+  "version": "0.10.8",
   "description": "Technical specification drafting tool that generates rich specification documents from markdown.",
   "main": "./index",
   "repository": {
@@ -49,7 +49,7 @@
     "merge-stream": "2.0.0",
     "pkg-dir": "4.2.0",
     "prismjs": ">=1.24.0",
-    "spec-up": "github:brianorwhatever/spec-up#fix-refs",
+    "spec-up": ">=0.10.8",
     "yargs": "16.2.0"
   },
   "overrides": {
