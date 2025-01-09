@@ -1,4 +1,4 @@
-# specification-template
+# Trust Over IP Trust Registry Query Protocol Specification
 
 This specification is basked on the [Trust Over IP Specification
 Template](https://github.com/trustoverip/specification-template).
@@ -11,7 +11,7 @@ To browse the spec, see the [rendering on GitHub pages](https://trustoverip.gith
 contribute to the spec, submit PRs that modify the .md files (in the `./spec` folder) that are used to generate the
 .html files in this folder.
 
-Before submitting a PR, please see the [Editing The Spec](./EditingTheSpec.md) document for guidance on generating the
+Before submitting a PR, please see the [Editing The Spec](./docs/EditingTheSpec.md) document for guidance on generating the
 specification locally for review.
 
 ## Repository Structure

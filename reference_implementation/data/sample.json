@@ -1,27 +1,27 @@
 {
   "metadata": {
-    "identifier": "did:web:samplenetwork.com",
-    "name": "Sample Ecosystem Trust Registry",
+    "identifier": "did:web:samplenetwork.com:trustregistry",
+    "name": "Sample Network Trust Registry",
     "version": "0.0.1",
-    "primaryEGFURI": "did:web:gan.foundation:primary",
-    "description": "Sample Ecosystem Trust Registry",
+    "primaryEGFURI": "did:web:samplenetwork.com:primary",
+    "description": "The Sample Network Trust Registry is a global registry of organizations that have agreed to accept the Sample Network Trust Registry as a source of trust for digital identity verification and attestation.",
     "language": "en"
   },
   "organizations": [
     {
-      "name": "Sample Network",
+      "name": "Sample Network 2",
       "type": "organization",
-      "participatingNamespaces": ["admin"],
-      "did": "did:web:samplenetwork.com",
+      "participatingNamespaces": ["foundation.samplenetwork.certified.person.issuer"],
+      "did": "did:web:samplenetwork.foundation",
       "status": {
         "status": "active",
         "detail": "Active Organizations"
       }
     },
     {
-      "name": "Global Acceptance Networks",
+      "name": "Sample Network",
       "type": "organization",
-      "did": "did:web:gan.foundation",
+      "did": "did:web:samplenetwork.com",
       "status": {
         "status": "active",
         "detail": "Active Organizations"
@@ -33,17 +33,21 @@
       "metadata": {
         "name": "Sample Network",
         "type": "ecosystem",
-        "namespaces": ["view"],
-        "description": "Sample Network",
-        "did": "did:web:gan.foundation",
-        "egfURI": "did:web:gan.foundation:governance",
-        "primary_trust_registry": "did:web:gan.foundation:trustregistry",
+        "namespaces": [
+          "foundation.samplenetwork.certified.person.verify",
+          "foundation.samplenetwork.certified.person.issue"
+        ],
+        "description": "The Sample Network is a sample network "
+        "did": "did:web:samplenetwork.com",
+        "contronller": "did:web:samplenetwork.com",
+        "egfURI": "did:web:samplenetwork.com:governance",
+        "primary_trust_registry": "did:web:samplenetwork.com:trustregistry",
         "registries": [
           {
-            "name": "GAN Trust Registry",
-            "identifier": "did:web:gan.foundation:trustregistry",
-            "description": "The GAN Trust Registry is a global registry of organizations that have agreed to accept the GAN Trust Registry as a source of trust for digital identity verification and attestation.",
-            "primaryEGFURI": "did:web:gan.foundation:primary",
+            "name": "Sample Network Trust Registry",
+            "identifier": "did:web:samplenetwork.com:trustregistry",
+            "description": "The Sample Network Trust Registry is a global registry of organizations that have agreed to accept the Sample Network Trust Registry as a source of trust for digital identity verification and attestation.",
+            "primaryEGFURI": "did:web:samplenetwork.com:primary",
             "peerType": "peer"
           }
         ],
@@ -54,19 +58,10 @@
       },
       "entries": [
         {
-          "did": "did:web:samplenetwork.com",
+          "did": "did:web:samplenetwork.foundation",
           "validFrom": "2024-09-10T12:00:00Z",
           "validTo": "2025-09-10T12:00:00Z",
-          "authorizations": ["did:web:gan.foundation:authorization:loa1"],
-          "status": {
-            "status": "active"
-          }
-        },
-        {
-          "did": "did:gan:foundation",
-          "validFrom": "2024-09-10T12:00:00Z",
-          "validTo": "2025-09-10T12:00:00Z",
-          "authorizations": ["did:web:gan.foundation:authorization:loa1"],
+          "authorizations": ["did:web:samplenetwork.com:authorization:loa1"],
           "status": {
             "status": "active"
           }
@@ -83,11 +78,11 @@
         }
       },
       "authorization_types": {
-        "did:web:samplenetwork:com:authorization:loa1": {
+        "did:web:samplenetwork.com:authorization:loa1": {
           "name": "Authorization Type 1",
           "description": "Authorization Type 1 is a type of authorization that is used to grant access to a resource or service."
         },
-        "did:web:samplenetwork:com:authorization:loa2": {
+        "did:web:samplenetwork.com:authorization:loa2": {
           "name": "Authorization Type 2",
           "description": "Authorization Type 2 is a type of authorization that is used to grant access to a resource or service."
         }
@@ -100,11 +95,11 @@
       ]
     },
     {
-      "name": "Sample Network",
+      "name": "Sample Network 2",
       "type": "ecosystem",
       "namespaces": [],
-      "did": "did:web:samplenetwork.com",
-      "egfURI": "did:web:samplenetwork.com:governance",
+      "did": "did:web:samplenetwork.foundation",
+      "egfURI": "did:web:samplenetwork.foundation:governance",
       "primary_trust_registry": "did:web:samplenetwork:trustregistry",
       "status": {
         "status": "active",
