@@ -1,0 +1,382 @@
+openapi: 3.0.3
+info:
+  title: TRQP Profile API
+  version: 1.0.0
+  description: |
+    This specification describes a RESTful, DID-based TRQP profile.
+    It includes endpoints for retrieving Trust Registry metadata,
+    Authorization data, checking Entity authorization status,
+    and verifying Ecosystem recognition.
+
+    # Security Considerations
+
+    1. **EGF DID Resolution**:
+       - The client first resolves the EGF DID (`egf_did`) using a DID resolver
+         (e.g., DID Web, ION, etc.).
+       - From the EGF’s DID Document, the client discovers or otherwise obtains
+         the **Trust Registry DID**.
+
+    2. **Trust Registry DID Resolution**:
+       - The client then resolves the Trust Registry DID, which yields the public key(s)
+         controlling the Trust Registry.
+       - All responses from the Trust Registry **MUST** be signed with the
+         Trust Registry’s private key, such that the client can verify them
+         with the corresponding public key from the DID Document.
+
+    3. **Response Verification and Nonce**:
+       - After receiving a JWS-encoded response, the client verifies the signature
+         using the Trust Registry’s public key.
+       - A client-generated unique **nonce** is included in the request and
+         must be echoed in the signed response payload.
+         The client checks that the nonce in the response matches the one it sent,
+         ensuring the response is fresh and not a replay.
+
+servers:
+  - url: https://example-trust-registry.com
+    description: Production server (example)
+  - url: https://sandbox-trust-registry.com
+    description: Sandbox server (example)
+
+paths:
+  /metadata:
+    get:
+      summary: Retrieve Trust Registry Metadata
+      description: |
+        Returns the Trust Registry Metadata as a JSON object.
+        The returned object **MUST** be signed using JSON Web Signatures (JWS).
+      operationId: getTrustRegistryMetadata
+      responses:
+        '200':
+          description: Successful response returning the JWS-encoded Trust Registry Metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustRegistryMetadataJWS'
+        '404':
+          description: Metadata not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /entity/authorized/{entity_id}/{authorization_id}/{egf_did}:
+    get:
+      summary: Check Entity Authorization Status
+      description: |
+        Checks if the provided entity (`entity_id`) is recognized
+        and authorized under a given authorization identifier (`authorization_id`)
+        within the context of a specified ecosystem governance framework (`egf_did`).
+
+        - **DID Resolution**: The EGF DID is resolved to find the Trust Registry DID.
+        - **Signature Verification**: All authorization responses are signed by
+          the Trust Registry's private key and verified using the Trust Registry DID's
+          public key.
+        - **Nonce Usage**: A unique nonce is used to prevent replay attacks.
+      operationId: checkAuthorizationStatus
+      parameters:
+        - name: entity_id
+          in: path
+          required: true
+          description: The unique identifier of the entity.
+          schema:
+            type: string
+        - name: authorization_id
+          in: path
+          required: true
+          description: The specific authorization identifier to evaluate.
+          schema:
+            type: string
+        - name: egf_did
+          in: path
+          required: true
+          description: The DID of the ecosystem governance framework.
+          schema:
+            type: string
+        - name: time
+          in: query
+          required: false
+          description: |
+            The ISO8601/RFC3339 timestamp at which the authorization status is requested.
+            If omitted, the server MAY assume the current time or another default.
+          schema:
+            type: string
+            format: date-time
+        - name: nonce
+          in: query
+          required: true
+          description: A unique client-generated nonce to prevent replay attacks.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Entity is authorized under the specified authorization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationResponseJWS'
+              examples:
+                example:
+                  value:
+                    jws: "<base64-encoded-JWS-string>"
+        '404':
+          description: Entity not found in the Trust Registry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationResponseJWS'
+              examples:
+                example:
+                  value:
+                    jws: "<base64-encoded-JWS-string>"
+        '401':
+          description: Unauthorized request or invalid credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationResponseJWS'
+              examples:
+                example:
+                  value:
+                    jws: "<base64-encoded-JWS-string>"
+
+  /ecosystem/recognition/{egf_did}/{ecosystem_id}:
+    get:
+      summary: Check Ecosystem Recognition
+      description: |
+        Checks if the specified ecosystem (`ecosystem_id`) is recognized under
+        a given governance framework (`egf_did`). Optional `time`
+        parameter can be provided as a query parameter.
+
+        - **DID Resolution**: The EGF DID is resolved, the Trust Registry DID
+          is discovered, and the trust registry's public key is used to verify
+          the returned JWS.
+        - **Nonce Usage**: A unique nonce is used to prevent replay attacks.
+      operationId: checkEcosystemRecognition
+      parameters:
+        - name: egf_did
+          in: path
+          required: true
+          description: The DID or unique identifier for the overarching governance framework.
+          schema:
+            type: string
+        - name: ecosystem_id
+          in: path
+          required: true
+          description: The DID of the ecosystem governance framework being queried.
+          schema:
+            type: string
+        - name: time
+          in: query
+          required: false
+          description: Timestamp in RFC3339 format indicating the point in time of recognition.
+          schema:
+            type: string
+            format: date-time
+        - name: nonce
+          in: query
+          required: true
+          description: A unique client-generated nonce to prevent replay attacks.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ecosystem is recognized under the specified EGF.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecognitionResponseJWS'
+        '404':
+          description: Ecosystem is not recognized or not found in the Trust Registry.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecognitionResponseJWS'
+        '401':
+          description: Unauthorized or invalid credentials (intra-ecosystem contexts).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecognitionResponseJWS'
+
+components:
+  schemas:
+    # ----------------------------------------------------------------------
+    # Shared Schemas
+    # ----------------------------------------------------------------------
+    Error:
+      type: object
+      description: A generic error response.
+      properties:
+        error:
+          type: string
+          description: A short error code or message describing the error.
+        details:
+          type: string
+          description: (Optional) Additional details about the error.
+      required:
+        - error
+      additionalProperties: false
+
+    # ----------------------------------------------------------------------
+    # Metadata Schemas
+    # ----------------------------------------------------------------------
+    TrustRegistryMetadata:
+      type: object
+      description: The core structure of the Trust Registry metadata.
+      properties:
+        id:
+          type: string
+          description: Decentralized Identifier (DID) of the Trust Registry.
+          pattern: '^did:[a-z0-9]+:[a-zA-Z0-9]+$'
+        description:
+          type: string
+          maxLength: 4096
+          description: A description of the Trust Registry. Must be fewer than 4096 bytes.
+        name:
+          type: string
+          description: Human-readable name of the Trust Registry.
+        controllers:
+          type: array
+          description: Array of DID URLs representing the controllers of the Trust Registry.
+          items:
+            type: string
+            format: uri
+          minItems: 1
+      required:
+        - id
+        - description
+        - name
+        - controllers
+      additionalProperties: false
+
+    TrustRegistryMetadataJWS:
+      type: object
+      description: A JSON Web Signature (JWS) encapsulated Trust Registry Metadata object.
+      properties:
+        jws:
+          type: string
+          description: The JWS compact or JSON serialization containing the Trust Registry Metadata.
+      required: [ jws ]
+
+    # ----------------------------------------------------------------------
+    # Authorization Schemas
+    # ----------------------------------------------------------------------
+    Authorization:
+      type: object
+      title: Authorization
+      description: JSON encoding of an Authorization data model.
+      properties:
+        id:
+          type: string
+          format: uri
+          pattern: '^https?://.+'
+          description: A HTTP-resolvable URI serving as the unique identifier.
+        description:
+          type: string
+          maxLength: 4096
+          description: A description of the authorization. Must be fewer than 4096 bytes.
+        name:
+          type: string
+          description: The human-readable name of the authorization.
+        controller:
+          type: string
+          format: uri
+          pattern: '^http://.+'
+          description: The EGF URI of the controlling entity of the Authorization.
+      required:
+        - id
+        - description
+        - name
+        - controller
+      additionalProperties: false
+
+    AuthorizationResponse:
+      type: object
+      title: Authorization Response
+      description: The response payload indicating whether the entity is recognized and authorized.
+      properties:
+        recognized:
+          type: boolean
+          description: Indicates whether the entity ID is recognized by the Trust Registry.
+        authorized:
+          type: boolean
+          description: Specifies whether the entity is authorized under the provided authorization ID.
+        message:
+          type: string
+          description: Additional context or information regarding the authorization status.
+        evaluated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the authorization status was evaluated.
+        response_time:
+          type: string
+          format: date-time
+          description: Timestamp when the response was generated.
+        expiry_time:
+          type: string
+          format: date-time
+          description: Timestamp when the authorization status expires (or null if not applicable).
+      required:
+        - recognized
+        - authorized
+        - message
+        - evaluated_at
+        - response_time
+      additionalProperties: false
+
+    AuthorizationResponseJWS:
+      type: object
+      description: A JWS wrapper for the AuthorizationResponse.
+      properties:
+        jws:
+          type: string
+          description: The JWS compact or JSON serialization containing the AuthorizationResponse.
+      required: [ jws ]
+
+    # ----------------------------------------------------------------------
+    # Recognition Schemas
+    # ----------------------------------------------------------------------
+    RecognitionResponse:
+      type: object
+      title: Recognition Response
+      description: The response structure indicating whether an ecosystem is recognized by the Trust Registry.
+      properties:
+        recognized:
+          type: boolean
+          description: Indicates whether the ecosystem ID is recognized by the Trust Registry.
+        message:
+          type: string
+          description: Additional information regarding the recognition status.
+        evaluated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the recognition status was evaluated.
+        response_time:
+          type: string
+          format: date-time
+          description: Timestamp when the response was generated.
+        expiry_time:
+          type: string
+          format: date-time
+          description: Timestamp when the recognition status expires (if applicable).
+      required:
+        - recognized
+        - message
+        - evaluated_at
+        - response_time
+      additionalProperties: false
+
+    RecognitionResponseJWS:
+      type: object
+      description: A JWS wrapper for the RecognitionResponse.
+      properties:
+        jws:
+          type: string
+          description: The JWS compact or JSON serialization containing the RecognitionResponse.
+      required: [ jws ]
