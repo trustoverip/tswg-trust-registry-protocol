@@ -12,7 +12,7 @@
       "name": "Sample Network 2",
       "type": "organization",
       "participatingNamespaces": ["foundation.samplenetwork.certified.person.issuer"],
-      "did": "did:web:samplenetwork.foundation",
+      "did": "did:web:samplenetwork2.com",
       "status": {
         "status": "active",
         "detail": "Active Organizations"
@@ -58,7 +58,7 @@
       },
       "entries": [
         {
-          "did": "did:web:samplenetwork.foundation",
+          "did": "did:web:samplenetwork.com",
           "validFrom": "2024-09-10T12:00:00Z",
           "validTo": "2025-09-10T12:00:00Z",
           "authorizations": ["did:web:samplenetwork.com:authorization:loa1"],
@@ -98,9 +98,9 @@
       "name": "Sample Network 2",
       "type": "ecosystem",
       "namespaces": [],
-      "did": "did:web:samplenetwork.foundation",
-      "egfURI": "did:web:samplenetwork.foundation:governance",
-      "primary_trust_registry": "did:web:samplenetwork:trustregistry",
+      "did": "did:web:samplenetwork2.com",
+      "egfURI": "did:web:samplenetwork2.com:governance",
+      "primary_trust_registry": "did:web:samplenetwork2:trustregistry",
       "status": {
         "status": "active",
         "detail": "Active ecosystem"
