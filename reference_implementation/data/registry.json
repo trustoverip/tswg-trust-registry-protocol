@@ -7,7 +7,7 @@
     "description": "The Sample Network Trust Registry is a global registry of organizations that have agreed to accept the Sample Network Trust Registry as a source of trust for digital identity verification and attestation.",
     "language": "en"
   },
-  "organizations": [
+   "organizations": [
     {
       "name": "Sample Network 2",
       "type": "organization",
@@ -37,7 +37,7 @@
           "foundation.samplenetwork.certified.person.verify",
           "foundation.samplenetwork.certified.person.issue"
         ],
-        "description": "The Sample Network is a sample network "
+        "description": "The Sample Network is a sample network",
         "did": "did:web:samplenetwork.com",
         "contronller": "did:web:samplenetwork.com",
         "egfURI": "did:web:samplenetwork.com:governance",
