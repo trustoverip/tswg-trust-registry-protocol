@@ -19,6 +19,36 @@ provided over the TRQP handlers.
 
 The current demo app adds a _lot_ of complexity, and the point of this was to _simplify_ as much as possible. This was particularly important when thinking about the data models. This is intentionally as simple as possible and intended to help us explore the minimum viable implementation for Phase 1.  
 
+**Example Queries:
+
+* Get Entity Status
+`curl http://localhost:8082/entitities/did:web:samplenetwork.foundation`
+
+```
+{
+  "entityDataValidity": {
+    "validFromDT": "2024-09-10T12:00:00Z",
+    "validUntilDT": "2025-09-10T12:00:00Z"
+  },
+  "entityVID": "did:web:samplenetwork.foundation",
+  "governanceFrameworkVID": "",
+  "primaryTrustRegistryVID": "did:web:samplenetwork.foundation",
+  "registrationStatus": {
+    "detail": "",
+    "status": "current"
+  },
+  "secondaryTrustRegistries": []
+}
+
+* Get Lookup
+
+`curl 'http://localhost:8082/lookup/namespaces?egfURI=did:web:samplenetwork2.com'
+
+```sh
+["foundation.samplenetwork.certified.person.verify","foundation.samplenetwork.certified.person.issue"]
+```
+
+```
 **To Use**
 
 1. `go mod tidy`
