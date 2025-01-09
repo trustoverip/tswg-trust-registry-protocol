@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  tr-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./api/trqp.yaml:/app/api/trqp.yaml
+      - ./redoc.html:/app/redoc.html
+      - ./data/registry.json:/app/data/registry.json
+    restart: always

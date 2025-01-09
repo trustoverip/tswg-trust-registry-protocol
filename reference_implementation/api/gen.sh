@@ -1,0 +1,1 @@
+oapi-codegen -generate types,chi-server -o ../gen/trqp/server.go -package trqp trqp.yaml
