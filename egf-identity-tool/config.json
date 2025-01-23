@@ -1,0 +1,22 @@
+{
+  "services": [
+    {
+      "id": "#egfURI",
+      "type": "egfURI",
+      "serviceEndpoint": {
+        "profile": "https://trustoverip.org/profiles/trp/egfURI/v1",
+        "uri": "https://my-tr-service/egfURI",
+        "integrity": "122041dd7b6443542e75701aa98a0c235951a28a0d851b11564d20022ab11d2589a8"
+      }
+    },
+    {
+      "id": "#validTrustRegistry-1",
+      "type": "TRQP",
+      "serviceEndpoint": {
+        "profile": "https://trustoverip.org/profiles/trp/v2",
+        "uri": "https://my-tr-service/",
+        "integrity": "122041dd7b6443542e75701aa98a0c235951a28a0d851b11564d20022ab11d2589a8"
+      }
+    }
+  ]
+}
