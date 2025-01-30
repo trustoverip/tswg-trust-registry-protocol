@@ -5,92 +5,65 @@ from cryptography.hazmat.primitives.asymmetric import ed25519, x25519
 from cryptography.hazmat.primitives import serialization
 from base58 import b58encode
 
-############################################
-# A Python Streamlit app replicating the Go code for
-# DID:peer:2 generation & resolution, with manual or file-based config.
-############################################
+# Streamlit UI Setup
+st.set_page_config(page_title="DID Peer 2 Generator")
+st.title("DID Peer 2 Generator & Resolver")
 
-st.set_page_config(page_title="DID Peer 2 App")
-st.title("TRQP EGF DID Creator")
-
-################################################################################
-# Utility: Abbreviate and expand fields for services
-################################################################################
-
+# Abbreviations Mapping
 full_to_abbreviation = {
+    "profile": "p",
     "type": "t",
     "serviceEndpoint": "s",
     "routingKeys": "r",
     "accept": "a",
-    "DIDCommMessaging": "dm"
+    "DIDCommMessaging": "dm",
+    "integrity": "i",
+    "uri": "u"
 }
 
-abbreviation_to_full = {
-    "t": "type",
-    "s": "serviceEndpoint",
-    "r": "routingKeys",
-    "a": "accept",
-    "dm": "DIDCommMessaging"
-}
+abbreviation_to_full = {v: k for k, v in full_to_abbreviation.items()}
 
 
 def abbreviate_service(obj):
+    """Convert full service fields to abbreviations."""
     if isinstance(obj, dict):
-        new_map = {}
-        for k, v in obj.items():
-            abbr_key = full_to_abbreviation.get(k, k)
-            if k == "type" and isinstance(v, str) and v in full_to_abbreviation:
-                v = full_to_abbreviation[v]
-            new_map[abbr_key] = abbreviate_service(v)
-        return new_map
+        return {full_to_abbreviation.get(k, k): abbreviate_service(v) for k, v in obj.items()}
     elif isinstance(obj, list):
         return [abbreviate_service(elem) for elem in obj]
-    else:
-        return obj
+    return obj
 
 
 def expand_service(obj):
+    """Convert abbreviated service fields to full names."""
     if isinstance(obj, dict):
-        new_map = {}
-        for k, v in obj.items():
-            expanded_key = abbreviation_to_full.get(k, k)
-            if expanded_key == "type" and isinstance(v, str) and v in abbreviation_to_full:
-                v = abbreviation_to_full[v]
-            new_map[expanded_key] = expand_service(v)
-        return new_map
+        return {abbreviation_to_full.get(k, k): expand_service(v) for k, v in obj.items()}
     elif isinstance(obj, list):
         return [expand_service(elem) for elem in obj]
-    else:
-        return obj
+    return obj
 
-################################################################################
-# Generate DID: function
-################################################################################
 
 def generate_did_peer2(config_data, method_prefix):
-    # 1. Generate Ed25519 keys
+    """Generate a DID:peer:2 identifier with service endpoints."""
+    # Generate Ed25519 Key
     ed_private_key = ed25519.Ed25519PrivateKey.generate()
     ed_public_key = ed_private_key.public_key()
     ed_pub_bytes = ed_public_key.public_bytes(
-        encoding=serialization.Encoding.Raw,
-        format=serialization.PublicFormat.Raw
+        encoding=serialization.Encoding.Raw, format=serialization.PublicFormat.Raw
     )
 
-    # 2. Generate X25519 keys
+    # Generate X25519 Key
     x25519_private_key = x25519.X25519PrivateKey.generate()
     x25519_public_key = x25519_private_key.public_key()
     x25519_pub_bytes = x25519_public_key.public_bytes(
-        encoding=serialization.Encoding.Raw,
-        format=serialization.PublicFormat.Raw
+        encoding=serialization.Encoding.Raw, format=serialization.PublicFormat.Raw
     )
 
     ed_pub_mb = "z" + b58encode(ed_pub_bytes).decode()
     x25519_pub_mb = "z" + b58encode(x25519_pub_bytes).decode()
 
-    # Build DID e.g.: did:peer:2.Vz6Mkj3PU...Ez6LSg8zQ...
     did_parts = [method_prefix, "V" + ed_pub_mb, "E" + x25519_pub_mb]
 
-    # Abbreviate services and append each as .S...
+    # Abbreviate and encode services
     for svc in config_data.get("services", []):
         abbrev = abbreviate_service(svc)
         svc_bytes = json.dumps(abbrev).encode()
@@ -99,7 +72,7 @@ def generate_did_peer2(config_data, method_prefix):
 
     did = ".".join(did_parts)
 
-    # Hex-encoded private keys
+    # Private keys in hex format
     ed_priv_hex = ed_private_key.private_bytes(
         encoding=serialization.Encoding.Raw,
         format=serialization.PrivateFormat.Raw,
@@ -114,11 +87,9 @@ def generate_did_peer2(config_data, method_prefix):
 
     return did, ed_priv_hex, x25519_priv_hex
 
-################################################################################
-# Resolve DID: function
-################################################################################
 
 def resolve_did_peer2(did_str, method_prefix):
+    """Resolve a DID:peer:2 string into a DID Document."""
     if not did_str.startswith(method_prefix):
         raise ValueError(f"DID '{did_str}' does not match method prefix '{method_prefix}'")
 
@@ -130,44 +101,28 @@ def resolve_did_peer2(did_str, method_prefix):
         "id": did_str
     }
 
-    vm_list = []
-    auth = []
-    assertion = []
-    key_agreement = []
-    cap_inv = []
-    cap_del = []
-
-    services = []
+    vm_list, auth, assertion, key_agreement, cap_inv, cap_del, services = [], [], [], [], [], [], []
     service_count = 0
 
-    # Remove prefix => everything after method_prefix
-    body = did_str[len(method_prefix):]
-    if body.startswith('.'):
-        body = body[1:]
-
+    body = did_str[len(method_prefix):].lstrip('.')
     parts = body.split('.')
-
     key_index = 1
 
     for seg in parts:
         if len(seg) < 2:
             raise ValueError(f"Malformed segment: '{seg}'")
-        purpose = seg[0]
-        rest = seg[1:]
+        purpose, rest = seg[0], seg[1:]
 
         if purpose in ['V', 'A', 'E', 'I', 'D']:
-            # Build a verification method
             key_id = f"#key-{key_index}"
             key_index += 1
-            vm = {
+            vm_list.append({
                 "id": key_id,
                 "type": "Multikey",
                 "controller": did_str,
                 "publicKeyMultibase": rest
-            }
-            vm_list.append(vm)
+            })
 
-            # Now add references to verification relationships
             if purpose == 'V':
                 auth.append(key_id)
             elif purpose == 'A':
@@ -180,23 +135,17 @@ def resolve_did_peer2(did_str, method_prefix):
                 cap_del.append(key_id)
 
         elif purpose == 'S':
-            # Service segment
             padding_needed = (4 - len(rest) % 4) % 4
-            svc_b64 = rest + ("=" * padding_needed)
-            svc_bytes = base64.urlsafe_b64decode(svc_b64)
+            svc_bytes = base64.urlsafe_b64decode(rest + ("=" * padding_needed))
+            expanded = expand_service(json.loads(svc_bytes))
 
-            raw = json.loads(svc_bytes)
-            expanded = expand_service(raw)
             if not isinstance(expanded, dict):
-                raise ValueError("Decoded service not an object")
+                raise ValueError("Decoded service is not an object")
 
-            if "id" not in expanded:
-                if service_count == 0:
-                    expanded["id"] = "#service"
-                else:
-                    expanded["id"] = f"#service-{service_count}"
+            expanded["id"] = f"#service-{service_count}" if service_count else "#service"
             service_count += 1
             services.append(expanded)
+
         else:
             raise ValueError(f"Unknown purpose code '{purpose}' in segment '{seg}'")
 
@@ -217,43 +166,27 @@ def resolve_did_peer2(did_str, method_prefix):
 
     return doc
 
-################################################################################
-# Streamlit UI
-################################################################################
 
+# Streamlit UI
 mode = st.radio("Select mode:", ["Generate", "Resolve"])
 
-method_prefix = st.text_input("Method Prefix", value="did:peer:2")
-
 if mode == "Generate":
+
+    method_prefix = st.text_input("Method Prefix", value="did:peer:2")
     st.subheader("Generate a DID")
-    st.write(
-        "You can either upload a config.json or manually provide 'egfURI' + 'uri' (array). "
-        "If you do both, the uploaded file overrides the manual fields."
-    )
 
     config_file = st.file_uploader("Upload config.json", type="json")
 
-    st.write("**Or** manually set service info (used only if no config file is uploaded):")
-    egf_uri = st.text_input("egfURI", value="https://my-tr-service/egfURI")
-    uri_list_str = st.text_area(
-        "uri (one per line or comma-separated)",
-        value="https://my-tr-service/egfURI\nhttps://my-tr-service/another"
-    )
+    st.write("**Or manually enter service details:**")
+    egf_uri = st.text_input("EGF URI", value="https://localhost:3000/terms")
+    trqp_uris_str = st.text_area("TRQP URIs (comma or newline-separated)", value="http://localhost:8080")
 
     if st.button("Generate DID"):
         try:
-            config_data = None
-            if config_file is not None:
-                # Use the uploaded config
+            if config_file:
                 config_data = json.loads(config_file.read().decode("utf-8"))
             else:
-                # Construct config_data from the fields
-                if "," in uri_list_str:
-                    raw_uris = [u.strip() for u in uri_list_str.split(",") if u.strip()]
-                else:
-                    raw_uris = [u.strip() for u in uri_list_str.split("\n") if u.strip()]
-
+                trqp_uris = [u.strip() for u in trqp_uris_str.replace(",", "\n").split("\n") if u.strip()]
                 config_data = {
                     "services": [
                         {
@@ -261,8 +194,17 @@ if mode == "Generate":
                             "type": "egfURI",
                             "serviceEndpoint": {
                                 "profile": "https://trustoverip.org/profiles/trp/egfURI/v1",
-                                "uri": raw_uris,
+                                "uri": egf_uri,
                                 "integrity": "122041dd7b6443542e75701aa98a0c235951a28a0d851b11564d20022ab11d2589a8"
+                            }
+                        },
+                        {
+                            "id": "#tr-1",
+                            "type": "TRQP",
+                            "serviceEndpoint": {
+                                "profile": "https://trustoverip.org/profiles/trp/v2",
+                                "uri": trqp_uris,
+                                "integrity": "122041dd7b6443542e75701aa98a0c235952a28a0d851b11564d20022ab11d2589a8"
                             }
                         }
                     ]
@@ -270,22 +212,17 @@ if mode == "Generate":
 
             did_str, ed_hex, x_hex = generate_did_peer2(config_data, method_prefix)
             st.success("DID Generation Successful!")
-            st.write("**DID**:")
             st.code(did_str)
-            st.write("**Ed25519 Private Key (hex)**:")
-            st.code(ed_hex)
-            st.write("**X25519 Private Key (hex)**:")
-            st.code(x_hex)
         except Exception as e:
             st.error(f"Error: {str(e)}")
 
-elif mode == "Resolve":
+if mode == "Resolve":
     st.subheader("Resolve a DID")
-    did_input = st.text_input("Enter DID string")
 
+    did_str = st.text_input("DID", value="")
     if st.button("Resolve DID"):
         try:
-            doc = resolve_did_peer2(did_input, method_prefix)
+            doc = resolve_did_peer2(did_str, "did:peer:2")
             st.success("DID Resolution Successful!")
             st.json(doc)
         except Exception as e:
