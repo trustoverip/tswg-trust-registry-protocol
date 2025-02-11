@@ -235,6 +235,9 @@ components:
           type: string
           format: date-time
           description: Timestamp when the authorization status expires (if applicable).
+        jws:
+          type: string
+          description: Signed response object as specified in https://datatracker.ietf.org/doc/html/rfc7515 from the controller of the Trust Regsitry
       required:
         - recognized
         - authorized
@@ -266,6 +269,9 @@ components:
           type: string
           format: date-time
           description: Timestamp when the recognition status expires (if applicable).
+        jws:
+          type: string
+          description: Signed response object as specified in https://datatracker.ietf.org/doc/html/rfc7515 from the controller of the Trust Regsitry
       required:
         - recognized
         - message
