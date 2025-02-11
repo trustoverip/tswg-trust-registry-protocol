@@ -1,0 +1,244 @@
+openapi: 3.0.3
+info:
+  title: "Admin API for Trust Registry"
+  description: "Admin endpoints for managing ecosystems in a trust registry"
+  version: "1.0.0"
+
+servers:
+  - url: /admin
+    description: "Admin API base path"
+
+paths:
+  /ecosystems:
+    post:
+      summary: Create Ecosystem
+      description: Adds a new ecosystem to the trust registry
+      operationId: createEcosystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ecosystem"
+      responses:
+        "201":
+          description: "Ecosystem created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicResponse"
+        "409":
+          description: "Conflict"
+    get:
+      summary: List Ecosystems
+      description: Retrieves a list of all ecosystems in the trust registry
+      operationId: listEcosystems
+      responses:
+        "200":
+          description: "List of ecosystems"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ecosystem"
+  /ecosystems/{did}:
+    get:
+      summary: Get Ecosystem
+      description: Retrieves a single ecosystem by DID
+      operationId: getEcosystem
+      parameters:
+        - name: did
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ecosystem"
+        "404":
+          description: "Not Found"
+
+    put:
+      summary: Update Ecosystem
+      description: Updates an existing ecosystem by DID
+      operationId: updateEcosystem
+      parameters:
+        - name: did
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ecosystem"
+      responses:
+        "200":
+          description: "Ecosystem updated"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicResponse"
+        "404":
+          description: "Not Found"
+
+    delete:
+      summary: Remove Ecosystem
+      description: Deletes an ecosystem by DID
+      operationId: removeEcosystem
+      parameters:
+        - name: did
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Ecosystem removed"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BasicResponse"
+        "404":
+          description: "Not Found"
+
+  /ecosystems/recognitions:
+    post:
+      summary: Recognize Ecosystem
+      description: Adds recognition to the specified ecosystem
+      operationId: recognizeEcosystem
+      parameters:
+        - name: did
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: egf
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: active
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: scope
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Recognized successfully"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecognizeEcosystemResponse"
+        "400":
+          description: "Bad Request"
+
+  /ecosystems/authorizations:
+    post:
+      summary: Authorize Entry
+      description: Adds an authorization entry to the specified ecosystem
+      operationId: authorizeEntry
+      parameters:
+        - name: did
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: egf
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: authorization_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: active
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: "Entry authorized"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizeEntryResponse"
+        "400":
+          description: "Bad Request"
+
+components:
+  schemas:
+    BasicResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    Ecosystem:
+      type: object
+      properties:
+        metadata:
+          $ref: "#/components/schemas/EcosystemMetadata"
+        entries:
+          type: array
+          items:
+            $ref: "#/components/schemas/Entry"
+      required:
+        - metadata
+
+    EcosystemMetadata:
+      type: object
+      properties:
+        did:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+      required:
+        - did
+
+    Entry:
+      type: object
+      properties:
+        did:
+          type: string
+        status:
+          $ref: "#/components/schemas/Status"
+
+    Status:
+      type: object
+      properties:
+        active:
+          type: boolean
+        detail:
+          type: string
+
+    RecognizeEcosystemResponse:
+      type: object
+      properties:
+        message:
+          type: string
+
+    AuthorizeEntryResponse:
+      type: object
+      properties:
+        message:
+          type: string

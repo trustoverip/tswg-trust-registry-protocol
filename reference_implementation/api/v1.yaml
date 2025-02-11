@@ -1,0 +1,994 @@
+openapi: 3.1.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://localhost:8082
+info:
+  description: |
+    # Trust Registry capabilities
+    * Allow querying for critical items in a digital trust ecosystem:
+    Entities, Registries, and Resources that are required to operate
+    in the ecosysystem.
+    # Registry of Registries (RoR) capabilities.
+    RoR capabilities include:
+      * Listing Registries that are known (to the registry being queried).
+      * list the acknowledged trust registries that the RoR recognizes and what
+    that may mean in the context of a particular governance framework.
+  version: 2.0.0
+  title: ToIP Trust Registry (Query) Protocol v2 - Working Draft
+  contact:
+    email: darrell.odonnell@continuumloop.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: registry
+    description: Queries about Entities, Registries, and Resources.
+  - name: lookups
+    description: Configuration and lookup operations.
+  - name: metadata
+    description: Metadata operations.
+  - name: offline
+    description: Offline operations (i.e. prepare to go offline).
+paths:
+  /entitities/{entityid}:
+    get:
+      tags:
+        - registry
+      summary: >-
+        Returns Registry Information about a particular entity that is
+        represented in the queried system.
+      parameters:
+        - in: path
+          name: entityid
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uri"
+          description: >
+            The URI-based identifier of a DID or X.509 Issuer. Allows reserved
+            characters per RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+        - in: query
+          name: authorizationVID
+          required: false
+          schema:
+            $ref: "#/components/schemas/Uri"
+          description: >
+            The identifier of the Authorization that is being queried for this
+            Entity.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntityType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /entities/{entityVID}/authorization:
+    get:
+      tags:
+        - registry
+      summary: Determine whether an Entity has a particular Authorization.
+      parameters:
+        - in: path
+          name: entityVID
+          required: true
+          schema:
+            $ref: "#/components/schemas/VID"
+          description: >
+            The VID-based identifier of a VID/DID/AID or X.509 Issuer. Allows
+            reserved characters per RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+        - in: query
+          name: authorizationVID
+          required: false
+          schema:
+            $ref: "#/components/schemas/Uri"
+          description: >
+            The identifier of the Authorization that is being queried for this
+            Entity.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationResponseListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /entities/{entityVID}/authorizations:
+    get:
+      tags:
+        - registry
+      summary: Determine whether an Entity has a particular Authorization.
+      parameters:
+        - in: path
+          name: entityVID
+          required: true
+          schema:
+            $ref: "#/components/schemas/VID"
+          description: >
+            The VID-based identifier of a VID/DID/AID or X.509 Issuer. Allows
+            reserved characters per RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationResponseListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /registries/recognized-registries:
+    get:
+      tags:
+        - registry
+      summary: >
+        Query this Trust Registry about its recognition of another Trust
+        Registry.
+      parameters:
+        - in: query
+          name: namespace-VID
+          required: false
+          schema:
+            $ref: "#/components/schemas/VID"
+          description: >
+            Filter in only the namespace requested - show all registries
+            otherwise. The URI-based Verifiable Identifier (VID) (e.g. DID or
+            X.509 VID). Allows reserved characters per RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+        - in: query
+          name: EGF-VID
+          required: false
+          schema:
+            $ref: "#/components/schemas/VID"
+          description: >
+            Filter in only the registries under the specified EGF (by EGF DID).
+            Defaults to be limited to the EGFURI that is being queried at the
+            root.
+
+            The URI-based Verifiable Identifier (VID) (e.g. DID or X.509 VID).
+            Allows reserved characters per RFC3986.
+
+            Do **NOT** escape the URI.
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegistryListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /registries/{registryVID}/recognized-registries/:
+    get:
+      tags:
+        - registry
+      summary: >
+        Query this Trust Registry about its recognition of a specific Trust
+        Registry.
+
+        TODO: determine RoR (registry of registry) impacts here.
+      parameters:
+        - in: path
+          name: registryVID
+          required: true
+          schema:
+            $ref: "#/components/schemas/VID"
+          description: >
+            The URI-based identifier of a DID or X.509 Issuer. Allows reserved
+            characters per RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegistryListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /registries/{registryVID}/:
+    get:
+      tags:
+        - registry
+      summary: Get resource data indicated by DID.
+      parameters:
+        - in: path
+          name: registryVID
+          required: true
+          schema:
+            $ref: "#/components/schemas/VID"
+          description: >
+            The URI-based identifier of a DID or X.509 Issuer. Allows reserved
+            characters per RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/ResourceReferencedType"
+                  - $ref: "#/components/schemas/ResourceDirectType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /lookup/authorizations:
+    get:
+      tags:
+        - lookups
+      summary: Get a list of Rights that are used in this Trust Registry.
+      parameters:
+        - in: query
+          name: egfURI
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uri"
+          description: >
+            The URI-based identifier of a DID or X.509 Issuer. Allows reserved
+            characters per RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /lookup/namespaces:
+    get:
+      tags:
+        - lookups
+      summary: Get the namespaces that are supported in this trust Registry.
+      parameters: []
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NamespaceListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /lookup/vidmethods:
+    get:
+      tags:
+        - lookups
+      summary: >-
+        Get a list of DID Methods that are supported by a particular Governance
+        Framework.
+      parameters:
+        - in: query
+          name: egfURI
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uri"
+          description: >
+            Provides a list of DID-methods that are supported by this trust
+            registry. MAY include Maximum Assurance Level
+
+            that a DID Method is set at under the EGF.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VIDMethodListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /lookup/assurancelevels:
+    get:
+      tags:
+        - lookups
+      summary: >-
+        Get a list of the assurance levels that are in use by this Trust
+        Registry (and its governing EGF).
+      parameters:
+        - in: query
+          name: egfURI
+          required: true
+          schema:
+            $ref: "#/components/schemas/Uri"
+          description: >
+            The URI-based identifier of the Ecosystem Governance Framework that
+            the assurance levels apply to. Allows reserved characters per
+            RFC3986.
+
+            Do **NOT** escape the URI.
+          allowReserved: true
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssuranceLevelListType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /metadata:
+    get:
+      tags:
+        - metadata
+      summary: Provides metadata object.
+      description: Metadata object.
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegistryMetadataType"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /offline/exportfile:
+    get:
+      tags:
+        - offline
+      summary: Access a full data file that can be used offline.
+      operationId: getOfflineFile
+      description: >
+        Allows querying to determine the status of an Issuer, as identified by
+        their Identifier (unique),
+
+        credential type, and EGF that they are operating under.
+      responses:
+        "200":
+          description: JSON file array of offline list of Issuers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportFile"
+  /offline/trustestablishmentdocument:
+    get:
+      tags:
+        - offline
+      summary: Access a full data file that can be used offline.
+      operationId: getTED
+      description: >
+        Allows querying to determine the status of an Issuer, as identified by
+        their Identifier (unique),
+
+        credential type, and EGF that they are operating under.
+      responses:
+        "200":
+          description: JSON file array of offline list of Issuers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrustEstablishmentDocument"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    Forbidden:
+      description: Forbidden
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    NotFound:
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    NotAcceptable:
+      description: Not Acceptable
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    Conflict:
+      description: Conflict
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    ServiceUnavailable:
+      description: Service Unavailable
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetails"
+    default:
+      description: Generic Error
+  schemas:
+    Uri:
+      type: string
+      format: uri
+      description: string providing an URI formatted according to IETF RFC 3986.
+    VID:
+      type: string
+      format: uri
+      description: string providing an URI formatted according to IETF RFC 3986.
+    AssuranceLevelType:
+      type: object
+      description: >
+        Creates assurance level as a top-level/first-class-citizen of a Trust
+        Registry. AssuranceLevel values
+
+        MUST be defined in an EGF if they are used.
+      required:
+        - identifier
+        - name
+        - description
+      properties:
+        identifier:
+          type: string
+          format: URI
+          examples:
+            - did:example:123
+        name:
+          type: string
+          examples:
+            - LOA2
+        description:
+          type: string
+          examples:
+            - "Level of Assurance 2 - see EGF for definition, terms, obligations,liabilities, and indemnity"
+    AuthorizationType:
+      type: object
+      required:
+        - identifier
+        - simplename
+        - description
+      properties:
+        identifier:
+          type: string
+          format: uri
+          examples:
+            - "did:example:123"
+        simplename:
+          type: string
+        description:
+          type: string
+        assuranceLevel:
+          description: >-
+            The Assurance Level for the Authorization. Defined in the EGF.
+            [OPTIONAL]
+          allOf:
+            - $ref: "#/components/schemas/AssuranceLevelType"
+    AuthorizationResponseType:
+      type: object
+      required:
+        - entityID
+        - authorizationUniqueString
+        - description
+      properties:
+        entityID:
+          type: string
+          format: uri
+          examples:
+            - did:example:123
+          description: >
+            The VID that identifies the Entity that may (i.e. it may be expired,
+            revoked, terminated)  hold the particular Authorization.
+        authorizationUniqueString:
+          type: string
+          description: The unique string that identifies the Authorization.
+        authorizationID:
+          type: string
+          format: uri
+          examples:
+            - "did:example:123"
+          description: the VID that identifies the particular Authorization.
+        description:
+          type: string
+        assuranceLevel:
+          description: >-
+            The Assurance Level for the Authorization. Defined in the EGF.
+            [OPTIONAL]
+          allOf:
+            - $ref: "#/components/schemas/AssuranceLevelType"
+        authorizationStatus:
+          $ref: "#/components/schemas/StatusType"
+        authorizationValidity:
+          description: The Validity dates related to this particular authorization.
+          allOf:
+            - $ref: "#/components/schemas/ValidityDatesType"
+    EntityType:
+      type: object
+      required:
+        - identifier
+        - governanceFrameworkVID
+        - status
+        - validFromDT
+      properties:
+        entityVID:
+          type: string
+          format: uri
+          examples:
+            - "did:example:123"
+          description: The primary identifier for the Entity (i.e. the primary key)
+        governanceFrameworkVID:
+          type: string
+          format: uri
+          examples:
+            - "did:example:456"
+        primaryTrustRegistryVID:
+          type: string
+          format: uri
+          examples:
+            - "did:example:123"
+          description: A VID identifying the registered entity's Primary Trust Registry
+        authorizations:
+          $ref: "#/components/schemas/AuthorizationListType"
+          description: List of the Authorizations that the Entity has.
+        secondaryTrustRegistries:
+          type: array
+          items:
+            type: string
+            format: uri
+            examples: ["did:example:456", "did:example:789"]
+            description: >-
+              A VID identifying a secondary trust registry that this Entity is
+              registered in.
+        participatingNamepaces:
+          $ref: "#/components/schemas/NamespaceListType"
+        entityDataValidity:
+          $ref: "#/components/schemas/ValidityDatesType"
+        registrationStatus:
+          $ref: "#/components/schemas/StatusType"
+    VIDMethodType:
+      type: object
+      required:
+        - identifier
+      description: |
+        DID Method supported by the trust registry. May include the maximum
+      properties:
+        identifier:
+          type: string
+          description: >
+            as "maintained" at
+            https://w3c.github.io/did-spec-registries/#did-methods TODO: do
+            better...
+        maximumAssuranceLevel:
+          description: >
+            A DID Method may, due to technical or human trust considerations be
+            limited in the assurance
+
+            level that it can provide.
+          allOf:
+            - $ref: "#/components/schemas/AssuranceLevelType"
+    IntegrityType:
+      type: object
+      description: Integrity object
+      required:
+        - hash
+        - hashtype
+      properties:
+        hashtype:
+          type: string
+          examples:
+            - "sha2-256"
+          description: |
+            Hashing algorithm well-known-name. TODO: Reference to some list?
+        hash:
+          type: string
+          description: the hash of the data.
+          examples:
+            - "64ee532ac8a4871e21ccf0397ac8154efb747ec37a2a116c35fc8b810cbf24bd"
+    ResourceReferencedType:
+      type: object
+      description: Resource that is provided by reference to a different source.
+      required:
+        - identifier
+        - lastupdated
+        - datatype
+        - resourceURI
+      properties:
+        identifier:
+          type: string
+          format: uri
+          examples:
+            - did:example:123
+        lastupdated:
+          type: string
+          format: date-time
+        datatype:
+          description: >
+            TODO: DECIDE about mimeType vs. dataType as property name
+
+            The `kind` of resource (e.g. credential-definition,
+            schema-definition, revocation-registry). intended
+
+            to be used by recipient for processing of the data payload.
+          type: string
+        resourceURI:
+          $ref: "#/components/schemas/Uri"
+        integrity:
+          $ref: "#/components/schemas/IntegrityType"
+    ResourceDirectType:
+      type: object
+      description: Resource that is served directly by this trust registry.
+      required:
+        - identifier
+        - lastupdated
+        - datatype
+      properties:
+        identifier:
+          type: string
+          format: uri
+          examples:
+            - "did:example:123"
+        lastupdated:
+          type: string
+          format: date-time
+        datatype:
+          description: >
+            TODO: DECIDE about mimeType vs. dataType as property name
+
+            The `kind` of resource (e.g. credential-definition,
+            schema-definition, revocation-registry). intended
+
+            to be used by recipient for processing of the data payload.
+          type: string
+        resourceURI:
+          description: Resource URI for direct reference (to this Trust Registry).
+          $ref: "#/components/schemas/Uri"
+        payloadJSON:
+          type: object
+          description: JSON object
+    NamespaceType:
+      type: object
+      description: >
+        Namespace object - formal name, EGF that governs namespace,
+        VC/DIDAuth/etc.
+      required:
+        - identifier
+        - canonicalString
+      properties:
+        identifier:
+          type: string
+          format: uri
+          examples:
+            - "did:example:123"
+        canonicalString:
+          type: string
+          examples:
+            - "ca.issuer.driverlicense"
+            - "mining.tsm"
+        egfURI:
+          type: string
+          examples:
+            - "did:example:GlobalDriverLicenseDID"
+          description: URI of the EGF that defines the namespace.
+        description:
+          type: string
+    RegistryMetadataType:
+      type: object
+      required:
+        - lastupdated
+      properties:
+        lastupdated:
+          type: string
+          format: date-time
+        primaryEGFURI:
+          type: string
+          example:
+            - "did:example:GlobalDriverLicenseDID"
+          description: URI of the EGF that governs the Trust Registry.
+        additionalEGFURIs:
+          type: array
+          description: "List of URIs of Ecosystem Governance Frameworks that this Trust Registry operates under, in addition to the .primaryEGFURI"
+          items:
+            $ref: "#/components/schemas/Uri"
+        participatingNamepaces:
+          $ref: "#/components/schemas/NamespaceListType"
+        languages:
+          type: array
+          description: >-
+            language codes (RFC 4646 -
+            https://datatracker.ietf.org/doc/html/rfc4646)
+          items:
+            type: string
+          examples:
+            - "en"
+            - "en-CA"
+            - "fr-CA"
+    RegistryType:
+      type: object
+      description: >
+        Data structure for basic Trust Registry indication of what the queried
+        TR will state about another TR.
+      required:
+        - identifier
+        - name
+      properties:
+        identifier:
+          type: string
+          format: uri
+          examples:
+            - "did:example:123"
+        name:
+          type: string
+          examples:
+            - "Professional Engineers Ontario"
+        description:
+          type: string
+          examples:
+            - "Established on June 14, 1922, Professional Engineers Ontario (PEO) is the licensing and regulating body for professional engineering in the province."
+        primaryEGFURI:
+          type: string
+          example:
+            - "did:example:GlobalDriverLicenseDID"
+          description: URI of the EGF that governs the Trust Registry.
+        additionalEGFURIs:
+          type: array
+          description: "List of URIs of Ecosystem Governance Frameworks that this Trust Registry operates under, in addition to the .primaryEGFURI"
+          items:
+            $ref: "#/components/schemas/Uri"
+        participatingNamepaces:
+          $ref: "#/components/schemas/NamespaceListType"
+        peerType:
+          type: string
+          enum:
+            - peer
+            - superior
+            - subordinate
+            - metaregistry
+          description: >
+            Relationship types - how does the TR that is being queried consider
+            the other TR.
+              * peer - registy is recognized as a peer under another jurisdiction or governance mechanism.
+              * superior - registry is above this TR in a hierarchy.
+              * subordinate - registry is subordinate to this TR in a hierarchy.
+              * metaregistry - registry being queried is considered (by this TR) to be a metaregistry (aka registry of registries)
+    StatusType:
+      type: object
+      description: >-
+        Status and textual description for Entity Registration Status, and
+        Entity Authorization Status
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - current
+            - expired
+            - terminated
+            - revoked
+          description: |
+            Provides a current status for entity at time of the query.
+            - current - status is current in the system of record.
+            - expired - status has expired in the system of record.
+            - terminated - entity has voluntarily terminated its status.
+            - revoked -  status was revoked by the governing authority.
+        detail:
+          type: string
+          description: Optional free text that expands on the status parameter.
+    AssuranceLevelListType:
+      type: array
+      items:
+        $ref: "#/components/schemas/AssuranceLevelType"
+    AuthorizationListType:
+      type: array
+      items:
+        $ref: "#/components/schemas/AuthorizationType"
+      examples:
+        - identifier: did:example:abc
+          simplename: country:role
+        - identifier: did:example:abcd
+          simplename: canada:professional:engineer
+    AuthorizationResponseListType:
+      type: array
+      items:
+        $ref: "#/components/schemas/AuthorizationResponseType"
+      examples:
+        - identifier: did:example:abc
+          simplename: country:role
+        - identifier: did:example:abcd
+          simplename: canada:professional:engineer
+    NamespaceListType:
+      type: array
+      items:
+        $ref: "#/components/schemas/NamespaceType"
+    RegistryListType:
+      type: array
+      description: Array of RegistryQueryType
+      items:
+        $ref: "#/components/schemas/RegistryType"
+    EntityListType:
+      type: array
+      items:
+        $ref: "#/components/schemas/EntityType"
+    VIDMethodListType:
+      type: array
+      items:
+        $ref: "#/components/schemas/VIDMethodType"
+
+    ExportLookups:
+      type: object
+      properties:
+        VIDMethods:
+          $ref: "#/components/schemas/VIDMethodListType"
+        AssuranceLevels:
+          $ref: "#/components/schemas/AssuranceLevelListType"
+        Authorizations:
+          $ref: "#/components/schemas/AuthorizationListType"
+        Namespaces:
+          $ref: "#/components/schemas/NamespaceListType"
+    ValidityDatesType:
+      type: object
+      description: Date and Time of validity.
+      properties:
+        validFromDT:
+          type: string
+          format: date-time
+          description: >-
+            Indicates that the Identifier status applies at the indicated time.
+            A time in the past indicates when the last status change was
+            recorded in the Trust Registry.
+        validUntilDT:
+          type: string
+          format: date-time
+          description: >-
+            Indicates the validity ends/ended at this date and time. A time in
+            the past may indicate that the data have expired. A blank response
+            indicates that the validity does not have an end value (i.e. does
+            not or has not expired yet).
+    ExportFile:
+      type: object
+      required:
+        - extractdatetime
+      properties:
+        extractdatetime:
+          type: string
+          format: date-time
+          description: The time of the data extraction.
+        version:
+          type: string
+          description: Version string [OPTIONAL]
+        validity:
+          $ref: "#/components/schemas/ValidityDatesType"
+        lookups:
+          $ref: "#/components/schemas/ExportLookups"
+        registries:
+          $ref: "#/components/schemas/RegistryListType"
+        entities:
+          $ref: "#/components/schemas/EntityListType"
+        resources:
+          $ref: "#/components/schemas/RegistryListType"
+    TrustEstablishmentDocument:
+      type: object
+      required:
+        - TBD
+      description: >-
+        Trust Establishment Document per
+        https://identity.foundation/trust-establishment/
+      properties:
+        TBD:
+          type: string
+    ProblemDetails:
+      description: A Problem Details object (RFC 7807)
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: An absolute URI that identifies the problem type
+          default: about:blank
+        title:
+          type: string
+          description: >-
+            A short summary of the problem type. Written in English and readable
+            for engineers (usually not suited for non technical stakeholders and
+            not localized).
+          examples:
+            - "Service Unavailable"
+        status:
+          type: integer
+          format: int32
+          description: >-
+            The HTTP status code generated by the origin server for this
+            occurrence of the problem.
+          minimum: 400
+          maximum: 600
+        detail:
+          type: string
+          description: >-
+            A human-readable explanation specific to this occurrence of the
+            problem
+        instance:
+          type: string
+          format: uri
+          description: >-
+            An absolute URI reference that identifies the specific occurrence of
+            the problem. It may or may not yield further information if
+            dereferenced.
+security:
+  - bearerAuth: []

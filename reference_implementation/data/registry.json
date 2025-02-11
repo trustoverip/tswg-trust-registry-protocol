@@ -1,110 +1,72 @@
 {
   "metadata": {
-    "identifier": "did:web:samplenetwork.com:trustregistry",
-    "name": "Sample Network Trust Registry",
-    "version": "0.0.1",
-    "primaryEGFURI": "did:web:samplenetwork.com:primary",
-    "description": "The Sample Network Trust Registry is a global registry of organizations that have agreed to accept the Sample Network Trust Registry as a source of trust for digital identity verification and attestation.",
-    "language": "en"
+    "identifier": "did:peer:2.VzDw2mziNbyGZP5wqp6HibgU1w7Yu7gLxFuv5b894nceVx.EzAnL9bg1GbTgNXhRCeoFDUdAnyAKrgWvcK3LMhjUJVf28.SeyJpZCI6ICIjZWdmVVJJIiwgInQiOiAiZWdmVVJJIiwgInMiOiB7InAiOiAiaHR0cHM6Ly90cnVzdG92ZXJpcC5vcmcvcHJvZmlsZXMvdHJwL2VnZlVSSS92MSIsICJ1IjogImh0dHBzOi8vbG9jYWxob3N0OjUwMDUvdGVybXMiLCAiaSI6ICIxMjIwNDFkZDdiNjQ0MzU0MmU3NTcwMWFhOThhMGMyMzU5NTFhMjhhMGQ4NTFiMTE1NjRkMjAwMjJhYjExZDI1ODlhOCJ9fQ.SeyJpZCI6ICIjdHItMSIsICJ0IjogIlRSUVAiLCAicyI6IHsicCI6ICJodHRwczovL3RydXN0b3ZlcmlwLm9yZy9wcm9maWxlcy90cnAvdjIiLCAidSI6IFsiaHR0cDovL2xvY2FsaG9zdDo1MDA1Il0sICJpIjogIjEyMjA0MWRkN2I2NDQzNTQyZTc1NzAxYWE5OGEwYzIzNTk1MmEyOGEwZDg1MWIxMTU2NGQyMDAyMmFiMTFkMjU4OWE4In19",
+    "name": "Sample Trust Registry"
   },
-   "organizations": [
-    {
-      "name": "Sample Network 2",
-      "type": "organization",
-      "participatingNamespaces": ["foundation.samplenetwork.certified.person.issuer"],
-      "did": "did:web:samplenetwork2.com",
-      "status": {
-        "status": "active",
-        "detail": "Active Organizations"
-      }
-    },
-    {
-      "name": "Sample Network",
-      "type": "organization",
-      "did": "did:web:samplenetwork.com",
-      "status": {
-        "status": "active",
-        "detail": "Active Organizations"
-      }
-    }
-  ],
   "ecosystems": [
     {
       "metadata": {
-        "name": "Sample Network",
+        "name": "Ecosystem 1",
         "type": "ecosystem",
-        "namespaces": [
-          "foundation.samplenetwork.certified.person.verify",
-          "foundation.samplenetwork.certified.person.issue"
-        ],
         "description": "The Sample Network is a sample network",
-        "did": "did:web:samplenetwork.com",
-        "contronller": "did:web:samplenetwork.com",
-        "egfURI": "did:web:samplenetwork.com:governance",
-        "primary_trust_registry": "did:web:samplenetwork.com:trustregistry",
-        "registries": [
-          {
-            "name": "Sample Network Trust Registry",
-            "identifier": "did:web:samplenetwork.com:trustregistry",
-            "description": "The Sample Network Trust Registry is a global registry of organizations that have agreed to accept the Sample Network Trust Registry as a source of trust for digital identity verification and attestation.",
-            "primaryEGFURI": "did:web:samplenetwork.com:primary",
-            "peerType": "peer"
-          }
-        ],
+        "did": "did:peer:2.Vz6HTifRCY2Jg7omivoUAfz8XGhHRP4aFxFj8E6ArtApQF.Ez2VfeciVFk3pxBJWonYDjZPHo512Ak3LJzxJ2vCq4gT9Z.SeyJpZCI6ICIjZWdmVVJJIiwgInQiOiAiZWdmVVJJIiwgInMiOiB7InAiOiAiaHR0cHM6Ly90cnVzdG92ZXJpcC5vcmcvcHJvZmlsZXMvdHJwL2VnZlVSSS92MSIsICJ1IjogImh0dHBzOi8vbG9jYWxob3N0OjUwMDUvdGVybXMiLCAiaSI6ICIxMjIwNDFkZDdiNjQ0MzU0MmU3NTcwMWFhOThhMGMyMzU5NTFhMjhhMGQ4NTFiMTE1NjRkMjAwMjJhYjExZDI1ODlhOCJ9fQ.SeyJpZCI6ICIjdHItMSIsICJ0IjogIlRSUVAiLCAicyI6IHsicCI6ICJodHRwczovL3RydXN0b3ZlcmlwLm9yZy9wcm9maWxlcy90cnAvdjIiLCAidSI6IFsiaHR0cDovL2xvY2FsaG9zdDo1MDA1Il0sICJpIjogIjEyMjA0MWRkN2I2NDQzNTQyZTc1NzAxYWE5OGEwYzIzNTk1MmEyOGEwZDg1MWIxMTU2NGQyMDAyMmFiMTFkMjU4OWE4In19",
         "status": {
           "status": "active",
           "detail": "Active ecosystem"
         }
       },
-      "entries": [
-        {
-          "did": "did:web:samplenetwork.com",
-          "validFrom": "2024-09-10T12:00:00Z",
-          "validTo": "2025-09-10T12:00:00Z",
-          "authorizations": ["did:web:samplenetwork.com:authorization:loa1"],
-          "status": {
-            "status": "active"
-          }
-        }
-      ],
       "assurance_levels": {
         "loa1": {
           "name": "Level of Assurance 1",
-          "description": "Level of Assurance 1 (LOA1) is the lowest level of assurance."
+          "description": "Lowest assurance level"
         },
         "loa2": {
           "name": "Level of Assurance 2",
-          "description": "Level of Assurance 2 (LOA2) is a medium level of assurance"
+          "description": "Medium assurance level"
         }
       },
       "authorization_types": {
-        "did:web:samplenetwork.com:authorization:loa1": {
-          "name": "Authorization Type 1",
-          "description": "Authorization Type 1 is a type of authorization that is used to grant access to a resource or service."
+        "loa1": {
+          "name": "Authorization Type 1"
         },
-        "did:web:samplenetwork.com:authorization:loa2": {
-          "name": "Authorization Type 2",
-          "description": "Authorization Type 2 is a type of authorization that is used to grant access to a resource or service."
+        "loa2": {
+          "name": "Authorization Type 2"
         }
       },
-      "vid_methods": [
+      "recognition_entries": [
         {
-          "identifier": "vid1",
-          "maxiumum_level_of_assurance": "loa1"
+          "scope": "scope:1",
+          "did": "did:peer:2.Vz2w5mRz8DbxfZdkrv5qVwVoMNPgUnn6To9ZM6GjV21r17.Ez7sJmZpcq4G79aEXvfbczFfv2BKJnA9uxuQ5GzM7nn6s5.SeyJpZCI6ICIjZWdmVVJJIiwgInQiOiAiZWdmVVJJIiwgInMiOiB7InAiOiAiaHR0cHM6Ly90cnVzdG92ZXJpcC5vcmcvcHJvZmlsZXMvdHJwL2VnZlVSSS92MSIsICJ1IjogImh0dHBzOi8vbG9jYWxob3N0OjUwMDYvdGVybXMiLCAiaSI6ICIxMjIwNDFkZDdiNjQ0MzU0MmU3NTcwMWFhOThhMGMyMzU5NTFhMjhhMGQ4NTFiMTE1NjRkMjAwMjJhYjExZDI1ODlhOCJ9fQ.SeyJpZCI6ICIjdHItMSIsICJ0IjogIlRSUVAiLCAicyI6IHsicCI6ICJodHRwczovL3RydXN0b3ZlcmlwLm9yZy9wcm9maWxlcy90cnAvdjIiLCAidSI6IFsiaHR0cDovL2xvY2FsaG9zdDo1MDA2Il0sICJpIjogIjEyMjA0MWRkN2I2NDQzNTQyZTc1NzAxYWE5OGEwYzIzNTk1MmEyOGEwZDg1MWIxMTU2NGQyMDAyMmFiMTFkMjU4OWE4In19",
+          "status": {
+            "active": true
+          }
+        }
+      ],
+      "authorization_entries": [
+        {
+          "authorization": "loa1",
+          "id": "96B26618-31D2-4CD8-8317-399049F9841A",
+          "did": "did:peer:2.VzGkgXrFnn4L2Gu6d8eyxgsnLAhA7trS1QoL3AtT5qeHtc.Ez8qURoHSaUbeja9mU3iQnQzEUoCvcF36BrCmtCgyJZAkc.SeyJpZCI6ICIjZWdmVVJJIiwgInQiOiAiZWdmVVJJIiwgInMiOiB7InAiOiAiaHR0cHM6Ly90cnVzdG92ZXJpcC5vcmcvcHJvZmlsZXMvdHJwL2VnZlVSSS92MSIsICJ1IjogImh0dHBzOi8vbG9jYWxob3N0OjUwMDYvdGVybXMiLCAiaSI6ICIxMjIwNDFkZDdiNjQ0MzU0MmU3NTcwMWFhOThhMGMyMzU5NTFhMjhhMGQ4NTFiMTE1NjRkMjAwMjJhYjExZDI1ODlhOCJ9fQ.SeyJpZCI6ICIjdHItMSIsICJ0IjogIlRSUVAiLCAicyI6IHsicCI6ICJodHRwczovL3RydXN0b3ZlcmlwLm9yZy9wcm9maWxlcy90cnAvdjIiLCAidSI6IFsiaHR0cDovL2xvY2FsaG9zdDo1MDA3Il0sICJpIjogIjEyMjA0MWRkN2I2NDQzNTQyZTc1NzAxYWE5OGEwYzIzNTk1MmEyOGEwZDg1MWIxMTU2NGQyMDAyMmFiMTFkMjU4OWE4In19",
+          "status": {
+            "active": true
+          }
         }
       ]
     },
     {
-      "name": "Sample Network 2",
-      "type": "ecosystem",
-      "namespaces": [],
-      "did": "did:web:samplenetwork2.com",
-      "egfURI": "did:web:samplenetwork2.com:governance",
-      "primary_trust_registry": "did:web:samplenetwork2:trustregistry",
-      "status": {
-        "status": "active",
-        "detail": "Active ecosystem"
-      }
+      "metadata": {
+        "name": "Ecosystem 2",
+        "type": "ecosystem",
+        "namespaces": [],
+        "description": "Secondary sample network",
+        "did": "did:peer:2.Vz2w5mRz8DbxfZdkrv5qVwVoMNPgUnn6To9ZM6GjV21r17.Ez7sJmZpcq4G79aEXvfbczFfv2BKJnA9uxuQ5GzM7nn6s5.SeyJpZCI6ICIjZWdmVVJJIiwgInQiOiAiZWdmVVJJIiwgInMiOiB7InAiOiAiaHR0cHM6Ly90cnVzdG92ZXJpcC5vcmcvcHJvZmlsZXMvdHJwL2VnZlVSSS92MSIsICJ1IjogImh0dHBzOi8vbG9jYWxob3N0OjUwMDYvdGVybXMiLCAiaSI6ICIxMjIwNDFkZDdiNjQ0MzU0MmU3NTcwMWFhOThhMGMyMzU5NTFhMjhhMGQ4NTFiMTE1NjRkMjAwMjJhYjExZDI1ODlhOCJ9fQ.SeyJpZCI6ICIjdHItMSIsICJ0IjogIlRSUVAiLCAicyI6IHsicCI6ICJodHRwczovL3RydXN0b3ZlcmlwLm9yZy9wcm9maWxlcy90cnAvdjIiLCAidSI6IFsiaHR0cDovL2xvY2FsaG9zdDo1MDA2Il0sICJpIjogIjEyMjA0MWRkN2I2NDQzNTQyZTc1NzAxYWE5OGEwYzIzNTk1MmEyOGEwZDg1MWIxMTU2NGQyMDAyMmFiMTFkMjU4OWE4In19",
+        "status": {
+          "status": "active",
+          "detail": "Active ecosystem"
+        }
+      },
+      "recognition_entries": [],
+      "authorization_entries": []
     }
   ]
 }
