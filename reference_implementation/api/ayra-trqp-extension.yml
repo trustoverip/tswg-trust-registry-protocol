@@ -1,9 +1,9 @@
 openapi: 3.0.1
 info:
-  title: TRQP Profile API
+  title: Ayra™ TRWQP Profile API
   version: 1.0.0
   description: |
-    This specification defines a RESTful TRQP profile.
+    This specification defines a RESTful TRQP profile for use in the Ayra™ Trust Network.
     It includes endpoints for retrieving Trust Registry metadata,
     authorization data, verifying entity authorization status,
     and checking ecosystem recognition.
