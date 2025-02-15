@@ -60,7 +60,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /entities/{entityDID}:
+  /entities/{entity-did}:
     get:
       summary: Retrieve Entity Information
       tags:
@@ -69,7 +69,7 @@ paths:
         Retrieves information about a specific entity.
       operationId: getEntityInformation
       parameters:
-        - name: entityDID
+        - name: entity-did
           in: path
           required: true
           description: A unique identifier for the entity.
@@ -97,7 +97,7 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 
 
-  /entities/{entityId}/authorization:
+  /entities/{entity-id}/authorization:
     get:
       summary: Check Entity Authorization Status
       tags:
@@ -107,19 +107,19 @@ paths:
         within the specified governance framework (`ecosystem_did`). Optionally, returns a list of authorizations if `all` is true.
       operationId: checkAuthorizationStatus
       parameters:
-        - name: entityId
+        - name: entity-id
           in: path
           required: true
           description: Unique identifier of the entity.
           schema:
             type: string
-        - name: authorizationId
+        - name: authorization_id
           in: query
           required: true
           description: Authorization identifier to evaluate.
           schema:
             type: string
-        - name: ecosystemDID
+        - name: ecosystem-did
           in: query
           required: true
           description: Unique identifier of the governance framework.
@@ -164,7 +164,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /ecosystems/{ecosystemDID}/recognitions:
+  /ecosystems/{ecosystem-did}/recognitions:
     get:
       summary: List Recognized Ecosystems
       tags:
@@ -173,13 +173,13 @@ paths:
         Retrieves a collection of recognized ecosystems for a specified governance framework.
       operationId: listEcosystemRecognitions
       parameters:
-        - name: ecosystemDID
+        - name: ecosystem-did
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
           schema:
             type: string
-        - name: egfDID
+        - name: egf_did
           in: query
           required: true
           description: Unique identifier of the governance framework.
@@ -214,7 +214,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /ecosystems/{ecosystemID}/recognition:
+  /ecosystems/{ecosystem-id}/recognition:
     get:
       summary: Check Ecosystem Recognition
       tags:
@@ -223,17 +223,17 @@ paths:
         Verifies if the specified ecosystem (`egf_target`) is recognized under the given governance framework (`egf_source`).
       operationId: checkEcosystemRecognition
       parameters:
-        - name: egfDID
+        - name: ecosystem-id
+          in: path
+          required: true
+          description: Unique identifier of the ecosystem being queried.
+          schema:
+            type: string
+        - name: egf_did
           in: query
           required: true
           # TODO: Review note on DEFAULT EGF_DID
           description: Unique identifier of the governance framework. Defaults to single egf_did of the Trust Registry itself.
-          schema:
-            type: string
-        - name: ecosystemID
-          in: path
-          required: true
-          description: Unique identifier of the ecosystem being queried.
           schema:
             type: string
         - name: time
@@ -271,7 +271,7 @@ paths:
 
 # NOTE: STANDARDIZING on DIDs. TRQP is NOT opinionated. Ayra is (DIDs).
 # TODO: rename to ecosystem_did? 
-  /ecosystems/{ecosystemDID}/lookups/assuranceLevels:
+  /ecosystems/{ecosystem-did}/lookups/assuranceLevels:
     get:
       summary: Lookup Supported Assurance Levels
       tags:
@@ -280,7 +280,7 @@ paths:
         Retrieves the supported assurance levels for the specified ecosystem.
       operationId: lookupSupportedAssuranceLevels
       parameters:
-        - name: ecosystemDID
+        - name: ecosystem-did
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
@@ -307,7 +307,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
-  /ecosystems/{ecosystemDID}/lookups/authorizations:
+              
+  /ecosystems/{ecosystem-did}/lookups/authorizations:
     get:
       summary: Lookup Authorizations
       tags:
@@ -316,7 +317,7 @@ paths:
         Performs an authorization lookup based on the provided ecosystem identifier.
       operationId: lookupAuthorizations
       parameters:
-        - name: ecosystemDID
+        - name: ecosystem-did
           in: path
           required: true
           description: Ecosystem identifier.
@@ -344,7 +345,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
   
-  /egfs/{ecosystemDID}/lookups/didMethods:
+  /egfs/{ecosystem-did}/lookups/didMethods:
     get:
       summary: Lookup Supported Assurance Levels
       tags:
@@ -353,7 +354,7 @@ paths:
         Retrieves the DID Methods. AYRA is opinionated here.
       operationId: lookupSupportedDIDMethods
       parameters:
-        - name: ecosystem_id
+        - name: ecosystem-did
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
