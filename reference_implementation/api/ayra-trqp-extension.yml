@@ -345,7 +345,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
   
-  /egfs/{ecosystem-did}/lookups/didMethods:
+  /egfs/{ecosystem-did}/lookups/didmethods:
     get:
       summary: Lookup Supported Assurance Levels
       tags:
