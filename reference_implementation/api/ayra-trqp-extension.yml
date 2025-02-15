@@ -97,7 +97,7 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
 
 
-  /entities/{entity_id}/Authorization:
+  /entities/{entityId}/authorization:
     get:
       summary: Check Entity Authorization Status
       tags:
@@ -107,19 +107,19 @@ paths:
         within the specified governance framework (`ecosystem_did`). Optionally, returns a list of authorizations if `all` is true.
       operationId: checkAuthorizationStatus
       parameters:
-        - name: entity_id
+        - name: entityId
           in: path
           required: true
           description: Unique identifier of the entity.
           schema:
             type: string
-        - name: authorization_id
+        - name: authorizationId
           in: query
           required: true
           description: Authorization identifier to evaluate.
           schema:
             type: string
-        - name: ecosystem_did
+        - name: ecosystemDID
           in: query
           required: true
           description: Unique identifier of the governance framework.
@@ -164,7 +164,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /ecosystems/{ecosystemDID}/Recognitions:
+  /ecosystems/{ecosystemDID}/recognitions:
     get:
       summary: List Recognized Ecosystems
       tags:
@@ -179,7 +179,7 @@ paths:
           description: Unique identifier of the ecosystem being queried.
           schema:
             type: string
-        - name: egf_did
+        - name: egfDID
           in: query
           required: true
           description: Unique identifier of the governance framework.
@@ -214,7 +214,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /ecosystems/{ecosystem_id}/Recognition:
+  /ecosystems/{ecosystemID}/recognition:
     get:
       summary: Check Ecosystem Recognition
       tags:
@@ -223,14 +223,14 @@ paths:
         Verifies if the specified ecosystem (`egf_target`) is recognized under the given governance framework (`egf_source`).
       operationId: checkEcosystemRecognition
       parameters:
-        - name: egf_did
+        - name: egfDID
           in: query
           required: true
           # TODO: Review note on DEFAULT EGF_DID
           description: Unique identifier of the governance framework. Defaults to single egf_did of the Trust Registry itself.
           schema:
             type: string
-        - name: ecosystem_id
+        - name: ecosystemID
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
@@ -271,7 +271,7 @@ paths:
 
 # NOTE: STANDARDIZING on DIDs. TRQP is NOT opinionated. Ayra is (DIDs).
 # TODO: rename to ecosystem_did? 
-  /ecosystems/{ecosystemDID}/lookups/assurance_levels:
+  /ecosystems/{ecosystemDID}/lookups/assuranceLevels:
     get:
       summary: Lookup Supported Assurance Levels
       tags:
@@ -280,7 +280,7 @@ paths:
         Retrieves the supported assurance levels for the specified ecosystem.
       operationId: lookupSupportedAssuranceLevels
       parameters:
-        - name: ecosystem_id
+        - name: ecosystemDID
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
@@ -316,7 +316,7 @@ paths:
         Performs an authorization lookup based on the provided ecosystem identifier.
       operationId: lookupAuthorizations
       parameters:
-        - name: egf_did
+        - name: ecosystemDID
           in: path
           required: true
           description: Ecosystem identifier.
@@ -380,84 +380,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
-  
-  /egfs/{ecosystemDID}/lookups/namespaces:
-    get:
-      summary: Lookup Authorizations
-      tags:
-        - extensions
-      description: |
-        Performs an authorization lookup based on the provided ecosystem identifier.
-      operationId: lookupNamepaces
-      parameters:
-        - name: ecosystem_id
-          in: path
-          required: true
-          description: Unique identifier of the ecosystem being queried.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A list of authorization responses.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NamespaceResponse'
-        '404':
-          description: Entity not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-        '401':
-          description: Unauthorized request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-  
-
-
-  # /supported_identifiers:
-  #   get:
-  #     summary: Lookup Supported Identifier Types
-  #     tags:
-  #       - extensions
-  #     description: |
-  #       Retrieves the supported identifier types for the specified ecosystem.
-  #     operationId: lookupSupportedIdentifierTypes
-  #     parameters:
-  #       - name: egf_did
-  #         in: query
-  #         required: true
-  #         description: Ecosystem identifier.
-  #         schema:
-  #           type: string
-  #     responses:
-  #       '200':
-  #         description: Supported identifier types retrieved successfully.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/SupportedIdentifierResponse'
-  #       '401':
-  #         description: Unauthorized request.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/ProblemDetails'
-  #       '404':
-  #         description: Ecosystem not found.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/ProblemDetails'
-
-  
 
 components:
   schemas:
