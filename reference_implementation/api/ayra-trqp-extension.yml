@@ -9,6 +9,7 @@ info:
     and checking ecosystem recognition.
 
 servers:
+# TODO: consider sandbox-tr.ayra.technology for domain.
   - url: https://example-trust-registry.com
     description: Production server (example)
   - url: https://sandbox-trust-registry.com
