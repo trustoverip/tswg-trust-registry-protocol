@@ -34,7 +34,7 @@ paths:
         Returns Trust Registry Metadata as a JSON object.
       operationId: getTrustRegistryMetadata
       parameters:
-        - name: ecosystem_id
+        - name: egf_did
           in: query
           required: false
           description: An optional identifier specifying which ecosystem's metadata should be retrieved.
@@ -60,7 +60,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /entities/{entity_did}:
+  /entities/{entity_id}:
     get:
       summary: Retrieve Entity Information
       tags:
@@ -69,7 +69,7 @@ paths:
         Retrieves information about a specific entity.
       operationId: getEntityInformation
       parameters:
-        - name: entity_did
+        - name: entity_id
           in: path
           required: true
           description: A unique identifier for the entity.
@@ -119,7 +119,7 @@ paths:
           description: Authorization identifier to evaluate.
           schema:
             type: string
-        - name: ecosystem-did
+        - name: ecosystem_did
           in: query
           required: true
           description: Unique identifier of the governance framework.
@@ -164,7 +164,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /ecosystems/{ecosystem-did}/recognitions:
+  /ecosystems/{ecosystem_did}/recognitions:
     get:
       summary: List Recognized Ecosystems
       tags:
@@ -173,7 +173,7 @@ paths:
         Retrieves a collection of recognized ecosystems for a specified governance framework.
       operationId: listEcosystemRecognitions
       parameters:
-        - name: ecosystem-did
+        - name: ecosystem_did
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
@@ -214,7 +214,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /ecosystems/{ecosystem_id}/recognition:
+  /ecosystems/{ecosystem_did}/recognition:
     get:
       summary: Check Ecosystem Recognition
       tags:
@@ -223,7 +223,7 @@ paths:
         Verifies if the specified ecosystem (`egf_target`) is recognized under the given governance framework (`egf_source`).
       operationId: checkEcosystemRecognition
       parameters:
-        - name: ecosystem_id
+        - name: ecosystem_did
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
@@ -270,7 +270,6 @@ paths:
 
 
 # NOTE: STANDARDIZING on DIDs. TRQP is NOT opinionated. Ayra is (DIDs).
-# TODO: rename to ecosystem_did? 
   /ecosystems/{ecosystem_did}/lookups/assuranceLevels:
     get:
       summary: Lookup Supported Assurance Levels
@@ -347,11 +346,11 @@ paths:
   
   /egfs/{ecosystem_did}/lookups/didmethods:
     get:
-      summary: Lookup Supported Assurance Levels
+      summary: Lookup Supported DID Methods
       tags:
         - extensions
       description: |
-        Retrieves the DID Methods. AYRA is opinionated here.
+        Retrieves the supported DID Methods. AYRA is opinionated here.
       operationId: lookupSupportedDIDMethods
       parameters:
         - name: ecosystem_did
@@ -368,7 +367,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AssuranceLevelResponse'
+                  $ref: '#/components/schemas/DIDMethodListType'
         '401':
           description: Unauthorized request.
           content:
@@ -501,19 +500,6 @@ components:
         - evaluated_at
         - response_time
 
-    SupportedIdentifierResponse:
-      type: object
-      properties:
-        identifier_type:
-          type: string
-          description: The type of identifier supported.
-        description:
-          type: string
-          description: A description of the identifier type.
-      required:
-        - identifier_type
-        - description
-
     AssuranceLevelResponse:
       type: object
       properties:
@@ -527,18 +513,6 @@ components:
         - level
         - description
 
-    NamespaceResponse:
-      type: object
-      properties:
-        level:
-          type: string
-          description: TODO - add list of namespaces, strings in namespacer, EGF(s) for those namespaces.
-        description:
-          type: string
-          description: Details about the assurance level.
-      required:
-        - level
-        - description
     DIDMethodType:
       type: object
       required:
