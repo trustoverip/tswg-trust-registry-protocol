@@ -164,57 +164,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
 
-  /ecosystems/{ecosystem_did}/recognitions:
-    get:
-      summary: List Recognized Ecosystems
-      tags:
-        - extensions
-      description: |
-        Retrieves a collection of recognized ecosystems for a specified governance framework.
-      operationId: listEcosystemRecognitions
-      parameters:
-        - name: ecosystem_did
-          in: path
-          required: true
-          description: Unique identifier of the ecosystem being queried.
-          schema:
-            type: string
-        - name: egf_did
-          in: query
-          required: true
-          description: Unique identifier of the governance framework.
-          schema:
-            type: string
-        - name: time
-          in: query
-          required: false
-          description: RFC3339 timestamp indicating when recognition is checked.
-          schema:
-            type: string
-            format: date-time
-      responses:
-        '200':
-          description: Ecosystem recognitions retrieved successfully.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RecognitionResponse'
-        '401':
-          description: Unauthorized request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-        '404':
-          description: Ecosystem not recognized or not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-
-  /ecosystems/{ecosystem_did}/recognition:
+  
+  /registries/{registry_id}/recognition:
     get:
       summary: Check Ecosystem Recognition
       tags:
@@ -250,6 +201,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RecognitionResponse'
+        '401':
+          description: Unauthorized request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Ecosystem not recognized or not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+
+
+  
+  /ecosystems/{ecosystem_did}/recognitions:
+    get:
+      summary: List Recognized Ecosystems
+      tags:
+        - extensions
+      description: |
+        Retrieves a collection of recognized ecosystems for a specified governance framework.
+      operationId: listEcosystemRecognitions
+      parameters:
+        - name: ecosystem_did
+          in: path
+          required: true
+          description: Unique identifier of the ecosystem being queried.
+          schema:
+            type: string
+        - name: egf_did
+          in: query
+          required: false
+          description: Optional identifier of the governance framework to filter the response. All EGFs supported by the ecosystem will be used when not provided.
+          schema:
+            type: string
+        - name: time
+          in: query
+          required: false
+          description: RFC3339 timestamp indicating when recognition is checked.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Ecosystem recognitions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecognitionResponse'
         '401':
           description: Unauthorized request.
           content:
@@ -413,9 +416,9 @@ components:
         id:
           type: string
           description: Unique identifier of the Trust Registry.
-        defaultEGF_DID:
+        default_egf_did:
           type: string
-          description: Default EGF that will be used if none is supplied. 
+          description: Default EGF, identified by DID, that will be used if none is supplied in various queries. 
           #TODO: review thinking on defaultEGF_DID
         description:
           type: string
@@ -439,6 +442,9 @@ components:
     AuthorizationResponse:
       type: object
       properties:
+        egf_did:
+          type: string
+          description: EGF DID this authorization response relates to.
         recognized:
           type: boolean
           description: Indicates whether the entity is recognized by the Trust Registry.
@@ -479,6 +485,9 @@ components:
         message:
           type: string
           description: Additional information regarding the recognition status.
+        egf_did:
+          type: string
+          description: EGF DID this recognition applies to.
         evaluated_at:
           type: string
           format: date-time
@@ -503,12 +512,16 @@ components:
     AssuranceLevelResponse:
       type: object
       properties:
-        level:
+        egf_did:
+          type: string
+          description: EGF DID this assurance level applies to.
+        assurance_level:
           type: string
           description: The assurance level.
         description:
           type: string
           description: Details about the assurance level.
+        
       required:
         - level
         - description
@@ -526,6 +539,9 @@ components:
             as "maintained" at
             https://w3c.github.io/did-spec-registries/#did-methods TODO: do
             better...
+        egf_did:
+          type: string
+          description: EGF DID this DID Method applies to.
         maximumAssuranceLevel:
           description: >
             A DID Method may, due to technical or human trust considerations be
