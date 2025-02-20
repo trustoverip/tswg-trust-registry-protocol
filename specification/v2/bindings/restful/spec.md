@@ -1,14 +1,25 @@
-# **RESTful Binding**
+**Trust Registry Query Protocol RESTful Binding**
+
+**Specification Status:** Draft
+**Version: 1.2:** Draft v1.2
+
+**Companion Docs**
+~ [Overview](/v2/)
+~ [Core](/v2/core)
+
+**Participate:**
+~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
+~ [File a bug](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
 
 RESTful TRQP Bindings specification that implements the core specification. 
 
-The following [OpenAPI](./v2.yaml) Document describes the RESTful endpoints that are required for the TRQP RESTful binding. 
+The following [OpenAPI](./swagger.yaml) Document describes the RESTful endpoints that are required for the TRQP RESTful binding. 
 
 * The `/metadata` endpoint is aligned to the MetadataQuery.
 * The `/registries/{ecosystem_id}/recognition` maps to the RecognitionQuery. 
-    * The `/entities/{entity_id}/authorization` maps to the AuthorizationQuery. 
+* The `/entities/{entity_id}/authorization` maps to the AuthorizationQuery. 
 
-Additional Information:
+**Additional Information:**
 
 * Error Codes are represented using [Problem Details described in rfc7807](https://datatracker.ietf.org/doc/html/rfc7807).
 * Authorization and Recognition Queries both take timestamps as a required parameter to resolve.

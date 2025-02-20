@@ -1,6 +1,16 @@
-# **Trust Registry Query Protocol (TRQP) Overview**
+**Trust Registry Query Protocol (TRQP) Overview**
+==================
 
-Draft v0.2 — February 2025
+**Specification Status:** Draft
+**Version: 1.2:** Draft v1.2 
+
+**Companion Docs**
+~ [Core](/v2/core)
+~ [Bindings](/v2/bindings)
+
+**Participate:**
+~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
+~ [File a bug](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
 
 ## Introduction
 
@@ -33,10 +43,7 @@ logic, cryptographic primitives, and internal policies.
 
 This document provides the overview to the TRQP. For more details, please read the note below:
 
-::: note
-- Read the **[core specification here](/v2/core)**
-- Check the **[bindings here](/bindings)**
-:::
+------------------------------------
 
 ## Purpose and Scope
 

@@ -20,7 +20,7 @@
             ],
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
             "logo_link": "https://github.com/trustoverip/specification-template",
-            "katex": true,
+            "katex": false,
             "source": {
                 "host": "github",
                 "account": "trustoverip",
@@ -33,7 +33,7 @@
         {
             "title": "ToIP Trust Query Registry Protocol v2 DRAFT",
             "spec_directory": "./specification/v2/core",
-            "katex": true,
+            "katex": false,
             "output_path": "./dist/v2/core",
             "markdown_paths": ["spec.md"],
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
@@ -52,7 +52,7 @@
             "spec_directory": "./specification/v2/bindings/restful",
             "output_path": "./dist/v2/bindings/restful",
             "markdown_paths": ["spec.md"],
-            "katex": true,
+            "katex": false,
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
             "logo_link": "https://github.com/trustoverip/specification-template",
             "source": {
@@ -69,7 +69,7 @@
             "spec_directory": "./specification/v2/bindings",
             "output_path": "./dist/v2/bindings",
             "markdown_paths": ["bindings.md"],
-            "katex": true,
+            "katex": false,
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
             "logo_link": "https://github.com/trustoverip/specification-template",
             "source": {
@@ -86,7 +86,7 @@
             "spec_directory": "./specification/v2",
             "output_path": "./dist/v2",
             "markdown_paths": ["overview.md"],
-            "katex": true,
+            "katex": false,
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
             "logo_link": "https://github.com/trustoverip/specification-template",
             "source": {

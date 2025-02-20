@@ -1,14 +1,20 @@
 **Trust Registry Query Protocol Core Specification**
 
-::: note
-- Read the **[overview to get started](/v2)**
-- Check the **[bindings here](/bindings)**
-:::
+**Specification Status:** Draft
+**Version: 1.2:** Draft v1.2 
+
+**Companion Docs**
+~ [Overview](/v2/)
+~ [Bindings](/v2/bindings)
+
+**Participate:**
+~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
+~ [File a bug](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
 
 ## **Introduction**
 
-Modern digital ecosystems [[ref:Digital Trust Ecosystem]] rely on diverse
-**intra-ecosystem trust frameworks [[ref:Intra-Ecosystem Trust]]** (e.g., OpenID
+Modern digital ecosystems [[ref:Digital Trust Ecosystem]] rely on diverse a
+**[[ref:Intra-Ecosystem Trust Framework]]s** (e.g., OpenID
 Federation, X.509 Chains, EBSI Trust Chains, TRAIN). These frameworks are often
 effective at verifying whether a subject in one ecosystem has a particular
 authorization—but only within that ecosystem. When verifiers need to validate
@@ -19,8 +25,8 @@ governance rules.
 The **Trust Registry Query Protocol (TRQP)**
 addresses this gap by providing a standardized way to query and verify
 authorizations and recognitions across ecosystems. It does not replace existing
-intra-ecosystem solutions [[ref:Intra-Ecosystem Trust]]; rather, it acts as a
-**bridge** between them—a so-called “inter-trust framework [[ref:Inter-Ecosystem Trust]].”
+intra-ecosystem solutions [[ref:Intra-Ecosystem Trust Framework]]; rather, it acts as a
+**bridge** between them—a so-called “inter-trust framework [[ref:Inter-Ecosystem Trust Framework]].”
 In practical terms, TRQP allows a verifier to answer questions such as:
 
 - “Does **Entity X** have **Authorization Y** under **Ecosystem Z’s** governance
@@ -87,7 +93,7 @@ or a
 ecosystems or governance frameworks. This type of trust enables cross-recognition
 of rules, trust registries, and authorization states among separate ecosystems.
 
- [[def:Intra-Ecosystem Trust, Intra-Ecosystem Trusts]]
+ [[def:Intra-Ecosystem Trust Framework, Intra-Ecosystem Trust Frameworks]]
 ~ The confidence and assurance maintained within a single ecosystem or governance
 framework. It applies to entities operating under the same set of rules, trust
 registries, and oversight mechanisms.
@@ -139,12 +145,12 @@ credentials.
 ## **Scope**
 
 This specification is primarily focused on defining the
-**TRQP Core [[ref:TRQP Core]]** framework. While we recognize the importance of
-**Bindings [[ref:TRQP Binding]]** and **Bridges [[ref:TRQP Bridge]]** in enabling
+**[[ref:TRQP Core]]** framework. While we recognize the importance of
+**[[ref:TRQP Binding]]** and **[[ref:TRQP Bridge]]** in enabling
 interoperability, their specific implementations are left to the discretion of
-ecosystems and implementers. **Bindings [[ref:TRQP Binding]]** extend the core
-abstractions to concrete implementations, while **Bridges [[ref:TRQP Bridge]]**
-connect ecosystems to their **System of Record [[ref:System of Record]]**.
+ecosystems and implementers. **[[ref:TRQP Binding]]** extend the core
+abstractions to concrete implementations, while **[[ref:TRQP Bridge]]**
+connect ecosystems to their **[[ref:System of Record]]**.
 However, this specification does not prescribe how they should be designed or
 deployed, allowing flexibility for diverse use cases and ecosystem needs.
 
@@ -156,8 +162,7 @@ ecosystems to build their own bindings.
 
 ## **Problem Statement**
 
-Modern digital ecosystems often rely on **intra-ecosystem trust frameworks
- [[ref:Intra-Ecosystem Trust]]** (e.g., OpenID Federation, X.509 Chains, EBSI
+Modern digital ecosystems often rely on **[[ref:Intra-Ecosystem Trust Framework]]** (e.g., OpenID Federation, X.509 Chains, EBSI
 Trust Chains, TRAIN) to manage authorization within their own boundaries. While
 these frameworks are effective at validating whether an entity is authorized
 **within** a single ecosystem, they do not easily extend to other ecosystems. As
@@ -171,7 +176,7 @@ authorizations **across** different frameworks. The core issues include:
   formats, and governance rules, which forces implementers to work with multiple
   disparate interfaces and data models.
 
-When attempting to establish **cross-ecosystem trust [[ref:Inter-Ecosystem Trust]]**,
+When attempting to establish **[[ref:Inter-Ecosystem Trust Framework]]**,
 verifiers face two fundamental questions:
 
 1. **Ecosystem Recognition**:
@@ -187,7 +192,7 @@ verifiers face two fundamental questions:
    *“Is the issuer authorized to issue this type of data under the ecosystem’s
    governance framework [[ref:Ecosystem Governance Framework]]?”*
 
-   This question takes the form of an **Authority Query [[ref:Authority Query]]**,
+   This question takes the form of an **[[ref:Authority Query]]**,
    which is a formal or protocol-based request to confirm whether a given entity
    (subject) holds a specific authorization, credential, or right within the
    ecosystem.
@@ -197,10 +202,9 @@ verifiers face two fundamental questions:
 Figure 2: The two fundamental queries required cross-ecosystem authority
 verification.
 
-TRQP must solve the cross-ecosystem trust [[ref:Inter-Ecosystem Trust]] problem
+TRQP tackles the [[ref:Inter-Ecosystem Trust Framework]] problem
 by allowing verifiers outside an ecosystem to request an
-**Authority Query [[ref:Authority Query]]** and **Recognition Query
- [[ref:Recognition Query]]** to any TRQP compliant network. The specification
+**[[ref:Authority Query]]** and **[[ref:Recognition Query]]** to any TRQP compliant network. The specification
 must work independently of any particular Systems of Record [[ref:System of Record]]
 and intra-trust frameworks, ensuring trust can be established across different
 ecosystems without uplifting a current authority system.
@@ -212,12 +216,12 @@ queries regarding trust registry information, authorization, and recognition. At
 its heart, TRQP comprises:
 
 1. An **abstract specification** (the *Core*) defining data models, query flows,
-   and security considerations. (i.e. **TRQP Core [[ref:TRQP Core]]**)
+   and security considerations. (i.e. **[[ref:TRQP Core]]**)
 2. One or more **concrete bindings [[ref:TRQP Binding]]** that map the abstract
    specification to specific transport protocols (e.g., HTTPS, DIDComm, TSP).
-3. **Bridges [[ref:TRQP Bridge]]** that connect TRQP queries to particular trust
+3. **[[ref:TRQP Bridge]]** that connect TRQP queries to particular trust
    frameworks (OIDF Federation, x.509, etc.).
-4. **Systems of Record [[ref:System of Record]]**—the actual trust frameworks or
+4. **[[ref:System of Record]]**—the actual trust frameworks or
    registries (e.g., x.509 Ecosystem, OIDF Federation) responsible for issuing
    or validating trust information.
 
@@ -238,7 +242,7 @@ and *Bindings [[ref:TRQP Binding]]* are out of scope for this specification, but
 defined in concept for other specifications to describe in detail.
 
 We will briefly go through each of the layers at a high level, and expand on the
-5.1 **TRQP Core [[ref:TRQP Core]]** layer in more detail in the subsequent
+5.1 **[[ref:TRQP Core]]** layer in more detail in the subsequent
 section.
 
 ### **TRQP Core**
@@ -286,7 +290,7 @@ section.
   * **EU Trusted List** (an EU-level trust list or EBSI-based registry)
 * **Role**: The ultimate source of truth for whether an entity is recognized,
   authorized, or otherwise valid within a particular ecosystem. (i.e.
-  **System of Record [[ref:System of Record]]**)
+  **[[ref:System of Record]]**)
 
 ### **TRQP Profiles**
 
@@ -305,7 +309,7 @@ section.
 
 ![images/ecosystem_model.png](images/ecosystem_model.png)
 
-Fig 4: Ecosystems and Trust Registries
+Fig 4: A trust registry may serve an ecosystem Authority Statement. A trust registry may serve multiple ecosystems. An ecosystem may have multiple trust registries.
 
 ### **Interpretation of the Diagram: Ecosystem and Trust Registry Relationship**
 
@@ -404,7 +408,7 @@ across one or more Ecosystems by:
 ## **Required Interfaces**
 
 Below are abstract API methods that **MUST** be exposed;
-**Bindings [[ref:TRQP Binding]]** **MUST** define a binding (e.g., REST, gRPC,
+**[[ref:TRQP Binding]]** **MUST** define a binding (e.g., REST, gRPC,
 DIDComm) that maps these methods to actual endpoints.
 
 ```mermaid
@@ -425,12 +429,12 @@ sequenceDiagram
 ### **Metadata Query**
 
 * **Request**: There are no required request parameters.
-  * MAY supply an egf_uri to represent a TR metadata request with a response that
+  * MAY supply an ecosystem_id to represent a TR metadata request with a response that
     is focused on a particular ecosystem governance framework
      [[ref:Ecosystem Governance Framework]] the Trust Registry serves.
 * **Response**:
-  * id: string. MUST share the identifier of the registry. If egf_uri is
-    parameterized, it MUST context the return with respect to the supplied EGF.
+  * id: string. MUST share the identifier of the registry. If ecosystem_id is
+    parameterized, it MUST context the return with respect to the supplied ecosystem.
 
 ### **Authorization Query**
 
@@ -509,6 +513,6 @@ across diverse trust frameworks.
 
 When combined with ecosystem-specific bindings [[ref:TRQP Binding]] and
 governance framework [[ref:Ecosystem Governance Framework]] definitions, the TRQP
-can dramatically streamline multi-ecosystem [[ref:Inter-Ecosystem Trust]]
+can dramatically streamline multi-ecosystem [[ref:Inter-Ecosystem Trust Framework]]
 integrations, ensuring reliable and secure authorization checks across
 organizational and technological boundaries.

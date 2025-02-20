@@ -2,4 +2,4 @@
 
 The following are TRTF registered bindings:
 
-- [restful](restful/) for the RESTful TRQP binding.
+- [RESTful Binding](restful/) for the RESTful TRQP binding.
