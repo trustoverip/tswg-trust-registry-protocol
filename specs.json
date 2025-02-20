@@ -3,7 +3,7 @@
         {
             "title": "ToIP Trust Query Registry Protocol v1 TF DRAFT",
             "spec_directory": "./specification/v1/spec",
-            "output_path": "./dist/v1",
+            "output_path": "./dist",
             "markdown_paths": [
                 "title.md",
                 "header.md",

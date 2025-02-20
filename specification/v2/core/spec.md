@@ -1,327 +1,514 @@
-# TRQP Core Specification
+**Trust Registry Query Protocol Core Specification**
 
-## Scope
+::: note
+- Read the **[overview to get started](/v2)**
+- Check the **[bindings here](/bindings)**
+:::
 
-The Trust Registry Query Protocol (TRQP) provides an abstract, interoperable framework for verifying authorization statuses across different digital ecosystems. TRQP **DOES NOT** replace existing intra-ecosystem trust solutions; rather, it defines a minimal set of queries, data models, and flows to bridge these ecosystems.
+## **Introduction**
 
-This specification includes:
+Modern digital ecosystems [[ref:Digital Trust Ecosystem]] rely on diverse
+**intra-ecosystem trust frameworks [[ref:Intra-Ecosystem Trust]]** (e.g., OpenID
+Federation, X.509 Chains, EBSI Trust Chains, TRAIN). These frameworks are often
+effective at verifying whether a subject in one ecosystem has a particular
+authorization—but only within that ecosystem. When verifiers need to validate
+authorizations **across** different ecosystems, they face interoperability
+challenges due to incompatible data models, inconsistent APIs, and varying
+governance rules.
 
-1. **Core Patterns** for bridging.  
-2. **Abstract Data Models** that define common structures (e.g., registry metadata, authorizations).  
-3. **Required Interfaces (APIs)** for cross-ecosystem queries.  
-4. **Security Considerations** relevant to the protocol.  
-5. **Conformance Criteria** for determining whether an implementation fully supports TRQP.  
-6. **Implementation Profiles** guidance, describing how ecosystems can map abstract TRQP interfaces to concrete protocols (e.g., REST, DIDComm, gRPC).
+The **Trust Registry Query Protocol (TRQP)**
+addresses this gap by providing a standardized way to query and verify
+authorizations and recognitions across ecosystems. It does not replace existing
+intra-ecosystem solutions [[ref:Intra-Ecosystem Trust]]; rather, it acts as a
+**bridge** between them—a so-called “inter-trust framework [[ref:Inter-Ecosystem Trust]].”
+In practical terms, TRQP allows a verifier to answer questions such as:
 
-This document does **NOT** define:
-- **Concrete Transport Details** (e.g., HTTP status codes, message encryption, DIDComm envelopes). 
-- **Bridging Mechanics** (e.g., how an existing trust framework is connected to TRQP). 
-- **Discovery Mechanisms** (e.g., DNS-based or DID-based lookup). 
+- “Does **Entity X** have **Authorization Y** under **Ecosystem Z’s** governance
+  framework [[ref:Ecosystem Governance Framework]]?” and
+- “Is **Entity X** **Recognized** under **Ecosystem Y’s** governance framework
+   [[ref:Ecosystem Governance Framework]] for **Z**?”
 
-Implementers **MUST** reference the relevant implementation profile(s) to see how these abstract requirements translate into actual endpoints or transport protocols.
+This specification describes the abstract rules, data models, and query flows
+necessary to implement TRQP, leaving concrete details—such as transport
+protocols, message formats, and discovery mechanisms to an ecosystem-specific or
+domain-specific [[ref:TRQP Binding]]. By adhering to TRQP, implementers
+ensure a consistent, secure, and interoperable means of authorization
+verification **across** multiple trust frameworks.
 
----
+## **Terms and Definitions**
 
-## Terms and Definitions
+ [[def:Authority Query, Authority Queries]]
+~ A request (typically formal or protocol-based) that seeks to verify whether a
+specific entity (subject) holds a particular authorization, credential, or right
+within an ecosystem.
 
-In addition to the terms defined below, references to “MUST,” “SHOULD,” and “MAY” are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
+ [[def:Authority State, Authority States]]
+~ A recorded or asserted status indicating whether an entity currently possesses
+a valid authorization within an ecosystem. It reflects the definitive condition
+of the entity’s rights or credentials at a given point in time.
 
-- **Inter-Ecosystem Trust**: Trust relationships established across different ecosystems or frameworks.  
-- **Intra-Ecosystem Trust**: Trust relationships established within a single ecosystem or framework.  
-- **Ecosystem**: A collection of entities, rules, and trust registries operating under a common governance framework.  
-- **Recognition**: Acknowledgment by one ecosystem of another ecosystem’s governance rules and trust registries.  
-- **Authority Query**: A request to verify if an entity (subject) holds a specific authorization.  
-- **Authority State**: The stored or asserted status indicating whether an entity has a valid authorization.  
-- **TRQP Implementation Profile**: A document describing concrete protocol bindings, data formats, and any ecosystem-specific mapping required to achieve TRQP compliance.  
-- **Bridging**: The process or mechanism by which a local ecosystem or trust framework is integrated with TRQP queries for cross-ecosystem or cross-framework validation.
+ [[def:Authority Statement, Authority Statements]]
+~ An authority statement is an assertion by an **authority** about either:
+a) the **authorization** or **delegation** it grants to another party over which
+it has authority, or b) the **recognition** it gives to a peer about the scope of
+that peer’s authority.
 
----
+ [[def:Digital Trust Ecosystem, Digital Trust Ecosystems]]
+~ A [digital ecosystem](https://glossary.trustoverip.org/#term:digital-ecosystem)
+in which the participants are one or more interoperating
+[trust communities](https://glossary.trustoverip.org/#term:trust-communities).
+Governance of the various
+[roles](https://glossary.trustoverip.org/#term:roles) of
+[governed parties](https://glossary.trustoverip.org/#term:governed-parties)
+within a digital trust ecosystem (e.g.,
+[issuers](https://glossary.trustoverip.org/#term:issuers),
+[holders](https://glossary.trustoverip.org/#term:holders),
+[verifiers](https://glossary.trustoverip.org/#term:verifiers),
+[certification bodies](https://glossary.trustoverip.org/#term:certification-bodies),
+[auditors](https://glossary.trustoverip.org/#term:auditors)) is typically managed
+by a [governing body](https://glossary.trustoverip.org/#term:governing-body)
+using a [governance framework](https://glossary.trustoverip.org/#term:governance-framework)
+as recommended in the [ToIP Governance Stack](https://glossary.trustoverip.org/#term:toip-governance-stack).
+Many digital trust ecosystems will also maintain one or more
+[trust lists](https://glossary.trustoverip.org/#term:trust-lists) and/or
+[trust registries](https://glossary.trustoverip.org/#term:trust-registries).
 
-## Introduction
+ [[def:Ecosystem Governance Framework, Ecosystem Governance Frameworks]]
+~ A [governance framework](https://glossary.trustoverip.org/#term:governance-framework)
+for a [digital trust ecosystem](https://glossary.trustoverip.org/#term:digital-trust-ecosystem).
+An ecosystem governance framework may incorporate, aggregate, or reference other
+types of governance frameworks such as a
+[credential governance framework](https://glossary.trustoverip.org/#term:credential-governance-framework)
+or a
+[utility governance framework](https://glossary.trustoverip.org/#term:utility-governance-framework).
 
-Modern digital ecosystems rely on diverse intra-ecosystem trust frameworks (e.g., OpenID Federation, X.509 Chains, EBSI Trust Chains, TRAIN). These frameworks typically operate within a single ecosystem’s boundaries, verifying whether a subject is authorized under that ecosystem’s governance. However, as organizations expand and collaborate, they encounter the need to verify authorizations **across** different ecosystems with potentially incompatible rules and data formats.
+ [[def:Inter-Ecosystem Trust, Inter-Ecosystem Trusts]]
+~ The confidence and assurance established between two or more distinct
+ecosystems or governance frameworks. This type of trust enables cross-recognition
+of rules, trust registries, and authorization states among separate ecosystems.
 
-TRQP addresses this gap with a common, minimal set of “bridge” queries. TRQP queries allow a verifier to answer:
+ [[def:Intra-Ecosystem Trust, Intra-Ecosystem Trusts]]
+~ The confidence and assurance maintained within a single ecosystem or governance
+framework. It applies to entities operating under the same set of rules, trust
+registries, and oversight mechanisms.
 
-> “Does Entity X have Authorization Y under Ecosystem Z’s governance framework?”
+ [[def:Hierarchical Authority Relationship, Hierarchical Authority Relationships]]
+~ A relationship between an authority and another party subject to that authority.
+This relationship is unilateral and exclusive, meaning that the authority is the
+only one in control, i.e., the only one who can grant authorization to or revoke
+authorization from the authorized party.
 
-TRQP is ecosystem-agnostic and **does not** prescribe how an ecosystem internally manages its trust registry or cryptographic keys. Instead, TRQP **defines**:
+ [[def:Recognition Relationship, Recognition Relationships]]
+~ A heterarchical authority relationship between two authorities who are peers,
+each authoritative for their own ecosystems. The relationship between these two
+authorities can be either unilateral or bilateral and it is non-exclusive. One
+authority is attesting to the other’s authority in one direction or both
+directions.
 
-1. **Core Queries** (Metadata, Authorization, Ecosystem Recognition).  
-2. **Abstract Data Models** (e.g., how to represent an authorization or registry metadata).  
-3. **Flows** for cross-ecosystem bridging.
+ [[def:Recognition Query, Recognition Queries]]
+~ A request to a network that enables a verifier to check the Recognition
+Relationship [[ref:Recognition Relationship]] of an ecosystem in relation to
+another ecosystem.
 
-By standardizing these elements, TRQP ensures consistent cross-ecosystem authorization checks while allowing each ecosystem to retain its preferred technologies, governance structures, and cryptographic tools.
+ [[def:TRQP Core]]
+~ A foundational specification that defines the core data models, queries, and
+security requirements necessary for consistent, interoperable trust interactions
+across different systems and ecosystems. It sets the universal “language” for
+TRQP implementations, ensuring that all compliant solutions share a common
+framework for exchanging and validating trust information.
 
----
+ [[def:TRQP Binding, TRQP Bindings]]
+~ A technical specification document outlining the precise requirements for
+implementing interoperability via the base TRQP interfaces and data models. It
+dictates how systems should interact and exchange trust information to remain
+compliant with TRQP standards.
 
-## High-Level Architecture
+ [[def:TRQP Bridge, TRQP Bridges]]
+~ A software or infrastructure component that connects a System of Record
+ [[ref:System of Record]] to a specified TRQP Binding [[ref:TRQP Binding]],
+enabling seamless data exchange and interoperability. It serves as the interface
+through which trust and authority data move between the system and the
+TRQP-compliant environment.
 
-A TRQP **implementation profile** **MUST** enable the ability for different ecosystem adapters (“bridges”) to connect to the profile. The figure below demonstrates a conceptual architecture where an integrator builds a gateway between a local ecosystem and a TRQP-compliant ecosystem.
+ [[def:System of Record, Systems of Record]]
+~ An authoritative source that manages and maintains authority and recognition
+statuses for participants within an ecosystem. It is responsible for preserving
+the integrity and continuity of records, including authorizations and trust
+credentials.
 
-> **Note**: The bridging mechanics—how exactly the local ecosystem integrates with TRQP—are out of scope for this specification. Implementers **MAY** use REST-based proxies, DIDComm agents, message queues, or any other bridging technology.
+## **Scope**
 
+This specification is primarily focused on defining the
+**TRQP Core [[ref:TRQP Core]]** framework. While we recognize the importance of
+**Bindings [[ref:TRQP Binding]]** and **Bridges [[ref:TRQP Bridge]]** in enabling
+interoperability, their specific implementations are left to the discretion of
+ecosystems and implementers. **Bindings [[ref:TRQP Binding]]** extend the core
+abstractions to concrete implementations, while **Bridges [[ref:TRQP Bridge]]**
+connect ecosystems to their **System of Record [[ref:System of Record]]**.
+However, this specification does not prescribe how they should be designed or
+deployed, allowing flexibility for diverse use cases and ecosystem needs.
 
-```text
-+-----------------+                +-------------------+
-| Local Ecosystem | -- (bridge) -->| TRQP-Compliant    |
-|   (Intra-Trust) |                | Ecosystem         |
-+-----------------+                +-------------------+
+![images/trqp_layers.png](images/trqp_layers.png)
+
+Fig 1: This specification is focused specifically on addressing the core
+requirements for a binding specification to be TRQP compliant. It is up to
+ecosystems to build their own bindings.
+
+## **Problem Statement**
+
+Modern digital ecosystems often rely on **intra-ecosystem trust frameworks
+ [[ref:Intra-Ecosystem Trust]]** (e.g., OpenID Federation, X.509 Chains, EBSI
+Trust Chains, TRAIN) to manage authorization within their own boundaries. While
+these frameworks are effective at validating whether an entity is authorized
+**within** a single ecosystem, they do not easily extend to other ecosystems. As
+a result, organizations face considerable challenges when attempting to verify
+authorizations **across** different frameworks. The core issues include:
+
+* **Siloed Trust Frameworks**: Each ecosystem typically operates in isolation,
+  lacking a common or standardized method to verify whether a subject in one
+  ecosystem has valid authorization recognized by another.
+* **Inconsistent Interfaces**: Every ecosystem defines its own APIs, credential
+  formats, and governance rules, which forces implementers to work with multiple
+  disparate interfaces and data models.
+
+When attempting to establish **cross-ecosystem trust [[ref:Inter-Ecosystem Trust]]**,
+verifiers face two fundamental questions:
+
+1. **Ecosystem Recognition**:
+
+   *“Do I recognize the governance framework [[ref:Ecosystem Governance Framework]]
+   of the other ecosystem?”*
+
+   This question, also called “ecosystem recognition,” is inherently complex and
+   ultimately depends on human policy decisions. It is not easily automated.
+
+2. **Entity Authorization**:
+
+   *“Is the issuer authorized to issue this type of data under the ecosystem’s
+   governance framework [[ref:Ecosystem Governance Framework]]?”*
+
+   This question takes the form of an **Authority Query [[ref:Authority Query]]**,
+   which is a formal or protocol-based request to confirm whether a given entity
+   (subject) holds a specific authorization, credential, or right within the
+   ecosystem.
+
+![images/authority_questions.png](images/authority_questions.png)
+
+Figure 2: The two fundamental queries required cross-ecosystem authority
+verification.
+
+TRQP must solve the cross-ecosystem trust [[ref:Inter-Ecosystem Trust]] problem
+by allowing verifiers outside an ecosystem to request an
+**Authority Query [[ref:Authority Query]]** and **Recognition Query
+ [[ref:Recognition Query]]** to any TRQP compliant network. The specification
+must work independently of any particular Systems of Record [[ref:System of Record]]
+and intra-trust frameworks, ensuring trust can be established across different
+ecosystems without uplifting a current authority system.
+
+## **High-Level Architecture**
+
+The **TRQP** architecture is designed to enable standardized cross-ecosystem
+queries regarding trust registry information, authorization, and recognition. At
+its heart, TRQP comprises:
+
+1. An **abstract specification** (the *Core*) defining data models, query flows,
+   and security considerations. (i.e. **TRQP Core [[ref:TRQP Core]]**)
+2. One or more **concrete bindings [[ref:TRQP Binding]]** that map the abstract
+   specification to specific transport protocols (e.g., HTTPS, DIDComm, TSP).
+3. **Bridges [[ref:TRQP Bridge]]** that connect TRQP queries to particular trust
+   frameworks (OIDF Federation, x.509, etc.).
+4. **Systems of Record [[ref:System of Record]]**—the actual trust frameworks or
+   registries (e.g., x.509 Ecosystem, OIDF Federation) responsible for issuing
+   or validating trust information.
+
+This layered approach allows implementers to select or build only what they
+need. If a trust framework has not implemented TRQP, integrators can connect a
+new **[[ref:TRQP Bridge]]** to a **[[ref:TRQP Binding]]** for it,
+as long as they follow the core specification and a compatible binding. The spec
+focuses on the abstract specification layer *(i.e Core)* and will not go into
+detail on anything lower in the stack.
+
+![images/system_boundaries.png](images/system_boundaries.png)
+
+Fig 3: TRQP Architecture has three layers: Core, Bindings, and Bridges. Profiles
+can be built on top to enable networks.
+
+Details of *Bridges [[ref:TRQP Bridge]]*, *Systems of Record [[ref:System of Record]]*,
+and *Bindings [[ref:TRQP Binding]]* are out of scope for this specification, but
+defined in concept for other specifications to describe in detail.
+
+We will briefly go through each of the layers at a high level, and expand on the
+5.1 **TRQP Core [[ref:TRQP Core]]** layer in more detail in the subsequent
+section.
+
+### **TRQP Core**
+
+* **What it is**: The TRQP Core [[ref:TRQP Core]] is an **abstract** specification
+  that defines:
+  * **Data Models**: Metadata, authorization, ecosystem recognition, etc.
+  * **Required Queries**: MetadataQuery, AuthorizationQuery, and
+    EcosystemRecognitionQuery.
+* **Role**: It ensures every TRQP-based implementation speaks the same
+  “language” (even if actual messages go over different transports).
+
+### **TRQP Bindings**
+
+* **What they are**: Concrete mappings of the Core specification onto specific
+  transports and protocols. For example:
+  * **HTTPS Binding**: Illustrates how to send TRQP queries over HTTPS.
+* **Role**: A TRQP Binding [[ref:TRQP Binding]] ensures that an abstract query
+  from the Core spec is transformed into real network requests and responses in
+  a standardized way.
+
+### **TRQP Bridges**
+
+* **What they are**: Adapters or connectors that apply a chosen
+  Binding [[ref:TRQP Binding]] to a specific trust framework (x.509, OIDF, DIF
+  CTE, etc.).
+* **Examples**:
+  * **x.509 Bridge**: Translates TRQP queries into x.509 certificate validations
+    and chain checks.
+  * **OIDF Bridge**: Leverages OpenID Federation endpoints to answer TRQP queries
+    about OIDC-based trust relationships.
+  * **CTE Bridge**: Adapts TRQP queries to DIF’s Credential Trust Establishment
+    protocols.
+* **Role**: A TRQP Bridge [[ref:TRQP Bridge]] “bridges” existing frameworks into
+  TRQP by implementing the relevant Binding [[ref:TRQP Binding]] and mapping
+  framework-specific data.
+
+### **Systems of Record**
+
+* **Definition**: Real-world trust frameworks or registries storing authoritative
+  data. Examples include:
+  * **OIDF Federation** (Profiles 1, N)
+  * **x.509 Ecosystem** (with a CA and certificate hierarchy)
+  * **TRAIN** (some trust registry or network)
+  * **EU Trusted List** (an EU-level trust list or EBSI-based registry)
+* **Role**: The ultimate source of truth for whether an entity is recognized,
+  authorized, or otherwise valid within a particular ecosystem. (i.e.
+  **System of Record [[ref:System of Record]]**)
+
+### **TRQP Profiles**
+
+* **Definition:** TRQP Profiles specify the implementation details necessary for
+  aligning a trust network with TRQP standards.
+* **Examples:**
+  * **Identifier Design:** How entities are uniquely identified within the
+    system.
+  * **Resolution Paths:** The process for resolving trust queries within a given
+    framework.
+* **Role:** Profiles guide the adaptation of TRQP to different ecosystems,
+  ensuring that queries, identifiers, and resolution mechanisms conform to
+  standardized practices.
+
+## **Abstract Metadata Models**
+
+![images/ecosystem_model.png](images/ecosystem_model.png)
+
+Fig 4: Ecosystems and Trust Registries
+
+### **Interpretation of the Diagram: Ecosystem and Trust Registry Relationship**
+
+Each Ecosystem is represented by a yellow box in the diagram and consists of:
+
+* An identifier (green box) – A globally unique reference that distinguishes the
+  ecosystem.
+* An EGF Document (green box) – The Ecosystem Governance Framework
+   [[ref:Ecosystem Governance Framework]] (EGF), which defines governance terms,
+  policies, and operational rules for the ecosystem.
+
+The dashed arrows from these Ecosystems point to one or more Trust Registries
+below, indicating that:
+
+* Each Ecosystem explicitly references the Trust Registry(ies) it recognizes for
+  managing and verifying authority-related queries [[ref:Authority Query]].
+* Trust Registries are designated by the Ecosystem metadata and are responsible
+  for enforcing the rules and policies outlined in the EGF document.
+
+Each Trust Registry (represented as a green box in the lower row) consists of:
+
+* An identifier (yellow box) – A unique reference for the registry.
+* References to one or more Ecosystems – If supported by the metadata, a Trust
+  Registry may explicitly list the Ecosystem(s) it serves.
+
+### **Role of the Trust Registry in Ecosystem Governance**
+
+A Trust Registry manages and serves authority statements [[ref:Authority Statement]]
+across one or more Ecosystems by:
+
+* Maintaining a structured record of trust relationships – storing authoritative
+  data on recognized entities and their authorization statuses.
+* Handling authority queries [[ref:Authority Query]] (as described in Section 8)
+  – providing verified responses regarding entity recognition and authorization.
+* Operating under the governance of the ecosystem – with the governing body
+  defining the policies and processes for registering entries into the ecosystem.
+
+### **Scalability and Multi-Ecosystem Trust Registries**
+
+* A single Trust Registry may serve multiple Ecosystems, acting as a shared
+  infrastructure for trust and authorization across different governance models.
+* An Ecosystem may rely on multiple Trust Registries to provide redundancy,
+  distribute authority management, or allow for diverse verification approaches.
+* The Trust Registry is not independent but operates within the authority scope
+  defined by the EGF Document of each ecosystem it serves.
+
+### **Trust Registry**
+
+* **Properties**
+  * **id: MUST** be a globally unique identifier for the registry (e.g., URI,
+    DID, UUID).
+  * **ecosystem: SHOULD** indicate which ecosystem(s) the registry serves or
+    recognizes.
+  * **controller: SHOULD** reference the entity (individual, organization, or
+    automated system) that manages or operates the registry.
+
+### **Ecosystem**
+
+* **Properties**
+  * **id: MUST** be a globally unique identifier for the registry (e.g., URI,
+    DID, UUID).
+  * **egf_id: MUST** specify a *resolvable* EGF identifier referencing the
+    official EGF document or descriptor.
+  * **trustregistries: MUST** provide a list of authorized Trust Registries that
+    serve the ecosystem authority state [[ref:Authority State]].
+    * Each registry **MUST** have the following properties:
+      * **endpoint**: The address (URL, DID, etc.) for TRQP
+        queries [[ref:Authority Query]] /  [[ref:Recognition Query]].
+    * Each registry **MAY** also be scoped to a particular set of authorization
+      states and is defined in the Binding [[ref:TRQP Binding]].
+  * **controller: SHOULD** include a method of validating controllers of an
+    ecosystem.
+
+## **Baseline Requirements For Conformance**
+
+### **Trust Registry**
+
+* All TRQP registriesqueries **MUST** provide an addressable endpoint that can be
+  resolvable as defined by the Implementation Profile.
+* All Trust Registries **MUST** supply the required interfaces described in
+  Section 8 over the *same* addressable endpoint to be TRQP conformant.
+
+### **TRQP Binding**
+
+* All compliant binding [[ref:TRQP Binding]] **MUST** support the required
+  interfaces described in Section 8.
+* A compliant binding [[ref:TRQP Binding]] **MUST** be compliant with
+  TRQP Core [[ref:TRQP Core]] requirements.
+* A compliant binding [[ref:TRQP Binding]] **MUST** support versioning using
+  [Semantic Versioning 2.0](https://semver.org/)
+
+### **TRQP Profiles**
+
+* All TRQP profiles **MUST** specify a compliant binding [[ref:TRQP Binding]].
+
+## **Required Interfaces**
+
+Below are abstract API methods that **MUST** be exposed;
+**Bindings [[ref:TRQP Binding]]** **MUST** define a binding (e.g., REST, gRPC,
+DIDComm) that maps these methods to actual endpoints.
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant R as Trust Registry
+
+    C->>R: 9.1 Metadata Query<br/>(registryIdentifier)
+    R-->>C: Metadata Response<br/>(auth types, credential formats, version info)<br/>MUST provide details for further queries
+
+    C->>R: 9.2 Authorization Query<br/>(subject, authorizationType, context?)
+    R-->>C: Authorization Response<br/>(authorized / not-authorized / revoked / error)<br/>MUST indicate authorization status clearly
+
+    C->>R: 9.3 Ecosystem Recognition Query<br/>(ecosystemIdentifier, governanceFrameworkRef)
+    R-->>C: Recognition Response<br/>(yes/no + reasons for rejection)<br/>MUST indicate acceptance or rejection
 ```
 
-### Ecosystem
-
-Each ecosystem **maintains**:
-- **Authority State**: The internal records or logic that describe which subjects are authorized, for what roles, under what policy conditions.  
-- **Governance Framework**: Rules for identity, credential issuance, revocation, etc.  
-- **Trust Registries**: The authoritative repositories or services that confirm subject authorizations.
-
-### Trust Registry
-
-A **trust registry** holds authorization details (e.g., valid, revoked). The registry is **controlled** by an entity or consortium recognized within the ecosystem. The trust registry’s internal data model typically reflects that ecosystem’s governance rules.
-
-### Bridging Mechanism
-
-TRQP standardizes cross-ecosystem queries while leaving each ecosystem’s internal details intact. The bridging mechanism is any intermediary or adapter that transforms local queries into TRQP queries and interprets TRQP responses back into the local ecosystem’s format.
-
-![images/protocol-bridging.png](images/protocol-bridging.png)
-
----
-
-## Core Patterns
-
-The TRQP design supports three primary flows (with additional optional flows):
-
-1. **Request Ecosystem Recognition**  
-2. **Query Entity Authorization**  
-3. **Trust Registry Metadata Lookup**  
-
-Implementations **MAY** add more queries based on ecosystem requirements (e.g., retrieving revocation logs, querying intermediate trust anchors), but **MUST** support the three above for TRQP compliance.
-
-> **Important**: TRQP **does not** define how trust registries are discovered; this is left to implementers (DNS, DID-based resolvers, well-known endpoints, etc.). However, the discovery method **MUST** be documented in the relevant implementation profile.
-
----
-
-## Abstract Data Models
-
-This section defines the core data structures each TRQP-capable ecosystem or registry **MUST** understand. Concrete serialization (JSON, JSON-LD, Protobuf, etc.) is handled by the **TRQP Implementation Profile**.
-
-### Metadata (Registry Metadata)
-
-**Purpose**: Describe a trust registry’s capabilities so a querying party understands which authorizations, credential types, or versions are recognized.
-
-**Data Model**:
-
-| Property             | Requirement           | Description                                                                                                                                   |
-|----------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| `id`                 | **MUST**             | Globally unique identifier for the registry (e.g., URL, DID, UUID).                                                                           |
-| `ecosystem`          | **SHOULD**           | The ecosystem or ecosystems served by this registry.                                                                                          |
-| `controller`         | **MUST**             | Identifier of the registry’s controlling entity (organization, DID, etc.).                                                                    |
-| `serviceEndpoint`    | **MUST**             | One or more endpoints (URL, DIDComm, etc.) where TRQP queries can be sent.                                                                    |
-| `supportedAuthTypes` | **MAY**              | A list of recognized authorization types (e.g., “NotaryRole,” “InsuranceLicense,” etc.).                                                      |
-| `supportedFormats`   | **MAY**              | Credential or proof formats supported (e.g., JWT, JSON-LD, X.509).                                                                            |
-| `versionInfo`        | **MAY**              | Version or release notes indicating registry iteration(s).                                                                                    |
-| `integrity`          | **MAY**              | A checksum, signature, or hash to validate metadata authenticity.                                                                             |
-
-> **Note**: Additional fields **MAY** be added by ecosystem-specific profiles.
-
-### Ecosystem Governance Framework (EGF)
-
-**Purpose**: Establish the rules by which a given ecosystem operates, including recognized registries and proof of control.
-
-1. **EGF URI (Canonical Reference)**  
-   - **MUST** define a stable URI referencing the EGF document. This could be an HTTP(S) URL or a DID-based URI.  
-
-2. **Proof of Ecosystem Control**  
-   - **MUST** include cryptographic evidence (e.g., a public key, verifiable credential) proving the publishing entity controls the ecosystem.  
-
-3. **List of Recognized Trust Registries**  
-   - **MUST** include a list of trust registries (with endpoints, integrity checks, and recognized scopes).  
-
-4. **Proof of Registry Relationship**  
-   - **MUST** provide verifiable linkage (signatures, references) to confirm that each listed registry is valid under this EGF.  
-
-5. **Versioning and Lifecycle Management**  
-   - **MUST** define how the EGF is updated and how old or compromised registries are revoked.  
-
-### Authorization
-
-Each authorization record expresses that a subject holds a particular role or credential under an ecosystem’s governance framework.
-
-| Property            | Requirement  | Description                                                                                       |
-|---------------------|--------------|---------------------------------------------------------------------------------------------------|
-| `subject`           | **MUST**     | Identifier of the entity (e.g., DID, unique ID) for whom the authorization is granted.            |
-| `authorizationType` | **MUST**     | The specific role, credential type, or permission (e.g., “DriverLicense,” “NotaryRole”).           |
-| `validFrom`         | **SHOULD**   | ISO 8601 date/time indicating when the authorization becomes valid.                                |
-| `validUntil`        | **SHOULD**   | ISO 8601 date/time indicating when the authorization expires.                                     |
-| `proof`             | **MUST**     | Cryptographic proof (signature, credential) confirming the authorization’s authenticity.          |
-| `status`            | **MUST**     | Enumeration or field reflecting whether the authorization is active, revoked, or unknown.         |
-| `revocationInfo`    | **MAY**      | Data about where or how revocation is tracked (registry URL, timestamp, signature).               |
-
----
-
-## Required Interfaces
-
-TRQP defines three **MUST**-implement abstract APIs. An **Implementation Profile** binds each of these to a specific transport or protocol.
-
-### Metadata Query
-
-- **Purpose**: Retrieve general or specific information about a trust registry’s capabilities.  
-- **Request Parameters**:  
-  1. **registryIdentifier** — The unique ID (URI, DID, etc.) for the registry whose metadata is being requested.
-- **Response**:  
-  - **success**: Returns the metadata object (see [6.1 Metadata (Registry Metadata)](#61-metadata-registry-metadata)).  
-  - **error**: Returns an error object with an explanation (e.g., “registry not found,” “unauthorized request”).
-
-### Authorization Query
-
-- **Purpose**: Check if a subject has a particular authorization or role recognized by the registry.  
-- **Request Parameters**:  
-  1. **subject** — The entity being queried (identifier, DID, etc.).  
-  2. **authorizationType** — The specific authorization or role type to validate.  
-  3. **context** (optional) — Additional context (e.g., the environment or reason for the query).
-- **Response**:  
-  - **status** — One of `authorized | not-authorized | revoked | unknown-subject | error`.  
-  - **validity** — (Optional) Timestamps or other relevant details if authorized.  
-  - **proofReference** — (Optional) If the registry issues a cryptographic proof or reference.
-
-### Ecosystem Recognition Query
-
-- **Purpose**: Determine if one ecosystem (or registry) is recognized by another.  
-- **Request Parameters**:  
-  1. **ecosystemIdentifier** — The ecosystem in question.  
-  2. **governanceFrameworkRef** — A reference to the EGF (URI, DID, etc.).  
-- **Response**:  
-  - **result** — `recognized | not-recognized`  
-  - **reason** — (Optional) Explanation if not recognized (e.g., “missing trust anchor,” “framework mismatch,” “registry not in EGF list”).
-
----
-
-## Error Handling
-
-While specific error codes are transport-dependent, a TRQP interface **MUST** communicate errors clearly. Common error categories include:
-
-- **Invalid Request**: The input data does not match expected fields or schema.  
-- **Unauthorized**: The caller lacks permissions to perform the query.  
-- **Not Found**: The requested registry, subject, or ecosystem is unknown.  
-- **Server Error**: Generic or internal failure during processing.
-
-All TRQP-compliant implementations **MUST** document their error codes, messages, and recommended fallback behaviors in their **Implementation Profile**.
-
----
-
-## Conformance
-
-An implementation **claims TRQP conformance** if:
-
-1. **All Required Interfaces**: It exposes **Metadata Query**, **Authorization Query**, and **Ecosystem Recognition Query** endpoints (or equivalent message handlers).  
-2. **Correct Data Models**: It adheres to the abstract data models (registry metadata, EGF, authorization) as defined in Section 6.  
-3. **Security**: It addresses the security considerations in Section 10 (e.g., uses cryptographic proofs, defends against replay attacks, logs critical events).  
-4. **Profile Documentation**: It publishes or references a **TRQP Implementation Profile** that binds these abstract interfaces to a concrete technology (REST, DIDComm, etc.).
-
-Any optional features (e.g., extended queries, advanced revocation checks) do **NOT** affect baseline conformance but **MAY** add additional interoperability value.
-
----
-
-## Security Considerations
-
-Implementers of TRQP **MUST** address the following threats:
-
-1. **Trust Anchor Hijacking**:  
-   - Use strong cryptography and rotate keys regularly.  
-   - Maintain secure storage of private keys for trust anchors.  
-2. **Trust Registry Bugs**:  
-   - Conduct regular code reviews, automated vulnerability scanning, and thorough QA.  
-3. **Trust Anchor Spoofing**:  
-   - Verify all registry responses against cryptographically verified anchors or certificate chains.  
-4. **Domain Hijacking**:  
-   - Protect DNS entries if using DNS-based discovery (consider DNSSEC).  
-5. **Replay Attacks**:  
-   - Use timestamps, nonces, short-lived tokens in request/response flows.  
-6. **Data Integrity**:  
-   - Sign or hash critical data at rest and use TLS or equivalent in transit.  
-7. **Denial of Service (DoS)**:  
-   - Implement rate-limiting, usage monitoring, and scalable infrastructures.  
-8. **Insufficient Data Validation**:  
-   - Validate all incoming data against strict schemas and return descriptive errors on malformed requests.  
-9. **Trust Anchor Compromise**:  
-   - Deploy multi-tier trust anchors where possible and have robust revocation/re-key procedures.  
-10. **Logging and Auditing**:  
-   - Log all relevant events and monitor them in real-time for anomalies.  
-11. **Protocol Downgrade Attacks**:  
-   - Default to the latest secure versions and disallow fallback to insecure or outdated protocol versions.  
-12. **Privacy Concerns**:  
-   - Encrypt personally identifiable information.  
-   - Comply with relevant privacy regulations (GDPR, HIPAA, etc.) as applicable.  
-13. **Timing Attacks**:  
-   - Use constant-time operations or obfuscation where feasible to avoid leaking sensitive data.
-
----
-
-## Privacy Considerations
-
-Since TRQP queries can reveal which authorizations a subject holds:
-
-- **Data Minimization**: Registries **SHOULD** share only necessary data for confirming the subject’s authorization status, rather than returning extraneous personal information.  
-- **Consent & Transparency**: Where required by law or policy, the subject **SHOULD** be informed (or have consented) that an external ecosystem may query their authorization status.  
-- **Access Control**: Registries **MUST** ensure that only authorized parties can request certain authorization details (especially if such details are sensitive).  
-
----
-
-## TRQP Implementation Profiles
-
-**Definition**: A TRQP Implementation Profile is a separate document or specification that explains how an implementer maps the **abstract** TRQP requirements into a **concrete** protocol/transport (REST, gRPC, DIDComm, etc.).
-
-### Example Profile Outline
-
-1. **Transport Protocol**: e.g., HTTP/1.1 or HTTP/2 for REST, specifying endpoints `/metadata`, `/authorize`, `/recognition`.  
-2. **Message Format**: e.g., JSON bodies with specified field names, or DIDComm V2 message structures.  
-3. **Authentication & Authorization**: e.g., OAuth 2.0 Bearer tokens, mutual TLS, or DIDComm-level authentication.  
-4. **Error Codes**: e.g., standard HTTP error statuses (400, 401, 404, 500) with TRQP-specific `errorType` fields.  
-5. **Cryptographic Requirements**: e.g., JWS for request/response signing, recommended ciphers for TLS connections.
-
-Any ecosystem or vendor can publish a **TRQP Implementation Profile** that interprets this specification for their context. Multiple profiles **MAY** coexist, each addressing different industries or technical stacks.
-
----
-
-## Governance and Lifecycle
-
-Because TRQP deals with trust and authority verification across potentially many organizations, governance is crucial:
-
-1. **Version Upgrades**:  
-   - The TRQP specification itself **MAY** evolve. Minor versions **SHOULD** be backward-compatible; major versions **MAY** introduce breaking changes.  
-   - Ecosystems **MUST** monitor TRQP version updates and adjust their profiles accordingly.
-2. **Deprecation**:  
-   - Older TRQP versions or profiles **MAY** be marked as deprecated.  
-   - Implementers **SHOULD** provide a transition or fallback plan to minimize disruption.
-3. **Community Feedback**:  
-   - Ecosystem stakeholders **SHOULD** contribute feedback to future TRQP iterations via recognized standard bodies or open forums.
-
----
-
-## Normative References
-
-- **[RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)**: Key words for use in RFCs to Indicate Requirement Levels.  
-- **[RFC 3986](https://www.rfc-editor.org/rfc/rfc3986)**: Uniform Resource Identifier (URI): Generic Syntax.  
-- **[RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)**: JSON Web Token (JWT).
-
-Additional references **MAY** be included in an ecosystem’s TRQP Implementation Profile (e.g., regarding cryptographic libraries or W3C Verifiable Credentials).
-
----
-
-## Conclusion
-
-The **Trust Registry Query Protocol (TRQP)** provides a standardized, minimal layer for bridging trust and authorization checks across heterogeneous ecosystems. By implementing the **Required Interfaces** (Metadata Query, Authorization Query, Ecosystem Recognition Query), adhering to the **Abstract Data Models** described herein, and following the **Security and Privacy** guidelines, ecosystems can seamlessly integrate and recognize each other’s authorizations without discarding their existing trust frameworks.
-
-- **MUST** statements are **mandatory** for compliance.  
-- **SHOULD** statements are **recommended** best practices for enhanced interoperability and security.  
-- **MAY** statements indicate **optional** but potentially valuable enhancements or extensions.
-
-When combined with an ecosystem-specific **TRQP Implementation Profile** and robust governance, TRQP is a powerful enabler for multi-ecosystem cooperation in domains ranging from finance to government services and beyond.
-
----
-
-## Document History (Non-Normative)
-
-- **v1.0**: Initial public release of the TRQP Specification.  
-- **v1.1 (Draft)**: Added clarifications on bridging mechanisms, expanded Data Models, introduced Privacy Considerations.
+### **Metadata Query**
+
+* **Request**: There are no required request parameters.
+  * MAY supply an egf_uri to represent a TR metadata request with a response that
+    is focused on a particular ecosystem governance framework
+     [[ref:Ecosystem Governance Framework]] the Trust Registry serves.
+* **Response**:
+  * id: string. MUST share the identifier of the registry. If egf_uri is
+    parameterized, it MUST context the return with respect to the supplied EGF.
+
+### **Authorization Query**
+
+* **Request**:
+  * **ecosystem_id** : string **MUST** be an ecosystem identifier defined in the
+    binding [[ref:TRQP Binding]]
+  * **authorization_type** : string **MUST** be defined in the
+    binding [[ref:TRQP Binding]].
+  * **target_entity** : string
+  * **time**: MAY be specified as required in the binding [[ref:TRQP Binding]].
+    * When time is provided it must conform with ____ (RFC3319 UTC?)
+    * When not provided the responding system must use the current time (i.e.
+      now) and provide the system time in the returned data.
+* **Response**: Authorization status (e.g., authorized, not-authorized, revoked,
+  unknown-subject, error) and optional validity or proof references.
+* **Behavior**: **MUST** respond with a clear indicator of whether the subject
+  has the specified authorization.
+
+### **Ecosystem Recognition Query**
+
+* **Request**:
+  * **ecosystem_id**: string **MUST** be an ecosystem identifier defined in the
+    binding [[ref:TRQP Binding]].
+  * **target_id**: string MAY be an ecosystem identifier
+  * **scope** (optional): string MAY be supplied to filter specific requests.
+    This spec does not make any normative decisions on how scopes are formed,
+    but profiles may.
+  * **time:** MAY be specified as required in the binding [[ref:TRQP Binding]].
+* **Response**: Recognition Status: acceptance or rejection of the ecosystem,
+  plus optional references to proofs or logs.
+* **Behavior**: **MUST** provide a yes/no answer. MAY provide additional reasons
+  depending on the binding [[ref:TRQP Binding]] specification.
+
+## **Security Considerations**
+
+All implementers (“bindings [[ref:TRQP Binding]]” and “bridges
+ [[ref:TRQP Bridge]]”) of TRQP **SHOULD** take the following threats into
+account and implement appropriate controls:
+
+* **Trust Anchor Hijacking**: Use strong cryptography and rotate keys regularly.
+* **Trust Registry Bugs**: Conduct code reviews, vulnerability scans, and robust
+  QA.
+* **Trust Anchor Spoofing**: Verify responses using known cryptographic anchors
+  or certificate chains.
+* **Domain Hijacking**: Protect DNS entries; if DNS-based discovery is used,
+  consider DNSSEC or other verification.
+* **Replay Attacks**: Use timestamps, nonces, and short-lived tokens.
+* **Data Integrity**: Sign or hash data at rest, use TLS or equivalent in
+  transit.
+* **Denial of Service (DoS)**: Rate-limit queries, monitor usage, scale
+  infrastructure appropriately.
+* **Insufficient Data Validation**: Enforce strict schema checks and reject
+  malformed data with clear error messages.
+* **Trust Anchor Compromise**: Implement multi-tier trust anchors, have a plan
+  to revoke or replace compromised keys quickly.
+* **Logging and Auditing**: Log all access, changes, and suspicious activities;
+  adopt real-time monitoring.
+* **Protocol Downgrade Attacks**: Default to the latest secure version, disallow
+  fallback to insecure versions.
+* **Privacy Concerns**: Encrypt sensitive or personally identifiable
+  information, comply with relevant data protection laws.
+* **Timing Attacks**: Where feasible, adopt constant-time operations for
+  cryptographic and authorization checks.
+
+## **Conclusion**
+
+The TRQP enables a consistent, abstract protocol for verifying cross-ecosystem
+authorizations and ecosystem recognition. By adhering to these requirements—
+data models, flows, security measures—implementers provide a standardized bridge
+across diverse trust frameworks.
+
+* **MUST** statements are mandatory for compliance.
+* **SHOULD** statements are recommended best practices for enhanced
+  interoperability and security.
+* **MAY** statements indicate optional features or extensions.
+
+When combined with ecosystem-specific bindings [[ref:TRQP Binding]] and
+governance framework [[ref:Ecosystem Governance Framework]] definitions, the TRQP
+can dramatically streamline multi-ecosystem [[ref:Inter-Ecosystem Trust]]
+integrations, ensuring reliable and secure authorization checks across
+organizational and technological boundaries.

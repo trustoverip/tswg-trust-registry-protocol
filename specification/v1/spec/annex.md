@@ -50,14 +50,14 @@ The TRQP is intended to be used in at least two key ways:
 * Native Support - systems may directly implement access using the TRQP.
 * Bridged - systems may create access "bridges" that provide TRQP access to their systems.
 
-![C4 Systems Model - showing native TRQP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](./images/puml/protocol-bridging.png).
+![C4 Systems Model - showing native TRQP support on one system, bridged support to two other systems (e.g. TRAIN and EU Trusted List ARF)](v1/images/puml/protocol-bridging.png).
 
 
 ### Object Model
 
 We provide a high-level object model (NOTE: source of truth is the Swagger as this diagram may be out of date during development)
 
-![High Level Object Model](./images/puml/highlevel.png)
+![High Level Object Model](v1/images/puml/highlevel.png)
 
 ## Annex D - Guides (for future breakout)
 

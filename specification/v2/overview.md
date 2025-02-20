@@ -31,8 +31,10 @@ By standardizing these queries, TRQP ensures that trust verification can be
 performed uniformly, even if each ecosystem operates with different governance
 logic, cryptographic primitives, and internal policies.
 
+This document provides the overview to the TRQP. For more details, please read the note below:
+
 ::: note
-- Read the **[core specification here](/core)**
+- Read the **[core specification here](/v2/core)**
 - Check the **[bindings here](/bindings)**
 :::
 
@@ -53,12 +55,13 @@ adapters, preserving existing issuance, revocation, or auditing workflows.
  * **Authorization Query**: Confirms or denies that a subject is authorized under a specific ecosystem.
  * **Recognition Query:** Determines whether one ecosystem’s governance framework is recognized by another.
  * **Metadata Query:** Exposes the descriptive information (capabilities, version details, etc.) of a trust registry.
+
 2. **Minimal Interfaces**
  * TRQP specifies a set of abstract interfaces that every compliant trust registry MUST support.
  * Because TRQP is transport-agnostic, these interfaces can be realized via various messaging protocols (e.g., RESTful).
-3. **Bindings & Profiles**
+
+3. **Bindings**
  * Bindings: Provide a concrete mapping of TRQP to a specific transport layer and message format (e.g., RESTful).
- * Profiles: Optionally define additional requirements or rules that a trust network (a consortium of participating ecosystems) may enforce. This is out of scope for the Trust Registry Task Force, but important to consider when engaging in a trust network. 
 
 ## TRQP Trust Networks
 
@@ -71,9 +74,23 @@ A trust network is formed when multiple participants, such as organizations or g
 
 By anchoring on a shared profile, a trust network ensures that all participating ecosystems operate with consistent rules and expectations, thus simplifying cross-ecosystem verification.
 
-## **4\. TRQP Layer Architecture**
+### **TRQP Core: Ecosystem and Trust Registry Interaction Model**
 
-![images/trqp_layers.png](images/trqp_layers.png)
+The **TRQP Core** defines an abstract data model that standardizes how **ecosystems** and **trust registries** interact, ensuring interoperability across diverse governance frameworks.
+
+![Ecosystem Model](core/images/ecosystem_model.png)
+
+In this model:
+
+- A **Trust Registry** acts as an authority that manages and serves **authority statements** for one or more ecosystems.  
+- **Ecosystems** rely on trust registries to verify the authenticity, validity, and governance of participating entities.  
+- **Authority statements** encapsulate verifiable claims about **authorizations, delegations, and ecosystem recognition** forming the foundation of trust across ecosystems.
+
+For a deeper dive into the data models, query mechanisms, and interoperability rules that govern TRQP, refer to the **[Core Specification](/v2/core/)**.
+
+## **TRQP Layer Architecture**
+
+![images/trqp_layers.png](core/images/trqp_layers.png)
 
 TRQP follows a layered architecture to separate concerns and allow for maximum flexibility across ecosystems with differing technical stacks.
 
@@ -87,7 +104,7 @@ Notably, the Core does not mandate any particular identity format (DID, x.509, e
 
 ### TRQP Binding
 
-* Translates the core queries and data models into a specific transport-layer implementation (e.g., REST over HTTPS, DIDComm messaging).
+* Translates the core queries and data models into a specific transport-layer implementation (e.g., RESTful, DIDComm messaging).
 * Defines how requests and responses are structured and encoded (JSON, JSON-LD, JWT).
 * Specifies any additional encryption or authentication steps needed to secure transport at runtime (e.g., TLS, message-level signatures, ephemeral keys).
 
@@ -96,6 +113,9 @@ Notably, the Core does not mandate any particular identity format (DID, x.509, e
 * Serves as an adapter or connector between an ecosystem’s trust registry and its chosen TRQP Binding.
 * Converts external TRQP calls into the internal logic of the trust registry (certificate validation, membership lookups, policy checks, etc.).
 * Returns outputs aligned to the defined Binding, allowing for a consistent interpretation of authorization, recognition, and metadata results.
+
+![images/system_boundaries.png](images/system_boundaries.png)
+
 
 ## TRQP Profiles Are Out of Scope But Important Considerations
 
@@ -117,10 +137,11 @@ TRQP offers a unified, minimal protocol for cross-ecosystem trust verification. 
 
 Trust networks can extend TRQP through profiles, aligning on consistent transport, credential formats, and policy rules to ensure broad interoperability with minimal friction.
 
-Check out the [Core Specification](/v2/core/) and [Bindings](/v2/bindings/).
+**Check out the [Core Specification](/v2/core/) and [Bindings](/v2/bindings/).**
+
 ## Implementation Tips
 
-* **Begin with One Binding:** A simple REST/HTTP endpoint often suffices as a proof of concept.
+* **Begin with One Binding:** A simple RESTful endpoint often suffices as a proof of concept.
 * **Develop or Integrate a TRQP Bridge:** Map queries to existing database or certificate checks, preserving local rules.
 * **Adopt a Common Profile:** Align with a trust network’s defined profile to simplify multi-party interoperability.
 
