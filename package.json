@@ -9,8 +9,9 @@
   },
   "scripts": {
     "edit": "node -e \"require('spec-up')()\"",
-    "render": "node -e \"require('spec-up')({ nowatch: true })\"",
-    "dev": "node -e \"require('spec-up')({ dev: true })\""
+    "prerender": "sh ./move_images.sh",
+    "render": "npm run prerender && node -e \"require('spec-up')({ nowatch: true })\"",
+    "dev": "npm run prerender && node -e \"require('spec-up')({ dev: true })\""
   },
   "keywords": ["spec", "specs", "markdown", "editor", "standards"],
   "author": "Daniel Buchner",
@@ -28,6 +29,7 @@
     "gulp-clean-css": "4.3.0",
     "gulp-concat": "2.6.1",
     "gulp-terser": "1.2.0",
+    "katex": "^0.16.21",
     "markdown-it": "13.0.1",
     "markdown-it-anchor": "5.2.5",
     "markdown-it-attrs": "4.1.4",

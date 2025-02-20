@@ -18,4 +18,5 @@ for DIR in $IMAGES_DIRS; do
     cp -r "$DIR"/* "$DEST_PATH"
 done
 
-echo "All image folders moved successfully!"
+mkdir -p dist/v2/bindings/restful/
+cp specification/v2/bindings/restful/swagger.yaml dist/v2/bindings/restful/swagger.yaml

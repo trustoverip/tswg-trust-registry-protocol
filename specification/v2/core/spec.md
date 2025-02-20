@@ -1,4 +1,4 @@
-# TRQP Specification
+# TRQP Core Specification
 
 ## Scope
 
@@ -84,7 +84,7 @@ A **trust registry** holds authorization details (e.g., valid, revoked). The reg
 
 TRQP standardizes cross-ecosystem queries while leaving each ecosystem’s internal details intact. The bridging mechanism is any intermediary or adapter that transforms local queries into TRQP queries and interprets TRQP responses back into the local ecosystem’s format.
 
-![./images/protocol-bridging.png](./images/protocol-bridging.png)
+![images/protocol-bridging.png](images/protocol-bridging.png)
 
 ---
 
