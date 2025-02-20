@@ -425,49 +425,66 @@ sequenceDiagram
     C->>R: 9.3 Ecosystem Recognition Query<br/>(ecosystemIdentifier, governanceFrameworkRef)
     R-->>C: Recognition Response<br/>(yes/no + reasons for rejection)<br/>MUST indicate acceptance or rejection
 ```
+Below is a rewritten version with additional context and sample values:
+
+---
 
 ### **Metadata Query**
 
-* **Request**: There are no required request parameters.
-  * MAY supply an ecosystem_id to represent a TR metadata request with a response that
-    is focused on a particular ecosystem governance framework
-     [[ref:Ecosystem Governance Framework]] the Trust Registry serves.
-* **Response**:
-  * id: string. MUST share the identifier of the registry. If ecosystem_id is
-    parameterized, it MUST context the return with respect to the supplied ecosystem.
+* **Request**:  
+  There are no mandatory request parameters.  
+  * Optionally, an `ecosystem_id` can be supplied to indicate that the metadata request should be interpreted within the context of a specific ecosystem’s governance framework (see [[ref:Ecosystem Governance Framework]]).
 
+* **Response**:  
+  * `id`: string. This value uniquely identifies the registry. If an `ecosystem_id` is provided, the response should clearly reflect that the returned data is scoped to the specified ecosystem (e.g., "ecosystem A").
+
+---
 ### **Authorization Query**
 
 * **Request**:
-  * **ecosystem_id** : string **MUST** be an ecosystem identifier defined in the
-    binding [[ref:TRQP Binding]]
-  * **authorization_type** : string **MUST** be defined in the
-    binding [[ref:TRQP Binding]].
-  * **target_entity** : string
-  * **time**: MAY be specified as required in the binding [[ref:TRQP Binding]].
-    * When time is provided it must conform with ____ (RFC3319 UTC?)
-    * When not provided the responding system must use the current time (i.e.
-      now) and provide the system time in the returned data.
-* **Response**: Authorization status (e.g., authorized, not-authorized, revoked,
-  unknown-subject, error) and optional validity or proof references.
-* **Behavior**: **MUST** respond with a clear indicator of whether the subject
-  has the specified authorization.
+  * **ecosystem_id**: string. This must be an ecosystem identifier as defined in the TRQP Binding.  
+    - *Example*: `"ecosystem_id": "ecosystem A"`
+  * **authorization_id**: string. This must match one of the defined authorization types in the TRQP Binding.  
+    - *Example*: `"authorization_id": "credential-A-issuer"`
+  * **entity_id**: string. This identifier specifies the entity for which the authorization is being queried.  
+    - *Example*: `"entity_id": "random-id-1234"`
+  * **time**: string (optional). May be provided according to the TRQP Binding guidelines and describes the time at which the Trust Registry should evaluate the authority query.
+    * If supplied, the `time` value must adhere to the required time format (e.g., RFC3319 UTC).
+    * If omitted, the system must use the current time and include that timestamp in its response.
+
+* **Response**:  
+  A status indicating the entity's authorization, such as:
+  - **authorized**
+  - **not-authorized**
+  - **revoked**
+  - **unknown-subject**
+  - **error**  
+  Optionally, the response may include additional details on validity or supporting proof references.
+
+* **Behavior**:  
+  The system **MUST** clearly indicate whether the subject holds the specified authorization.
+
+---
 
 ### **Ecosystem Recognition Query**
 
 * **Request**:
-  * **ecosystem_id**: string **MUST** be an ecosystem identifier defined in the
-    binding [[ref:TRQP Binding]].
-  * **target_id**: string MAY be an ecosystem identifier
-  * **scope** (optional): string MAY be supplied to filter specific requests.
-    This spec does not make any normative decisions on how scopes are formed,
-    but profiles may.
-  * **time:** MAY be specified as required in the binding [[ref:TRQP Binding]].
-* **Response**: Recognition Status: acceptance or rejection of the ecosystem,
-  plus optional references to proofs or logs.
-* **Behavior**: **MUST** provide a yes/no answer. MAY provide additional reasons
-  depending on the binding [[ref:TRQP Binding]] specification.
+  * **ecosystem_id**: string. This is the identifier for the ecosystem, defined in the TRQP Binding.  
+    - *Example*: `"ecosystem_id": "ecosystem A"`
+  * **target_ecosystem_id**: string (optional). This may be another ecosystem identifier against which recognition is being evaluated.
+  * **scope**: string (optional). This parameter may be used to filter or narrow the request. The specification does not enforce a specific structure for scopes, but individual profiles may define their own conventions.
+  * **time**: string (optional). May be provided as described in the TRQP Binding guidelines.
 
+* **Response**:  
+  The response indicates the recognition status of the ecosystem, for example:
+  - **accepted** (if the ecosystem is recognized)
+  - **rejected** (if it is not)  
+  Additional supporting details, such as proof references or log entries, may also be included.
+
+* **Behavior**:  
+  The system **MUST** return a clear yes/no answer regarding ecosystem recognition, and it **MAY** provide further explanation or details as specified in the TRQP Binding.
+
+---
 ## **Security Considerations**
 
 All implementers (“bindings [[ref:TRQP Binding]]” and “bridges
