@@ -9,12 +9,12 @@
   },
   "scripts": {
     "edit": "node -e \"require('spec-up')()\"",
-    "prerender": "sh ./move_images.sh",
+    "prerender": "bash ./move_images.sh",
     "render": "npm run prerender && node -e \"require('spec-up')({ nowatch: true })\"",
     "dev": "npm run prerender && node -e \"require('spec-up')({ dev: true })\""
   },
   "keywords": ["spec", "specs", "markdown", "editor", "standards"],
-  "author": "Daniel Buchner",
+  "author": "Andor Kesselman",
   "license": "apache-2.0",
   "bugs": {
     "url": "https://github.com/decentralized-identity/spec-up/issues"
