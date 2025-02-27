@@ -3,7 +3,7 @@
         {
             "title": "ToIP Trust Query Registry Protocol Overview",
             "spec_directory": "./specification/v2",
-            "output_path": "./dist/",
+            "output_path": "./dist/v1",
             "markdown_paths": ["overview.md"],
             "katex": false,
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
@@ -109,6 +109,28 @@
             "source": {
                 "host": "github",
                 "account": "trustoverip",
+                "repo": "tswg-trust-registry-protocol"
+            },
+            "external_specs": [
+                { "TOIP": "https://trustoverip.github.io/ctwg-main-glossary/" }
+            ]
+        },
+        {
+            "title": "ToIP Trust Query Registry Protocol Overview",
+            "spec_directory": "./specification/v3",
+            "output_path": "./dist",
+            "markdown_paths": [
+                "overview.md",
+                "core/spec.md",
+                "bindings/restful/spec.md",
+                "conclusion.md"
+            ],
+            "katex": false,
+            "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
+            "logo_link": "https://github.com/trustoverip/specification-template",
+            "source": {
+                "host": "github",
+                "trustoverip": "account",
                 "repo": "tswg-trust-registry-protocol"
             },
             "external_specs": [

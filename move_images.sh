@@ -19,4 +19,10 @@ for DIR in $IMAGES_DIRS; do
 done
 
 mkdir -p dist/v2/bindings/restful/
+mkdir -p dist/v3/bindings/restful/
+mkdir -p dist/images
+
 cp specification/v2/bindings/restful/swagger.yaml dist/v2/bindings/restful/swagger.yaml
+cp specification/v3/bindings/restful/swagger.yaml dist/v3/bindings/restful/swagger.yaml
+cp specification/v3/bindings/restful/swagger.yaml dist/swagger.yaml
+cp -r specification/v3/images dist/
