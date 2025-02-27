@@ -9,6 +9,11 @@
 ~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
 ~ [File a bug](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
 
+
+::: note
+This specification is currently a DRAFT.
+:::
+
 ## Overview
 
 Many digital ecosystems use intra-ecosystem trust frameworks—for example, OpenID
