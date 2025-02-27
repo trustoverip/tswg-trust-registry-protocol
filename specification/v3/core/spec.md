@@ -119,8 +119,8 @@ dictates how systems should interact and exchange trust information to remain
 compliant with TRQP standards.
 
  [[def:TRQP Bridge, TRQP Bridges]]
-~ A software or infrastructure component that connects a System of Record
- [[ref:System of Record]] to a specified TRQP Binding [[ref:TRQP Binding]],
+~ A software or infrastructure component that connects a 
+ [[ref:System of Record]] to a specified [[ref:TRQP Binding]],
 enabling seamless data exchange and interoperability. It serves as the interface
 through which trust and authority data move between the system and the
 TRQP-compliant environment.
@@ -229,8 +229,8 @@ detail on anything lower in the stack.
 Fig 3: TRQP Architecture has three layers: Core, Bindings, and Bridges. Profiles
 can be built on top to enable networks.
 
-Details of *Bridges [[ref:TRQP Bridge]]*, *Systems of Record [[ref:System of Record]]*,
-and *Bindings [[ref:TRQP Binding]]* are out of scope for this specification, but
+Details of *[[ref:TRQP Bridge]]*, *[[ref:System of Record]]*,
+and *[[ref:TRQP Binding]]* are out of scope for this specification, but
 defined in concept for other specifications to describe in detail.
 
 We will briefly go through each of the layers at a high level, and expand on the
@@ -240,7 +240,7 @@ section.
 ### **TRQP Core**
 _this section is non-normative_
 
-* **What it is**: The TRQP Core [[ref:TRQP Core]] is an **abstract** specification
+* **What it is**: The [[ref:TRQP Core]] is an **abstract** specification
   that defines:
   * **Data Models**: Metadata, authorization, ecosystem recognition, etc.
   * **Required Queries**: MetadataQuery, AuthorizationQuery, and
@@ -254,7 +254,7 @@ _this section is non-normative_
 * **What they are**: Concrete mappings of the Core specification onto specific
   transports and protocols. For example:
   * **HTTPS Binding**: Illustrates how to send TRQP queries over HTTPS.
-* **Role**: A TRQP Binding [[ref:TRQP Binding]] ensures that an abstract query
+* **Role**: A [[ref:TRQP Binding]] ensures that an abstract query
   from the Core spec is transformed into real network requests and responses in
   a standardized way.
 
@@ -262,7 +262,7 @@ _this section is non-normative_
 _this section is non-normative_
 
 * **What they are**: Adapters or connectors that apply a chosen
-  Binding [[ref:TRQP Binding]] to a specific trust framework (x.509, OIDF, DIF
+  [[ref:TRQP Binding]] to a specific trust framework (x.509, OIDF, DIF
   CTE, etc.).
 * **Examples**:
   * **x.509 Bridge**: Translates TRQP queries into x.509 certificate validations
@@ -271,8 +271,8 @@ _this section is non-normative_
     about OIDC-based trust relationships.
   * **CTE Bridge**: Adapts TRQP queries to DIF’s Credential Trust Establishment
     protocols.
-* **Role**: A TRQP Bridge [[ref:TRQP Bridge]] “bridges” existing frameworks into
-  TRQP by implementing the relevant Binding [[ref:TRQP Binding]] and mapping
+* **Role**: A [[ref:TRQP Bridge]] “bridges” existing frameworks into
+  TRQP by implementing the relevant [[ref:TRQP Binding]] and mapping
   framework-specific data.
 
 ### **Systems of Record**
