@@ -229,8 +229,8 @@ detail on anything lower in the stack.
 Fig 3: TRQP Architecture has three layers: Core, Bindings, and Bridges. Profiles
 can be built on top to enable networks.
 
-Details of *Bridges [[ref:TRQP Bridge]]*, *Systems of Record [[ref:System of Record]]*,
-and *Bindings [[ref:TRQP Binding]]* are out of scope for this specification, but
+Details of *[[ref:TRQP Bridge]]*, *[[ref:System of Record]]*,
+and *[[ref:TRQP Binding]]* are out of scope for this specification, but
 defined in concept for other specifications to describe in detail.
 
 We will briefly go through each of the layers at a high level, and expand on the
@@ -240,7 +240,7 @@ section.
 ### **TRQP Core**
 _this section is non-normative_
 
-* **What it is**: The TRQP Core [[ref:TRQP Core]] is an **abstract** specification
+* **What it is**: The [[ref:TRQP Core]] is an **abstract** specification
   that defines:
   * **Data Models**: Metadata, authorization, ecosystem recognition, etc.
   * **Required Queries**: MetadataQuery, AuthorizationQuery, and
