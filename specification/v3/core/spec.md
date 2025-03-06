@@ -133,24 +133,48 @@ statuses for participants within an ecosystem. It is responsible for preserving
 the integrity and continuity of records, including authorizations and trust
 credentials.
 
-## **Scope**
+### **Scope of This Specification**  
 _this section is non-normative_
 
-This specification is primarily focused on defining the
-**[[ref:TRQP Core]]** framework. While we recognize the importance of
-**[[ref:TRQP Binding]]** and **[[ref:TRQP Bridge]]** in enabling
-interoperability, their specific implementations are left to the discretion of
-ecosystems and implementers. **[[ref:TRQP Binding]]** extend the core
-abstractions to concrete implementations, while **[[ref:TRQP Bridge]]**
-connect ecosystems to their **[[ref:System of Record]]**.
-However, this specification does not prescribe how they should be designed or
-deployed, allowing flexibility for diverse use cases and ecosystem needs.
+This specification primarily defines the **TRQP Core**, which establishes the
+normative **data models** and **query semantics** required for cross-ecosystem
+trust verification. While TRQP is designed to be transport-agnostic, this
+document also specifies an **initial RESTful TRQP Binding**, providing a
+concrete mapping of TRQP queries to a widely adopted web API standard.
+
+A **TRQP Binding** extends the core abstractions by specifying how TRQP queries
+should be transmitted over a given protocol. In the case of the RESTful binding:
+- **Queries** (such as Authority Queries, Recognition Queries, and Metadata
+  Queries) are mapped to HTTP endpoints.
+- **Requests and responses** follow structured JSON representations, ensuring
+  machine-readable and interoperable exchanges.
+- **Security and authentication mechanisms** are left to ecosystem-specific
+  implementations but must align with the core TRQP security model.
+
+The role of **TRQP Bridges**, which connect an implementation to a specific
+**System of Record**, is recognized but left **out of scope** for this
+specification. Implementers are free to define how their internal trust
+registries, governance frameworks, or ledger-based systems integrate with
+TRQP-compliant endpoints.
+
+### **Out of Scope**
+
+- **Routing and Discovery**: While TRQP specifies structured queries, it does not define how verifiers discover registries or how requests should be routed to the appropriate authority. Ecosystems may implement their own directory services or resolution mechanisms.  
+- **Protocol-Specific Variants**: While this document defines a RESTful binding, additional bindings (e.g., DIDComm, gRPC) may be created separately and are not covered here.  
+- **Governance and Policy Decisions**: TRQP does not mandate specific governance policies but provides a mechanism for ecosystems to expose their existing policies in a structured and queryable manner.  
+
+This approach ensures that TRQP remains **flexible and extensible**, allowing
+different ecosystems to adopt it in a way that aligns with their existing trust
+models while still ensuring cross-framework interoperability.
 
 ![images/trqp_layers.png](images/trqp_layers.png)
-
 Fig 1: This specification is focused specifically on addressing the core
 requirements for a binding specification to be TRQP compliant. It is up to
 ecosystems to build their own bindings.
+
+::: note
+For more background information, please see the [wiki](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/22996548/ToIP+Trust+Registry+Query+Protocol+TRQP+Specification+Overview). The wiki describes the ecosystems of ecosystems model and the core considerations for the TRQP.
+:::
 
 ## **Problem Statement**
 _this section is non-normative_
@@ -226,10 +250,9 @@ as long as they follow the core specification and a compatible binding. The spec
 focuses on the abstract specification layer *(i.e Core)* and will not go into
 detail on anything lower in the stack.
 
-![images/system_boundaries.png](images/system_boundaries.png)
+![images/trqp_overview.png](images/trqp_overview.png)
 
-Fig 3: TRQP Architecture has three layers: Core, Bindings, and Bridges. Profiles
-can be built on top to enable networks.
+Fig 3: TRQP Architecture has three layers: Core, Bindings, and Bridges.
 
 Details of *[[ref:TRQP Bridge]]*, *[[ref:System of Record]]*,
 and *[[ref:TRQP Binding]]* are out of scope for this specification, but
@@ -250,12 +273,12 @@ _this section is non-normative_
 * **Role**: It ensures every TRQP-based implementation speaks the same
   “language” (even if actual messages go over different transports).
 
-### **TRQP Bindings**
+### **TRQP Binding**
 _this section is non-normative_
 
-* **What they are**: Concrete mappings of the Core specification onto specific
+* **What is it**: Concrete mappings of the Core specification onto specific
   transports and protocols. For example:
-  * **HTTPS Binding**: Illustrates how to send TRQP queries over HTTPS.
+  * **RESTful Binding**: Illustrates how to send TRQP queries over HTTPS.
 * **Role**: A [[ref:TRQP Binding]] ensures that an abstract query
   from the Core spec is transformed into real network requests and responses in
   a standardized way.
@@ -289,21 +312,6 @@ _this section is non-normative_
 * **Role**: The ultimate source of truth for whether an entity is recognized,
   authorized, or otherwise valid within a particular ecosystem. (i.e.
   **[[ref:System of Record]]**)
-
-### **TRQP Profiles**
-_this section is non-normative_
-
-* **Definition:** TRQP Profiles specify the implementation details necessary for
-  aligning a trust network with TRQP standards.
-* **Examples:**
-  * **Identifier Design:** How entities are uniquely identified within the
-    system.
-  * **Resolution Paths:** The process for resolving trust queries within a given
-    framework.
-* **Role:** Profiles guide the adaptation of TRQP to different ecosystems,
-  ensuring that queries, identifiers, and resolution mechanisms conform to
-  standardized practices.
-
 
 ## **Interpretation of the Diagram: Ecosystem and Trust Registry Relationship**
 _this section is non-normative_
@@ -359,6 +367,11 @@ _this section is non-normative_
   defined by the EGF Document of each ecosystem it serves.
 
 ## Metadata Models
+_this section is normative_
+
+The following section outlines the metadata model requirements necessary for any bridge implementing TRQP.  
+
+While the previous section introduced key metadata model concepts, the details provided here define their implementation. A crucial aspect of this model is the **1:many relationship** between an **ecosystem and its trust registries**—where an ecosystem may reference multiple trust registries, and a trust registry may serve multiple ecosystems.
 
 ### **Trust Registry**
 _this section is normative_
@@ -385,7 +398,7 @@ _this section is normative_
       * **endpoint**: The address (URL, DID, etc.) for TRQP
         queries [[ref:Authority Query]] /  [[ref:Recognition Query]].
     * Each registry **MAY** also be scoped to a particular set of authorization
-      states and is defined in the Binding [[ref:TRQP Binding]].
+      states and is defined in the [[ref:TRQP Binding]].
   * **controller: SHOULD** include a method of validating controllers of an
     ecosystem.
 
@@ -408,10 +421,6 @@ _this section is normative_
   TRQP Core [[ref:TRQP Core]] requirements.
 * A compliant binding [[ref:TRQP Binding]] **MUST** support versioning using
   [Semantic Versioning 2.0](https://semver.org/)
-
-### **TRQP Profiles**
-
-* All TRQP profiles **MUST** specify a compliant binding [[ref:TRQP Binding]].
 
 ## **Required Interfaces**
 _this section is normative_
