@@ -1,33 +1,35 @@
-## **Introduction**
+## **Introduction**  
 _this section is non-normative_
 
-Modern digital ecosystems [[ref:Digital Trust Ecosystem]] rely on diverse a
-**[[ref:Intra-Ecosystem Trust Framework]]s** (e.g., OpenID
-Federation, X.509 Chains, EBSI Trust Chains, TRAIN). These frameworks are often
-effective at verifying whether a subject in one ecosystem has a particular
-authorization—but only within that ecosystem. When verifiers need to validate
-authorizations **across** different ecosystems, they face interoperability
-challenges due to incompatible data models, inconsistent APIs, and varying
-governance rules.
+Modern digital trust ecosystems employ a broad spectrum of **intra-ecosystem** frameworks—such as OpenID Federation, X.509 certificate chains, and EBSI Trust Chains—to manage authorized actors *within* a single governance domain. When it comes to verifying trust **across** different domains, however, no common vocabulary or interface exists. Verifiers seeking to confirm cross-ecosystem authorizations must contend with incompatible data models, inconsistent APIs, and divergent policies. 
 
-The **Trust Registry Query Protocol (TRQP)**
-addresses this gap by providing a standardized way to query and verify
-authorizations and recognitions across ecosystems. It does not replace existing
-intra-ecosystem solutions [[ref:Intra-Ecosystem Trust Framework]]; rather, it acts as a
-**bridge** between them—a so-called “inter-trust framework [[ref:Inter-Ecosystem Trust Framework]].”
-In practical terms, TRQP allows a verifier to answer questions such as:
+The **Trust Registry Query Protocol (TRQP)** closes this interoperability gap by
+specifying an **abstract** set of queries and data models that different trust
+frameworks can implement. It introduces a standardized “bridge” for verifying
+whether an entity or ecosystem is recognized or authorized beyond its original
+domain—without mandating that any party revamp its existing internal governance
+structure or security model.
 
-- “Does **Entity X** have **Authorization Y** under **Ecosystem Z’s** governance
-  framework [[ref:Ecosystem Governance Framework]]?” and
-- “Is **Entity X** **Recognized** under **Ecosystem Y’s** governance framework
-   [[ref:Ecosystem Governance Framework]] for **Z**?”
+### **Who Is This Specification For?**
+- **Trust Framework Providers**: Ecosystem operators that manage internal authorization processes (e.g., OpenID, X.509 CAs) but need a consistent way to publish and validate those authorizations to external verifiers. 
+- **Verifiers**: Entities that consume cross-ecosystem authorization details—such as relying parties, certification bodies, or auditors—who need a uniform mechanism to inquire about another party’s trust status outside their own ecosystem. 
+- **Developers of Interoperability Solutions**: Teams building connectors, gateways, or “bridges” that unify distinct trust frameworks under a single protocol. 
+- **Governance Bodies**: Policy-makers and standard-setters who want to ensure that ecosystems can interoperate without forgoing unique governance policies.
 
-This specification describes the abstract rules, data models, and query flows
-necessary to implement TRQP, leaving concrete details—such as transport
-protocols, message formats, and discovery mechanisms to an ecosystem-specific or
-domain-specific [[ref:TRQP Binding]]. By adhering to TRQP, implementers
-ensure a consistent, secure, and interoperable means of authorization
-verification **across** multiple trust frameworks.
+### **What the Specification Does (and Does Not) Do**  
+- **Does**:
+  - **Define** a minimum set of **abstract queries** (Metadata, Authorization,
+    Recognition) that any TRQP-compliant trust registry **MUST** implement.
+  - **Describe** the data models necessary to exchange trust information
+    ([[ref:Authority Statement]], [[ref:System of Record]], etc.).
+  - **Enable** cross-ecosystem interoperability by outlining consistent rules
+    for how verifiers can inquire about and interpret trust data coming from
+    diverse frameworks.
+
+- **Does Not**:
+  - **Prescribe** a single transport protocol, messaging format, or cryptographic mechanism. These details are left to a [ref: TRQP Binding], which maps the abstract queries to actual implementations (e.g., REST, DIDComm, etc.).  
+  - **Replace or Modify** existing trust frameworks. Instead, TRQP serves as a bridging layer that ecosystems adopt on their own terms.  
+  - **Mandate** how governance bodies structure their internal policies or define their recognition relationships. TRQP simply provides a way to *expose* those details in a standardized fashion.
 
 ## **Terms and Definitions**
 _this section is non-normative_
