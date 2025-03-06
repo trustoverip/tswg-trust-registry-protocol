@@ -1,4 +1,5 @@
 ## Security Considerations
+_this section is non-normative_
 
 All implementers (“bindings [[ref:TRQP Binding]]” and “bridges [[ref:TRQP Bridge]]”) of TRQP **SHOULD** take the following threats into account and implement appropriate controls:
 
@@ -17,6 +18,7 @@ All implementers (“bindings [[ref:TRQP Binding]]” and “bridges [[ref:TRQP 
 - **Timing Attacks**: Where feasible, adopt constant-time operations for cryptographic and authorization checks.
 
 ## Privacy Considerations
+_this section is non-normative_
 
 Implementers must design the system so that the handling of authorizations and identity information minimizes the risk of exposing sensitive details. In addition to data minimization and regulatory compliance, pay special attention to the following:
 
@@ -28,6 +30,7 @@ Implementers must design the system so that the handling of authorizations and i
   - Consider implementing techniques such as query obfuscation, randomized response timings, or other privacy-preserving measures to reduce the risk of linking requests back to a particular requester.
 
 ## Implementation Considerations
+_this section is non-normative_
 
 Implementing the TRQP for the Ayra Trust Network requires a dual focus: establishing secure bridging mechanisms between heterogeneous trust frameworks and ensuring that trust registries accurately represent the ecosystem model. Key aspects include:
 
@@ -45,6 +48,7 @@ Implementing the TRQP for the Ayra Trust Network requires a dual focus: establis
     - Document how the registry bubbles up the state of authorizations, including how updates and revocations are handled to maintain an accurate and timely reflection of the ecosystem’s trust landscape.
 
 ## **Conclusion**
+_this section is non-normative_
 
 The TRQP enables a consistent, abstract protocol for verifying cross-ecosystem
 authorizations and ecosystem recognition. By adhering to these requirements—
