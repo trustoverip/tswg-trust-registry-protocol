@@ -4,11 +4,12 @@
 - **Specification Status:** Draft
 - **Version:** 1.2 
 - **Status:** Draft v1.2 
+- **Editors:** Andor Kesselman, Antti Kettunen, Darrell O’Donnell, Drummond Reed  
+- **Contributors:** Alex Teweedale, Christine Martin, Dave Poltorak, Eric Drury, Fabrice Rochette, Jacques Latour, Jesse Carter, Jon Bauer, Markus Sabadello, Scott Perry, Subhasis, Tim Bouma
 
 **Participate:**
 ~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
 ~ [File a bug](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
-
 
 ::: note
 This specification is currently a DRAFT.
