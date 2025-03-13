@@ -1,208 +1,105 @@
-## Introduction
-_This section is non-normative_
-
-Modern digital ecosystems [[ref:Digital Trust Ecosystem]] rely on diverse **[[ref:Intra-Ecosystem Trust Framework]]s** (e.g., OpenID
-Federation, X.509 Chains, EBSI Trust Chains, TRAIN). While these frameworks effectively verify authorizations **within** their respective ecosystems, they struggle with cross-ecosystem verification. When verifiers need to validate authorizations **across** different ecosystems, they face interoperability challenges due to incompatible data models, inconsistent APIs, and varying governance rules.
-
-The **Trust Registry Query Protocol (TRQP)** bridges this gap by providing a standardized way to query and verify authorizations and recognitions across ecosystems. It does not replace existing intra-ecosystem solutions [[ref:Intra-Ecosystem Trust Framework]]; rather, it acts as a **bridge** between them—a so-called "inter-trust framework" [[ref:Inter-Ecosystem Trust Framework]]. 
-
-In practical terms, TRQP allows a verifier to answer questions such as:
-
-- "Does **Entity X** have **Authorization Y** under **Ecosystem Z's** governance framework [[ref:Ecosystem Governance Framework]]?"
-- "Is **Entity X** **Recognized** under **Ecosystem Y's** governance framework [[ref:Ecosystem Governance Framework]] for **Z**?"
-
-This specification describes the abstract rules, data models, and query flows necessary to implement TRQP. It intentionally leaves concrete details—such as transport protocols, message formats, and discovery mechanisms—to ecosystem-specific or domain-specific [[ref:TRQP Binding]]s. By adhering to this specification, implementers ensure a consistent, secure, and interoperable means of authorization verification **across** multiple trust frameworks.
-
 ## Terms and Definitions
-_This section is non-normative_
+_This section is informative._
 
- [[def:Authority Query, Authority Queries]]
-~ A request that seeks to verify whether a specific entity (subject) holds a particular authorization, credential, or right within an ecosystem.
+ [[def:authorization relationship, authorization relationships]]
+~ An authority statement asserting the authorization an authority grants to another party over which it has authority.
 
- [[def:Authority State, Authority States]]
-~ A recorded status indicating whether an entity currently possesses a valid authorization within an ecosystem. It reflects the definitive condition of the entity's rights or credentials at a given point in time.
+ [[def:authorization query, authorization queries]]
+~ A request for an authority statement asserting an authorization relationship or a delegation relationship.
 
- [[def:Authority Statement, Authority Statements]]
-~ An assertion by an **authority** about either: a) the **authorization** or **delegation** it grants to another party over which it has authority, or b) the **recognition** it gives to a peer about the scope of that peer's authority.
+ [[def:authority state, authority states]]
+~ The set of authority statements that describe a particular entity at a particular point in time.
 
- [[def:Digital Trust Ecosystem, Digital Trust Ecosystems]]
+ [[def:authority statement, authority statements]]
+~ An assertion by an authority about either: a) the authorization or delegation it grants to another party over which it has authority, or b) the recognition it gives to a peer about the scope of that peer's authority.
+
+ [[def:delegation relationship, delegation relationships]]
+~ An authority statement asserting the rights an authority delegates to another party over which it has authority.
+
+ [[def:digital trust ecosystem, digital trust ecosystems]]
 ~ A [digital ecosystem](https://glossary.trustoverip.org/#term:digital-ecosystem) in which participants are one or more interoperating [trust communities](https://glossary.trustoverip.org/#term:trust-communities). Governance of various [roles](https://glossary.trustoverip.org/#term:roles) within this ecosystem is typically managed by a [governing body](https://glossary.trustoverip.org/#term:governing-body) using a [governance framework](https://glossary.trustoverip.org/#term:governance-framework). Many digital trust ecosystems maintain one or more [trust registries](https://glossary.trustoverip.org/#term:trust-registries).
 
- [[def:Ecosystem Governance Framework, Ecosystem Governance Frameworks]]
+ [[def:ecosystem]]
+~ See [[ref:digital trust ecosystem]].
+
+ [[def:ecosystem governance framework, ecosystem governance frameworks]]
 ~ A [governance framework](https://glossary.trustoverip.org/#term:governance-framework) for a [digital trust ecosystem](https://glossary.trustoverip.org/#term:digital-trust-ecosystem). This may incorporate other types of frameworks such as [credential governance frameworks](https://glossary.trustoverip.org/#term:credential-governance-framework).
 
- [[def:Inter-Ecosystem Trust, Inter-Ecosystem Trusts]]
-~ The confidence and assurance established between two or more distinct ecosystems or governance frameworks. This enables cross-recognition of rules, trust registries, and authorization states.
+ [[def:inter-ecosystem]]
+~ An adjective describing relationships and data exchanges between participants in two or more separate ecosystems operating under separate governance frameworks.
 
- [[def:Intra-Ecosystem Trust Framework, Intra-Ecosystem Trust Frameworks]]
-~ The confidence and assurance maintained within a single ecosystem or governance framework. It applies to entities operating under the same set of rules and oversight mechanisms.
+ [[def:intra-ecosystem]]
+~ An adjective describing relationships and data exchanges between participants operating within the same ecosystem and the same governance frameworks.
 
- [[def:Hierarchical Authority Relationship, Hierarchical Authority Relationships]]
+ [[def:hierarchical authority relationship, hierarchical authority relationships]]
 ~ A unilateral and exclusive relationship between an authority and another party subject to that authority. The authority is the only one who can grant or revoke authorization from the authorized party.
 
- [[def:Recognition Relationship, Recognition Relationships]]
-~ A heterarchical authority relationship between two peer authorities, each authoritative for their own ecosystems. This relationship can be unilateral or bilateral and is non-exclusive. One authority attests to the other's authority in one or both directions.
+ [[def:metadata query, metadata queries]]
+~ A request for an authority statement describing an entity.
 
- [[def:Recognition Query, Recognition Queries]]
-~ A request that enables a verifier to check the Recognition Relationship [[ref:Recognition Relationship]] of an ecosystem in relation to another ecosystem.
+ [[def:recognition relationship, recognition relationships]]
+~ A heterarchical authority relationship between two peer authorities, each authoritative for their own ecosystem. This relationship can be unilateral or bilateral and is non-exclusive. One authority attests to the other's authority in one or both directions.
+
+ [[def:recognition query, recognition queries]]
+~ A request for an authority statement asserting an recognition relationship.
+
+ [[def:TRQP binding, TRQP bindings]]
+~ A technical specification defining how to implement the TRQP Core protocol over a specific transport protocol.
+
+ [[def:TRQP bridge, TRQP bridges]]
+~ A system that connects a [[ref:TRQP endpoint]] to a [[ref:system of record]]. The bridge transforms a TRQP query into the query format supported by the system of record. It also performs the reverse mapping for the response.
 
  [[def:TRQP Core]]
-~ The foundational specification that defines core data models, queries, and security requirements necessary for consistent, interoperable trust interactions across different systems and ecosystems.
+~ The foundational specification that defines core data models, queries, and security requirements for the Trust Registry Query Protocol.
 
- [[def:TRQP Binding, TRQP Bindings]]
-~ A technical specification document that outlines the precise requirements for implementing interoperability via the base TRQP interfaces and data models. It dictates how systems should interact and exchange trust information.
+ [[def:TRQP consumer]]
+~ A network device (client or server) that send TRQP queries to a TRQP endpoint.
 
- [[def:TRQP Bridge, TRQP Bridges]]
-~ A software or infrastructure component that connects a [[ref:System of Record]] to a specified [[ref:TRQP Binding]], enabling seamless data exchange and interoperability.
+ [[def:TRQP endpoint]]
+~ The network service endpoint for trust registry that speaks TRQP.
 
- [[def:System of Record, Systems of Record]]
-~ An authoritative source that manages and maintains authority and recognition statuses for participants within an ecosystem. It preserves the integrity and continuity of records.
+ [[def:system of record, systems of record]]
+~ An authoritative source for the authority statements governing the participants in a digital trust ecosystem.
 
 ## Scope
-_This section is non-normative_
+_This section is informative._
 
-This specification focuses primarily on defining the **[[ref:TRQP Core]]** framework. While **[[ref:TRQP Binding]]s** and **[[ref:TRQP Bridge]]s** are essential for interoperability, their specific implementations are left to ecosystem implementers. 
+Figure 1 illustrates the four primary components involved with TRQP architecture.
 
-**[[ref:TRQP Binding]]s** extend the core abstractions to concrete implementations, while **[[ref:TRQP Bridge]]s** connect ecosystems to their **[[ref:System of Record]]s**. This specification does not prescribe how they should be designed or deployed, allowing flexibility for diverse ecosystem needs.
+![TRQP primary components](images/trqp_components.png)
 
-![TRQP Layers](images/trqp_layers.png)
+**Figure 1:** The primary components involved in TRQP architecture.
 
-**Figure 1:** This specification addresses the core requirements for a binding specification to be TRQP compliant. Ecosystems must build their own bindings.
+The scope of this specification is limited to the TRQP protocol operating between TRQP consumers and TRQP endpoints representing addressable TRQP trust registries. The following are out-of-scope:
 
-## Problem Statement
-_This section is non-normative_
+* **Systems of record**. This specification casts no requirements on how the system of record is designed or deployed. Also, because TRQP is read-only, this specification does not address create, update, or delete operations for the system of record.
+* **TRQP bridges**. If the system of record is not a native TRQP trust registry, a TRQP bridge is needed to transform a TRQP query into the query format supported by the system of record. Seperate specifications may be published for popular TRQP bridges, however they are out-of-scope for this specification.
 
-Modern digital ecosystems rely on **[[ref:Intra-Ecosystem Trust Framework]]s** to manage authorization within their own boundaries. While effective within a single ecosystem, these frameworks don't easily extend to others. Organizations face significant challenges when verifying authorizations across different frameworks, including:
-
-* **Siloed Trust Frameworks**: Each ecosystem typically operates in isolation without standardized methods for cross-ecosystem authorization verification
-* **Inconsistent Interfaces**: Diverse APIs, credential formats, and governance rules force implementers to work with multiple disparate interfaces
-
-When attempting to establish **[[ref:Inter-Ecosystem Trust Framework]]s**, verifiers face two fundamental questions:
-
-1. **Ecosystem Recognition**:
-
-   *"Do I recognize the governance framework [[ref:Ecosystem Governance Framework]] of the other ecosystem?"*
-
-   This question is inherently complex and depends on human policy decisions, making it difficult to automate.
-
-2. **Entity Authorization**:
-
-   *"Is the issuer authorized to issue this type of data under the ecosystem's governance framework [[ref:Ecosystem Governance Framework]]?"*
-
-   This question takes the form of an **[[ref:Authority Query]]**, a formal request to confirm whether an entity holds a specific authorization within the ecosystem.
-
-![Authority Questions](images/authority_questions.png)
-
-**Figure 2:** The two fundamental queries required for cross-ecosystem authority verification.
-
-TRQP addresses the [[ref:Inter-Ecosystem Trust Framework]] problem by enabling verifiers outside an ecosystem to submit **[[ref:Authority Query]]** and **[[ref:Recognition Query]]** requests to any TRQP-compliant network. The specification works independently of any particular [[ref:System of Record]] or intra-trust framework, ensuring trust can be established across different ecosystems without requiring changes to existing authority systems.
 
 ## High-Level Architecture
-_This section is non-normative_
+_This section is informative._
 
-The **TRQP** architecture enables standardized cross-ecosystem queries for trust registry information, authorization, and recognition. At its core, TRQP comprises:
+The following diagram illustrates the relationships between four core concepts in TRQP architecture: ecosystems, authorities, governance frameworks, and trust registries.
 
-1. An **abstract specification** (the *Core*) defining data models, query flows, and security considerations (**[[ref:TRQP Core]]**)
-2. One or more **concrete bindings** (**[[ref:TRQP Binding]]s**) that map the abstract specification to specific transport protocols (e.g., HTTPS, DIDComm, TSP)
-3. **[[ref:TRQP Bridge]]s** that connect TRQP queries to particular trust frameworks (OIDF Federation, X.509, etc.)
-4. **[[ref:System of Record]]s**—the actual trust frameworks or registries responsible for issuing or validating trust information
-
-This layered approach allows implementers to select or build only what they need. If a trust framework hasn't implemented TRQP, integrators can connect a new **[[ref:TRQP Bridge]]** to a **[[ref:TRQP Binding]]** for it, provided they follow the core specification and a compatible binding. This specification focuses on the abstract core layer and does not detail lower layers in the stack.
-
-![System Boundaries](images/system_boundaries.png)
-
-**Figure 3:** TRQP Architecture has three layers: Core, Bindings, and Bridges. Profiles can be built on top to enable networks.
-
-Details of *[[ref:TRQP Bridge]]s*, *[[ref:System of Record]]s*, and *[[ref:TRQP Binding]]s* are out of scope for this specification but defined conceptually for other specifications to describe in detail.
-
-The following sections briefly explain each layer, with deeper focus on the **[[ref:TRQP Core]]** layer.
-
-### TRQP Core
-_This section is non-normative_
-
-* **What it is**: The [[ref:TRQP Core]] is an **abstract** specification that defines:
-  * **Data Models**: Metadata, authorization, ecosystem recognition, etc.
-  * **Required Queries**: MetadataQuery, AuthorizationQuery, and EcosystemRecognitionQuery.
-* **Role**: It ensures every TRQP-based implementation speaks the same "language" (even if actual messages travel over different transports).
-
-### TRQP Bindings
-_This section is non-normative_
-
-* **What they are**: Concrete mappings of the Core specification onto specific transports and protocols. For example:
-  * **HTTPS Binding**: Implements TRQP queries over HTTPS.
-* **Role**: A [[ref:TRQP Binding]] transforms abstract queries from the Core spec into real network requests and responses in a standardized way.
-
-### TRQP Bridges
-_This section is non-normative_
-
-* **What they are**: Adapters that connect a chosen [[ref:TRQP Binding]] to a specific trust framework (X.509, OIDF, DIF CTE, etc.).
-* **Examples**:
-  * **X.509 Bridge**: Translates TRQP queries into X.509 certificate validations and chain checks.
-  * **OIDF Bridge**: Leverages OpenID Federation endpoints to answer TRQP queries about OIDC-based trust relationships.
-  * **CTE Bridge**: Adapts TRQP queries to DIF's Credential Trust Establishment protocols.
-* **Role**: A [[ref:TRQP Bridge]] "bridges" existing frameworks into TRQP by implementing the relevant [[ref:TRQP Binding]] and mapping framework-specific data.
-
-### Systems of Record
-_This section is non-normative_
-
-* **Definition**: Real-world trust frameworks or registries storing authoritative data, including:
-  * **OIDF Federation** (various profiles)
-  * **X.509 Ecosystem** (with a CA and certificate hierarchy)
-  * **TRAIN** (trust registry or network)
-  * **EU Trusted List** (an EU-level trust list or EBSI-based registry)
-* **Role**: The ultimate source of truth for whether an entity is recognized, authorized, or otherwise valid within a particular ecosystem (**[[ref:System of Record]]**).
-
-### TRQP Profiles
-_This section is non-normative_
-
-* **Definition**: TRQP Profiles specify implementation details for aligning a trust network with TRQP standards.
-* **Examples**:
-  * **Identifier Design**: How entities are uniquely identified within the system.
-  * **Resolution Paths**: The process for resolving trust queries within a given framework.
-* **Role**: Profiles guide adaptation of TRQP to different ecosystems, ensuring queries, identifiers, and resolution mechanisms conform to standardized practices.
-
-## Ecosystem and Trust Registry Relationship
-_This section is non-normative_
+**!!TODO — Draft a new diagram of the relationship of these four core concepts.!!**
 
 ![Ecosystem Model](images/ecosystem_model.png)
 
-**Figure 4:** A trust registry may serve multiple ecosystems, and an ecosystem may have multiple trust registries.
+**Figure 2:** The relationship of ecosystems, authorities, governance frameworks, and trust registries.
 
-Each Ecosystem (yellow box in the diagram) consists of:
+The relationshp betweeen these four concepts is as follows:
 
-* An identifier (green box) – A globally unique reference
-* An EGF Document (green box) – The Ecosystem Governance Framework [[ref:Ecosystem Governance Framework]], which defines governance terms, policies, and operational rules
+1) Ecosystems always have an authority.
+2) The authority ID constitutes the "identity" of the ecosystem.
+2) The authority publishes an ecosystem governance framework (typically at an authoritative URL) to specify the human-readable policies governing the ecosystem.
+3) The authority publishes a set of authority statements into one or or more trust registries to specify the machine-readable policies governing the ecosystem.
 
-The dashed arrows from Ecosystems point to Trust Registries below, indicating:
-
-* Each Ecosystem explicitly references Trust Registries it recognizes for managing authority-related queries [[ref:Authority Query]]
-* Trust Registries enforce the rules outlined in the EGF document
-
-Each Trust Registry (green box in the lower row) consists of:
-
-* An identifier (yellow box) – A unique reference
-* References to one or more Ecosystems it serves (if supported by the metadata)
-
-### Role of the Trust Registry in Ecosystem Governance
-_This section is non-normative_
-
-A Trust Registry manages authority statements [[ref:Authority Statement]] across one or more Ecosystems by:
-
-* Maintaining structured records of trust relationships and authorization statuses
-* Handling authority queries [[ref:Authority Query]] (as described in the Required Interfaces section)
-* Operating under ecosystem governance, with the governing body defining policies for registration
-
-### Scalability and Multi-Ecosystem Trust Registries
-_This section is non-normative_
-
-* A single Trust Registry may serve multiple Ecosystems as shared infrastructure
-* An Ecosystem may rely on multiple Trust Registries for redundancy or diverse verification approaches
-* The Trust Registry operates within the authority scope defined by each ecosystem's EGF Document
+From a multiplicity standpoint, an ecosystem authority can be served by more than one trust registry, and a trust registry can serve more than one ecosystem authority.
 
 ## Metadata Models
 
 ### Trust Registry
-_This section is normative_
+_This section is normative._
 
 * **Properties**
   * **id: MUST** be a globally unique identifier for the registry (e.g., URI, DID, UUID)

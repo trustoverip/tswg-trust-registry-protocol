@@ -8,7 +8,7 @@
                 "overview.md",
                 "core/spec.md",
                 "bindings/restful/spec.md",
-                "conclusion.md"
+                "considerations.md"
             ],
             "katex": false,
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",
