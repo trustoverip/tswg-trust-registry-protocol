@@ -27,7 +27,7 @@ jobs:
           apt-get update && apt-get install -y curl
 
           # Copy OpenAPI specs to working directory
-          cp -r playground/trust-registry/api/* ./
+          cp -r specification/v1/bindings/restful/swagger.yaml ./
 
           # Validate OpenAPI specs (using trqp.yaml or swagger.yaml as needed)
           if [ -f ./specification/v1/bindings/restful/swagger.yaml ]; then
