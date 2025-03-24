@@ -62,7 +62,7 @@ jobs:
             <script>
               window.onload = function() {
                 window.ui = SwaggerUIBundle({
-                  url: "../${SPEC_FILE}",
+                  url: "/api-docs/specification/v1/bindings/restful/swagger.yaml",
                   dom_id: '#swagger-ui',
                   deepLinking: true,
                   presets: [SwaggerUIBundle.presets.apis],
