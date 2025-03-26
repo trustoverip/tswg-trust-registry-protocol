@@ -76,25 +76,180 @@ The scope of this specification is limited to the TRQP protocol operating betwee
 * **TRQP bridges**. If the system of record is not a native TRQP trust registry, a TRQP bridge is needed to transform a TRQP query into the query format supported by the system of record. Seperate specifications may be published for popular TRQP bridges, however they are out-of-scope for this specification.
 
 
-## High-Level Architecture
-_This section is informative._
+## High-Level Architecture 
+*This section is informative.*
 
-The following diagram illustrates the relationships between four core concepts in TRQP architecture: ecosystems, authorities, governance frameworks, and trust registries.
+Figure 2 illustrates the relationships between the core concepts in TRQP architecture.
 
-**!!TODO — Draft a new diagram of the relationship of these four core concepts.!!**
+![images/authority_model.png](images/authority_model.png)
 
-![Ecosystem Model](images/ecosystem_model.png)
+*Figure 2: Overview of the core concepts in TRQP architecture*
 
-**Figure 2:** The relationship of ecosystems, authorities, governance frameworks, and trust registries.
+### Ecosystem Governing Authorities and Trust Registry Operators
 
-The relationshp betweeen these four concepts is as follows:
+At the top of Figure&nbsp;2 are the two primary actors involved in TRQP infrastructure—the **ecosystem governing authority** and the **trust registry operator**. From a legal standpoint, they are the real-world entities with ultimate responsibility for the infrastructure that will serve the authority statements. Key considerations about these two roles:
 
-1) Ecosystems always have an authority.
-2) The authority ID constitutes the "identity" of the ecosystem.
-2) The authority publishes an ecosystem governance framework (typically at an authoritative URL) to specify the human-readable policies governing the ecosystem.
-3) The authority publishes a set of authority statements into one or or more trust registries to specify the machine-readable policies governing the ecosystem.
+- **Both roles can be played by the same entity.** Although the roles are shown separately in Figure&nbsp;2, the ecosystem [governing authority](https://glossary.trustoverip.org/#term:governing-body) may also serve as the trust registry operator. If the ecosystem chooses to use a separate trust registry operator, then from a ToIP governance architecture standpoint, the operator serves as an [administering authority](https://glossary.trustoverip.org/#term:administering-body).
+- **The legal responsibilities of these actors—including liability and indemnity—depend on the ecosystem governance framework** and any specific contractual terms it requires. Those considerations are out-of-scope for this specification.
+- **An ecosystem may be served by multiple trust registries and a trust registry may serve multiple ecosystems.** This multiplicity can be especially helpful when designing a group of related ecosystems.
+- **Both roles publish authority statements—however it is important to distinguish between them.** The ecosystem governing authority is authoritative for statements describing or implementing the policies in the ecosystem governance framework, while the trust registry operator is authoritative for metadata statements describing the capabilities and operations of the trust registry itself (those that are under the operator’s sole control).
 
-From a multiplicity standpoint, an ecosystem authority can be served by more than one trust registry, and a trust registry can serve more than one ecosystem authority.
+### Ecosystem IDs and Trust Registry IDs
+
+Interoperability of TRQP across decentralized digital trust ecosystems depends on globally unique identifiers the same way interoperability of the Internet depends on globally unique identifiers (IP addresses and DNS names). Unique IDs are particularly important in TRQP architecture since they are the root of every authority statement (see [Standard Structure](#standard-structure)).
+
+- An **ecosystem ID** uniquely identifies a digital trust ecosystem.  
+- A **trust registry ID** uniquely identifies a trust registry.
+
+Normative requirements for these identifiers appear in [Authority IDs and Entity IDs](#authority-ids-and-entity-ids).
+
+### Authority Statements
+
+Authority statements are the critical pieces of information stored in trust registries for the benefit of all participants in a digital trust ecosystem. As shown in Figure&nbsp;2, both ecosystem governing authorities and trust registry operators can publish authority statements. The standard structure and vocabulary of TRQP authority statements is defined in [Authority Statements and Query Vocabulary](#authority-statements-and-query-vocabulary).
+
+
+## Authority Statements and Query Vocabulary
+*This section is normative.*
+
+Authority statements in TRQP are designed to communicate essential information about authorizations, delegations, recognitions, and descriptions (metadata). They share a consistent three-part structure and employ a standardized vocabulary for querying.
+
+### Standard Structure
+
+Interoperability across ecosystems requires shared semantics for querying authority statements. Therefore, TRQP authority statements are structured in three standard parts as shown below:
+
+![images/authority_statements.png](images/authority_statements.png)
+
+
+*Figure 3: The standard three-part structure of TRQP authority statements*
+
+These three strings are simple yet flexible enough to express all types of authority statements, including authorization, recognition, delegation, and description (metadata), as defined in this section.
+
+### Authority IDs and Entity IDs
+
+Every authority statement is made by an authority **about** an entity. Therefore, the characteristics of these two identifiers are especially important:
+
+#### Authority ID
+- **MUST** be a globally unique identifier for the authority making the statement.  
+- **MUST** be represented as a single string conforming to [IETF RFC&nbsp;3986](https://datatracker.ietf.org/doc/html/rfc3986).  
+- Should be a cryptographically verifiable identifier (e.g., DID or AID) or an HTTPS URL, so that verifiers can resolve and verify public keys, TRQP service endpoints, and other metadata describing the authority.  
+- It is recommended to use multi-anchoring of the verifiable identifier for additional assurance (for example, using [High Assurance DIDs using DNS](https://www.ietf.org/archive/id/draft-carter-high-assurance-dids-with-dns-03.html) or equivalent).
+
+#### Entity ID
+- **MUST** be unique **within** the ecosystem.  
+  - If correlation across ecosystems is desirable (for example, to establish the reputation of a credential issuer), then it is recommended to be globally unique.  
+  - If correlation across ecosystems is **not** desirable (for example, for individual privacy), then it is recommended to be a locally unique identifier.  
+- **MUST** be represented as a single string conforming to [IETF RFC&nbsp;3986](https://datatracker.ietf.org/doc/html/rfc3986).  
+- Should be a cryptographically verifiable identifier (e.g., DID or AID) or an HTTPS URL, so that verifiers can resolve public keys, service endpoints, and other metadata describing the entity.
+
+### Authorization Statements
+
+In an authorization statement, an authority grants an authorization to an entity under its authority. In the ToIP governance model, this entity is called a [governed party](https://glossary.trustoverip.org/#term:governed-party).
+
+#### ABNF (Authorization Assertions)
+```txt
+auth-assertion = authorization “/” scope
+authorization  = segment         ; as defined in RFC 3986
+scope          = URI-reference   ; as defined in RFC 3986
+```
+
+### Authorization Assertions for Verifiable Digital Credentials
+
+The following enumerated strings SHOULD be used for authorization assertions governing verifiable digital credentials:
+
+`auth-string	= "issue" / "verify"`
+
+- The `issue` string SHOULD be used for an entity authorized to act in the role of issuing a digital credential as defined in the specification for the relevant digital credential format.
+- The `verify` string SHOULD be used for an entity authorized to act in the role of verifying a digital credential as defined in the specification for the relevant digital credential format.
+- The `scope` of an digital credential authorization assertion SHOULD define the type of digital credential the entity is authorized to issue or verify. It is RECOMMENDED to:
+
+1. Use the same URI string that uniquely defines the credential type as defined in the appropriate credential specification or type definition.  
+2. Publish that URI string in the ecosystem governance framework and any associated type catalogues.
+
+### Authorization Assertions for Other Verifiable Data
+
+The following enumerated strings SHOULD be used for authorization assertions governing other forms of verifiable data:
+
+`auth-string	= "publish" / "consume"`
+
+- The `publish` string SHOULD be used for an entity authorized to act in the role of publishing and digitally signing verifiable data that is not in a digital credential format.
+- The `consume` string SHOULD be used for an entity authorized to act in the role of requesting, verifying, and using digitally signing verifiable data that is not in a digital credential format.
+- The `scope` of a verifiable data authorization assertion SHOULD define the type of verifiable data an entity is authorized to issue or verify. It is RECOMMENDED to:
+
+1. Use the same URI string that uniquely defines the verifiable data type as defined in the appropriate specification or type definition.  
+2. Publish that URI string in the ecosystem governance framework and any associated type catalogues.
+
+#### Recognition Assertions
+
+Recognition assertions do not have a `scope` because by definition both authorities are sovereign—neither controls the scope of the other. If two authorities have a control relationship, it **MUST** be expressed using a delegation statement.
+
+
+### Delegation Statements
+
+A delegation statement expresses a control relationship between two ecosystem governing authorities where one delegates a specific scope of authority to the other.
+
+### 5.5.1 ABNF
+
+The assertion in an TRQP delegation statement **MUST** be a string that conforms to the following ABNF:
+
+```txt
+deleg-assertion	= delegation "/" scope
+delegation		= segment			; as defined in RFC 3986  
+scope			= URI-reference		; as defined in RFC 3986
+```
+### Delegation Assertions
+    
+The following enumerated strings SHOULD be used for delegation assertions:
+
+`deleg-string	= "delegates" / "delegated-by"`
+
+The `delegates` string SHOULD when one ecosystem governing authority is delegating authority for a specific `scope` to another ecosystem governing authority.
+
+The `delegated-by` string SHOULD be used to express the precise inverse delegation relationship as that expressed by the `delegates` string.
+
+It is RECOMMENDED that a TRQP consumer verifies a `delegated-by` statement by querying the TRQP endpoint of the delegating authority for the inverse `delegates` statement.
+
+The `scope` of a delegation assertion SHOULD identify the governance framework (or subset of a governance framework) for which authority is being delegated. It is RECOMMENDED to define and publish this URI string in the governance framework as a self-reference.
+
+
+## Description (Metadata) Statements
+
+A description statement identifies metadata stored in the trust registry that describes the identified entity. If the authority ID for the description statement is the same as the entity ID, then the description is self-asserted. If the authority ID and entity ID are different, then the authority is making an assertion that the metadata describes the entity.
+
+Description statements can be used to lookup any relevant metadata about an entity, including metadata about the ecosystem governing authority, the ecosystem governance framework, the trust registry operator, the trust registry, or any governed party in the ecosystem.
+
+
+### ABNF (Description Assertions)
+
+The assertion in a TRQP description statement **MUST** be a string that conforms to the following ABNF: 
+
+```txt
+desc-assertion = description
+description    = URI-reference   ; as defined in RFC 3986
+```
+
+### Generic Metadata Assertions
+
+The following enumerated string SHOULD be used to query for generic metadata:
+
+`desc-string	= "metadata"`
+
+A TRQP description query with the `metadata` assertion **MUST** return the metadata
+for the entity ID as asserted by the authority ID.
+
+### Verification Metadata Assertions
+
+Certain types of verifiable identifiers, called [self-certifying identifiers](https://glossary.trustoverip.org/#term:self-certifying-identifier) (SCIDs), have defined formats for their associated verification metadata. Two examples are KERI AIDs \[normative-reference\] and [did:scid DIDs](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/88572360/DID+SCID+Method+Specification) \[normative-reference\]. The following enumerated string SHOULD be used to query for the verification metadata for a SCID:
+
+> **Important:** For a SCID, “self-asserted” vs. “witnessed” verification metadata must be queried by specifying the correct authority ID (the SCID itself vs. the witness).
+
+### Verifiable Credential Assertions
+
+Trust registries can also store verifiable credentials describing any entity. To query for a specific credential type:
+
+1. The authority ID should be the **issuer** of the credential.  
+2. The assertion should be the **URI reference** identifying the credential type.  
+3. The entity ID must be the **subject** of the credential.
+
 
 ## Metadata Models
 
