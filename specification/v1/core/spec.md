@@ -93,16 +93,6 @@ At the top of Figure&nbsp;2 are the two primary actors involved in TRQP infrastr
 - **An ecosystem may be served by multiple trust registries and a trust registry may serve multiple ecosystems.** This multiplicity can be especially helpful when designing a group of related ecosystems.
 - **Both roles publish authority statements—however it is important to distinguish between them.** The ecosystem governing authority is authoritative for statements describing or implementing the policies in the ecosystem governance framework, while the trust registry operator is authoritative for metadata statements describing the capabilities and operations of the trust registry itself (those that are under the operator’s sole control).
 
-## Ecosystem IDs and Trust Registry IDs
-
-Interoperability of TRQP across decentralized digital trust ecosystems depends on globally unique identifiers the same way interoperability of the Internet depends on globally unique identifiers (IP addresses and DNS names). Unique IDs are particularly important in TRQP architecture since they are the root of every authority statement (see section 5.1).
-
-An ecosystem ID uniquely identifies a digital trust ecosystem, and a trust registry ID uniquely identifies a trust registry. Normative requirements for these identifiers are in section 5.2.
-
-## Authority Statements
-
-Authority statements are the critical pieces of information stored in trust registries for the benefit of all participants in a digital trust ecosystem. As shown in figure 2, both ecosystem governing authorities and trust registry operators can publish authority statements. The standard structure and vocabulary of TRQP authority statements is defined in section 5\.
-
 ## Metadata Models
 
 ### Trust Registry
