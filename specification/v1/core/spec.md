@@ -75,8 +75,107 @@ The scope of this specification is limited to the TRQP protocol operating betwee
 * **Systems of record**. This specification casts no requirements on how the system of record is designed or deployed. Also, because TRQP is read-only, this specification does not address create, update, or delete operations for the system of record.
 * **TRQP bridges**. If the system of record is not a native TRQP trust registry, a TRQP bridge is needed to transform a TRQP query into the query format supported by the system of record. Seperate specifications may be published for popular TRQP bridges, however they are out-of-scope for this specification.
 
+## High-Level Architecture 
+*This section is informative.*
 
-### Ecosystem IDs and Trust Registry IDs
+Figure 2 illustrates the relationships between the core concepts in TRQP architecture.
+
+![images/authority_model.png](images/authority_model.png)
+
+*Figure 2: Overview of the core concepts in TRQP architecture*
+
+### Ecosystem Governing Authorities and Trust Registry Operators
+
+At the top of Figure&nbsp;2 are the two primary actors involved in TRQP infrastructure—the **ecosystem governing authority** and the **trust registry operator**. From a legal standpoint, they are the real-world entities with ultimate responsibility for the infrastructure that will serve the authority statements. Key considerations about these two roles:
+
+- **Both roles can be played by the same entity.** Although the roles are shown separately in Figure&nbsp;2, the ecosystem [governing authority](https://glossary.trustoverip.org/#term:governing-body) may also serve as the trust registry operator. If the ecosystem chooses to use a separate trust registry operator, then from a ToIP governance architecture standpoint, the operator serves as an [administering authority](https://glossary.trustoverip.org/#term:administering-body).
+- **The legal responsibilities of these actors—including liability and indemnity—depend on the ecosystem governance framework** and any specific contractual terms it requires. Those considerations are out-of-scope for this specification.
+- **An ecosystem may be served by multiple trust registries and a trust registry may serve multiple ecosystems.** This multiplicity can be especially helpful when designing a group of related ecosystems.
+- **Both roles publish authority statements—however it is important to distinguish between them.** The ecosystem governing authority is authoritative for statements describing or implementing the policies in the ecosystem governance framework, while the trust registry operator is authoritative for metadata statements describing the capabilities and operations of the trust registry itself (those that are under the operator’s sole control).
+
+## Ecosystem IDs and Trust Registry IDs
+
+Interoperability of TRQP across decentralized digital trust ecosystems depends on globally unique identifiers the same way interoperability of the Internet depends on globally unique identifiers (IP addresses and DNS names). Unique IDs are particularly important in TRQP architecture since they are the root of every authority statement (see section 5.1).
+
+An ecosystem ID uniquely identifies a digital trust ecosystem, and a trust registry ID uniquely identifies a trust registry. Normative requirements for these identifiers are in section 5.2.
+
+## Authority Statements
+
+Authority statements are the critical pieces of information stored in trust registries for the benefit of all participants in a digital trust ecosystem. As shown in figure 2, both ecosystem governing authorities and trust registry operators can publish authority statements. The standard structure and vocabulary of TRQP authority statements is defined in section 5\.
+
+## Metadata Models
+
+### Trust Registry
+_This section is normative._
+
+* **Properties**
+  * **id: MUST** be a globally unique identifier for the registry (e.g., URI, DID, UUID)
+  * **ecosystem: SHOULD** indicate which ecosystem(s) the registry serves or recognizes
+  * **controller: SHOULD** reference the entity that manages or operates the registry
+
+### Ecosystem
+_This section is normative_
+
+* **Properties**
+  * **id: MUST** be a globally unique identifier for the registry (e.g., URI, DID, UUID)
+  * **egf_id: MUST** specify a *resolvable* EGF identifier referencing the official EGF document
+  * **trustregistries: MUST** provide a list of authorized Trust Registries that serve the ecosystem authority state [[ref:Authority State]]
+    * Each registry **MUST** have the following properties:
+      * **endpoint**: The address (URL, DID, etc.) for TRQP queries [[ref:Authority Query]] / [[ref:Recognition Query]]
+    * Each registry **MAY** also be scoped to a particular set of authorization states as defined in the Binding [[ref:TRQP Binding]]
+  * **controller: SHOULD** include a method of validating ecosystem controllers
+
+## Baseline Requirements For Conformance
+
+### Trust Registry
+_This section is normative_
+
+* All TRQP registries **MUST** provide an addressable endpoint resolvable as defined by the Implementation Profile
+* All Trust Registries **MUST** supply the required interfaces described in the Required Interfaces section over the *same* addressable endpoint to be TRQP conformant
+
+### TRQP Binding
+_This section is normative_
+
+* All compliant [[ref:TRQP Binding]]s **MUST** support the required interfaces described in the Required Interfaces section
+* A compliant [[ref:TRQP Binding]] **MUST** comply with [[ref:TRQP Core]] requirements
+* A compliant [[ref:TRQP Binding]] **MUST** support versioning using [Semantic Versioning 2.0](https://semver.org/)
+
+### TRQP Profiles
+_This section is normative_
+
+* All TRQP profiles **MUST** specify a compliant [[ref:TRQP Binding]]
+
+## Required Interfaces
+_This section is normative_
+
+Below are abstract API methods that **MUST** be exposed. Each **[[ref:TRQP Binding]]** **MUST** define a binding (e.g., REST, gRPC, DIDComm) that maps these methods to actual endpoints.
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant R as Trust Registry
+
+    C->>R: Metadata Query<br/>(registryIdentifier)
+    R-->>C: Metadata Response<br/>(auth types, credential formats, version info)<br/>MUST provide details for further queries
+
+    C->>R: Authorization Query<br/>(subject, authorizationType, context?)
+    R-->>C: Authorization Response<br/>(authorized / not-authorized / revoked / error)<br/>MUST indicate authorization status clearly
+
+    C->>R: Ecosystem Recognition Query<br/>(ecosystemIdentifier, governanceFrameworkRef)
+    R-->>C: Recognition Response<br/>(yes/no + reasons for rejection)<br/>MUST indicate acceptance or rejection
+```
+
+**Figure 5:** Sequence diagram showing interactions between a client and Trust Registry for the required interfaces.
+
+### Metadata Query
+_This section is normative_
+
+* **Request**:  
+  There are no mandatory request parameters.  
+  * Optionally, an `ecosystem_id` can specify that the metadata request should be interpreted within a specific ecosystem's governance framework context [[ref:Ecosystem Governance Framework]]
+
+* **Response**:  
+  * `id`: string. Uniquely identifies the registry. If an `ecosystem_id` is provided, the response must clearly reflect that the returned data is scoped to the specified ecosystem (e.g., "ecosystem A").
 
 Interoperability of TRQP across decentralized digital trust ecosystems depends on globally unique identifiers the same way interoperability of the Internet depends on globally unique identifiers (IP addresses and DNS names). Unique IDs are particularly important in TRQP architecture since they are the root of every authority statement (see [Standard Structure](#standard-structure)).
 
