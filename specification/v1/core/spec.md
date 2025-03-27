@@ -76,24 +76,6 @@ The scope of this specification is limited to the TRQP protocol operating betwee
 * **TRQP bridges**. If the system of record is not a native TRQP trust registry, a TRQP bridge is needed to transform a TRQP query into the query format supported by the system of record. Seperate specifications may be published for popular TRQP bridges, however they are out-of-scope for this specification.
 
 
-## High-Level Architecture 
-*This section is informative.*
-
-Figure 2 illustrates the relationships between the core concepts in TRQP architecture.
-
-![images/authority_model.png](images/authority_model.png)
-
-*Figure 2: Overview of the core concepts in TRQP architecture*
-
-### Ecosystem Governing Authorities and Trust Registry Operators
-
-At the top of Figure&nbsp;2 are the two primary actors involved in TRQP infrastructure—the **ecosystem governing authority** and the **trust registry operator**. From a legal standpoint, they are the real-world entities with ultimate responsibility for the infrastructure that will serve the authority statements. Key considerations about these two roles:
-
-- **Both roles can be played by the same entity.** Although the roles are shown separately in Figure&nbsp;2, the ecosystem [governing authority](https://glossary.trustoverip.org/#term:governing-body) may also serve as the trust registry operator. If the ecosystem chooses to use a separate trust registry operator, then from a ToIP governance architecture standpoint, the operator serves as an [administering authority](https://glossary.trustoverip.org/#term:administering-body).
-- **The legal responsibilities of these actors—including liability and indemnity—depend on the ecosystem governance framework** and any specific contractual terms it requires. Those considerations are out-of-scope for this specification.
-- **An ecosystem may be served by multiple trust registries and a trust registry may serve multiple ecosystems.** This multiplicity can be especially helpful when designing a group of related ecosystems.
-- **Both roles publish authority statements—however it is important to distinguish between them.** The ecosystem governing authority is authoritative for statements describing or implementing the policies in the ecosystem governance framework, while the trust registry operator is authoritative for metadata statements describing the capabilities and operations of the trust registry itself (those that are under the operator’s sole control).
-
 ### Ecosystem IDs and Trust Registry IDs
 
 Interoperability of TRQP across decentralized digital trust ecosystems depends on globally unique identifiers the same way interoperability of the Internet depends on globally unique identifiers (IP addresses and DNS names). Unique IDs are particularly important in TRQP architecture since they are the root of every authority statement (see [Standard Structure](#standard-structure)).
