@@ -214,7 +214,7 @@ _This section is normative_
 ### Authorization Query
 _This section is normative_
 
-### Authorization Model
+#### Authorization Model
 
 * **Request**:
   * **ecosystem_id**: string. An ecosystem identifier as defined in the TRQP Binding.  
@@ -266,7 +266,7 @@ _This section is normative_
 ### Ecosystem Recognition Query
 _This section is normative_
 
-### Ecosystem Recognition Models
+#### Ecosystem Recognition Models
 
 * **Request**:
   * **ecosystem_id**: string. The identifier for the ecosystem, defined in the TRQP Binding.  
