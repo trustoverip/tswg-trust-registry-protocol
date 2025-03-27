@@ -43,3 +43,4 @@ Implementing the TRQP for the Ayra Trust Network requires a dual focus: establis
   - **Bridging Governance & Registries**:  
     - The registry should integrate with the broader ecosystem governance framework, adhering to the TRQP’s requirements for identifier creation (using compliant DID methods) and service endpoint specifications.  
     - Document how the registry bubbles up the state of authorizations, including how updates and revocations are handled to maintain an accurate and timely reflection of the ecosystem’s trust landscape.
+
