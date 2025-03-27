@@ -166,12 +166,3 @@ _This section is normative_
 
 * **Response**:  
   * `id`: string. Uniquely identifies the registry. If an `ecosystem_id` is provided, the response must clearly reflect that the returned data is scoped to the specified ecosystem (e.g., "ecosystem A").
-
-Interoperability of TRQP across decentralized digital trust ecosystems depends on globally unique identifiers the same way interoperability of the Internet depends on globally unique identifiers (IP addresses and DNS names). Unique IDs are particularly important in TRQP architecture since they are the root of every authority statement (see [Standard Structure](#standard-structure)).
-
-- An **ecosystem ID** uniquely identifies a digital trust ecosystem.  
-- A **trust registry ID** uniquely identifies a trust registry.
-
-Normative requirements for these identifiers appear in [Authority IDs and Entity IDs](#authority-ids-and-entity-ids).
-
-
