@@ -43,3 +43,84 @@ Implementing the TRQP for the Ayra Trust Network requires a dual focus: establis
   - **Bridging Governance & Registries**:  
     - The registry should integrate with the broader ecosystem governance framework, adhering to the TRQP’s requirements for identifier creation (using compliant DID methods) and service endpoint specifications.  
     - Document how the registry bubbles up the state of authorizations, including how updates and revocations are handled to maintain an accurate and timely reflection of the ecosystem’s trust landscape.
+
+## Error Response Considerations
+
+_this section is informative_
+
+### Query Error Handling Guidelines
+
+This document outlines general guidelines for handling errors in responses to queries within the Trust Registry Query Protocol. The approach described here is abstracted from any specific transport or protocol (such as HTTP) to offer guidance applicable across various implementations.
+
+While this does not require HTTP, the error codes are loosely aligned with [HTTP Error Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) and [DNS Codes](https://help.dnsfilter.com/hc/en-us/articles/4408415850003-DNS-return-codes).
+
+Currently, this section is informative.
+
+#### General Data Model for Errors
+
+Error responses should provide the following structured information which SHOULD be described in the binding.
+
+- **code** *(number)*: A numeric code identifying the type of error.  
+- **message** *(string)*: A clear and descriptive explanation for developers and implementers.  
+- **details** *(optional, object)*: Additional context that aids in diagnosing or rectifying the issue.
+
+The following section describes the suggested code number and the situations when you should use the response.
+
+#### Metadata Query Errors
+
+- **Ecosystem Identifier Not Found** 
+  - **When:** The provided registry identifier does not exist. 
+  - **Description:** Indicates the registry identifier specified in the query was not found.
+  - **Code Number:** 404
+- **Malformed Request**
+  - **When:** Request parameters are missing or incorrectly formatted.
+  - **Description:** Indicates the request lacks required parameters or contains invalid data.
+  - **Code Number:** 400
+
+#### Authorization Query Errors
+
+- **Ecosystem ID Not Found** 
+  - **When:** The specified ecosystem ID is not recognized by the registry.
+  - **Description:** Indicates the ecosystem identifier does not exist in the registry.
+  - **Code Number:** 404
+- **Invalid Authorization Type** 
+  - **When:** Authorization type provided does not match known types.  
+  - **Description:** Indicates the authorization type specified is invalid or unrecognized.  
+  - **Code Number:** 400 
+- **Authorization Type Not Found** 
+  - **When:** Authorization type provided does not match known types.  
+  - **Description:** Indicates the authorization type specified is not available.  
+  - **Code Number:** 404 
+- **Unknown Entity ID** 
+  - **When:** The provided entity ID does not exist in registry records.  
+  - **Description:** Indicates the entity ID provided in the query is unknown.  
+  - **Code Number:** 404 
+- **Invalid Time Requested** 
+  - **When:** The time parameter provided is invalid or incorrectly formatted.  
+  - **Description:** Indicates the requested time parameter does not conform to expected formats.  
+  - **Code Number:** 400
+
+#### Ecosystem Recognition Query Errors
+
+- **Ecosystem ID Not Found** 
+  - **When:** The ecosystem ID of the requesting ecosystem is not recognized. 
+  - **Description:** Indicates that the source ecosystem specified is not registered or recognized. 
+  - **Code Number:** 404 
+- **Target Ecosystem ID Not Found** 
+  - **When:** The ecosystem ID of the target ecosystem is unknown or unrecognized. 
+  - **Description:** Indicates the target ecosystem specified in the query does not exist. 
+  - **Code Number:** 404 
+- **Scope Not Found** 
+  - **When:** The ecosystem ID of the target ecosystem is not found. 
+  - **Description:** Indicates the target ecosystem specified in the query does not exist. 
+  - **Code Number:** 404 
+- **Malformed Recognition Request** 
+  - **When:** Request parameters are incomplete or incorrectly formatted.  
+  - **Description:** Indicates essential elements of the recognition request are missing or invalid.  
+  - **Code Number:** 400
+
+#### Recommendations for Implementers
+
+- Error responses should be consistent and predictable.  
+- Clearly differentiate between recoverable errors (such as malformed requests) and terminal conditions (such as missing resources).  
+- Include contextual information whenever possible to expedite issue resolution.
