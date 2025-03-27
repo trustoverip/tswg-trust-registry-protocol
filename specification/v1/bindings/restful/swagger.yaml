@@ -60,13 +60,13 @@ paths:
         Verifies if the specified ecosystem (`ecosystem_id`) is recognized under the given governance framework (`egf_id`).
       operationId: checkEcosystemRecognition
       parameters:
-        - name: ecosystem_id
+        - name: entity_id
           in: path
           required: true
           description: Unique identifier of the ecosystem being queried.
           schema:
             type: string
-        - name: egf_id
+        - name: authority_id
           in: query
           required: true
           description: Unique identifier of the governance framework. Defaults to single egf_id of the Trust Registry itself.
@@ -121,7 +121,7 @@ paths:
           description: Authorization identifier to evaluate.
           schema:
             type: string
-        - name: egf_id
+        - name: authority_id
           in: query
           required: true
           description: Unique identifier of the governance framework.
@@ -129,7 +129,7 @@ paths:
             type: string
         - name: all
           in: query
-          required: true
+          required: false
           description: Whether to return a list of authorizations.
           schema:
             type: boolean
