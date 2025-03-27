@@ -75,7 +75,6 @@ The scope of this specification is limited to the TRQP protocol operating betwee
 * **Systems of record**. This specification casts no requirements on how the system of record is designed or deployed. Also, because TRQP is read-only, this specification does not address create, update, or delete operations for the system of record.
 * **TRQP bridges**. If the system of record is not a native TRQP trust registry, a TRQP bridge is needed to transform a TRQP query into the query format supported by the system of record. Seperate specifications may be published for popular TRQP bridges, however they are out-of-scope for this specification.
 
-
 ## High-Level Architecture 
 *This section is informative.*
 
@@ -304,4 +303,3 @@ _This section is normative_
   - **When:** Request parameters are incomplete or incorrectly formatted.  
   - **Description:** Indicates essential elements of the recognition request are missing or invalid.  
   - **Code Number:** 400
-
