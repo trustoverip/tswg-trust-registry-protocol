@@ -15,9 +15,9 @@ _This section is normative_
 
 The following mapping of error codes to HTTP Status is provided for http-based implementations:
 
-| Return Code | Return Message                | HTTP Status | HTTP Reason             | 
-| ----------- | --------------                | ----------- | -----------             |
-| `statuscode`| `message`                     |             |                         |
+| Return Code       | Return Message          | HTTP Status | HTTP Reason             | 
+| -----------       | --------------          | ----------- | -----------             |
+| `statuscode`      | `message`               |             |                         |
 | 0                 | success                 | 200         | OK                      |
 | 100               | error                   | 500         | Internal Server Error   |
 | 200               | notfound                | 404         | Not Found               |
