@@ -13,7 +13,7 @@ _This section is normative_
 
 * **Properties**
   * **id: MUST** be a globally unique identifier for the registry (e.g., URI, DID, UUID)
-  * **egf_id: MUST** specify a *resolvable* EGF identifier referencing the official EGF document
+    * **egf_id: MUST** specify a *resolvable* EGF identifier `referencing the official EGF document
   * **trustregistries: MUST** provide a list of authorized Trust Registries that serve the ecosystem authority state [[ref:Authority State]]
     * Each registry **MUST** have the following properties:
       * **endpoint**: The address (URL, DID, etc.) for TRQP queries [[ref:Authority Query]] / [[ref:Recognition Query]]
@@ -44,24 +44,58 @@ _This section is normative_
 
 _this section is normative_
 
+
+
+
+
 #### Query Error Handling Guidelines
 _this section is informative_
 
 This document outlines general guidelines for handling errors in responses to queries within the Trust Registry Query Protocol. The approach described here is abstracted from any specific transport or protocol (such as HTTP) to offer guidance applicable across various implementations.
 
-While this does not require HTTP, the error codes are loosely aligned with [HTTP Error Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) and [DNS Codes](https://help.dnsfilter.com/hc/en-us/articles/4408415850003-DNS-return-codes).
-
-Currently, this section is informative.
 
 #### General Data Model for Errors
 
 Error responses should provide the following structured information which MUST be described in the binding.
 
-- **code** *(number)*: A numeric code identifying the type of error.  
-- **message** *(string)*: A clear and descriptive explanation for developers and implementers.  
-- **details** *(optional, object)*: Additional context that aids in diagnosing or rectifying the issue.
+- `statuscode` *(number)*: A numeric code identifying the type of error.  
+- `message` *(string)*: A clear and descriptive explanation for developers and implementers.  
+- `details` *(optional, object)*: Additional context that aids in diagnosing or rectifying the issue.
 
 The following section describes the suggested code number and the situations when you should use the response.
+
+### Error Codes
+_This section is normative_
+
+Consider a range of status codes:
+
+* `0-99`: Success Codes - operation has been completed successfully
+* `100-199`: General Errors - General system errors. 
+* `200-299`: Resource Errors - Errors that relate to resources.
+* `300-399`: Authentication Errors - errors that relate to authentication of querier.
+* `400-499`: Validation Errors - errors related to the validation of query inputs.
+
+This range has been established to provide more detail in future versions without breaking existing status codes.
+
+The following `statuscode` values apply to all queries:
+
+| Return Code | Return Message         | Description                   | 
+| ----------- | --------------         | -----------                   |
+| `statuscode`| `message`              | `details`                     |
+| 0           | success                | Query Completed Successfully  |
+| 100         | error                  | error (see detail)            |
+| 200         | notfound               | not found                     |
+| 201         | notfound:ecosystem_id  | EcosystemID not found (see `TODO` below)        |
+| 300         | unauthorized           | Authorization error           |
+| 400         | invalidrequest         | Invalid request               |
+
+`TODO ------------------------------------`
+
+* `QUESTION:` Does 201 add things? From past rounds many may consider this to be a security problem. Error detail on a 200 (vs. 201) can provide detail at the choice of the Trust Registry implementor. 
+* `SUGGESTION:` REMOVE 201 (here and below) and use 200
+
+
+
 
 #### Recommendations for Implementers
 _this section is non-normative_
@@ -92,6 +126,9 @@ sequenceDiagram
 
 **Figure 5:** Sequence diagram showing interactions between a client and Trust Registry for the required interfaces.
 
+
+
+
 ### Metadata Query
 _This section is normative_
 
@@ -105,15 +142,16 @@ _This section is normative_
   * `id`: string. Uniquely identifies the registry. If an `ecosystem_id` is provided, the response must clearly reflect that the returned data is scoped to the specified ecosystem (e.g., "ecosystem A").
 
 #### Metadata Query Errors
+_This section is normative_
 
 - **Ecosystem Identifier Not Found** 
   - **When:** The provided registry identifier does not exist. 
   - **Description:** Indicates the registry identifier specified in the query was not found.
-  - **Code Number:** 404
+  - **statuscode:** 201 
 - **Malformed Request**
   - **When:** Request parameters are missing or incorrectly formatted.
   - **Description:** Indicates the request lacks required parameters or contains invalid data.
-  - **Code Number:** 400
+  - **statuscode:** 400
 
 
 ### Authorization Query
@@ -146,27 +184,28 @@ _This section is normative_
   The system **MUST** clearly indicate whether the subject holds the specified authorization.
 
 #### Authorization Query Errors
+_This section is normative_
 
 - **Ecosystem ID Not Found** 
   - **When:** The specified ecosystem ID is not recognized by the registry.
   - **Description:** Indicates the ecosystem identifier does not exist in the registry.
-  - **Code Number:** 404
+  - **statuscode:** 201
 - **Invalid Authorization Type** 
   - **When:** Authorization type provided does not match known types.  
   - **Description:** Indicates the authorization type specified is invalid or unrecognized.  
-  - **Code Number:** 400 
+  - **statuscode:** 200
 - **Authorization Type Not Found** 
   - **When:** Authorization type provided does not match known types.  
-  - **Description:** Indicates the authorization type specified is not available.  
-  - **Code Number:** 404 
+  - **Description:** Indicates the authorization type specified is not available. 
+  - **statuscode:** 200 
 - **Unknown Entity ID** 
   - **When:** The provided entity ID does not exist in registry records.  
   - **Description:** Indicates the entity ID provided in the query is unknown.  
-  - **Code Number:** 404 
+  - **statuscode:** 200
 - **Invalid Time Requested** 
   - **When:** The time parameter provided is invalid or incorrectly formatted.  
   - **Description:** Indicates the requested time parameter does not conform to expected formats.  
-  - **Code Number:** 400
+  - **statuscode:** 400
 
 ### Ecosystem Recognition Query
 _This section is normative_
@@ -195,17 +234,17 @@ _This section is normative_
 - **Ecosystem ID Not Found** 
   - **When:** The ecosystem ID of the requesting ecosystem is not recognized. 
   - **Description:** Indicates that the source ecosystem specified is not registered or recognized. 
-  - **Code Number:** 404 
+  - **statuscode:** 201 
 - **Target Ecosystem ID Not Found** 
   - **When:** The ecosystem ID of the target ecosystem is unknown or unrecognized. 
   - **Description:** Indicates the target ecosystem specified in the query does not exist. 
-  - **Code Number:** 404 
+  - **statuscode:** 200 
 - **Scope Not Found** 
   - **When:** The ecosystem ID of the target ecosystem is not found. 
   - **Description:** Indicates the target ecosystem specified in the query does not exist. 
-  - **Code Number:** 404 
+  - **statuscode:** 200 
 - **Malformed Recognition Request** 
   - **When:** Request parameters are incomplete or incorrectly formatted.  
   - **Description:** Indicates essential elements of the recognition request are missing or invalid.  
-  - **Code Number:** 400
+  - **statuscode:** 400
 
