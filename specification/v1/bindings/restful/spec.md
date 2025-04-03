@@ -21,7 +21,6 @@ The following mapping of error codes to HTTP Status is provided for http-based i
 | 0                 | success                 | 200         | OK                      |
 | 100               | error                   | 500         | Internal Server Error   |
 | 200               | notfound                | 404         | Not Found               |
-| 201               | notfound:ecosystem_id   | 404         | Not Found               |
 | 300               | unauthorized            | 401         | Not Authorized          |
 | 400               | invalidrequest          | 400         | Invalid request         |
 
