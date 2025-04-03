@@ -25,14 +25,15 @@ The ToIP Trust Registry Query Protocol (TRQP) is a lightweight, read-only protoc
 
 The same way DNS name servers serve name domains, TRQP trust registries serve *trust domains*, also known as *digital trust ecosystems*. Four primary actors participate in the flow of verifiable data (including *verifiable credentials*) within the ecosystem: 1) data producers (issuers), 2) data subjects (holders), 3) data consumers (verifiers or relying parties), and 4) governing bodies (authorities). 
 
-Authorities determine the policies governing which actors can perform what actions on what data within the ecosystem. These policies are typically published in human-readable form called a *governance framework*, also known as a *trust framework*. To make these policies accessible to software agents, they are published in machine-readable form known as *authority statements*. Authority statements can be published in a file, issued to individual actors as verifiable credentials, or published in a trust registry.
+Authorities determine the policies governing which actors can perform what actions on what data within the ecosystem. These policies are typically published in a human-readable form called a *governance framework*, also known as a *trust framework*. To make these policies accessible to software agents, they are published in a machine-readable form known as *authority statements*. Authority statements can be published in a file, issued to individual actors as verifiable credentials, or published in a trust registry.
 
-Digitally verifiable authority statements can be expressed using several different standards, including X.509 certificate hierarchies, OpenID Federations, EBSI Trust Chains, or TRAIN trust lists. Although these standards can work well for *intra-ecosystem* authority verification, they are not optimized for *inter-ecosystem* authority verification.
+Digitally-verifiable authority statements can be expressed using various standards, including X.509 certificate hierarchies, OpenID Federations, EBSI Trust Chains, or TRAIN trust lists. Although these standards can work well for *intra-ecosystem* authority verification, they are not optimized for *inter-ecosystem* authority verification.
 
 The purpose of TRQP is to bridge this gap by provide a standard protocol for querying authority statements from any TRQP-compliant trust registry. It specifies a standard data model, query vocabulary, and transport protocol binding that can be implemented by any ecosystem regardless of its internal trust architecture.
 
 TRQP focuses on three query types:
 
-1. **Authorization Queries:** “Does Entity X hold Authorization Y under Ecosystem Governance Framework Z?”
+1. **Authorization Queries:** “Has Entity X been granted Authorization Y under Ecosystem Governance Framework Z?”
 2. **Recognition Queries**: "Is Ecosystem A recognized as an authority for Governance Framework B by Ecosystem C?"
-3. **Metadata Queries**: “What capabilities, data models, or policies does this trust registry support?”
+3. **Delegation Queries**: "Has Ecosystem A been delegated authority for Governance Framework D by Ecosystem C?"
+4. **Description (Metadata) Queries**: “What DID methods does Ecosystem A support?”
