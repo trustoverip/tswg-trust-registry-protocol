@@ -63,7 +63,7 @@ Verifies if the ecosystem governing authority identified by 'entity_id" is recog
         - name: entity_id
           in: path
           required: true
-          description: Unique identifier of the ecosystem being queried.
+          description: Unique identifier of the ecosystem governing authority being recognized.
           schema:
             type: string
         - name: authority_id
