@@ -9,6 +9,9 @@
 ~ [File an issue](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
 ~ [Start a discussion](https://github.com/trustoverip/tswg-trust-registry-protocol/discussions)
 
+- **Editors:** Darrell O’Donnell, Andor Kesselman, Drummond Reed, Antti Kettunen,  
+- **Contributors:** Alex Tweeddale, Christine Martin, Dave Poltorak, Eric Drury, Fabrice Rochette, Jacques Latour, Jesse Carter, Jeff Braswell, Jon Bauer, Makki Elfatih, Marcus Ubani, Markus Sabadello, Scott Perry, Sankarshan Mukhopadhyay, Subhasis, Tim Bouma
+
 ::: note
 This specification is currently a Working Draft of the Trust Over IP (ToIP) [Trust Registry Task Force](https://wiki.trustoverip.org/display/HOME/Trust+Registry+Task+Force). Feedback is welcome — see instructions here. !TODO—add link to feedback instructions!
 
