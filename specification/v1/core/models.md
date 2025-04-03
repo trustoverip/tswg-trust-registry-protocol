@@ -91,7 +91,6 @@ The following `statuscode` values apply to all queries:
 
 `TODO ------------------------------------`
 
-* `SUGGESTION:` REMOVE 201 (here and below) and use 200
 
 
 
