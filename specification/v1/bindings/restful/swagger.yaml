@@ -57,19 +57,19 @@ paths:
       tags:
         - trqp
       description: |
-        Verifies if the specified ecosystem (`ecosystem_id`) is recognized under the given governance framework (`egf_id`).
+Verifies if the ecosystem governing authority identified by 'entity_id" is recognized by the ecosystem governing authority identified by 'authority_id"
       operationId: checkEcosystemRecognition
       parameters:
-        - name: ecosystem_id
+        - name: entity_id
           in: path
           required: true
-          description: Unique identifier of the ecosystem being queried.
+          description: Unique identifier of the ecosystem governing authority being recognized.
           schema:
             type: string
-        - name: egf_id
+        - name: authority_id
           in: query
           required: true
-          description: Unique identifier of the governance framework. Defaults to single egf_id of the Trust Registry itself.
+          description: Unique identifier of the ecosystem governing authority asserting recognition. Defaults to the ecosystem governing authority of the trust registry (but only if the trust registry serves only a single ecosystem governing authority).
           schema:
             type: string
         - name: time
@@ -121,18 +121,12 @@ paths:
           description: Authorization identifier to evaluate.
           schema:
             type: string
-        - name: egf_id
+        - name: authority_id
           in: query
           required: true
-          description: Unique identifier of the governance framework.
+          description: Unique identifier of the ecosystem governing authority granting authorization.
           schema:
             type: string
-        - name: all
-          in: query
-          required: true
-          description: Whether to return a list of authorizations.
-          schema:
-            type: boolean
         - name: time
           in: query
           required: false
