@@ -51,13 +51,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
 
-  /registries/{ecosystem_id}/recognition:
+  /registries/{entity_id}/recognition:
     get:
       summary: Check Ecosystem Recognition
       tags:
         - trqp
-      description: |
-Verifies if the ecosystem governing authority identified by 'entity_id" is recognized by the ecosystem governing authority identified by 'authority_id"
+      description: Verifies if the ecosystem governing authority identified by `entity_id` is recognized by the ecosystem governing authority identified by `authority_id`
       operationId: checkEcosystemRecognition
       parameters:
         - name: entity_id
