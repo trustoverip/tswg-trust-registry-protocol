@@ -88,7 +88,6 @@ The following `statuscode` values apply to all queries:
 | 300         | unauthorized           | Authorization error           |
 | 400         | invalidrequest         | Invalid request               |
 
-`TODO ------------------------------------`
 
 
 
