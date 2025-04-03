@@ -1,58 +1,25 @@
-## Metadata Models
-
-### Trust Registry
-_This section is normative._
-
-* **Properties**
-  * **id: MUST** be a globally unique identifier for the registry (e.g., URI, DID, UUID)
-  * **ecosystem: SHOULD** indicate which ecosystem(s) the registry serves or recognizes
-  * **controller: SHOULD** reference the entity that manages or operates the registry
-
-### Ecosystem
-_This section is normative_
-
-* **Properties**
-  * **id: MUST** be a globally unique identifier for the registry (e.g., URI, DID, UUID)
-    * **egf_id: MUST** specify a *resolvable* EGF identifier `referencing the official EGF document
-  * **trustregistries: MUST** provide a list of authorized Trust Registries that serve the ecosystem authority state [[ref:Authority State]]
-    * Each registry **MUST** have the following properties:
-      * **endpoint**: The address (URL, DID, etc.) for TRQP queries [[ref:Authority Query]] / [[ref:Recognition Query]]
-    * Each registry **MAY** also be scoped to a particular set of authorization states as defined in the Binding [[ref:TRQP Binding]]
-  * **controller: SHOULD** include a method of validating ecosystem controllers
-
-## Baseline Requirements For Conformance
-
-### Trust Registry
-_This section is normative_
-
-* All TRQP registries **MUST** provide an addressable endpoint resolvable as defined by the Implementation Profile
-* All Trust Registries **MUST** supply the required interfaces described in the Required Interfaces section over the *same* addressable endpoint to be TRQP conformant
-
-### TRQP Binding
+## TRQP Bindings
 _This section is normative_
 
 * All compliant [[ref:TRQP Binding]]s **MUST** support the required interfaces described in the Required Interfaces section
 * A compliant [[ref:TRQP Binding]] **MUST** comply with [[ref:TRQP Core]] requirements
 * A compliant [[ref:TRQP Binding]] **MUST** support versioning using [Semantic Versioning 2.0](https://semver.org/)
 
-### TRQP Profiles
+## TRQP Profiles
 _This section is normative_
 
 * All TRQP profiles **MUST** specify a compliant [[ref:TRQP Binding]]
+
+## Error Handling 
 
 ### Error Response Considerations
 
 _this section is normative_
 
-
-
-
-
 #### Query Error Handling Guidelines
 _this section is informative_
 
 This document outlines general guidelines for handling errors in responses to queries within the Trust Registry Query Protocol. The approach described here is abstracted from any specific transport or protocol (such as HTTP) to offer guidance applicable across various implementations.
-
 
 #### General Data Model for Errors
 
@@ -79,14 +46,14 @@ This range has been established to provide more detail in future versions withou
 
 The following `statuscode` values apply to all queries:
 
-| Return Code | Return Message         | Description                   | 
-| ----------- | --------------         | -----------                   |
-| `statuscode`| `message`              | `details`                     |
-| TRQP-0           | success                | Query Completed Successfully  |
-| TRQP-100         | error                  | error (see detail)            |
-| TRQP-200         | notfound               | not found                     |
-| TRQP-300         | unauthorized           | Authorization error           |
-| TRQP-400         | invalidrequest         | Invalid request               |
+| Return Code  | Return Message | Description                  |
+|--------------|----------------|------------------------------|
+| `statuscode` | `message`      | `details`                    |
+| TRQP-0       | success        | Query Completed Successfully |
+| TRQP-100     | error          | error (see detail)           |
+| TRQP-200     | notfound       | not found                    |
+| TRQP-300     | unauthorized   | Authorization error          |
+| TRQP-400     | invalidrequest | Invalid request              |
 
 #### Recommendations for Implementers
 _this section is non-normative_
@@ -117,10 +84,7 @@ sequenceDiagram
 
 **Figure 5:** Sequence diagram showing interactions between a client and Trust Registry for the required interfaces.
 
-
-
-
-### Metadata Query
+### Description(Metadata) Query
 _This section is normative_
 
 #### Metadata Query Models
@@ -143,7 +107,6 @@ _This section is normative_
   - **When:** Request parameters are missing or incorrectly formatted.
   - **Description:** Indicates the request lacks required parameters or contains invalid data.
   - **statuscode:** 400
-
 
 ### Authorization Query
 _This section is normative_
@@ -239,3 +202,6 @@ _This section is normative_
   - **Description:** Indicates essential elements of the recognition request are missing or invalid.  
   - **statuscode:** 400
 
+### Delegation Query
+
+<>
