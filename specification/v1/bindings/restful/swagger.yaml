@@ -127,12 +127,6 @@ Verifies if the ecosystem governing authority identified by 'entity_id" is recog
           description: Unique identifier of the ecosystem governing authority granting authorization.
           schema:
             type: string
-        - name: all
-          in: query
-          required: false
-          description: Whether to return a list of authorizations.
-          schema:
-            type: boolean
         - name: time
           in: query
           required: false
