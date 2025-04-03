@@ -9,21 +9,19 @@ The following [OpenAPI](./swagger.yaml) Document describes the RESTful endpoints
 * The `/registries/{ecosystem_id}/recognition` maps to the RecognitionQuery. 
 * The `/entities/{entity_id}/authorization` maps to the AuthorizationQuery. 
 
-
 ### HTTP Error Code Mapping
 _This section is normative_
 
 The following mapping of error codes to HTTP Status is provided for http-based implementations:
 
-| Return Code       | Return Message          | HTTP Status | HTTP Reason             | 
-| -----------       | --------------          | ----------- | -----------             |
-| `statuscode`      | `message`               |             |                         |
-| 0                 | success                 | 200         | OK                      |
-| 100               | error                   | 500         | Internal Server Error   |
-| 200               | notfound                | 404         | Not Found               |
-| 300               | unauthorized            | 401         | Not Authorized          |
-| 400               | invalidrequest          | 400         | Invalid request         |
-
+| Return Code            | Return Message          | HTTP Status | HTTP Reason             | 
+| -----------            | --------------          | ----------- | -----------             |
+| `statuscode`           | `message`               |             |                         |
+| TRQP-0                 | success                 | 200         | OK                      |
+| TRQP-100               | error                   | 500         | Internal Server Error   |
+| TRQP-200               | notfound                | 404         | Not Found               |
+| TRQP-300               | unauthorized            | 401         | Not Authorized          |
+| TRQP-400               | invalidrequest          | 400         | Invalid request         |
 
 **Additional Information:**
 
