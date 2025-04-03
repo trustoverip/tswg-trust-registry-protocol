@@ -57,7 +57,7 @@ paths:
       tags:
         - trqp
       description: |
-        Verifies if the specified ecosystem (`ecosystem_id`) is recognized under the given governance framework (`egf_id`).
+Verifies if the ecosystem governing authority identified by 'entity_id" is recognized by the ecosystem governing authority identified by 'authority_id"
       operationId: checkEcosystemRecognition
       parameters:
         - name: entity_id
