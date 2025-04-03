@@ -85,7 +85,6 @@ The following `statuscode` values apply to all queries:
 | 0           | success                | Query Completed Successfully  |
 | 100         | error                  | error (see detail)            |
 | 200         | notfound               | not found                     |
-| 201         | notfound:ecosystem_id  | EcosystemID not found (see `TODO` below)        |
 | 300         | unauthorized           | Authorization error           |
 | 400         | invalidrequest         | Invalid request               |
 
