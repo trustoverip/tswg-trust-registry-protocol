@@ -91,7 +91,6 @@ The following `statuscode` values apply to all queries:
 
 `TODO ------------------------------------`
 
-* `QUESTION:` Does 201 add things? From past rounds many may consider this to be a security problem. Error detail on a 200 (vs. 201) can provide detail at the choice of the Trust Registry implementor. 
 * `SUGGESTION:` REMOVE 201 (here and below) and use 200
 
 
