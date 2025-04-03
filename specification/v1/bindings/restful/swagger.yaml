@@ -69,7 +69,7 @@ Verifies if the ecosystem governing authority identified by 'entity_id" is recog
         - name: authority_id
           in: query
           required: true
-          description: Unique identifier of the governance framework. Defaults to single egf_id of the Trust Registry itself.
+          description: Unique identifier of the ecosystem governing authority asserting recognition. Defaults to the ecosystem governing authority of the trust registry (but only if the trust registry serves only a single ecosystem governing authority).
           schema:
             type: string
         - name: time
