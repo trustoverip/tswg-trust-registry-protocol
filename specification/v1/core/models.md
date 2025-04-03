@@ -82,16 +82,11 @@ The following `statuscode` values apply to all queries:
 | Return Code | Return Message         | Description                   | 
 | ----------- | --------------         | -----------                   |
 | `statuscode`| `message`              | `details`                     |
-| 0           | success                | Query Completed Successfully  |
-| 100         | error                  | error (see detail)            |
-| 200         | notfound               | not found                     |
-| 300         | unauthorized           | Authorization error           |
-| 400         | invalidrequest         | Invalid request               |
-
-
-
-
-
+| TRQP-0           | success                | Query Completed Successfully  |
+| TRQP-100         | error                  | error (see detail)            |
+| TRQP-200         | notfound               | not found                     |
+| TRQP-300         | unauthorized           | Authorization error           |
+| TRQP-400         | invalidrequest         | Invalid request               |
 
 #### Recommendations for Implementers
 _this section is non-normative_
