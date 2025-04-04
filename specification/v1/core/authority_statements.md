@@ -1,24 +1,20 @@
 ## Authority Statements
-
-Authority statements are the critical pieces of information stored in trust registries for the benefit of all participants in a digital trust ecosystem. As shown in Figure&nbsp;2, both ecosystem governing authorities and trust registry operators can publish authority statements. The standard structure and vocabulary of TRQP authority statements is defined in [Authority Statements and Query Vocabulary](#authority-statements-and-query-vocabulary).
-
-### Authority Statements and Query Vocabulary
 *This section is normative.*
 
-Authority statements in TRQP are designed to communicate essential information about authorizations, delegations, recognitions, and descriptions (metadata). They share a consistent three-part structure and employ a standardized vocabulary for querying.
+Authority statements are the machine-readable data stored in trust registries to communicate authoritative information about authorizations, delegations, recognitions, and descriptions (metadata).
 
 ### Standard Structure
 
-Interoperability across ecosystems requires shared semantics for querying authority statements. Therefore, TRQP authority statements are structured in three standard parts as shown below:
+To enable interoperability of authority statements across ecosystems, TRQP authority statements are structured in three standard parts as shown in Figure&nbsp;3:
 
 ![images/authority_statements.png](images/authority_statements.png)
 
 *Figure 3: The standard three-part structure of TRQP authority statements*
 
-These three strings are simple yet flexible enough to express all types of authority statements, including authorization, recognition, delegation, and description (metadata), as defined in this section.
+These three strings are simple yet flexible enough to express all types of [[ref:authority statements]]. This standard structure should also enable [[ref:TRQP bridges]] to perform deterministic transformations regardless of the structure of the data in an underlying [[ref:system of record]].
 
 ### Query Vocabulary
 
 :::note
-TODO: Drummond to add text around this note as a reference.
+While this specification defines requirements for the [[ref:authority ID]] and [[ref:entity ID]] components of [[ref: authority statements]], it does not yet specify requirements for the assertion component. The The ToIP Trust Registry Task Force is currently developing standardized query vocabulary to support interoperability of assertions across ecosystems. This query vocabulary may be published in a subsequent draft of this specification or as a separate specification. We invite comments on [the TRQP Query Vocabulary draft currently posted on the ToIP wiki](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/149749777/TRQP+Query+Vocabulary).
 :::
