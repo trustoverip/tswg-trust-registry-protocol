@@ -11,302 +11,6 @@ To be a compatible binding, the following requirements must be met:
 * A compliant [[ref:TRQP Binding]] MUST adhere to the [[ref:TRQP Core]] requirements.
 * A compliant [[ref:TRQP Binding]] MUST support versioning using Semantic Versioning 2.0.
 
-### RESTful Binding
-
-The RESTful binding can be seen in the [api docs](https://trustoverip.github.io/tswg-trust-registry-protocol/api-docs/) or described in the swagger document below: 
-
-<details>
-<summary>Click To View OpenAPI 3.0 Specification</summary>
-
-```yaml
-openapi: 3.0.1
-info:
-  title: TRQP Restful Binding
-  version: 1.0.0
-  description: |
-    This specification defines a RESTful TRQP Binding.
-    It includes endpoints for retrieving Trust Registry metadata,
-    authorization data, verifying entity authorization status,
-    and checking ecosystem recognition.
-servers:
-  - url: https://example-trust-registry.com
-    description: Production server (example)
-
-tags:
-  - name: trqp
-    description: TRQP Compliant Queries
-
-paths:
-  /metadata:
-    get:
-      summary: Retrieve Trust Registry Metadata
-      tags:
-        - trqp
-      description: |
-        Returns Trust Registry Metadata as a JSON object.
-      operationId: getTrustRegistryMetadata
-      parameters:
-        - name: egf_id
-          in: query
-          required: false
-          description: An optional identifier specifying which ecosystem's metadata should be retrieved.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successfully retrieved Trust Registry Metadata.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TrustRegistryMetadata"
-        "404":
-          description: Metadata not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-        "401":
-          description: Unauthorized request.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-
-  /registries/{entity_id}/recognition:
-    get:
-      summary: Check Ecosystem Recognition
-      tags:
-        - trqp
-      description: Verifies if the ecosystem governing authority identified by `entity_id` is recognized by the ecosystem governing authority identified by `authority_id`
-      operationId: checkEcosystemRecognition
-      parameters:
-        - name: entity_id
-          in: path
-          required: true
-          description: Unique identifier of the ecosystem governing authority being recognized.
-          schema:
-            type: string
-        - name: authority_id
-          in: query
-          required: true
-          description: Unique identifier of the ecosystem governing authority asserting recognition. Defaults to the ecosystem governing authority of the trust registry (but only if the trust registry serves only a single ecosystem governing authority).
-          schema:
-            type: string
-        - name: time
-          in: query
-          required: false
-          description: RFC3339 timestamp indicating when recognition is checked. Defaults to "now" on system being queried.
-          schema:
-            type: string
-            format: date-time
-      responses:
-        "200":
-          description: Ecosystem recognition successfully verified.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RecognitionResponse"
-        "401":
-          description: Unauthorized request.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-        "404":
-          description: Ecosystem not recognized or not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-
-  /entities/{entity_id}/authorization:
-    get:
-      summary: Check Entity Authorization Status
-      tags:
-        - trqp
-      description: |
-        Determines if the specified entity (`entity_id`) is authorized under the given authorization identifier (`authorization_id`)
-        within the specified governance framework (`egf_id`). Optionally, returns a list of authorizations if `all` is true.
-      operationId: checkAuthorizationStatus
-      parameters:
-        - name: entity_id
-          in: path
-          required: true
-          description: Unique identifier of the entity.
-          schema:
-            type: string
-        - name: authorization_id
-          in: query
-          required: true
-          description: Authorization identifier to evaluate.
-          schema:
-            type: string
-        - name: authority_id
-          in: query
-          required: true
-          description: Unique identifier of the ecosystem governing authority granting authorization.
-          schema:
-            type: string
-        - name: time
-          in: query
-          required: false
-          description: |
-            ISO8601/RFC3339 timestamp for authorization status evaluation.
-            Defaults to the current time if omitted.
-          schema:
-            type: string
-            format: date-time
-      responses:
-        "200":
-          description: Authorization status successfully retrieved.
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/AuthorizationResponse"
-                  - type: array
-                    items:
-                      $ref: "#/components/schemas/AuthorizationResponse"
-        "404":
-          description: Entity not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-        "401":
-          description: Unauthorized request.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-
-components:
-  schemas:
-    ProblemDetails:
-      type: object
-      description: |
-        A Problem Details object as defined in [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807).
-      properties:
-        type:
-          type: string
-          format: uri
-          description: A URI reference that identifies the problem type.
-        title:
-          type: string
-          description: A short, human-readable summary of the problem.
-        status:
-          type: integer
-          description: The HTTP status code (e.g., 404 for "Not Found").
-        detail:
-          type: string
-          description: A human-readable explanation specific to this occurrence of the problem.
-        instance:
-          type: string
-          format: uri
-          description: A URI reference that identifies the specific occurrence of the problem.
-      additionalProperties: true
-
-    TrustRegistryMetadata:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the Trust Registry.
-        default_egf_id:
-          type: string
-          description: Default EGF, identified by DID, that will be used if none is supplied in various queries.
-          #TODO: review thinking on defaultEGF_DID
-        description:
-          type: string
-          maxLength: 4096
-          description: A description of the Trust Registry.
-        name:
-          type: string
-          description: Human-readable name of the Trust Registry.
-        controllers:
-          type: array
-          description: List of unique identifiers representing the controllers of the Trust Registry.
-          items:
-            type: string
-          minItems: 1
-      required:
-        - id
-        - description
-        - name
-        - controllers
-
-    AuthorizationResponse:
-      type: object
-      properties:
-        egf_id:
-          type: string
-          description: EGF DID this authorization response relates to.
-        recognized:
-          type: boolean
-          description: Indicates whether the entity is recognized by the Trust Registry.
-        authorized:
-          type: boolean
-          description: Specifies whether the entity is authorized under the provided authorization ID.
-        message:
-          type: string
-          description: Additional context or information regarding the authorization status.
-        evaluated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the authorization status was evaluated.
-        response_time:
-          type: string
-          format: date-time
-          description: Timestamp when the response was generated.
-        expiry_time:
-          type: string
-          format: date-time
-          description: Timestamp when the authorization status expires (if applicable).
-        jws:
-          type: string
-          description: Signed response object as specified in [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515) from the controller of the Trust Registry.
-      required:
-        - recognized
-        - authorized
-        - message
-        - evaluated_at
-        - response_time
-
-    RecognitionResponse:
-      type: object
-      properties:
-        recognized:
-          type: boolean
-          description: Indicates whether the ecosystem ID is recognized by the Trust Registry.
-        message:
-          type: string
-          description: Additional information regarding the recognition status.
-        egf_id:
-          type: string
-          description: EGF DID this recognition applies to.
-        evaluated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the recognition status was evaluated.
-        response_time:
-          type: string
-          format: date-time
-          description: Timestamp when the response was generated.
-        expiry_time:
-          type: string
-          format: date-time
-          description: Timestamp when the recognition status expires (if applicable).
-        jws:
-          type: string
-          description: Signed response object as specified in [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515) from the controller of the Trust Registry.
-      required:
-        - recognized
-        - message
-        - evaluated_at
-        - response_time
-```
-</details>
-
 ## Error Handling 
 
 ### Error Response Considerations
@@ -343,9 +47,6 @@ without breaking compatibility:
 | TRQP-200    | notfound       | not found                    |
 | TRQP-300    | unauthorized   | Authorization error          |
 | TRQP-400    | invalidrequest | Invalid request              |
-
-
-Below is the complete specification in Markdown format. You can copy and paste this into your Markdown file.
 
 ## Queries
 
@@ -417,13 +118,13 @@ Example Request:
 
 ### Authorization Status Table
 
-| Authorization | Status          | Description                                                    |
-|---------------|-----------------|----------------------------------------------------------------|
-|               | authorized      | The entity holds the requested authorization.                  | 
-|               | not-authorized  | The entity does not hold the requested authorization.          | 
-|               | revoked         | The authorization was previously granted but has been revoked. | 
-|               | unknown-subject | The entity is not recognized or does not exist.                | 
-|               | error           | An error occurred while evaluating the authorization query.    | 
+| Authorization  Status | Description                                                    |
+|-----------------------|----------------------------------------------------------------|
+| authorized            | The entity holds the requested authorization.                  |
+| not-authorized        | The entity does not hold the requested authorization.          |
+| revoked               | The authorization was previously granted but has been revoked. |
+| unknown-subject       | The entity is not recognized or does not exist.                |
+| error                 | An error occurred while evaluating the authorization query.    |
 
 
 * Optional Fields: Additional details, such as validity information or supporting proof references, MAY be included.
@@ -470,7 +171,8 @@ ecosystem governing authority as a peer.
 ```
 
 #### Response
-	•	Recognition Status: MUST be one of the following:
+
+* Recognition Status: MUST be one of the following:
 
 #### Recognition Status Table
 
@@ -478,7 +180,7 @@ ecosystem governing authority as a peer.
 | accepted           | The recognition relationship is confirmed. |
 | rejected           | The recognition relationship is denied.    |
 
-	•	Optional Fields: Additional supporting details such as proof references or log entries MAY be included.
+* Optional Fields: Additional supporting details such as proof references or log entries MAY be included.
 
 Behavior:
 
@@ -520,12 +222,13 @@ Example Request:
 ```
 
 ##### Response
-	•	Delegation Status: MUST be one of the following:
-	•	delegated
-	•	not-delegated
-	•	revoked
-	•	error
-	•	Optional Fields: Additional details or supporting information regarding the delegation MAY be included.
+* Delegation Status: MUST be one of the following:
+  * delegated
+  * not-delegated
+  * revoked
+  * error
+
+* Optional Fields: Additional details or supporting information regarding the delegation MAY be included.
 
 Delegation Query Errors
 
