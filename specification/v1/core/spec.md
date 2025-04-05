@@ -199,7 +199,10 @@ For additional assurance, it is RECOMMENDED to use multi-anchoring of identifier
 
 1. A TRQP-compliant digital trust ecosystem as a logical governance entity MUST have a globally unique identifier (the “ecosystem ID”).  
 2. The domain name records, cryptographic keys, or other controls for the ecosystem ID MUST be controlled by the ecosystem governing authority.  
-3. The ecosystem ID MUST be used as an authority ID in TRQP authority statements for which the ecosystem governing authority is the authority.
+3. The ecosystem ID MUST:
+   - Be used as an authority ID in TRQP authority statements for which the ecosystem governing authority is the authority.
+   - Enable discoverability of the Ecosystem Governance Framework. 
+   - Enable discoverability of the authorized trust registries serving that ecosystem. 
 
 ### Trust Registry IDs
 
@@ -208,6 +211,7 @@ For additional assurance, it is RECOMMENDED to use multi-anchoring of identifier
    1. The ecosystem governing authority, or  
    2. An independent trust registry operator delegated by the ecosystem governing authority.  
 3. The trust registry ID MUST be used as an authority ID in TRQP authority statements for which the trust registry operator is the authority.
+4. The trust regsitry ID MUST enable discoverability of the TRQP endpoints.
 
 ### Authority IDs
 
