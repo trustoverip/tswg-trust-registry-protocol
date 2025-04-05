@@ -42,11 +42,11 @@ without breaking compatibility:
 
 | Status Code | Return Message | Details                      |
 |-------------|----------------|------------------------------|
-| TRQP-0      | success        | Query completed successfully |
+| TRQP-0      | success        | query completed successfully |
 | TRQP-100    | error          | error                        |
 | TRQP-200    | notfound       | not found                    |
-| TRQP-300    | unauthorized   | Authorization error          |
-| TRQP-400    | invalidrequest | Invalid request              |
+| TRQP-300    | unauthorized   | authorization error          |
+| TRQP-400    | invalidrequest | invalid request              |
 
 ## Queries
 
@@ -57,9 +57,11 @@ This section defines the query types available under the TRQP Binding. Each quer
 3. **Ecosystem Recognition Query**  
 4. **Delegation Query**
 
-### Description (Metadata) Query
+### Metadata (Description) Query
 
-#### Metadata Query Models
+The metadata query supports descriptive information about an ecosystem or a
+registry. If no ecosystem is provided, it's default behavior is to provide
+information about the registry itself. It is expected for the [[ref:TRQP Profile]] to define the payloads in more detail.
 
 #### Request Parameters Table
 
@@ -73,26 +75,24 @@ This section defines the query types available under the TRQP Binding. Each quer
 { "ecosystem_id": "ecosystem A" }
 ```
 
-##### Response
+#### Response
 
-* Fields:
-  * ecosystem_id (string): If an ecosystem_id is provided, the response MUST clearly reflect that the returned metadata is scoped to the specified ecosystem (e.g., by including an explicit reference such as “ecosystem A”).
+Response model is left to the [[ref:TRQP Profile]] and [[TRQP:Binding]] to define. The RESTful binding allows an arbitrary JSON response.
 
+#### Metadata Query Errors
 
-##### Metadata Query Errors
+| Error Name                     | When                                              | Description                                                                    | Status Code |
+|--------------------------------|---------------------------------------------------|--------------------------------------------------------------------------------|-------------|
+| Ecosystem Identifier Not Found | The provided ecosystem identifier does not exist. | Indicates that the ecosystem identifier specified was not found.               | TRQP-201    |
+| Malformed Request	Request   | parameters are missing or incorrectly formatted.  | Indicates that the request lacks required parameters or contains invalid data. | TRQP-400    |
 
-| Error Name                     | When                                              | Description	Status Code                                                     |     |
-|--------------------------------|---------------------------------------------------|--------------------------------------------------------------------------------|-----|
-| Ecosystem Identifier Not Found | The provided ecosystem identifier does not exist. | Indicates that the ecosystem identifier specified was not found.               | 201 |
-| Malformed Request	Request   | parameters are missing or incorrectly formatted.  | Indicates that the request lacks required parameters or contains invalid data. | 400 |
-
-#### Authorization Query
+### Authorization Query
 
 In an authorization statement, an authority grants an authorization to an entity
 under its authority. In the ToIP governance model, this entity is called a
-governed party. This query serves the authority statements of the ecosystem. 
+governed party. This query serves the authorization statements of the ecosystem. 
 
-##### Request Parameters Table
+#### Request Parameters Table
 
 | Parameter        | Type   | Required? | Description                                                              | Example                |
 |------------------|--------|-----------|--------------------------------------------------------------------------|------------------------|
@@ -112,11 +112,13 @@ Example Request:
 }
 ```
 
-##### Response
+#### **Response**
 
-* Authorization Status: MUST be one of the following:
+* TRQP bindings MUST return the Authorization Status of the entry. 
 
-### Authorization Status Table
+The Status Table below describes possible statuses. The response **MUST** have one of the following statuses:
+
+**Authorization Status Table**
 
 | Authorization  Status | Description                                                    |
 |-----------------------|----------------------------------------------------------------|
@@ -127,44 +129,46 @@ Example Request:
 | error                 | An error occurred while evaluating the authorization query.    |
 
 
-* Optional Fields: Additional details, such as validity information or supporting proof references, MAY be included.
+Additional details, such as validity information or supporting proof references,
+MAY be included in the response as per the binding and profile requirements.
 
-#### Behavior:
-The system MUST clearly indicate whether the subject holds the specified authorization at the evaluated time.
+**Required Behavior**
+
+The system MUST clearly indicate whether the subject holds the specified
+authorization at the evaluated time. If no `time` is provided, `time` SHOULD be
+evaluated as the time the request was received by the registry.
 
 #### Authorization Query Errors
 
 | Error Name                   | When                                                        | Description                                                                        | Status Code |
 |------------------------------|-------------------------------------------------------------|------------------------------------------------------------------------------------|-------------|
-| Ecosystem ID Not Found       | The specified ecosystem identifier is not recognized.       | Indicates that the ecosystem identifier does not exist.                            | 201         |
-| Invalid Authorization Type   | The provided authorization type does not match known types. | Indicates that the authorization type specified is invalid.                        | 200         |
-| Authorization Type Not Found | The provided authorization type is not available.           | Indicates that the authorization type specified is not found.                      | 200         |
-| Unknown Entity ID            | The provided entity identifier does not exist in records.   | Indicates that the entity ID is unknown.                                           | 200         |
-| Invalid Time Requested       | The time parameter is invalid or incorrectly formatted.     | Indicates that the requested time does not conform to the expected RFC3339 format. | 400         |
+| Ecosystem ID Not Found       | The specified ecosystem identifier is not recognized.       | Indicates that the ecosystem identifier does not exist.                            | TRQP-201         |
+| Invalid Authorization Type   | The provided authorization type does not match known types. | Indicates that the authorization type specified is invalid.                        | TRQP-200         |
+| Authorization Type Not Found | The provided authorization type is not available.           | Indicates that the authorization type specified is not found.                      | TRQP-200         |
+| Unknown Entity ID            | The provided entity identifier does not exist in records.   | Indicates that the entity ID is unknown.                                           | TRQP-200         |
+| Invalid Time Requested       | The time parameter is invalid or incorrectly formatted.     | Indicates that the requested time does not conform to the expected RFC3339 format. | TRQP-400         |
 
 
 ### Ecosystem Recognition Query
 
 In a recognition statement, one ecosystem governing authority recognizes another
-ecosystem governing authority as a peer.
-
-#### Ecosystem Recognition Models
+ecosystem governing authority as a peer. The following query shares the recognition status. 
 
 #### Request Parameters Table
 
-| Parameter           | Type   | Required? | Description                                                                                             | Example                |
-|---------------------|--------|-----------|---------------------------------------------------------------------------------------------------------|------------------------|
-| ecosystem_id        | string | Yes       | The identifier for the requesting ecosystem as defined in the TRQP Binding.                             | “ecosystem A”          |
-| target_ecosystem_id | string | Optional  | Another ecosystem identifier against which recognition is being evaluated.                              | “ecosystem B”          |
-| scope               | string | Optional  | A filter or context to narrow the recognition query; specific structure defined by individual profiles. | “financial-services”   |
-| time                | string | Optional  | A timestamp in RFC3339 UTC format indicating when to evaluate the recognition query.                    | “2025-04-01T00:00:00Z” |
+| Parameter    | Type   | Required? | Description                                                                                             | Example                |
+|--------------|--------|-----------|---------------------------------------------------------------------------------------------------------|------------------------|
+| authority_id | string | Yes       | The identifier for the requesting ecosystem as defined in the TRQP Binding.                             | “ecosystem A”          |
+| entity_id    | string | Optional  | Another ecosystem identifier against which recognition is being evaluated.                              | “ecosystem B”          |
+| scope        | string | Optional  | A filter or context to narrow the recognition query; specific structure defined by individual profiles. | “financial-services”   |
+| time         | string | Optional  | A timestamp in RFC3339 UTC format indicating when to evaluate the recognition query.                    | “2025-04-01T00:00:00Z” |
 
-#### Example Request:
+**Example Request:**
 
 ```json
 {
-  "ecosystem_id": "ecosystem A",
-  "target_ecosystem_id": "ecosystem B",
+  "authority_id": "ecosystem A",
+  "entity_id": "ecosystem B",
   "scope": "financial-services",
   "time": "2025-04-01T00:00:00Z"
 }
@@ -172,36 +176,39 @@ ecosystem governing authority as a peer.
 
 #### Response
 
-* Recognition Status: MUST be one of the following:
+Recognition Status: MUST be one of the following:
 
-#### Recognition Status Table
+**Recognition Status Table**
 
 | Recognition Status | Description                                |
-| accepted           | The recognition relationship is confirmed. |
-| rejected           | The recognition relationship is denied.    |
+|--------------------|--------------------------------------------|
+| recognized         | The recognition relationship is confirmed. |
+| not-recognized     | The recognition relationship is denied.    |
 
 * Optional Fields: Additional supporting details such as proof references or log entries MAY be included.
 
-Behavior:
+**Behavior:**
 
 The system MUST return a clear yes/no answer regarding ecosystem recognition and MAY provide further explanatory details as specified in the TRQP Binding.
 
-### Ecosystem Recognition Query Errors
+#### Ecosystem Recognition Query Errors
 
 | Error Name                    | When                                                        | Description                                                                        | Status Code |
 |-------------------------------|-------------------------------------------------------------|------------------------------------------------------------------------------------|-------------|
-| Ecosystem ID Not Found        | The requesting ecosystem identifier is not recognized.      | Indicates that the source ecosystem is not registered.                             | 201         |
-| Target Ecosystem ID Not Found | The target ecosystem identifier is unknown or unrecognized. | Indicates that the target ecosystem does not exist.                                | 200         |
-| Scope Not Found               | The specified scope does not match any known context.       | Indicates that the target ecosystem or scope is not found.                         | 200         |
-| Malformed Recognition Request | Request parameters are incomplete or incorrectly formatted. | Indicates that essential elements of the recognition query are missing or invalid. | 400         |
+| Authority ID Not Found        | The requesting authority identifier is not recognized.      | Indicates that the authority id is not registered.                                 | TRQP-201    |
+| Entity ID Not Found           | The entity id  is unknown or unrecognized.                  | Indicates that the entity id  does not exist.                                      | TRQP-200    |
+| Scope Not Found               | The specified scope does not match any known context.       | Indicates that the target ecosystem or scope is not found.                         | TRQP-200    |
+| Malformed Recognition Request | Request parameters are incomplete or incorrectly formatted. | Indicates that essential elements of the recognition query are missing or invalid. | TRQP-400    |
 
-#### Delegation Query
+### Delegation Query
 
-Note: The specifics of the Delegation Query model are pending further details. The following serves as a placeholder specification and should be expanded as additional requirements become available.
+:::note
+The specifics of the Delegation Query model are pending further details.
+The following serves as a placeholder specification and should be expanded as
+additional requirements become available.
+:::
 
-Delegation Query Models
-
-Request Parameters Table
+#### Request Parameters Table
 
 | Parameter	Type | Required? | Description | Example                                                                       |                        |
 |-------------------|-----------|-------------|-------------------------------------------------------------------------------|------------------------|
@@ -221,16 +228,18 @@ Example Request:
 }
 ```
 
-##### Response
+#### Response
 * Delegation Status: MUST be one of the following:
-  * delegated
-  * not-delegated
-  * revoked
-  * error
 
-* Optional Fields: Additional details or supporting information regarding the delegation MAY be included.
+| Delegation Status | Description                               |
+|-------------------|-------------------------------------------|
+| delegated         | The delegation relationship is confirmed. |
+| not-delegated     | The is no delegation relationship         |
+| revoked           | The delegation relationship was revoked   |
 
-Delegation Query Errors
+Additional details or supporting information regarding the delegation MAY be included per the binding.
+
+#### Delegation Query Errors
 
 | Error Name                   | When                                                     | Description                                                                                    | Status Code |
 |------------------------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------|-------------|
