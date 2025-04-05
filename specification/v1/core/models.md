@@ -76,7 +76,7 @@ This section defines the query types available under the TRQP Binding. Each quer
 ##### Response
 
 * Fields:
-  * id (string): Uniquely identifies the registry. If an ecosystem_id is provided, the response MUST clearly reflect that the returned metadata is scoped to the specified ecosystem (e.g., by including an explicit reference such as “ecosystem A”).
+  * ecosystem_id (string): If an ecosystem_id is provided, the response MUST clearly reflect that the returned metadata is scoped to the specified ecosystem (e.g., by including an explicit reference such as “ecosystem A”).
 
 
 ##### Metadata Query Errors
