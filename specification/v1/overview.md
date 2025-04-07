@@ -2,7 +2,7 @@
 ==================
 
 - **Specification Version:** 2.0
-- **Document Status:** Working Draft 02
+- **Document Status:** Public Review 01
 
 **Participate:**
 ~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
