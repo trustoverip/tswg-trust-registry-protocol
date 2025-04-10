@@ -1,6 +1,6 @@
 # specification-template
 
-This specification is basked on the [Trust Over IP Specification Template](https://github.com/trustoverip/specification-template).
+This specification is based on the [Trust Over IP Specification Template](https://github.com/trustoverip/specification-template).
 
 The spec is written using [SpecUp](https://github.com/decentralized-identity/spec-up) which is maintained by the Decentralized Identity Foundation. 
 
