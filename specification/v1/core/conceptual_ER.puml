@@ -35,7 +35,7 @@ entity EntityAuths {
     * authorizationID
 }
 
-entity hackedEntityAuthQuery {
+entity EntityAuthQuery {
     * entityID <<FK>>
     * authorizationID <<FK>>
     * ecosystemID <<FK>>
@@ -53,9 +53,9 @@ entities }|..|| EntityAuths
 authorizations }|..|| EntityAuths
 
 ' the main (hacked) QUERY
-entities }|..|| hackedEntityAuthQuery
-EntityAuths }|..|| hackedEntityAuthQuery
-ecosystem }|..|| hackedEntityAuthQuery
+entities }|..|| EntityAuthQuery
+EntityAuths }|..|| EntityAuthQuery
+ecosystem }|..|| EntityAuthQuery
 
 '' ///// below here is the EGF deeper linkages allowing 1:N for Ecosystem:EGF
 
