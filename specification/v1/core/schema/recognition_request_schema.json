@@ -1,0 +1,36 @@
+{
+  "$id": "trqp-recognition-request",
+  "title": "TRQP Recognition Request",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "assertion_id",
+    "authority_id"
+  ],
+  "properties": {
+    "entity_id": {
+        "type": "string",
+        "$comment": "The Entity being queried about. "
+    },
+    "authority_id": {
+        "type": "string",
+        "$comment": "The Authority being queried."
+    }, 
+    "assertion_id": {
+        "type": "string",
+        "$comment": "the assertion being queried - Does entity_id have assertion_id according to authority_id"
+    },
+    "context": {
+        "type": "object",
+        "properties": {
+            "time": {
+                "type": "string",
+                "$comment": "time for query to use. If blank, uses current server time. RFC_____ TODO"
+            }
+        },
+        "additionalProperties": {
+            "type": "string"
+        }
+    }
+  }
+}

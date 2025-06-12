@@ -1,0 +1,36 @@
+{
+  "$id": "trqp-authorization-request",
+  "title": "TRQP Authorization Request",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "assertion_id",
+    "authority_id"
+  ],
+  "properties": {
+    "entity_id": {
+        "type": "string",
+        "$comment": "TODO"
+    },
+    "authority_id": {
+        "type": "string",
+        "$comment": "TODO"
+    }, 
+    "assertion_id": {
+        "type": "string",
+        "$comment": "TODO"
+    },
+    "context": {
+        "type": "object",
+        "properties": {
+            "time": {
+                "type": "string",
+                "$comment": "time for query to use. If blank, uses current server time. RFC_____ TODO"
+            }
+        },
+        "additionalProperties": {
+            "type": "string"
+        }
+    }
+  }
+}
