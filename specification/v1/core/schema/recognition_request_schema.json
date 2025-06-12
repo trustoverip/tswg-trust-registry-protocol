@@ -25,7 +25,14 @@
         "properties": {
             "time": {
                 "type": "string",
-                "$comment": "time for query to use. If blank, uses current server time. RFC_____ TODO"
+                "$comment": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset.",
+                "example": 
+                [ 
+                    {
+                    "time": "1985-04-12T23:20:50.52Z"
+                    }
+                ]
+
             }
         },
         "additionalProperties": {
