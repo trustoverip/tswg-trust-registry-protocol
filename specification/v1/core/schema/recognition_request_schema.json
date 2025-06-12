@@ -10,22 +10,23 @@
   "properties": {
     "entity_id": {
         "type": "string",
-        "$comment": "The Entity being queried about. "
+        "description": "The Entity being queried about. "
     },
     "authority_id": {
         "type": "string",
-        "$comment": "The Authority being queried."
+        "description": "The Authority being queried."
     }, 
     "assertion_id": {
         "type": "string",
-        "$comment": "the assertion being queried - Does entity_id have assertion_id according to authority_id"
+        "description": "the assertion being queried - Does entity_id have assertion_id according to authority_id"
     },
     "context": {
         "type": "object",
         "properties": {
             "time": {
                 "type": "string",
-                "$comment": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset.",
+                "format": "date-time",
+                "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset.",
                 "example": 
                 [ 
                     {
