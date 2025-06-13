@@ -1,6 +1,6 @@
 {
-  "$id": "trqp-authorization-request",
-  "title": "TRQP Authorization Request",
+  "$id": "trqp-request",
+  "title": "TRQP Request",
   "type": "object",
   "required": [
     "entity_id",

@@ -1,6 +1,6 @@
 {
-  "$id": "trqp-authorization-response",
-  "title": "TRQP Authorization Response",
+  "$id": "trqp-response",
+  "title": "TRQP Response",
   "type": "object",
   "required": [
     "entity_id",
@@ -16,7 +16,7 @@
     },
     "authority_id": {
         "type": "string",
-        "description": "TODO"
+        "description": "The id of the Authority entity"
     }, 
     "assertion_id": {
         "type": "string",
