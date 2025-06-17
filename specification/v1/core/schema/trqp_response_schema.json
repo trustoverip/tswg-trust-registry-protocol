@@ -20,7 +20,7 @@
     }, 
     "assertion_id": {
         "type": "string",
-        "description": "TODO"
+        "description": "The identifier of the claim type being made against the entity_id"
     },
     "assertion_verified": {
         "type" : "boolean",
