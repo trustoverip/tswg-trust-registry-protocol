@@ -12,7 +12,7 @@
   "properties": {
     "entity_id": {
         "type": "string",
-        "description": "TODO"
+        "description": "The identifier of the subject of the authorization"
     },
     "authority_id": {
         "type": "string",
