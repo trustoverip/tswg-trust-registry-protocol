@@ -38,6 +38,7 @@
     },
     "message": {
         "type": "string"
+        "description": "additional details attached to the response about the assertion"
     },
     "context": {
         "type": "object",
