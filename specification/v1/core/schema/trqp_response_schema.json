@@ -16,7 +16,7 @@
     },
     "authority_id": {
         "type": "string",
-        "description": "The id of the Authority entity"
+        "description": "The id of the Authority entity."
     }, 
     "assertion_id": {
         "type": "string",
