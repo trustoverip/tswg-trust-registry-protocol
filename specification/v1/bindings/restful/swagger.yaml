@@ -51,6 +51,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetails"
 
+
   /registries/{entity_id}/recognition:
     get:
       summary: Check Ecosystem Recognition
@@ -194,7 +195,6 @@ components:
         default_egf_id:
           type: string
           description: Default EGF, identified by DID, that will be used if none is supplied in various queries.
-          #TODO: review thinking on defaultEGF_DID
         description:
           type: string
           maxLength: 4096
@@ -283,3 +283,4 @@ components:
         - message
         - evaluated_at
         - response_time
+
