@@ -123,7 +123,7 @@ Content-Type: application/json
 
 The Authorization API asks “Does **entity\_id** hold **assertion\_id** according to **authority\_id** under **context**?”
 
-### AuthorizationRequest {#authorization-request}
+### AuthorizationRequest 
 
 ```json
 {
