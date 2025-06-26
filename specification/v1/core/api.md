@@ -1,8 +1,8 @@
-## Recognition API {#recognition-api}
+## Recognition API 
 
 The Recognition API asks “Is **entity\_id** recognized by **authority\_id** for **assertion\_id** under **context**?”
 
-### RecognitionRequest {#recognition-request}
+### RecognitionRequest 
 
 ```json
 {
@@ -57,7 +57,7 @@ Content-Type: application/json
 }
 ```
 
-### RecognitionResponse {#recognition-response}
+### RecognitionResponse
 
 ```json
 {
@@ -119,7 +119,7 @@ Content-Type: application/json
 
 ---
 
-# Authorization API {#authorization-api}
+# Authorization API 
 
 The Authorization API asks “Does **entity\_id** hold **assertion\_id** according to **authority\_id** under **context**?”
 
@@ -178,7 +178,7 @@ Content-Type: application/json
 }
 ```
 
-### AuthorizationResponse {#authorization-response}
+### AuthorizationResponse
 
 ```json
 {

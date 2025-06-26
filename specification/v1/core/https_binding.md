@@ -1,4 +1,4 @@
-## HTTPS Binding {#https-binding}
+## HTTPS Binding 
 
 This section shows how to carry the Recognition and Authorization calls over HTTPS with JSON.
 
