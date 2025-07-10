@@ -72,7 +72,7 @@ Content-Type: application/json
   "properties": {
     "entity_id":      { "type":"string", "description":"Queried entity." },
     "authority_id":   { "type":"string", "description":"Queried authority." },
-    "scope_id":       { "type":"string", "description":"Scope of the recognition" },
+    "assertion_id":       { "type":"string", "description":"Scope of the recognition" },
     "recognized":     { "type":"boolean", "description":"True if recognized." },
     "message": {
       "type":"string",
@@ -91,10 +91,8 @@ Content-Type: application/json
 {
   "entity_id":      "service-42",
   "authority_id":   "auth-master",
-  "scope_id":       "peer-recognition",
+  "assertion_id":       "peer-recognition",
   "recognized":     true,
-  "time_requested": "2025-06-19T10:00:00Z",
-  "time_evaluated": "2025-06-19T10:00:00Z",
   "message":        "Service-42 is recognized by auth-master.",
 }
 ```
