@@ -18,3 +18,4 @@ These three strings are simple yet flexible enough to express all types of [[ref
 While this specification defines requirements for the [[ref:authority ID]] and [[ref:entity ID]] components of [[ref: authority statements]], it does not yet specify requirements for the assertion component. The The ToIP Trust Registry Task Force is currently developing standardized query vocabulary to support interoperability of assertions across ecosystems. This query vocabulary may be published in a subsequent draft of this specification or as a separate specification. We invite comments on [the TRQP Query Vocabulary draft currently posted on the ToIP wiki](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/149749777/TRQP+Query+Vocabulary).
 :::
 
+
