@@ -37,7 +37,7 @@
         "description": "the server time that was used in the query."
     },
     "message": {
-        "type": "string"
+        "type": "string",
         "description": "additional details attached to the response about the assertion"
     },
     "context": {
