@@ -19,7 +19,7 @@ All HTTPS calls **MUST** include:
 ### HTTPS Recognition Request
 
 ```http
-POST /v1/recognition HTTP/1.1
+POST /v2/recognition HTTP/1.1
 Host: registry.example.com
 Content-Type: application/json
 Authorization: Bearer eyJ...
@@ -67,7 +67,7 @@ Error conditions (e.g. malformed JSON, unauthorized, not found) are signaled via
 ### HTTPS Authorization Request
 
 ```http
-POST /v1/authorization HTTP/1.1
+POST /v2/authorization HTTP/1.1
 Host: registry.example.com
 Content-Type: application/json
 Authorization: Bearer eyJ...

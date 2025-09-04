@@ -27,13 +27,13 @@ jobs:
           apt-get update && apt-get install -y curl
 
           # Copy OpenAPI specs to working directory
-          cp -r specification/v1/bindings/restful/swagger.yaml ./
+          cp -r specification/v2/bindings/restful/swagger.yaml ./
 
           # Validate OpenAPI specs (using trqp.yaml or swagger.yaml as needed)
-          if [ -f ./specification/v1/bindings/restful/swagger.yaml ]; then
-            SPEC_FILE="./specification/v1/bindings/restful/swagger.yaml"
+          if [ -f ./specification/v2/bindings/restful/swagger.yaml ]; then
+            SPEC_FILE="./specification/v2/bindings/restful/swagger.yaml"
           else
-            SPEC_FILE="./specification/v1/bindings/restful/swagger.yaml"
+            SPEC_FILE="./specification/v2/bindings/restful/swagger.yaml"
           fi
           swagger-cli validate $SPEC_FILE
 
