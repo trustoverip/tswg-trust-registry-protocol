@@ -4,47 +4,17 @@ The Recognition API asks “Is **entity\_id** recognized by **authority\_id** fo
 
 ### RecognitionRequest 
 
+The RecognitionRequest JSON Schema file is located here: TODO
+
 ```json
-{
-  "$id": "trqp-recognition-request",
-  "title": "RecognitionRequest",
-  "type": "object",
-  "required": ["entity_id","authority_id"],
-  "properties": {
-    "entity_id": {
-      "type": "string",
-      "description": "The entity being recognized."
-    },
-    "authority_id": {
-      "type": "string",
-      "description": "The authority asserting recognition."
-    },
-    "assertion_id": {
-      "type": "string",
-      "description": "The specific recognition relationship or claim."
-    },
-    "context": {
-      "type": "object",
-      "description": "Optional parameters influencing evaluation.",
-      "properties": {
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "RFC3339 timestamp; defaults to server time."
-        }
-      },
-      "additionalProperties": {
-        "type": "string"
-      }
-    }
-  }
-}
+[[insert: ./specification/v2/core/schema/trqp_recognition_request.schema.json]]
 ```
+
 
 **Example request:**
 
 ```http
-POST /v1/recognition
+POST /recognition
 Content-Type: application/json
 
 {
@@ -60,27 +30,9 @@ Content-Type: application/json
 ### RecognitionResponse
 
 ```json
-{
-  "$id": "trqp-recognition-response",
-  "title": "RecognitionResponse",
-  "type": "object",
-  "required": [
-    "entity_id",
-    "authority_id",
-    "recognized",
-  ],
-  "properties": {
-    "entity_id":      { "type":"string", "description":"Queried entity." },
-    "authority_id":   { "type":"string", "description":"Queried authority." },
-    "assertion_id":       { "type":"string", "description":"Scope of the recognition" },
-    "recognized":     { "type":"boolean", "description":"True if recognized." },
-    "message": {
-      "type":"string",
-      "description":"Optional human-readable details."
-    }
-  }
-}
+[[insert: ./specification/v2/core/schema/trqp_recognition_response.schema.json]]
 ```
+
 
 **Example response:**
 
@@ -106,46 +58,14 @@ The Authorization API asks “Does **entity\_id** hold **assertion\_id** accordi
 ### AuthorizationRequest 
 
 ```json
-{
-  "$id": "trqp-authorization-request",
-  "title": "AuthorizationRequest",
-  "type": "object",
-  "required": ["entity_id","authority_id","assertion_id"],
-  "properties": {
-    "entity_id": {
-      "type": "string",
-      "description": "The entity being queried."
-    },
-    "authority_id": {
-      "type": "string",
-      "description": "The authority making the claim."
-    },
-    "assertion_id": {
-      "type": "string",
-      "description": "The specific claim or right to evaluate."
-    },
-    "context": {
-      "type": "object",
-      "description": "Optional parameters influencing evaluation.",
-      "properties": {
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "RFC3339 timestamp; defaults to server time."
-        }
-      },
-      "additionalProperties": {
-        "type": "string"
-      }
-    }
-  }
-}
+[[insert: ./specification/v2/core/schema/trqp_authorization_request.schema.json]]
 ```
+
 
 **Example request:**
 
 ```http
-POST /v1/authorization
+POST /authorization
 Content-Type: application/json
 
 {
@@ -161,44 +81,9 @@ Content-Type: application/json
 ### AuthorizationResponse
 
 ```json
-{
-  "$id": "trqp-authorization-response",
-  "title": "AuthorizationResponse",
-  "type": "object",
-  "required": [
-    "entity_id",
-    "authority_id",
-    "assertion_id",
-    "assertion_verified",
-  ],
-  "properties": {
-    "entity_id": {
-      "type":"string",
-      "description":"Queried entity."
-    },
-    "authority_id": {
-      "type":"string",
-      "description":"Queried authority."
-    },
-    "assertion_id": {
-      "type":"string",
-      "description":"Queried claim."
-    },
-    "assertion_verified": {
-      "type":"boolean",
-      "description":"True if the claim holds."
-    },
-    "time": {
-      "type":"string","format":"date-time",
-      "description":"Client time, if supplied."
-    },
-    "message": {
-      "type":"string",
-      "description":"Optional human-readable details."
-    }
-  }
-}
+[[insert: ./specification/v2/core/schema/trqp_authorization_response.schema.json]]
 ```
+
 
 **Example response:**
 
@@ -214,5 +99,5 @@ Content-Type: application/json
   "time":               "2025-06-19T11:30:00Z",
   "message":            "User-1234 holds the admin role.",
 }
-
+``` 
 
