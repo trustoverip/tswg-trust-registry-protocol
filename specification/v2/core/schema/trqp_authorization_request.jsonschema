@@ -1,0 +1,37 @@
+{
+    "$id": "trqp-authorization-request",
+    "title": "AuthorizationRequest",
+    "type": "object",
+    "required": [
+        "entity_id",
+        "assertion_id",
+        "authority_id"
+    ],
+    "properties": {
+        "entity_id": {
+            "type": "string",
+            "description": "The identifier of the subject the assertion is made for."
+        },
+        "authority_id": {
+            "type": "string",
+            "description": "The Authority being queried."
+        },
+        "assertion_id": {
+            "type": "string",
+            "description": "the assertion being queried - Does entity_id have assertion_id according to authority_id"
+        },
+        "context": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+                }
+            },
+            "additionalProperties": {
+                "type": "string"
+            }
+        }
+    }
+}

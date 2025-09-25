@@ -1,0 +1,57 @@
+{
+  "$id": "trqp-authorization-response",
+  "title": "AuthorizationResponse",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "assertion_id",
+    "authority_id",
+    "time_evaluated",
+    "assertion_verified"
+  ],
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "description": "The identifier of the subject of the authorization."
+    },
+    "authority_id": {
+      "type": "string",
+      "description": "The id of the Authority entity."
+    },
+    "assertion_id": {
+      "type": "string",
+      "description": "The identifier of the claim type being made against the entity_id."
+    },
+    "assertion_verified": {
+      "type": "boolean",
+      "description": "True if the assertion has been verified, false otherwise."
+    },
+    "time_requested": {
+      "type": "string",
+      "format": "date-time",
+      "description": "the server time that was requested (may be blank)."
+    },
+    "time_evaluated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "the server time that was used in the query."
+    },
+    "message": {
+      "type": "string",
+      "description": "additional details attached to the response about the assertion"
+    },
+    "context": {
+      "type": "object",
+      "description": "the context object that was supplied for the query that was evaluated",
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}
