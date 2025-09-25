@@ -2,7 +2,7 @@
     "specs": [
         {
             "title": "ToIP Trust Query Registry Protocol Overview",
-            "spec_directory": "./specification/v1",
+            "spec_directory": "./specification/v2",
             "output_path": "./dist",
             "markdown_paths": [
                 "overview.md",
