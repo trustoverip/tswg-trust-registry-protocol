@@ -7,7 +7,7 @@ The Recognition API asks “Is **entity\_id** recognized by **authority\_id** fo
 The RecognitionRequest JSON Schema file is located here: TODO
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_recognition_request.schema.json]]
+[[insert: ./specification/v2/core/schema/trqp_recognition_request.jsonschema]]
 ```
 
 
@@ -30,7 +30,7 @@ Content-Type: application/json
 ### RecognitionResponse
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_recognition_response.schema.json]]
+[[insert: ./specification/v2/core/schema/trqp_recognition_response.jsonschema]]
 ```
 
 
@@ -58,7 +58,7 @@ The Authorization API asks “Does **entity\_id** hold **assertion\_id** accordi
 ### AuthorizationRequest 
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_authorization_request.schema.json]]
+[[insert: ./specification/v2/core/schema/trqp_authorization_request.jsonschema]]
 ```
 
 
@@ -81,7 +81,7 @@ Content-Type: application/json
 ### AuthorizationResponse
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_authorization_response.schema.json]]
+[[insert: ./specification/v2/core/schema/trqp_authorization_response.jsonschema]]
 ```
 
 
