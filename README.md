@@ -32,12 +32,11 @@ specifies a standard data model, query vocabulary, and transport protocol
 binding that can be implemented by any ecosystem regardless of its internal
 trust architecture.
 
-TRQP focuses on three query types:
+TRQP focuses on two query types:
 
 1. Authorization Queries: “Has Entity X been granted Authorization Y under
    Ecosystem Governance Framework Z?”
-2. Recognition Queries: “Is Ecosystem A recognized as an authority for
-   Governance Framework B by Ecosystem C?”
+2. Recognition Queries: "Is Ecosystem A recognized as having Authorization Y by Ecosystem C?” 
 
 # specification-template
 
@@ -58,3 +57,13 @@ To run Spec-up in live edit mode (will re-render upon save), in project folder r
 ```
 npm run edit
 ```
+
+## Future Version Considerations:
+
+The TRQP v2.0 specification is focused solely on Recognition and Authorization queries. Two key areas were under discussion but didn't reach a point of closure, so have not been included in the v2.0 specification:
+
+- **Delegation Queries**: "Has Ecosystem A been delegated authority for Governance Framework D by Ecosystem C?"
+- **Description (Metadata) Queries**: “What DID methods does Ecosystem A support?”
+  - 
+
+
