@@ -98,7 +98,7 @@ paths:
       summary: Check Ecosystem Recognition
       tags:
         - trqp
-      description: Verifies if the ecosystem governing authority identified by `entity_id` is recognized by the ecosystem governing authority identified by `authority_id`
+      description: Verifies if the ecosystem governing authority identified by `entity_id` is recognized by the ecosystem governing authority identified by `ecosystem_id`
       operationId: checkEcosystemRecognition
       parameters:
         - name: entity_id
@@ -107,10 +107,10 @@ paths:
           description: Unique identifier of the ecosystem governing authority being recognized.
           schema:
             type: string
-        - name: authority_id
+        - name: ecosystem_id
           in: query
           required: true
-          description: Unique identifier of the ecosystem governing authority asserting recognition. Defaults to the ecosystem governing authority of the trust registry (but only if the trust registry serves only a single ecosystem governing authority).
+          description: Unique identifier of the ecosystem being queried.
           schema:
             type: string
         - name: time
@@ -162,7 +162,7 @@ paths:
           description: Authorization identifier to evaluate.
           schema:
             type: string
-        - name: authority_id
+        - name: ecosystem_id
           in: query
           required: true
           description: Unique identifier of the ecosystem governing authority granting authorization.

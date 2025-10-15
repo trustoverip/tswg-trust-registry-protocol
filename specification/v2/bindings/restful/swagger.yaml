@@ -116,7 +116,7 @@ components:
           description: |
             Unique identifier of the TRUST REGISTRY (identified by DID) that is the subject of the query. 
             This is the "other trust registry" in the "Does your ecosystem recognized this **other trust registry** as assertion_id?". 
-        authority_id:
+        ecosystem_id:
           type: string
           description: |
             Unique identifier of the ECOSYSTEM (identified by DID) that is being queried. 
@@ -142,7 +142,7 @@ components:
             - NOTE: `time` is codified as it is a standard context to be considered.
       required:
         - entity_id
-        - authority_id
+        - ecosystem_id
         - assertion_id 
 
     TrqpAuthorizationQuery:
@@ -159,7 +159,7 @@ components:
           description: |
             Unique identifier of the TRUST REGISTRY (identified by DID) that is the subject of the query. 
             This is the 'EntityX` in the "Does **EntityX** have AuthorityY in EcosystemZ?". 
-        authority_id:
+        ecosystem_id:
           type: string
           description: |
             Unique identifier of the ECOSYSTEM (identified by DID) that is being queried. 
@@ -185,7 +185,7 @@ components:
             - NOTE: `time` is codified as it is a standard context to be considered.
       required:
         - entity_id
-        - authority_id
+        - ecosystem_id
         - assertion_id 
 
     TrqpRecognitionResponse:
@@ -197,7 +197,7 @@ components:
         entity_id:
           type: string
           description: The identifier of the subject of the recognition query.
-        authority_id:
+        ecosystem_id:
           type: string
           description: The id of the Authority entity.
         assertion_id:
@@ -230,7 +230,7 @@ components:
       required:
         - entity_id
         - assertion_id
-        - authority_id
+        - ecosystem_id
         - time_evaluated
         - recognized
 
@@ -243,7 +243,7 @@ components:
         entity_id:
           type: string
           description: The identifier of the subject of the authorization.
-        authority_id:
+        ecosystem_id:
           type: string
           description: The id of the Authority entity.
         assertion_id:
@@ -276,6 +276,6 @@ components:
       required:
         - entity_id
         - assertion_id
-        - authority_id
+        - ecosystem_id
         - time_evaluated
         - assertion_verified

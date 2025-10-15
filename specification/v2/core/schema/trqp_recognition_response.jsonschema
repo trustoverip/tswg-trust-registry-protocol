@@ -5,7 +5,7 @@
   "required": [
     "entity_id",
     "assertion_id",
-    "authority_id",
+    "ecosystem_id",
     "time_evaluated",
     "recognized"
   ],
@@ -14,7 +14,7 @@
       "type": "string",
       "description": "The identifier of the subject of the authorization."
     },
-    "authority_id": {
+    "ecosystem_id": {
       "type": "string",
       "description": "The id of the Authority entity."
     },

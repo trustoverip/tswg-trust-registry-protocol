@@ -5,20 +5,20 @@
     "required": [
         "entity_id",
         "assertion_id",
-        "authority_id"
+        "ecosystem_id"
     ],
     "properties": {
         "entity_id": {
             "type": "string",
             "description": "The identifier of the subject the assertion is made for."
         },
-        "authority_id": {
+        "ecosystem_id": {
             "type": "string",
             "description": "The Authority being queried."
         },
         "assertion_id": {
             "type": "string",
-            "description": "the assertion being queried - Does entity_id have assertion_id according to authority_id"
+            "description": "the assertion being queried - Does entity_id have assertion_id according to ecosystem_id"
         },
         "context": {
             "type": "object",

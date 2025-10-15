@@ -152,7 +152,7 @@ ecosystem governing authority as a peer. The following query shares the recognit
 
 | Parameter    | Type   | Required? | Description                                                                                             | Example                |
 |--------------|--------|-----------|---------------------------------------------------------------------------------------------------------|------------------------|
-| authority_id | string | Yes       | The identifier for the requesting ecosystem as defined in the TRQP Binding.                             | “ecosystem A”          |
+| ecosystem_id | string | Yes       | The identifier for the requesting ecosystem as defined in the TRQP Binding.                             | “ecosystem A”          |
 | entity_id    | string | Optional  | Another ecosystem identifier against which recognition is being evaluated.                              | “ecosystem B”          |
 | scope        | string | Optional  | A filter or context to narrow the recognition query; specific structure defined by individual profiles. | “financial-services”   |
 | time         | string | Optional  | A timestamp in RFC3339 UTC format indicating when to evaluate the recognition query.                    | “2025-04-01T00:00:00Z” |
@@ -161,7 +161,7 @@ ecosystem governing authority as a peer. The following query shares the recognit
 
 ```json
 {
-  "authority_id": "ecosystem A",
+  "ecosystem_id": "ecosystem A",
   "entity_id": "ecosystem B",
   "scope": "financial-services",
   "time": "2025-04-01T00:00:00Z"

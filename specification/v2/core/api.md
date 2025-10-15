@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
   "entity_id":    "service-42",
-  "authority_id": "auth-master",
+  "ecosystem_id": "did:example",
   "assertion_id": "peer-recognition",
   "context": {
     "time": "2025-06-19T10:00:00Z"
@@ -42,7 +42,7 @@ Content-Type: application/json
 
 {
   "entity_id":      "service-42",
-  "authority_id":   "auth-master",
+  "ecosystem_id":   "did:example",
   "assertion_id":       "peer-recognition",
   "recognized":     true,
   "message":        "Service-42 is recognized by auth-master.",
@@ -70,7 +70,7 @@ Content-Type: application/json
 
 {
   "entity_id":    "user-1234",
-  "authority_id": "auth-service-A",
+  "ecosystem_id": "auth-service-A",
   "assertion_id": "role-admin",
   "context": {
     "time": "2025-06-19T11:30:00Z"
@@ -93,7 +93,7 @@ Content-Type: application/json
 
 {
   "entity_id":          "user-1234",
-  "authority_id":       "auth-service-A",
+  "ecosystem_id":       "auth-service-A",
   "assertion_id":       "role-admin",
   "assertion_verified": true,
   "time":               "2025-06-19T11:30:00Z",

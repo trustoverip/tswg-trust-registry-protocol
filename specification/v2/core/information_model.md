@@ -17,7 +17,7 @@ The **authority\_id** identifies the party (service or system) asserting or eval
 * **Example:**
 
   ```json
-  "authority_id": "auth-service-A"
+  "ecosystem_id": "auth-service-A"
   ```
 
 ---
