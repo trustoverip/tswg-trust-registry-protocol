@@ -8,7 +8,7 @@ objects or values.  All JSON objects follow [RFC 8259]({{RFC8259}}).
 
 ### authority\_id 
 
-The **authority\_id** identifies the party (service or system) asserting or evaluating the claim.
+The **ecosystem\_id** identifies the party (service or system) asserting or evaluating the claim.
 
 * **Type:** string
 * **Required:** yes

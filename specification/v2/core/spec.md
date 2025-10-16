@@ -211,13 +211,7 @@ For additional assurance, it is RECOMMENDED to use multi-anchoring of identifier
    1. The ecosystem governing authority, or  
    2. An independent trust registry operator delegated by the ecosystem governing authority.  
 3. The trust registry ID MUST be used as an authority ID in TRQP authority statements for which the trust registry operator is the authority.
-4. The trust regsitry ID MUST enable discoverability of the TRQP endpoints.
-
-### Authority IDs
-
-1. An authority ID MUST be the identifier of the controlling party for an authority statement.  
-2. An authority ID MAY be either an ecosystem ID or a trust registry ID.  
-3. All TRQP-compliant authority statements MUST be asserted by an authority ID.
+4. The trust registry ID MUST enable discoverability of the TRQP endpoints.
 
 ### Entity IDs
 

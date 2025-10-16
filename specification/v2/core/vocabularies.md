@@ -19,7 +19,7 @@ Every authority statement is made by an authority **about** an entity. Therefore
 
 ### Authorization Statements
 
-In an authorization statement, an authority grants an authorization to an entity under its authority. In the ToIP governance model, this entity is called a [governed party](https://glossary.trustoverip.org/#term:governed-party).
+In an authorization statement, an ecosystem grants an authorization to an entity under its authority. In the ToIP governance model, this entity is called a [governed party](https://glossary.trustoverip.org/#term:governed-party).
 
 #### ABNF (Authorization Assertions)
 ```txt

@@ -1,6 +1,6 @@
 ## Recognition API 
 
-The Recognition API asks “Is **entity\_id** recognized by **authority\_id** for **assertion\_id** under **context**?”
+The Recognition API asks “Is **entity\_id** recognized by **ecosystem\_id** for **assertion\_id** under **context**?”
 
 ### RecognitionRequest 
 
@@ -53,7 +53,7 @@ Content-Type: application/json
 
 # Authorization API 
 
-The Authorization API asks “Does **entity\_id** hold **assertion\_id** according to **authority\_id** under **context**?”
+The Authorization API asks “Does **entity\_id** hold **assertion\_id** according to **ecosystem\_id** (under **context**)?”
 
 ### AuthorizationRequest 
 
