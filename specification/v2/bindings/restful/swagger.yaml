@@ -116,16 +116,17 @@ components:
           description: |
             Unique identifier of the TRUST REGISTRY (identified by DID) that is the subject of the query. 
             This is the "other trust registry" in the "Does your ecosystem recognized this **other trust registry** as assertion_id?". 
-        ecosystem_id:
+        authority_id:
           type: string
           description: |
             Unique identifier of the ECOSYSTEM (identified by DID) that is being queried. 
             This is the "your ecosystem" in the "Does **your ecosystem** recognize this other trust registry as assertion_id?".
-        assertion_id:
+        action:
           type: string
-          description: |
-            The assertion_id that is being tested against. 
-            This is the `assertion_id` in the "Does your ecosystem recognize this other trust registry as **assertion_id**?".
+          description: The Action (in the PARC model) that the query is checking authorization for. 
+        resource:
+          type: string
+          description: The resource (in the PARC model) that the query is is checking authorization for.
         context:
           type: object
           properties:
@@ -142,7 +143,7 @@ components:
             - NOTE: `time` is codified as it is a standard context to be considered.
       required:
         - entity_id
-        - ecosystem_id
+        - authority_id
         - assertion_id 
 
     TrqpAuthorizationQuery:
@@ -159,16 +160,17 @@ components:
           description: |
             Unique identifier of the TRUST REGISTRY (identified by DID) that is the subject of the query. 
             This is the 'EntityX` in the "Does **EntityX** have AuthorityY in EcosystemZ?". 
-        ecosystem_id:
+        authority_id:
           type: string
           description: |
             Unique identifier of the ECOSYSTEM (identified by DID) that is being queried. 
             This is the "EcosystemZ" in the "Does EntityX have AuthorityY in **EcosystemZ**?". 
-        assertion_id:
+        action:
           type: string
-          description: |
-            The assertion_id that is being tested against. 
-            This is the `AuthorityY` in the "Does EntityX have **AuthorityY** in **EcosystemZ**?". 
+          description: The Action (in the PARC model) that the query is checking authorization for. 
+        resource:
+          type: string
+          description: The resource (in the PARC model) that the query is is checking authorization for.
         context:
           type: object
           properties:
@@ -185,7 +187,7 @@ components:
             - NOTE: `time` is codified as it is a standard context to be considered.
       required:
         - entity_id
-        - ecosystem_id
+        - authority_id
         - assertion_id 
 
     TrqpRecognitionResponse:
@@ -197,12 +199,15 @@ components:
         entity_id:
           type: string
           description: The identifier of the subject of the recognition query.
-        ecosystem_id:
+        authority_id:
           type: string
           description: The id of the Authority entity.
-        assertion_id:
+        action:
           type: string
-          description: The identifier of the claim type being made against the entity_id.
+          description: The Action (in the PARC model) that the query is checking authorization for. 
+        resource:
+          type: string
+          description: The resource (in the PARC model) that the query is is checking authorization for.
         recognized:
           type: boolean
           description: True if the assertion has been verified, false otherwise.
@@ -230,7 +235,7 @@ components:
       required:
         - entity_id
         - assertion_id
-        - ecosystem_id
+        - authority_id
         - time_evaluated
         - recognized
 
@@ -243,13 +248,16 @@ components:
         entity_id:
           type: string
           description: The identifier of the subject of the authorization.
-        ecosystem_id:
+        authority_id:
           type: string
           description: The id of the Authority entity.
-        assertion_id:
+        action:
           type: string
-          description: The identifier of the claim type being made against the entity_id.
-        assertion_verified:
+          description: The Action (in the PARC model) that the query is checking authorization for. 
+        resource:
+          type: string
+          description: The resource (in the PARC model) that the query is is checking authorization for.
+        authorization_verified:
           type: boolean
           description: True if the assertion has been verified, false otherwise.
         time_requested:
@@ -276,6 +284,6 @@ components:
       required:
         - entity_id
         - assertion_id
-        - ecosystem_id
+        - authority_id
         - time_evaluated
         - assertion_verified
