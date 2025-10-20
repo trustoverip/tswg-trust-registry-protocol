@@ -13,7 +13,6 @@
                 "core/api.md",
                 "core/https_binding.md",
                 "considerations.md",
-                "core/authority_statements.md",
                 "core/information_model.md"
             ],
             "katex": false,

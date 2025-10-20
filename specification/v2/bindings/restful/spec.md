@@ -98,7 +98,7 @@ paths:
       summary: Check Ecosystem Recognition
       tags:
         - trqp
-      description: Verifies if the ecosystem governing authority identified by `entity_id` is recognized by the ecosystem governing authority identified by `ecosystem_id`
+      description: Verifies if the ecosystem governing authority identified by `entity_id` is recognized by the ecosystem governing authority identified by `authority_id`
       operationId: checkEcosystemRecognition
       parameters:
         - name: entity_id
