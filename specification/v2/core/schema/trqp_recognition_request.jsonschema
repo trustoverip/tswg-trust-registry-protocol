@@ -9,13 +9,13 @@
   ],
   "properties": {
     "entity_id": {
-      "type": "string",
-      "description": "The identifier of the subject the assertion is made for."
-    },
-    "authority_id": {
-      "type": "string",
-      "description": "The Authority being queried."
-    },
+            "type": "string",
+            "description": "The Principal (in the PARC model) that is being tested for recognition."
+        },
+        "authority_id": {
+            "type": "string",
+            "description": "The Authority (in the PARC model) being queried to recognize the Principal (`entity_id`)."
+        },
     "action": {
         "type": "string",
         "description": "The Action (in the PARC model) that the query is checking Recognition for."

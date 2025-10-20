@@ -10,11 +10,11 @@
     "properties": {
         "entity_id": {
             "type": "string",
-            "description": "The identifier of the subject the assertion is made for."
+            "description": "The Principal (in the PARC model) that is being tested for authorization."
         },
         "authority_id": {
             "type": "string",
-            "description": "The Authority being queried."
+            "description": "The Authority (in the PARC model) being queried."
         },
         "action": {
             "type": "string",

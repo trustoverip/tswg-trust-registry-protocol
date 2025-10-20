@@ -11,13 +11,13 @@
   ],
   "properties": {
     "entity_id": {
-      "type": "string",
-      "description": "The identifier of the subject of the authorization."
-    },
-    "authority_id": {
-      "type": "string",
-      "description": "The id of the Authority entity."
-    },
+            "type": "string",
+            "description": "The Principal (in the PARC model) that was queried for recognition by the Principal (identified by `authority_id`)."
+        },
+        "authority_id": {
+            "type": "string",
+            "description": "The Authority (in the PARC model) that was queried."
+        },
     "action": {
         "type": "string",
         "description": "The Action (in the PARC model) that the query is checking Recognition for."
