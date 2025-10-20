@@ -27,7 +27,7 @@ X-Request-ID: bfe9eb29-ab87-4ca3-be83-a1d5d8305716
 
 {
   "entity_id":    "service-42",
-  "ecosystem_id": "did:example",
+  "authority_id": "did:example",
   "assertion_id": "peer-recognition",
   "context": {
     "time": "2025-06-19T10:00:00Z"
@@ -46,7 +46,7 @@ X-Request-ID: bfe9eb29-ab87-4ca3-be83-a1d5d8305716
 
 {
   "entity_id":      "service-42",
-  "ecosystem_id":   "did:example",
+  "authority_id":   "did:example",
   "assertion_id":   "peer-recognition",
   "recognized":     true,
   "time_requested": "2025-06-19T10:00:00Z",
@@ -75,7 +75,7 @@ X-Request-ID: d4f34c12-9b7a-4e3a-a5d1-7e4f8c2c9f10
 
 {
   "entity_id":    "user-1234",
-  "ecosystem_id": "auth-service-A",
+  "authority_id": "auth-service-A",
   "assertion_id": "role-admin",
   "context": {
     "time": "2025-06-19T11:30:00Z"
@@ -94,7 +94,7 @@ X-Request-ID: d4f34c12-9b7a-4e3a-a5d1-7e4f8c2c9f10
 
 {
   "entity_id":          "user-1234",
-  "ecosystem_id":       "auth-service-A",
+  "authority_id":       "auth-service-A",
   "assertion_id":       "role-admin",
   "assertion_verified": true,
   "time_requested":     "2025-06-19T11:30:00Z",

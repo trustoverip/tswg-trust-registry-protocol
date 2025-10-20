@@ -3,10 +3,14 @@
 ### Keywords
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in [IETF RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
 
-### Augmented Backus-Naur Form (ABNF)
-The syntax definitions in this specifications use Augmented Backus-Naur Form (ABNF) as defined in [IETF RFC 5234](https://datatracker.ietf.org/doc/html/rfc5234).
-
 ### Definitions
+
+[[def:authority]]
+~ The entity responsible for making authority statements expressing the governance policies for its trust domain or digital trust ecosystem.
+
+[[def:authority ID]]
+~ The globally unique identifier of an authority.
+
 
  [[def:authority statement, authority statements]]
 ~ An assertion by an authority about another entity. Types of authority statements include authorization, recognition, delegation, and description (metadata).
@@ -27,16 +31,16 @@ The syntax definitions in this specifications use Augmented Backus-Naur Form (AB
 ~ See [[ref:digital trust ecosystem]].
 
  [[def:ecosystem governing authority]]
-~ The entity responsible for governance of a [[ref:digital trust ecosystem]] and for publishing its [[ref:authority statements]]. An ecosystem governing authority may take any legal form or may not be a formal legal entity at all.
-
- [[def:ecosystem ID]]
-~ The globally unique identifier of a [[ref:digital trust ecosystem]].
+~ The authority responsible for governance of a [[ref:digital trust ecosystem]] and for publishing its [[ref:authority statements]]. An ecosystem governing authority may take any legal form or may not be a formal legal entity at all.
 
  [[def:ecosystem governance framework, ecosystem governance frameworks]]
 ~ A [governance framework](https://glossary.trustoverip.org/#term:governance-framework) for a [digital trust ecosystem](https://glossary.trustoverip.org/#term:digital-trust-ecosystem). This may incorporate other types of frameworks such as [credential governance frameworks](https://glossary.trustoverip.org/#term:credential-governance-framework).
 
  [[def:entity ID]]
-~ The unique identifier of an entity within a [[ref:digital trust ecosystem]].
+~ The unique identifier of an entity within a trust domain or [[ref:digital trust ecosystem]].
+
+[[governance framework]]
+A collection of one or more [governance documents](https://glossary.trustoverip.org/#term:governance-documents) published by the [governing body](https://glossary.trustoverip.org/#term:governing-body) of an ecosystem or any kind of [trust community](https://glossary.trustoverip.org/#term:trust-community).
 
  [[def:inter-ecosystem]]
 ~ An adjective describing relationships and data exchanges between participants in two or more separate ecosystems operating under separate governance frameworks.
@@ -84,8 +88,18 @@ The scope of this specification is limited to the TRQP protocol operating betwee
 
 * **Systems of record**. This specification casts no requirements on how the system of record is designed or deployed. Also, because TRQP is read-only, this specification does not address create, update, or delete operations for the system of record.
 * **TRQP bridges**. If the system of record is not a native TRQP trust registry, a TRQP bridge is needed to transform a TRQP query into the query format supported by the system of record. Seperate specifications may be published for popular TRQP bridges, however they are out-of-scope for this specification.
+* **Implmentation Code**. TRQP defines the protocol; it does not provide the code for implementation.
 
-## High-Level Architecture 
+## REMOVE COMPLETELY? High-Level Architecture 
+
+::: warning
+TODO: DECISION
+What does this section provide now? With the removal of the `trustregistry_id` confusion it needs, at minimum, to be gutted and new diagrams created. 
+
+OR 
+
+Do we just remove it completely and use the High Level Architecture that is in `hla.md` (Section 5 at time of writing) as a total replacement. 
+:::
 
 *This section is informative.*
 
@@ -95,10 +109,9 @@ trust registry:
 1. The ecosystem governing authority role (section 4.1).  
 2. The trust registry operator role (section 4.2).
 
-Both roles may be played by the same entity or by separate entities. Figure 2 is
-a diagram of the case where the ecosystem governing authority is also the trust
-registry operator. 
+Both roles may be played by the same entity or by separate entities. Figure 2 is a diagram of the case where the ecosystem governing authority is also the trust registry operator. 
 
+TODO: Adjust diagram - remove "trust registry ID" and clarify that the BLUE is "your choice". The single/multi-operator model is NOT relevant for external implementations (TRQP Consumer) and overall confusing for implementers (TRQP Producer).
 
 ![images/authority_model_single_operator.png](images/authority_model_single_operator.png)
 
@@ -114,10 +127,7 @@ trust registry to an independent trust registry operator.
 
 ### Ecosystem Governing Authority 
 
-The ecosystem governing authority is the entity responsible for governance of
-the ecosystem and for publishing its authority statements. It may take any legal
-form or may not be a formal legal entity at all. The only requirement is that
-the ecosystem governing authority be recognized by the stakeholders in the
+The ecosystem governing authority is the entity responsible for governance of the ecosystem and for publishing its authority statements. It may take any legal form or may not be a formal legal entity at all. The only requirement is that the ecosystem governing authority be recognized by the stakeholders in the
 ecosystem for the purposes of its governance. 
 
 From a TRQP architecture standpoint, the ecosystem governing authority is
@@ -129,11 +139,8 @@ responsible for:
   registries.
 
 If the ecosystem governing authority chooses to operate its own trust
-registr(ies), it is also responsible for the functions in section 4.2. If not,
-the ecosystem governing authority is responsible for delegating these
-responsibilities to a trust registry operator and communicating that delegation
-pathway to any potential TRQP consumers. This should include publishing a
-delegation statement to the trust registry (section 6.4).
+registr(ies), it is also responsible for the functions in section 4.2. If not, the ecosystem governing authority is responsible for delegating these
+responsibilities to a trust registry operator and communicating that delegation pathway to any potential TRQP consumers. This should include publishing a delegation statement to the trust registry (section 6.4).
 
 ::: note
  If ecosystem governing authority contracts with a service provider to manage
@@ -182,39 +189,6 @@ To facilitate [trust decisions](https://glossary.trustoverip.org/#term:trust-dec
 2. The ecosystem governance framework ID should be discoverable via the ecosystem ID (section 5.1).  
 3. The ecosystem governance framework should follow the recommendations of the [ToIP Governance Architecture Specification](https://trustoverip.org/wp-content/uploads/ToIP-Governance-Architecture-Specification-V1.0-2021-12-21.pdf) and [ToIP Governance Metamodel Specification](https://trustoverip.org/wp-content/uploads/ToIP-Governance-Metamodel-Specification-V1.0-2021-12-21.pdf).
 
-## Identifiers
-
-*This section is normative.*
-
-Interoperability of TRQP across decentralized digital trust ecosystems depends on globally unique identifiers in the same way interoperability of the Internet depends on IP addresses and DNS names.
-
-The following requirements apply to all identifiers defining in this section:
-
-1. The identifier MUST be represented as a single string conforming to [IETF RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) \[normative reference\].  
-2. It is RECOMMENDED to use a [verifiable identifier](https://glossary.trustoverip.org/#term:verifiable-identifier) such as a W3C Decentralized Identifier (DID), a KERI autonomic identifier (AID), or an HTTPS URL so their authenticity can be verified by any relying party.
-
-For additional assurance, it is RECOMMENDED to use multi-anchoring of identifiers as defined by the IETF [High Assurance DIDs using DNS specification](https://www.ietf.org/archive/id/draft-carter-high-assurance-dids-with-dns-03.html) \[normative reference\] or the work of the ToIP [High Assurance Verifiable Identifiers Task Force](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/32473104/High+Assurance+VID+Task+Force+HAVID?atlOrigin=eyJpIjoiMWJkOTU4MjI5NTdhNGU0ZTlhMmI3MGRlNWYwNmVmMGQiLCJwIjoiYyJ9) \[informative reference\].
-
-### Ecosystem IDs
-
-1. A TRQP-compliant digital trust ecosystem as a logical governance entity MUST have a globally unique identifier (the “ecosystem ID”).  
-2. The domain name records, cryptographic keys, or other controls for the ecosystem ID MUST be controlled by the ecosystem governing authority.  
-3. The ecosystem ID MUST:
-   - Be used as an authority ID in TRQP authority statements for which the ecosystem governing authority is the authority.
-   - Enable discoverability of the Ecosystem Governance Framework. 
-   - Enable discoverability of the authorized trust registries serving that ecosystem. 
-
-### Trust Registry IDs
-
-1. A trust registry MUST have a globally unique identifier (the “trust registry ID”).  
-2. The domain name records, cryptographic keys, or other controls for the trust registry ID MUST be controlled by one of the following:  
-   1. The ecosystem governing authority, or  
-   2. An independent trust registry operator delegated by the ecosystem governing authority.  
-3. The trust registry ID MUST be used as an authority ID in TRQP authority statements for which the trust registry operator is the authority.
-4. The trust registry ID MUST enable discoverability of the TRQP endpoints.
-
-### Entity IDs
-
-1. An entity ID MUST be the identifier of the entity that is the target of the authority statement.  
-2. For a recognition statement (section 6.3) or a delegation statement (section 6.4), the entity ID MUST be an authority ID.  
-3. For an authorization statement about a [governed party](https://glossary.trustoverip.org/#term:governed-party) (section 6.2), the entity ID MUST be unique in the scope of the ecosystem. It is NOT REQUIRED for the entity ID to be globally unique.
+::: warning
+Remove above?
+:::
