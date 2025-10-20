@@ -45,4 +45,4 @@ The TRQP v2.0 specification is focused solely on Recognition and Authorization q
 - **Delegation Queries**: "Has Ecosystem A been delegated authority for Governance Framework D by Ecosystem C?"
 - **Description (Metadata) Queries**: “What DID methods does Ecosystem A support?”
 
-A further area about establishing a "query language" 
+A further area about establishing a "query language" emerged from the efforts in the Trust Registry Task Force, which has taken on the [Trust Registry Query Language](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/149749777/TRQL+Trust+Registry+Query+Language) as a separate specification to consider.
