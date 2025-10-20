@@ -1,5 +1,9 @@
-## Information Model 
+## OLD (remove or rewrite?) Information Model 
 
+::: warning
+This section is mostly duplicative but perhaps warranted.
+TODO make DECISION and PLAN
+:::
 The TRQP Assertion API is based on four core entities—**authority\_id**,
 **entity\_id**, **assertion\_id**, and **context**—each represented as JSON
 objects or values.  All JSON objects follow [RFC 8259]({{RFC8259}}).
@@ -17,7 +21,7 @@ The **ecosystem\_id** identifies the party (service or system) asserting or eval
 * **Example:**
 
   ```json
-  "ecosystem_id": "auth-service-A"
+  "authority_id": "auth-service-A"
   ```
 
 ---
@@ -39,6 +43,8 @@ The **entity\_id** identifies the subject (user, device, service, etc.) about wh
 ---
 
 ### assertion\_id 
+
+TODO: REPLACE
 
 The **assertion\_id** specifies which claim, role, or right is being queried.
 
@@ -72,9 +78,20 @@ The **context** object carries auxiliary parameters that influence evaluation, s
       RFC 3339 timestamp (UTC, “Z” suffix).  
       If omitted, the server MUST use its current time.
   ```
-* **Example:**
+#### Example `context` 
+
+**Example 1:** A basic context object with a `time` parameter set.
 
   ```json
   "context": {
     "time": "2025-06-01T12:00:00Z"
+  }
+  ```
 
+**Example 2:** A basic `context` object with a `locator` value set. The `locator` object serves a community where a `locator` object is expected, but is not defined in the TRQP specification. In this example, the `locator` value may be helpful in a smart contract context to locate the starting record.
+
+  ```json
+  "context": {
+    "locator": "did:example:ledgerlocation"
+  }
+  ```

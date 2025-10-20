@@ -68,12 +68,12 @@ information about the registry itself. It is expected for the [[ref:TRQP Profile
 
 | Parameter    | Type   | Required? | Description                                                          | Example       |
 |--------------|--------|-----------|----------------------------------------------------------------------|---------------|
-| ecosystem_id | string | Optional  | Identifier for scoping the metadata request to a specific ecosystem. | "ecosystem A" |
+| authority_id | string | Optional  | Identifier for scoping the metadata request to a specific ecosystem. | "ecosystem A" |
 
 *Example Request:*
 
 ```json
-{ "ecosystem_id": "ecosystem A" }
+{ "authority_id": "ecosystem A" }
 ```
 
 #### Response
@@ -97,7 +97,7 @@ governed party. This query serves the authorization statements of the ecosystem.
 
 | Parameter        | Type   | Required? | Description                                                                                                                                                                                                                                                                                       | Example                |
 |------------------|--------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
-| ecosystem_id     | string | Yes       | An ecosystem identifier as defined in the TRQP Binding.                                                                                                                                                                                                                                           | “ecosystem A”          |
+| authority_id     | string | Yes       | An ecosystem identifier as defined in the TRQP Binding.                                                                                                                                                                                                                                           | “ecosystem A”          |
 | authorization_id | string | Yes       | MUST match one of the defined authorization types in the TRQP Binding.                                                                                                                                                                                                                            | “credential-A-issuer”  |
 | entity_id        | string | Yes       | Identifies the entity for which the authorization is being queried.                                                                                                                                                                                                                               | “random-id-1234”       |
 | time             | string | Optional  | A timestamp in RFC3339 UTC format indicating when to evaluate the query. The system MUST clearly indicate whether the subject holds the specified authorization at the evaluated time. If no `time` is provided, `time` SHOULD be evaluated as the time the request was received by the registry. | “2025-04-01T00:00:00Z” |
@@ -107,7 +107,7 @@ Example Request:
 
 ```json
 {
-  "ecosystem_id": "ecosystem A",
+  "authority_id": "ecosystem A",
   "authorization_id": "credential-A-issuer",
   "entity_id": "random-id-1234",
   "time": "2025-04-01T00:00:00Z"
@@ -152,7 +152,7 @@ ecosystem governing authority as a peer. The following query shares the recognit
 
 | Parameter    | Type   | Required? | Description                                                                                             | Example                |
 |--------------|--------|-----------|---------------------------------------------------------------------------------------------------------|------------------------|
-| ecosystem_id | string | Yes       | The identifier for the requesting ecosystem as defined in the TRQP Binding.                             | “ecosystem A”          |
+| authority_id | string | Yes       | The identifier for the requesting ecosystem as defined in the TRQP Binding.                             | “ecosystem A”          |
 | entity_id    | string | Optional  | Another ecosystem identifier against which recognition is being evaluated.                              | “ecosystem B”          |
 | scope        | string | Optional  | A filter or context to narrow the recognition query; specific structure defined by individual profiles. | “financial-services”   |
 | time         | string | Optional  | A timestamp in RFC3339 UTC format indicating when to evaluate the recognition query.                    | “2025-04-01T00:00:00Z” |
@@ -161,7 +161,7 @@ ecosystem governing authority as a peer. The following query shares the recognit
 
 ```json
 {
-  "ecosystem_id": "ecosystem A",
+  "authority_id": "ecosystem A",
   "entity_id": "ecosystem B",
   "scope": "financial-services",
   "time": "2025-04-01T00:00:00Z"
