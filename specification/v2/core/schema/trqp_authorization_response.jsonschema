@@ -5,7 +5,7 @@
   "required": [
     "entity_id",
     "assertion_id",
-    "ecosystem_id",
+    "authority_id",
     "time_evaluated",
     "assertion_verified"
   ],
@@ -14,17 +14,21 @@
       "type": "string",
       "description": "The identifier of the subject of the authorization."
     },
-    "ecosystem_id": {
+    "authority_id": {
       "type": "string",
       "description": "The id of the Authority entity."
     },
-    "assertion_id": {
-      "type": "string",
-      "description": "The identifier of the claim type being made against the entity_id."
+    "action": {
+        "type": "string",
+        "description": "The Action (in the PARC model) that the query is checking Authorization for."
     },
-    "assertion_verified": {
+    "resource": {
+        "type": "string",
+        "description": "The resource (in the PARC model) that the query is is checking Authorization for."
+    },
+    "authorized": {
       "type": "boolean",
-      "description": "True if the assertion has been verified, false otherwise."
+      "description": "True if the action+resource authorization has been confirmed, false otherwise."
     },
     "time_requested": {
       "type": "string",
@@ -47,10 +51,6 @@
         "time": {
           "type": "string",
           "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
-        },
-        "locator": {
-            "type": "string",
-            "description": "Provided for systems that require additional information to locate the records in question."
         }
       },
       "additionalProperties": {

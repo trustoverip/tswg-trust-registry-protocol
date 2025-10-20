@@ -5,20 +5,24 @@
   "required": [
     "entity_id",
     "assertion_id",
-    "ecosystem_id"
+    "authority_id"
   ],
   "properties": {
     "entity_id": {
       "type": "string",
       "description": "The identifier of the subject the assertion is made for."
     },
-    "ecosystem_id": {
+    "authority_id": {
       "type": "string",
       "description": "The Authority being queried."
     },
-    "assertion_id": {
-      "type": "string",
-      "description": "the assertion being queried - Does entity_id have assertion_id according to ecosystem_id"
+    "action": {
+        "type": "string",
+        "description": "The Action (in the PARC model) that the query is checking Recognition for."
+    },
+    "resource": {
+        "type": "string",
+        "description": "The resource (in the PARC model) that the query is is checking Recognition for."
     },
     "context": {
       "type": "object",

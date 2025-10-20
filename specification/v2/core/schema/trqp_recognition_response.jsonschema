@@ -5,7 +5,7 @@
   "required": [
     "entity_id",
     "assertion_id",
-    "ecosystem_id",
+    "authority_id",
     "time_evaluated",
     "recognized"
   ],
@@ -14,13 +14,17 @@
       "type": "string",
       "description": "The identifier of the subject of the authorization."
     },
-    "ecosystem_id": {
+    "authority_id": {
       "type": "string",
       "description": "The id of the Authority entity."
     },
-    "assertion_id": {
-      "type": "string",
-      "description": "The identifier of the claim type being made against the entity_id."
+    "action": {
+        "type": "string",
+        "description": "The Action (in the PARC model) that the query is checking Recognition for."
+    },
+    "resource": {
+        "type": "string",
+        "description": "The resource (in the PARC model) that the query is is checking Recognition for."
     },
     "recognized": {
       "type": "boolean",
