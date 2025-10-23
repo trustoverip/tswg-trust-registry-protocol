@@ -11,20 +11,20 @@
   ],
   "properties": {
     "entity_id": {
-            "type": "string",
-            "description": "The Principal (in the PARC model) that was tested for authorization."
-        },
-        "authority_id": {
-            "type": "string",
-            "description": "The Authority (in the PARC model) that was queried."
-        },
+      "type": "string",
+      "description": "The identifier for the entity that was tested for authorization."
+    },
+    "authority_id": {
+      "type": "string",
+      "description": "The identifier for the authority that was queried."
+    },
     "action": {
-        "type": "string",
-        "description": "The Action (in the PARC model) that the query is checking Authorization for."
+      "type": "string",
+      "description": "The action that the query is checking Authorization for."
     },
     "resource": {
         "type": "string",
-        "description": "The resource (in the PARC model) that the query is is checking Authorization for."
+        "description": "The resource that the query is is checking Authorization for."
     },
     "authorized": {
       "type": "boolean",

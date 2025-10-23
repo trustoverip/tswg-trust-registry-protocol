@@ -9,28 +9,28 @@
   ],
   "properties": {
     "entity_id": {
-            "type": "string",
-            "description": "The Principal (in the PARC model) that is being tested for recognition."
-        },
-        "authority_id": {
-            "type": "string",
-            "description": "The Authority (in the PARC model) being queried to recognize the Principal (`entity_id`)."
-        },
-    "action": {
+      "type": "string",
+      "description": "The identifier for the entity that is being tested for recognition."
+    },
+    "authority_id": {
         "type": "string",
-        "description": "The Action (in the PARC model) that the query is checking Recognition for."
+        "description": "The identifier for the authority (e.g. ecosystem governing authority) being queried to recognize the entity (`entity_id`)."
+    },
+    "action": {
+      "type": "string",
+      "description": "The action that the query is checking Recognition for."
     },
     "resource": {
-        "type": "string",
-        "description": "The resource (in the PARC model) that the query is is checking Recognition for."
+      "type": "string",
+      "description": "The resource that the query is is checking Recognition for."
     },
     "context": {
       "type": "object",
       "properties": {
         "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+        "type": "string",
+        "format": "date-time",
+        "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
         }
       },
       "additionalProperties": {
