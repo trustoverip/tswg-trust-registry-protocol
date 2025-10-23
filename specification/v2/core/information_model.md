@@ -1,18 +1,16 @@
-## OLD (remove or rewrite?) Information Model 
+## Information Model 
 
 ::: warning
 This section is mostly duplicative but perhaps warranted.
 TODO make DECISION and PLAN
 :::
-The TRQP Assertion API is based on four core entities—**authority\_id**,
-**entity\_id**, **assertion\_id**, and **context**—each represented as JSON
-objects or values.  All JSON objects follow [RFC 8259]({{RFC8259}}).
+The TRQP is based on four core parameters (`entity_id`, `action`, `resource`, `authority_id`) represented as strings, and an optional JSON `context` object. All JSON objects follow [RFC 8259]({{RFC8259}}).
 
 ---
 
 ### authority\_id 
 
-The **ecosystem\_id** identifies the party (service or system) asserting or evaluating the claim.
+The **authority\_id** identifies the party (service or system) asserting or evaluating the claim.
 
 * **Type:** string
 * **Required:** yes
