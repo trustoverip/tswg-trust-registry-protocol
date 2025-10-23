@@ -31,3 +31,14 @@ To facilitate [trust decisions](https://glossary.trustoverip.org/#term:trust-dec
 In the context of this specification, a trust registry is a system accessible via a TRQP endpoint that can be queried for the authority statements published by one or more authorities. A trust registry is operated by a trust registry operator. The role of a trust registry operator may be performed directly by an authority or may be delegated to an independent trust registry operator who specializes in this function. In the latter case, from a ToIP governance architecture perspective, the trust registry operator is serving as an [administering authority](https://glossary.trustoverip.org/#term:administering-body).
 
 The TRQP service endpoint for a trust registry may be published in the governance framework or discoverable from the authority\_id as described in section TODO.
+
+### PARC Model
+
+Our information model was heavily inspired by the [PARC model](https://docs.cedarpolicy.com/auth/authorization.html). The identifiers that follow map well to PARC:
+* Principal - `entity_id`
+* Action - `action`
+* Resource - `resource`
+* Context - `authority_id` is the mandatory context, and an optional `context` object is available for further refinement.
+
+
+
