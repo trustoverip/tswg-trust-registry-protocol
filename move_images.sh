@@ -21,6 +21,6 @@ done
 mkdir -p dist/v2/bindings/restful/
 mkdir -p dist/images
 
-cp specification/v2/bindings/restful/swagger.yaml dist/v2/bindings/restful/swagger.yaml
-cp specification/v2/bindings/restful/swagger.yaml dist/swagger.yaml
+# cp specification/v2/bindings/restful/swagger.yaml dist/v2/bindings/restful/swagger.yaml
+# cp specification/v2/bindings/restful/swagger.yaml dist/swagger.yaml
 cp -r specification/v2/images dist/
