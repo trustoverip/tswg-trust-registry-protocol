@@ -59,7 +59,7 @@ The Recognition API asks “Is **entity\_id** recognized by **ecosystem\_id** fo
 
 ### RecognitionRequest 
 
-The RecognitionRequest JSON Schema file is located here: TODO
+The RecognitionRequest JSON Schema file is located [here](./schema/trqp_recognition_request.jsonschema)
 
 ```json
 [[insert: ./specification/v2/core/schema/trqp_recognition_request.jsonschema]]
