@@ -11,16 +11,20 @@
   ],
   "properties": {
     "entity_id": {
+        "type": "string",
+        "description": "The identifier for the entitythat was queried for recognition by the authority (identified by `authority_id`)."
+      },
+      "authority_id": {
+        "type": "string",
+        "description": "The identifier for the authority (e.g. ecosystem governance authority) that was queried."
+      },
+    "action": {
       "type": "string",
-      "description": "The identifier of the subject of the authorization."
+      "description": "The action that the query is checking Recognition for."
     },
-    "authority_id": {
+    "resource": {
       "type": "string",
-      "description": "The id of the Authority entity."
-    },
-    "assertion_id": {
-      "type": "string",
-      "description": "The identifier of the claim type being made against the entity_id."
+      "description": "The resource that the query is is checking Recognition for."
     },
     "recognized": {
       "type": "boolean",

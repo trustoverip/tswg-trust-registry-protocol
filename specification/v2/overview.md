@@ -13,7 +13,7 @@
 - **Contributors:** Alex Tweeddale, Christine Martin, Dave Poltorak, Eric Drury, Fabrice Rochette, Jacques Latour, Jesse Carter, Jeff Braswell, Jon Bauer, Makki Elfatih, Marcus Ubani, Markus Sabadello, Scott Perry, Sankarshan Mukhopadhyay, Subhasis, Tim Bouma
 
 ::: note
-This specification is currently a Working Draft of the Trust Over IP (ToIP) [Trust Registry Task Force](https://wiki.trustoverip.org/display/HOME/Trust+Registry+Task+Force). Feedback is welcome — see instructions here. !TODO—add link to feedback instructions!
+This specification is currently a Working Draft of the Trust Over IP (ToIP) [Trust Registry Task Force](https://wiki.trustoverip.org/display/HOME/Trust+Registry+Task+Force). Feedback is welcome - see instructions [here](https://github.com/trustoverip/tswg-trust-registry-protocol)
 
 For a complete overview of the motivations and core concepts behind TRQP, please see the [TRQP Overview page](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/22996548/ToIP+Trust+Registry+Query+Protocol+TRQP+Specification+Overview).
 :::
@@ -31,9 +31,7 @@ Digitally-verifiable authority statements can be expressed using various standar
 
 The purpose of TRQP is to bridge this gap by provide a standard protocol for querying authority statements from any TRQP-compliant trust registry. It specifies a standard data model, query vocabulary, and transport protocol binding that can be implemented by any ecosystem regardless of its internal trust architecture.
 
-TRQP focuses on three query types:
+TRQP focuses on two query types:
 
 1. **Authorization Queries:** “Has Entity X been granted Authorization Y under Ecosystem Governance Framework Z?”
 2. **Recognition Queries**: "Is Ecosystem A recognized as an authority for Governance Framework B by Ecosystem C?"
-3. **Delegation Queries**: "Has Ecosystem A been delegated authority for Governance Framework D by Ecosystem C?"
-4. **Description (Metadata) Queries**: “What DID methods does Ecosystem A support?”

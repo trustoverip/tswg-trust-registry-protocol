@@ -7,8 +7,8 @@
             "markdown_paths": [
                 "overview.md",
                 "core/spec.md",
-                "core/authority_statements.md",
-                "core/information_model.md",
+                "core/hla.md",
+                "core/identifiers.md",
                 "core/api.md",
                 "core/https_binding.md",
                 "considerations.md"

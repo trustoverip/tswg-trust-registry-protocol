@@ -27,7 +27,7 @@ X-Request-ID: bfe9eb29-ab87-4ca3-be83-a1d5d8305716
 
 {
   "entity_id":    "service-42",
-  "authority_id": "auth-master",
+  "authority_id": "did:example",
   "assertion_id": "peer-recognition",
   "context": {
     "time": "2025-06-19T10:00:00Z"
@@ -46,7 +46,7 @@ X-Request-ID: bfe9eb29-ab87-4ca3-be83-a1d5d8305716
 
 {
   "entity_id":      "service-42",
-  "authority_id":   "auth-master",
+  "authority_id":   "did:example",
   "assertion_id":   "peer-recognition",
   "recognized":     true,
   "time_requested": "2025-06-19T10:00:00Z",
