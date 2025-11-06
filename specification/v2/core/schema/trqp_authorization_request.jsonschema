@@ -31,6 +31,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+        },
+        "locator": {
+            "type": "string",
+            "description": "Provided for systems that require additional information to locate the records in question."
         }
       },
       "additionalProperties": {
