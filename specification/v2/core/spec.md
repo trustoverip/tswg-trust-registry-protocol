@@ -5,7 +5,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ### Definitions
 
-[[def:authority]]
+[[def:authority, authorities]]
 ~ The entity responsible for making authority statements expressing the governance policies for its trust domain or digital trust ecosystem.
 
 [[def:authority ID]]
@@ -39,8 +39,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
  [[def:entity ID]]
 ~ The unique identifier of an entity within a trust domain or [[ref:digital trust ecosystem]].
 
-[[governance framework]]
-A collection of one or more [governance documents](https://glossary.trustoverip.org/#term:governance-documents) published by the [governing body](https://glossary.trustoverip.org/#term:governing-body) of an ecosystem or any kind of [trust community](https://glossary.trustoverip.org/#term:trust-community).
+[[def: governance framework]]
+~ A collection of one or more [governance documents](https://glossary.trustoverip.org/#term:governance-documents) published by the [governing body](https://glossary.trustoverip.org/#term:governing-body) of an ecosystem or any kind of [trust community](https://glossary.trustoverip.org/#term:trust-community).
 
  [[def:inter-ecosystem]]
 ~ An adjective describing relationships and data exchanges between participants in two or more separate ecosystems operating under separate governance frameworks.
@@ -58,7 +58,7 @@ A collection of one or more [governance documents](https://glossary.trustoverip.
 ~ A system that connects a [[ref:TRQP endpoint]] to a [[ref:system of record]]. The bridge transforms a TRQP query into the query format supported by the system of record and performs the reverse mapping for the response.
 
  [[def:TRQP Core]]
-~ The foundational specification that defines core data models, query vocabulary, and other requirements for the Trust Registry Query Protocol.
+~ This specification that defines core data models, query vocabulary, and other requirements for the Trust Registry Query Protocol.
 
  [[def:TRQP consumer]]
 ~ A network device (client or server) that send TRQP queries to a TRQP endpoint.

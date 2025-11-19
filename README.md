@@ -8,8 +8,7 @@ Authorities determine the policies governing which actors can perform what actio
 
 Authority statements can be published in a file, issued to individual actors as verifiable credentials, or published in a trust registry.
 
-Digitally-verifiable authority statements can be expressed using various
-standards, including X.509 certificate hierarchies, OpenID Federations, EBSI Trust Chains, or TRAIN trust lists. Although these standards can work well for intra-ecosystem authority verification, they are not optimized for inter-ecosystem authority verification.
+Digitally-verifiable authority statements can be expressed using various standards, including X.509 certificate hierarchies, OpenID Federations, EBSI Trust Chains, or TRAIN trust lists. Although these standards can work well for intra-ecosystem authority verification, they are not optimized for inter-ecosystem authority verification.
 
 The purpose of TRQP is to bridge this gap by provide a standard protocol for querying authority statements from any TRQP-compliant trust registry. It specifies a standard data model, query vocabulary, and transport protocol binding that can be implemented by any ecosystem regardless of its internal trust architecture.
 

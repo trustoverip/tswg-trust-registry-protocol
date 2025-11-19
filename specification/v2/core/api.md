@@ -1,18 +1,19 @@
 
 ---
 
-## Authorization API 
+## Authorization Query and Response Schemas
 
-The Authorization API asks “Does **entity\_id** hold **assertion\_id** according to **ecosystem\_id** (under **context**)?”
+The purpose of a TRQP authorization query is to ask the question “Does `authority_id` authorize `entity_id` to take `action` on `resource` (with optional context conditions such as `time`)?" 
 
-### AuthorizationRequest 
+TRQP authorization queries and responses MUST conform to the JSON schemas defined in this section.
+
+### Authorization Query Schema
 
 ```json
 [[insert: ./specification/v2/core/schema/trqp_authorization_request.jsonschema]]
 ```
 
-
-**Example request:**
+**Example authorization query:**
 
 ```http
 POST /authorization
@@ -29,14 +30,13 @@ Content-Type: application/json
 }
 ```
 
-### AuthorizationResponse
+### Authorization Response Schema
 
 ```json
 [[insert: ./specification/v2/core/schema/trqp_authorization_response.jsonschema]]
 ```
 
-
-**Example response:**
+**Example authorization response:**
 
 ```http
 HTTP/1.1 200 OK
@@ -53,20 +53,19 @@ Content-Type: application/json
 }
 ``` 
 
-## Recognition API 
+## Recognition Query and Response Schemas 
 
-The Recognition API asks “Is **entity\_id** recognized by **ecosystem\_id** for **assertion\_id** under **context**?”
+The purpose of a TRQP recognition query is to ask the question “Does `authority_id` recognize `entity_id` (another authority) to be authoritative for `action` on `resource`?"
 
-### RecognitionRequest 
+TRQP recognition queries and responses MUST conform to the JSON schemas defined in this section.
 
-The RecognitionRequest JSON Schema file is located [here](./schema/trqp_recognition_request.jsonschema)
+### Recognition Query Schema
 
 ```json
 [[insert: ./specification/v2/core/schema/trqp_recognition_request.jsonschema]]
 ```
 
-
-**Example request:**
+**Example recognitiion query:**
 
 ```http
 POST /recognition
@@ -83,14 +82,13 @@ Content-Type: application/json
 }
 ```
 
-### RecognitionResponse
+### Recognition Response
 
 ```json
 [[insert: ./specification/v2/core/schema/trqp_recognition_response.jsonschema]]
 ```
 
-
-**Example response:**
+**Example recognition response:**
 
 ```http
 HTTP/1.1 200 OK

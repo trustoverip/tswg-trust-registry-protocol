@@ -9,7 +9,7 @@
 ~ [File an issue](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
 ~ [Start a discussion](https://github.com/trustoverip/tswg-trust-registry-protocol/discussions)
 
-- **Editors:** Darrell O’Donnell, Andor Kesselman, Drummond Reed, Antti Kettunen,  
+- **Editors:** Darrell O’Donnell, Andor Kesselman, Drummond Reed, Antti Kettunen
 - **Contributors:** Alex Tweeddale, Christine Martin, Dave Poltorak, Eric Drury, Fabrice Rochette, Jacques Latour, Jesse Carter, Jeff Braswell, Jon Bauer, Makki Elfatih, Marcus Ubani, Markus Sabadello, Scott Perry, Sankarshan Mukhopadhyay, Subhasis, Tim Bouma
 
 ::: note
@@ -33,5 +33,5 @@ The purpose of TRQP is to bridge this gap by provide a standard protocol for que
 
 TRQP focuses on two query types:
 
-1. **Authorization Queries:** “Has Entity X been granted Authorization Y under Ecosystem Governance Framework Z?”
-2. **Recognition Queries**: "Is Ecosystem A recognized as an authority for Governance Framework B by Ecosystem C?"
+1. **Authorization Queries:** “Has Authority A authorized Entity B to take Action X on Resource Y?”
+2. **Recognition Queries**: "Does Authority X recognize Entity B as an authority to authorize taking Action X on Resource Y?”

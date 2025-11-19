@@ -4,10 +4,11 @@
   "type": "object",
   "required": [
     "entity_id",
-    "assertion_id",
+    "action",
+    "resource",
     "authority_id",
     "time_evaluated",
-    "assertion_verified"
+    "authorized"
   ],
   "properties": {
     "entity_id": {
@@ -42,7 +43,7 @@
     },
     "message": {
       "type": "string",
-      "description": "additional details attached to the response about the assertion"
+      "description": "additional details attached to the response about the authorization response."
     },
     "context": {
       "type": "object",
@@ -51,6 +52,10 @@
         "time": {
           "type": "string",
           "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+        },
+        "locator": {
+            "type": "string",
+            "description": "Provided for systems that require additional information to locate the records in question."
         }
       },
       "additionalProperties": {

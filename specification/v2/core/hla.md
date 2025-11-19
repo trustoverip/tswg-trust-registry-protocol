@@ -14,39 +14,41 @@ Nation states, companies, NGOs, universities, churches, associations, social net
 
 An authority statement is a machine-readable representation of a policy governing an entity within the authority’s scope of authority. Trust registries serve as a mechanism for making authority statements accessible to parties who need to make trust decisions regarding those entities.
 
-TRQP supports two authority statements;
+TRQP supports two basic types of authority statements;
 
-### Authorization Authority Statement
+#### Authorization Authority Statements
 
-An authorization authority statement denotes a hierarchical relationship between the `authority_id` and the `entity_id`. It represents a declaration in which an authority confers a specific authorization upon an entity that falls under its jurisdiction or control.
+An [[ref: authorization authority statement]] expresses a hierarchical relationship between the `authority_id` and the `entity_id`. It represents a declaration by an authority that an entity under its jurisdiction or sphere-of-control is authorized to take a specific action on a specific resource.
 
-**Authorization Statement**
+**Example Authorization Statement (Pseudocode)**
 ```sh
-Authority_Id: America Association of Motor Vehicle Administrators (AAMVA)
-Entity_Id : Department Of Motor Vehicles (DMV)
-Action: issue
-Resource: DriversLicense
-Context:
-- EcosystemID : United States Of America
+authority_id: American Association of Motor Vehicle Administrators (AAMVA)
+entity_id : Department Of Motor Vehicles (DMV)
+action: issue
+resource: DriversLicense
 ```
 
-Which correlates to (in human readable text) : "AAMVA has authorized the DMV has issue Drivers Licenses under the United States Ecosystem"
+In English, this corresponds to the statement: "AAMVA has authorized the DMV to issue Drivers Licenses."
 
-In this example, AAMVA sits above DMV on the hierarchy in a federation and therefore describes an `authorization authority statement`. This allows for authorization queries to be answered via the TRQP and implies more control over the `entity_id` than the `recognition authority statement` (described below).
+#### Recognition Authority Statements
 
-### Recognition Authority Statement
+A [[ref: recognition authority statement]] expresses that one authority recognizes the authority of another as a **peer**. Such a recognition relationship may be unilateral or bilateral and is non-exclusive.
 
-An authority statement in which one authority recognizes the authority of another authority as a **peer**. Note that this recognition relationship may be unilateral or bilateral and is non-exclusive. This relationship implies there is less contol in the authority statement over the entity when juxtapositioned against the `authorization authority statement`. It is not mutually exclusive however, and an entity can be both recognized and authorized by the same `authority_id`.
+::: note
 
-**Recognition Statement**
+Unlike an [[ref: authorization authority statement]], the authority making a [[ref: recognition authority statement]] is **not** asserting authority over the target authority. Rather it is a referral from one peer to another.
+
+:::
+
+**Example Recognition Statement (Pseudocode)**
 ```sh
-Authority_Id: France
-Entity_Id : Germany
-Action: issue
-Resource: Passport
+authority_id: France
+entity_id : Germany
+action: issue
+resource: Passport
 ```
 
-Which correlates to (in human readable text) : "Germany recognizes France to issue Passports"
+In English, this corresponds to the statement: "France recognizes Germany to issue Passports."
 
 ### Governance Frameworks
 
@@ -63,7 +65,3 @@ To facilitate [trust decisions](https://glossary.trustoverip.org/#term:trust-dec
 In the context of this specification, a trust registry is a system accessible via a TRQP endpoint that can be queried for the authority statements published by one or more authorities. A trust registry is operated by a trust registry operator. The role of a trust registry operator may be performed directly by an authority or may be delegated to an independent trust registry operator who specializes in this function. In the latter case, from a ToIP governance architecture perspective, the trust registry operator is serving as an [administering authority](https://glossary.trustoverip.org/#term:administering-body).
 
 The TRQP service endpoint for a trust registry may be published in the governance framework or discoverable from the authority\_id as described in the [identifiers section](#identifiers).
-
-### PARC Model
-
-Our information model was heavily inspired by the [PARC model](https://docs.cedarpolicy.com/auth/authorization.html). The identifiers that follow map well to PARC; Principal ~= `entity_id`; Action ~= `action` Resource ~= `resource`; Context ~= `authority_id` is the mandatory context, and an optional `context` object is available for further refinement.
