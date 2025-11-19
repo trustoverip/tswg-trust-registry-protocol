@@ -4,10 +4,11 @@
   "type": "object",
   "required": [
     "entity_id",
-    "assertion_id",
+    "action",
+    "resource",
     "authority_id",
     "time_evaluated",
-    "assertion_verified"
+    "authorized"
   ],
   "properties": {
     "entity_id": {
@@ -42,7 +43,7 @@
     },
     "message": {
       "type": "string",
-      "description": "additional details attached to the response about the assertion"
+      "description": "additional details attached to the response about the authorization response."
     },
     "context": {
       "type": "object",

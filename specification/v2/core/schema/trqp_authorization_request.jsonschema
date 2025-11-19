@@ -4,7 +4,8 @@
   "type": "object",
   "required": [
     "entity_id",
-    "assertion_id",
+    "action",
+    "resource",
     "authority_id"
   ],
   "properties": {

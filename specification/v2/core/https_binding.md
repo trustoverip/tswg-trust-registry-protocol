@@ -28,7 +28,8 @@ X-Request-ID: d4f34c12-9b7a-4e3a-a5d1-7e4f8c2c9f10
 {
   "entity_id":    "user-1234",
   "authority_id": "auth-service-A",
-  "assertion_id": "role-admin",
+  "action":       "issue",
+  "resource":     "engineer-license",
   "context": {
     "time": "2025-06-19T11:30:00Z"
   }
@@ -47,8 +48,9 @@ X-Request-ID: d4f34c12-9b7a-4e3a-a5d1-7e4f8c2c9f10
 {
   "entity_id":          "user-1234",
   "authority_id":       "auth-service-A",
-  "assertion_id":       "role-admin",
-  "assertion_verified": true,
+  "action":             "issue",
+  "resource":           "engineer-license",
+  "authorized":         true,
   "time_requested":     "2025-06-19T11:30:00Z",
   "time_evaluated":     "2025-06-19T11:30:00Z",
   "message":            "User-1234 holds the admin role.",
@@ -74,7 +76,8 @@ X-Request-ID: bfe9eb29-ab87-4ca3-be83-a1d5d8305716
 {
   "entity_id":    "service-42",
   "authority_id": "did:example",
-  "assertion_id": "peer-recognition",
+  "action":       "govern",
+  "resource":     "professional-engineers",
   "context": {
     "time": "2025-06-19T10:00:00Z"
   }
@@ -93,7 +96,8 @@ X-Request-ID: bfe9eb29-ab87-4ca3-be83-a1d5d8305716
 {
   "entity_id":      "service-42",
   "authority_id":   "did:example",
-  "assertion_id":   "peer-recognition",
+  "action":         "govern",
+  "resource":       "professional-engineers",
   "recognized":     true,
   "time_requested": "2025-06-19T10:00:00Z",
   "time_evaluated": "2025-06-19T10:00:00Z",
@@ -112,17 +116,17 @@ Error conditions (e.g. malformed JSON, unauthorized, not found) are signaled via
 
 * **400 Bad Request** — invalid JSON or missing required fields
 * **401 Unauthorized** — missing/invalid bearer token
-* **404 Not Found** — entity, authority, or assertion not recognized
+* **404 Not Found** — entity, authority, action, or resource not recognized
 * **500 Internal Server Error** — unexpected server failure
 
 Error responses use the [Problem Details for HTTP APIs](https://datatracker.ietf.org/doc/html/rfc7807) format:
 
 ```json
 {
-  "type":   "https://example.com/problems/invalid-assertion",
-  "title":  "Assertion not found",
+  "type":   "https://example.com/problems/invalid-action",
+  "title":  "action not found",
   "status": 404,
-  "detail": "Assertion \"role-admin\" is not defined for authority auth-service-A."
+  "detail": "action \"issue\" is not defined for authority auth-service-A."
 }
 ```
 
