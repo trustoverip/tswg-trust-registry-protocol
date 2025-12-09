@@ -2,8 +2,7 @@
 ==================
 
 - **Specification Version:** 2.0
-- **Document Status:** Public Review **02** PENDING TRTF VOTE ON 2025.11.27 (i.e. Public Review is expected to start after that vote)
-
+- **Document Status:** Public Review 02
 
 **Participate:**
 ~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
