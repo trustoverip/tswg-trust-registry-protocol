@@ -1,0 +1,15 @@
+{
+  "context": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+}
