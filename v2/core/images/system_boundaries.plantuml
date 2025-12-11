@@ -1,0 +1,56 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title TRQP System Boundaries
+
+System(TRQPCore, "Core", "Abstract Specification:\nData Models & Queries")
+
+System_Boundary(TRQPCoreBoundary, "TRQP Bindings") {
+    System(HTTPBinding, "RESTful Binding", "Implements TRQP over HTTP (example)")
+    System(TSPBinding, "TSP Binding", "Implements TRQP over TSP (example)")
+}
+
+
+System_Boundary(ImplementerBoundary, "Implementer Boundary") {
+
+
+System_Boundary(BridgesBoundary, "TRQP Bridges") {
+    System(Bridge, "Generic Bridge")
+    System(teBridge, "DIF\nCredential Trust Establishment\nBridge", "[CTE]")
+    System(oidcBridge, "OIDF Bridge")
+    System(x509bridge, "x.509 Bridge")
+}
+
+
+System_Boundary(SystemOfRecordBoundary, "System Of Record"){
+    System(oidfData, "Federation", "OIDF\nProfile 1")
+    System(oidfDataN, "Federation", "OIDF\nProfile N")
+    System(TRAIN, "TRAIN")
+    System(EUTrustedList, "EU Trusted List")
+    System(NativeSupport, "SystemX", "w Native TRQP Support")
+    System(teFile, "CTE file")
+
+    System_Boundary(x509system, "x509") {
+        System(x509, "x509 Ecosystem")
+        System(x509CA, "x509 CA")
+
+        Rel(x509bridge, x509, "bridges")
+        Rel(x509CA, x509, "anchors")
+    }
+}
+
+}
+'
+' Show how Core defines the Bindings, and Bridges implement them.
+'
+Rel(TRQPCore, HTTPBinding, "Defines → Implementation (HTTP/DID)")
+Rel(TRQPCore, TSPBinding,  "Defines → Implementation (TSP)")
+Rel(TRQPCoreBoundary, BridgesBoundary, "Instantiates")
+
+Rel(oidcBridge, oidfData, "OIDF\nProfile 1")
+Rel(oidcBridge, oidfDataN, "OIDF\nProfile N")
+Rel(Bridge, TRAIN, "bridges")
+Rel(Bridge, EUTrustedList, "bridges")
+Rel(teBridge, teFile, "processes")
+
+@enduml
