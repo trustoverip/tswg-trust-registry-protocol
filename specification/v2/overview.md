@@ -5,6 +5,7 @@
 - **Document Status:** Public Review 02
 
 **Participate:**
+
 ~ [GitHub repo](https://github.com/trustoverip/tswg-trust-registry-protocol/tree/main)
 ~ [File an issue](https://github.com/trustoverip/tswg-trust-registry-protocol/issues)
 ~ [Start a discussion](https://github.com/trustoverip/tswg-trust-registry-protocol/discussions)
@@ -13,7 +14,9 @@
 - **Contributors:** Alex Tweeddale, Christine Martin, Dave Poltorak, Eric Drury, Fabrice Rochette, Jacques Latour, Jesse Carter, Jeff Braswell, Jon Bauer, Makki Elfatih, Marcus Ubani, Markus Sabadello, Scott Perry, Sankarshan Mukhopadhyay, Subhasis Ojha, Tim Bouma
 
 ::: note
-This specification is currently a Working Draft of the Trust Over IP (ToIP) [Trust Registry Task Force](https://wiki.trustoverip.org/display/HOME/Trust+Registry+Task+Force). Feedback is welcome - see instructions [here](https://github.com/trustoverip/tswg-trust-registry-protocol)
+This specification is currently a Working Draft of the Trust Over IP (ToIP) [Trust Registry Task Force](https://wiki.trustoverip.org/display/HOME/Trust+Registry+Task+Force). It is in [public review](https://www.lfdecentralizedtrust.org/blog/toip-announces-public-review-02-of-the-trust-registry-query-protocol-trqp-specification-v2.0) until midnight PT on January 16, 2025.
+
+Feedback is welcome - see instructions [here](https://github.com/trustoverip/tswg-trust-registry-protocol)
 
 For a complete overview of the motivations and core concepts behind TRQP, please see the [TRQP Overview page](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/22996548/ToIP+Trust+Registry+Query+Protocol+TRQP+Specification+Overview).
 :::
