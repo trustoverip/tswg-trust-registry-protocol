@@ -37,7 +37,7 @@ npm run edit
 
 ## Future Version Considerations:
 
-The TRQP v2.0 specification is focused solely on Recognition and Authorization queries. Two other key areas were under discussion but didn't reach a point of closure, so have not been included in the v2.0 specification and will be addressed in further releases. These are:
+The TRQP v2.0 specification is focused solely on Recognition and Authorization queries. Two other key areas were under discussion but didn't reach a point of closure, so have not been included in the v2.0 specification and may be addressed in further releases. These are:
 
 - **Delegation Queries**: "Has Ecosystem A been delegated authority for Governance Framework D by Ecosystem C?"
 - **Description (Metadata) Queries**: “What DID methods does Ecosystem A support?”
