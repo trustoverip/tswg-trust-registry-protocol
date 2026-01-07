@@ -19,15 +19,13 @@ TRQP focuses on two query types:
 
 # specification-template
 
-This specification is basked on the [Trust Over IP Specification Template](https://github.com/trustoverip/specification-template).
+This specification is based on the [Trust Over IP Specification Template](https://github.com/trustoverip/specification-template).
 
 The spec is written using [SpecUp](https://github.com/decentralized-identity/spec-up) which is maintained by the Decentralized Identity Foundation. 
-
 
 To browse the spec, see the [rendering on GitHub pages](https://trustoverip.github.io/tswg-trust-registry-protocol/). To contribute to the spec, submit PRs that modify the .md files (in the `./spec` folder) that are used to generate the .html files in this folder.
 
 Before submitting a PR, please see the [Editing The Spec](./EditingTheSpec.md) document for guidance on generating the specification locally for review.
-
 
 ## Rendering Spec-Up
 
@@ -39,7 +37,7 @@ npm run edit
 
 ## Future Version Considerations:
 
-The TRQP v2.0 specification is focused solely on Recognition and Authorization queries. Two key areas were under discussion but didn't reach a point of closure, so have not been included in the v2.0 specification:
+The TRQP v2.0 specification is focused solely on Recognition and Authorization queries. Two other key areas were under discussion but didn't reach a point of closure, so have not been included in the v2.0 specification and will be addressed in further releases. These are:
 
 - **Delegation Queries**: "Has Ecosystem A been delegated authority for Governance Framework D by Ecosystem C?"
 - **Description (Metadata) Queries**: “What DID methods does Ecosystem A support?”
