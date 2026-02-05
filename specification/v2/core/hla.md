@@ -28,7 +28,7 @@ action: issue
 resource: DriversLicense
 ```
 
-In English, this corresponds to the statement: "AAMVA has authorized the DMV to issue Drivers Licenses."
+In English, this corresponds to the statement: "AAMVA indicates that the DMV is authorized to issue Drivers Licenses, according to the system it maintains on behalf of member states."
 
 #### Recognition Authority Statements
 
@@ -41,6 +41,7 @@ Unlike an [[ref: authorization authority statement]], the authority making a [[r
 :::
 
 **Example Recognition Statement (Pseudocode)**
+
 ```sh
 authority_id: France
 entity_id : Germany
@@ -48,7 +49,7 @@ action: issue
 resource: Passport
 ```
 
-In English, this corresponds to the statement: "France recognizes Germany to issue Passports."
+In English, this corresponds to the statement: "France recognizes Germany for official German Government sources and issued credentials (e.g. passport issuance)."
 
 ### Governance Frameworks
 
