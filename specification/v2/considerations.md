@@ -2,7 +2,7 @@
 
 _This section is informative._
 
-All implementers (“bindings [[ref:TRQP binding]]” and “bridges [[ref:TRQP bridge]]”) of TRQP **SHOULD** take the following threats into account and implement appropriate controls:
+All implementers (“bindings [[ref:TRQP binding]]” and “bridges [[ref:TRQP bridge]]”) of TRQP should take the following threats into account and implement appropriate controls:
 
 - **Trust Anchor Hijacking**: Use strong cryptography and rotate keys regularly.
 - **Trust Registry Bugs**: Conduct code reviews, vulnerability scans, and robust QA.
