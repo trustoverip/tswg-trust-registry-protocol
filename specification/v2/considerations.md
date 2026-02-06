@@ -54,4 +54,6 @@ Key factors involved in each category:
   - **Bridging Governance & Registries**:  
     - The registry should integrate with the broader ecosystem governance framework, adhering to the requirements of this specification for identifier creation (e.g., using compliant identifier strings, URIs, and/or DID methods) and service endpoint specifications.  
     - Document how the registry bubbles up the state of authorizations, including how updates and revocations are handled to maintain an accurate and timely reflection of the ecosystem’s trust landscape.
-
+- **Additional Bindings**: Additional bindings may be considered, including:
+  - **DIDComm TRQP Binding**: establishing a DIDComm-based protocol, including RFCs that may be required for formalization.
+  - **TSP TRQP Binding**: establishing a TSP-based protocol, including RFCs that may be required for formalization.
