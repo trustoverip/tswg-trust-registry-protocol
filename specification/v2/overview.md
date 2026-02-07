@@ -22,6 +22,7 @@ For a complete overview of the motivations and core concepts behind TRQP, please
 :::
 
 ## Introduction
+
 _This section is informative._
 
 The ToIP Trust Registry Query Protocol (TRQP) is a lightweight, read-only protocol for making fast, efficient queries for authoritative data from *trust registries*, also known as *trust lists*. To use an analogy, TRQP is to trust registries what DNS is to name servers.

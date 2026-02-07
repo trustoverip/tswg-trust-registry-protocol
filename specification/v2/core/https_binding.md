@@ -1,5 +1,7 @@
 ## HTTPS Binding 
 
+*This section is normative.*
+
 This section defines the requirements for making TRQP authorization and recognition queries over HTTPS with JSON.
 
 ---

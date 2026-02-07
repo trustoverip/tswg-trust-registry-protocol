@@ -3,6 +3,8 @@
 
 ## Authorization Query and Response Schemas
 
+*This section is normative.*
+
 The purpose of a TRQP authorization query is to ask the question “Does `authority_id` authorize `entity_id` to take `action` on `resource` (with optional context conditions such as `time`)?" 
 
 TRQP authorization queries and responses MUST conform to the JSON schemas defined in this section.
@@ -53,7 +55,9 @@ Content-Type: application/json
 }
 ``` 
 
-## Recognition Query and Response Schemas 
+## Recognition Query and Response Schemas
+ 
+*This section is normative.*
 
 The purpose of a TRQP recognition query is to ask the question “Does `authority_id` recognize `entity_id` (another authority) to be authoritative for `action` on `resource`?"
 

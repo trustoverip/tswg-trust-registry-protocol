@@ -1,6 +1,8 @@
 ## Security Considerations
 
-All implementers (“bindings [[ref:TRQP binding]]” and “bridges [[ref:TRQP bridge]]”) of TRQP **SHOULD** take the following threats into account and implement appropriate controls:
+_This section is informative._
+
+All implementers (“bindings [[ref:TRQP binding]]” and “bridges [[ref:TRQP bridge]]”) of TRQP should take the following threats into account and implement appropriate controls:
 
 - **Trust Anchor Hijacking**: Use strong cryptography and rotate keys regularly.
 - **Trust Registry Bugs**: Conduct code reviews, vulnerability scans, and robust QA.
@@ -18,6 +20,8 @@ All implementers (“bindings [[ref:TRQP binding]]” and “bridges [[ref:TRQP 
 
 ## Privacy Considerations
 
+_This section is informative._
+
 Implementers must design the system so that the handling of authorizations and identity information minimizes the risk of exposing sensitive details. In addition to data minimization and regulatory compliance, pay special attention to the following:
 
 - **Careful Handling of Authorizations & Identities**:  
@@ -28,6 +32,8 @@ Implementers must design the system so that the handling of authorizations and i
   - Consider implementing techniques such as query obfuscation, randomized response timings, or other privacy-preserving measures to reduce the risk of linking requests back to a particular requester.
 
 ## Implementation Considerations
+
+_This section is informative._
 
 Implementing TRQP across multiple digital trust ecosystem involves two categories of considerations:
 
@@ -48,4 +54,6 @@ Key factors involved in each category:
   - **Bridging Governance & Registries**:  
     - The registry should integrate with the broader ecosystem governance framework, adhering to the requirements of this specification for identifier creation (e.g., using compliant identifier strings, URIs, and/or DID methods) and service endpoint specifications.  
     - Document how the registry bubbles up the state of authorizations, including how updates and revocations are handled to maintain an accurate and timely reflection of the ecosystem’s trust landscape.
-
+- **Additional Bindings**: Additional bindings may be considered, including:
+  - **DIDComm TRQP Binding**: establishing a DIDComm-based protocol, including RFCs that may be required for formalization.
+  - **TSP TRQP Binding**: establishing a TSP-based protocol, including RFCs that may be required for formalization.
