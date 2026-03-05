@@ -11,7 +11,10 @@
                 "core/identifiers.md",
                 "core/api.md",
                 "core/https_binding.md",
-                "considerations.md"
+                "versioning.md",
+                "conformance.md",
+                "considerations.md",
+                "references.md"
             ],
             "katex": false,
             "logo": "https://raw.githubusercontent.com/trustoverip/logo-assets/master/logos/ToIP-Logo-Color-SolidDimensional-Horizontal-LightOnDark.svg",

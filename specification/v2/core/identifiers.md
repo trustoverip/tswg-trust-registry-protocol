@@ -6,10 +6,10 @@ Interoperability of TRQP across decentralized trust domains, communities, and ec
 
 The following requirements apply to all identifiers defined in this section:
 
-1. The identifier MUST be represented as a single string conforming to [IETF RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986) \[TODO—normative reference\].  
+1. The identifier MUST be represented as a single string conforming to [IETF RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986).  
 2. For globally unique identifiers, it is RECOMMENDED to use a [verifiable identifier](https://glossary.trustoverip.org/#term:verifiable-identifier) such as a W3C Decentralized Identifier (DID), a KERI autonomic identifier (AID), or an HTTPS URL so their authenticity can be verified by any relying party.
 
-For additional assurance, it is RECOMMENDED to use multi-anchoring of identifiers as defined by the IETF [High Assurance DIDs using DNS specification](https://www.ietf.org/archive/id/draft-carter-high-assurance-dids-with-dns-03.html) \[TODO-normative reference\] or the work of the ToIP [High Assurance Verifiable Identifiers Task Force](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/32473104/High+Assurance+VID+Task+Force+HAVID?atlOrigin=eyJpIjoiMWJkOTU4MjI5NTdhNGU0ZTlhMmI3MGRlNWYwNmVmMGQiLCJwIjoiYyJ9) \[TODO-informative reference\].
+For additional assurance, it is RECOMMENDED to use multi-anchoring of identifiers as defined by the IETF [High Assurance DIDs using DNS specification](https://www.ietf.org/archive/id/draft-carter-high-assurance-dids-with-dns-03.html) or the work of the ToIP [High Assurance Verifiable Identifiers Task Force](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/32473104/High+Assurance+VID+Task+Force+HAVID?atlOrigin=eyJpIjoiMWJkOTU4MjI5NTdhNGU0ZTlhMmI3MGRlNWYwNmVmMGQiLCJwIjoiYyJ9).
 
 ::: note 
 
@@ -38,7 +38,7 @@ The TRQP information model is patterned after the [PARC model](https://docs.ceda
 2. It is NOT REQUIRED for the `action` identifier string to be globally unique.  
 3. The `action` identifier string SHOULD:  
    1. Be specified in the authority’s governance framework.  
-   2. Be machine-discoverable via a query to the authoritative trust registr(ies).
+   2. Be machine-discoverable via a query to the authoritative trust registries.
 
 ::: note
 
@@ -52,15 +52,15 @@ To encourage cross-ecosystem interoperability, in a future version of this speci
 2. It is NOT REQUIRED for the `resource` identifier string to be globally unique.  
 3. In addition, the requirements for `resource` identifiers SHOULD:  
    1. Be defined in the authority’s governance framework.  
-   2. Be machine-discoverable via a query to the authoritative trust registr(ies).
+   2. Be machine-discoverable via a query to the authoritative trust registries.
 
 ### `context` 
 
-Because `authority_id` is the required context for all TRQP [[ref: authority statements]], a `context` object is OPTIONAL in a [[ref: TRQP query]]. If a `context` object is included, it MUST conform to the requirements in this section.
+Because `authority_id` is the required context for all TRQP [[ref: authority statements]], a `context` object is OPTIONAL in a query. If a `context` object is included, it MUST conform to the requirements in this section.
 
 1. A `context` object MUST be a JSON object whose members convey other query conditions.   
 2. If a `context` object needs to express a time-based condition:  
    1. It MUST include a `time` parameter.
-   2. The value of this parameter MUST a time value expressed in [RFC 3339](https://trustoverip.github.io/tswg-trust-registry-protocol/%7B%7BRFC3339%7D%7D) format.  
+   2. The value of this parameter MUST be a time value expressed in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format.  
    3. The value of the `time` parameter MUST be interpreted as the datetime as of which the target [[ref: authority statement]] is valid.  
 3. Additional JSON object members specifying other conditions MAY be defined by TRQP profiles or bindings.

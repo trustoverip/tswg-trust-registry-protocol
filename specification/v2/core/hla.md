@@ -14,11 +14,11 @@ Nation states, companies, NGOs, universities, churches, associations, social net
 
 An authority statement is a machine-readable representation of a policy governing an entity within the authority’s scope of authority. Trust registries serve as a mechanism for making authority statements accessible to parties who need to make trust decisions regarding those entities.
 
-TRQP supports two basic types of authority statements;
+TRQP supports two basic types of authority statements:
 
 #### Authorization Authority Statements
 
-An [[ref: authorization authority statement]] expresses a hierarchical relationship between the `authority_id` and the `entity_id`. It represents a declaration by an authority that an entity under its jurisdiction or sphere-of-control is authorized to take a specific action on a specific resource.
+An [[ref: authorization statement]] expresses a hierarchical relationship between the `authority_id` and the `entity_id`. It represents a declaration by an authority that an entity under its jurisdiction or sphere-of-control is authorized to take a specific action on a specific resource.
 
 **Example Authorization Statement (Pseudocode)**
 ```sh
@@ -28,19 +28,20 @@ action: issue
 resource: DriversLicense
 ```
 
-In English, this corresponds to the statement: "AAMVA has authorized the DMV to issue Drivers Licenses."
+In English, this corresponds to the statement: "AAMVA indicates that the DMV is authorized to issue Drivers Licenses, according to the system it maintains on behalf of member states."
 
 #### Recognition Authority Statements
 
-A [[ref: recognition authority statement]] expresses that one authority recognizes the authority of another as a **peer**. Such a recognition relationship may be unilateral or bilateral and is non-exclusive.
+A [[ref: recognition statement]] expresses that one authority recognizes the authority of another as a **peer**. Such a recognition relationship may be unilateral or bilateral and is non-exclusive.
 
 ::: note
 
-Unlike an [[ref: authorization authority statement]], the authority making a [[ref: recognition authority statement]] is **not** asserting authority over the target authority. Rather it is a referral from one peer to another.
+Unlike an [[ref: authorization statement]], the authority making a [[ref: recognition statement]] is **not** asserting authority over the target authority. Rather it is a referral from one peer to another.
 
 :::
 
 **Example Recognition Statement (Pseudocode)**
+
 ```sh
 authority_id: France
 entity_id : Germany
@@ -48,7 +49,7 @@ action: issue
 resource: Passport
 ```
 
-In English, this corresponds to the statement: "France recognizes Germany to issue Passports."
+In English, this corresponds to the statement: "France recognizes Germany for official German Government sources and issued credentials (e.g. passport issuance)."
 
 ### Governance Frameworks
 
@@ -62,6 +63,6 @@ To facilitate [trust decisions](https://glossary.trustoverip.org/#term:trust-dec
 
 ### Trust Registries
 
-In the context of this specification, a trust registry is a system accessible via a TRQP endpoint that can be queried for the authority statements published by one or more authorities. A trust registry is operated by a trust registry operator. The role of a trust registry operator may be performed directly by an authority or may be delegated to an independent trust registry operator who specializes in this function. In the latter case, from a ToIP governance architecture perspective, the trust registry operator is serving as an [administering authority](https://glossary.trustoverip.org/#term:administering-body).
+In the context of this specification, a trust registry is a system accessible via a TRQP endpoint that can be queried for the authority statements published by one or more authorities. A trust registry is operated by a [[ref: trust registry operator]]. The role of a trust registry operator may be performed directly by an [[ref: authority]] or may be delegated to an independent trust registry operator who specializes in this function. In the latter case, from a ToIP governance architecture perspective, the trust registry operator is serving as an [administering authority](https://glossary.trustoverip.org/#term:administering-body).
 
 The TRQP service endpoint for a trust registry may be published in the governance framework or discoverable from the authority\_id as described in the [identifiers section](#identifiers).
