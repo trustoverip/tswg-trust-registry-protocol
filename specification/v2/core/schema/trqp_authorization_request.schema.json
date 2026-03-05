@@ -1,6 +1,6 @@
 {
-  "$id": "trqp-recognition-request",
-  "title": "RecognitionRequest",
+  "$id": "trqp-authorization-request",
+  "title": "AuthorizationRequest",
   "type": "object",
   "required": [
     "entity_id",
@@ -11,19 +11,19 @@
   "properties": {
     "entity_id": {
       "type": "string",
-      "description": "The identifier for the entity that is being tested for recognition."
+      "description": "The identifier for the entity that is being tested for authorization."
     },
     "authority_id": {
-        "type": "string",
-        "description": "The identifier for the authority (e.g. ecosystem governing authority) being queried to recognize the entity (`entity_id`)."
+      "type": "string",
+      "description": "The identifier for the authority (e.g. ecosystem governing authority) that is being queried."
     },
     "action": {
       "type": "string",
-      "description": "The action that the query is checking Recognition for."
+      "description": "The action that the query is checking Authorization for."
     },
     "resource": {
       "type": "string",
-      "description": "The resource that the query is is checking Recognition for."
+      "description": "The resource that the query is checking Authorization for."
     },
     "context": {
       "type": "object",
@@ -32,6 +32,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+        },
+        "locator": {
+            "type": "string",
+            "description": "Provided for systems that require additional information to locate the records in question."
         }
       },
       "additionalProperties": {

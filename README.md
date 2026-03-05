@@ -37,6 +37,12 @@ To run Spec-up in live edit mode (will re-render upon save), in project folder r
 npm run edit
 ```
 
+## Test Suite
+
+A formal conformance test suite for TRQP v2.0 does not yet exist. The specification defines conformance targets for TRQP Endpoints, TRQP Consumers, and the HTTPS Binding (see the Conformance section of the [rendered specification](https://trustoverip.github.io/tswg-trust-registry-protocol/)), which are intended to serve as the basis for a future test suite.
+
+Contributions toward a test suite are welcome. If you are interested in contributing, please [start a discussion](https://github.com/trustoverip/tswg-trust-registry-protocol/discussions) or [file an issue](https://github.com/trustoverip/tswg-trust-registry-protocol/issues).
+
 ## Future Version Considerations:
 
 The TRQP v2.0 specification is focused solely on Recognition and Authorization queries. Two key areas were under discussion but didn't reach a point of closure, so have not been included in the v2.0 specification:

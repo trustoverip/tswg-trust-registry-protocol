@@ -25,7 +25,7 @@
     },
     "resource": {
         "type": "string",
-        "description": "The resource that the query is is checking Authorization for."
+        "description": "The resource that the query is checking Authorization for."
     },
     "authorized": {
       "type": "boolean",
@@ -34,12 +34,12 @@
     "time_requested": {
       "type": "string",
       "format": "date-time",
-      "description": "the server time that was requested (may be blank)."
+      "description": "the server time that was requested (may be blank), as provided in the `time` object. This value means that the response applies at the moment in time that was requested."
     },
     "time_evaluated": {
       "type": "string",
       "format": "date-time",
-      "description": "the server time that was used in the query."
+      "description": "the server time that the query was executed at on the endpoint service, per the endpoint time."
     },
     "message": {
       "type": "string",

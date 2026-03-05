@@ -12,7 +12,7 @@ TRQP authorization queries and responses MUST conform to the JSON schemas define
 ### Authorization Query Schema
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_authorization_request.jsonschema]]
+[[insert: ./specification/v2/core/schema/trqp_authorization_request.schema.json]]
 ```
 
 **Example authorization query:**
@@ -35,7 +35,7 @@ Content-Type: application/json
 ### Authorization Response Schema
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_authorization_response.jsonschema]]
+[[insert: ./specification/v2/core/schema/trqp_authorization_response.schema.json]]
 ```
 
 **Example authorization response:**
@@ -50,8 +50,9 @@ Content-Type: application/json
   "action":       "issue",
   "resource":     "country:state:driverlicense",
   "authorized":   true,
-  "time":         "2025-06-19T11:30:00Z",
-  "message":      "did:user-1234 is authorized for issue+country:state:driverlicense (action+resource) by auth-service-A.",
+  "time_requested":         "2025-06-25T00:42:00Z",
+  "time_evaluated":         "2025-06-19T11:30:00Z",
+  "message":      "did:user-1234 is authorized for issue+country:state:driverlicense (action+resource) by auth-service-A."
 }
 ``` 
 
@@ -66,10 +67,10 @@ TRQP recognition queries and responses MUST conform to the JSON schemas defined 
 ### Recognition Query Schema
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_recognition_request.jsonschema]]
+[[insert: ./specification/v2/core/schema/trqp_recognition_request.schema.json]]
 ```
 
-**Example recognitiion query:**
+**Example recognition query:**
 
 ```http
 POST /recognition
@@ -89,7 +90,7 @@ Content-Type: application/json
 ### Recognition Response
 
 ```json
-[[insert: ./specification/v2/core/schema/trqp_recognition_response.jsonschema]]
+[[insert: ./specification/v2/core/schema/trqp_recognition_response.schema.json]]
 ```
 
 **Example recognition response:**
@@ -104,6 +105,8 @@ Content-Type: application/json
   "action":       "recognize",
   "resource":     "listed-registry",
   "recognized":   true,
-  "message":      "Service-42 is recognized by did:example.",
+  "time_requested":         "2025-06-19T10:00:00Z",
+  "time_evaluated":         "2025-06-19T10:00:00Z",
+  "message":      "Service-42 is recognized by did:example."
 }
 ```

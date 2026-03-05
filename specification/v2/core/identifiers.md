@@ -38,7 +38,7 @@ The TRQP information model is patterned after the [PARC model](https://docs.ceda
 2. It is NOT REQUIRED for the `action` identifier string to be globally unique.  
 3. The `action` identifier string SHOULD:  
    1. Be specified in the authority’s governance framework.  
-   2. Be machine-discoverable via a query to the authoritative trust registr(ies).
+   2. Be machine-discoverable via a query to the authoritative trust registries.
 
 ::: note
 
@@ -52,15 +52,15 @@ To encourage cross-ecosystem interoperability, in a future version of this speci
 2. It is NOT REQUIRED for the `resource` identifier string to be globally unique.  
 3. In addition, the requirements for `resource` identifiers SHOULD:  
    1. Be defined in the authority’s governance framework.  
-   2. Be machine-discoverable via a query to the authoritative trust registr(ies).
+   2. Be machine-discoverable via a query to the authoritative trust registries.
 
 ### `context` 
 
-Because `authority_id` is the required context for all TRQP [[ref: authority statements]], a `context` object is OPTIONAL in a [[ref: TRQP query]]. If a `context` object is included, it MUST conform to the requirements in this section.
+Because `authority_id` is the required context for all TRQP [[ref: authority statements]], a `context` object is OPTIONAL in a query. If a `context` object is included, it MUST conform to the requirements in this section.
 
 1. A `context` object MUST be a JSON object whose members convey other query conditions.   
 2. If a `context` object needs to express a time-based condition:  
    1. It MUST include a `time` parameter.
-   2. The value of this parameter MUST a time value expressed in [RFC 3339](https://trustoverip.github.io/tswg-trust-registry-protocol/%7B%7BRFC3339%7D%7D) format.  
+   2. The value of this parameter MUST be a time value expressed in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format.  
    3. The value of the `time` parameter MUST be interpreted as the datetime as of which the target [[ref: authority statement]] is valid.  
 3. Additional JSON object members specifying other conditions MAY be defined by TRQP profiles or bindings.
