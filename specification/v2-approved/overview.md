@@ -2,11 +2,12 @@
 ==================
 
 - **Specification Version:** 2.0
-- **Document Status:** Working Draft
-- **ToIP Permalink:** [ToIP-Trust-Registry-Query-Protocol-TRQP-Specification-V2.0-2026-04-15](https://trustoverip.org/permalink/ToIP-Trust-Registry-Query-Protocol-TRQP-Specification-V2.0-2026-04-15.html) <!-- TODO: confirm final permalink with ToIP SC before publication -->
+- **Document Status:** ToIP Approved Deliverable
+- **ToIP Permalink:** [https://github.com/trustoverip/tswg-trust-registry-protocol](https://github.com/trustoverip/tswg-trust-registry-protocol) 
+- DOI: [10.5281/zenodo.18789010](https://doi.org/10.5281/zenodo.18789010)
 
 ::: note
-The [Approved version](../approved/) of this specification is also available.
+A [Working Draft](../draft/) of the next version of this specification is also available.
 :::
 
 **Participate:**

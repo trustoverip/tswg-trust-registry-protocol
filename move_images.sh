@@ -18,11 +18,22 @@ for DIR in $IMAGES_DIRS; do
     cp -r "$DIR"/* "$DEST_PATH"
 done
 
-mkdir -p dist/v2/bindings/restful/
-mkdir -p dist/schema
-mkdir -p dist/images
+# Approved version (output: dist/approved/)
+mkdir -p dist/approved/v2-approved/core/images
+mkdir -p dist/approved/v2-approved/images
+mkdir -p dist/approved/images
+mkdir -p dist/approved/schema
 
-# cp specification/v2/bindings/restful/swagger.yaml dist/v2/bindings/restful/swagger.yaml
-# cp specification/v2/bindings/restful/swagger.yaml dist/swagger.yaml
-cp -r specification/v2/images dist/
-cp -r specification/v2/core/schema schema/
+cp -r specification/v2-approved/images/* dist/approved/images/
+cp -r specification/v2-approved/images/* dist/approved/v2-approved/images/
+cp -r specification/v2-approved/core/images/* dist/approved/v2-approved/core/images/
+cp -r specification/v2-approved/core/schema dist/approved/schema/
+
+# Draft version (output: dist/draft/)
+mkdir -p dist/draft/v2/core/images
+mkdir -p dist/draft/v2/images
+mkdir -p dist/draft/images
+
+cp -r specification/v2/images/* dist/draft/images/
+cp -r specification/v2/images/* dist/draft/v2/images/
+cp -r specification/v2/core/images/* dist/draft/v2/core/images/

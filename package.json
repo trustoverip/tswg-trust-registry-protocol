@@ -10,7 +10,7 @@
   "scripts": {
     "edit": "node -e \"require('spec-up')()\"",
     "prerender": "bash ./move_images.sh",
-    "render": "npm run prerender && node -e \"require('spec-up')({ nowatch: true })\"",
+    "render": "bash ./render-all.sh",
     "dev": "npm run prerender && node -e \"require('spec-up')({ dev: true })\""
   },
   "keywords": [

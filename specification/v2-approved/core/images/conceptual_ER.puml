@@ -1,0 +1,93 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title TRQP Conceptual Relationships
+skinparam linetype ortho
+
+entity "Ecosystem Governance Frameworks" as EGF {
+    * EGFID
+}
+
+' entity "EcosystemEGFs" as egfmapping {
+'     * ecosystemID
+'     * EGFID
+' }
+
+entity "Ecosystems" as ecosystem {
+    * ecosystemID: string 
+      ecosystemName: string 
+      EGFID :string <<FK>> 
+
+    
+}
+
+entity "Entities" as entities {
+    * entityID: string
+
+}
+
+entity "Authorizations" as authorizations {
+    * authorizationID: string
+}
+
+entity EntityAuths {
+    * entityID
+    * authorizationID
+}
+
+entity EntityAuthQuery {
+    * entityID <<FK>>
+    * authorizationID <<FK>>
+    * ecosystemID <<FK>>
+}
+
+' Zero or One	|o--
+' Exactly One	||--
+' Zero or Many	}o--
+' One or Many	}|--
+
+ecosystem ||-- EGF
+
+' entity Authorizations
+entities }|..|| EntityAuths
+authorizations }|..|| EntityAuths
+
+' the main (hacked) QUERY
+entities }|..|| EntityAuthQuery
+EntityAuths }|..|| EntityAuthQuery
+ecosystem }|..|| EntityAuthQuery
+
+'' ///// below here is the EGF deeper linkages allowing 1:N for Ecosystem:EGF
+
+' entity EntityEGFs {
+'     * entityID <<FK>>
+'     * EGFID <<FK>>
+' }
+
+' entity EntityAuthQuery {
+'     * entityID <<FK>>
+'     * authorizationID <<FK>>
+'     * EGFID <<FK>>
+' }
+
+
+
+
+' ' ecosystem 1:n EGF
+' egfmapping }|..|| ecosystem 
+' egfmapping }|..|| EGF
+
+
+
+' ' entity EGFs
+' entities }|..|| EntityEGFs
+' EGF }|..|| EntityEGFs
+
+' ' the main QUERY
+' entities }|..|| EntityAuthQuery
+' authorizations }|..|| EntityAuthQuery
+' EGF }|..|| EntityAuthQuery
+
+
+
+@enduml
