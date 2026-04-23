@@ -1,0 +1,62 @@
+{
+  "$id": "trqp-recognition-response",
+  "title": "RecognitionResponse",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "action",
+    "resource",
+    "authority_id",
+    "time_evaluated",
+    "recognized"
+  ],
+  "properties": {
+    "entity_id": {
+        "type": "string",
+        "description": "The identifier for the entity that was queried for recognition by the authority (identified by `authority_id`)."
+      },
+      "authority_id": {
+        "type": "string",
+        "description": "The identifier for the authority (e.g. ecosystem governance authority) that was queried."
+      },
+    "action": {
+      "type": "string",
+      "description": "The action that the query is checking Recognition for."
+    },
+    "resource": {
+      "type": "string",
+      "description": "The resource that the query is checking Recognition for."
+    },
+    "recognized": {
+      "type": "boolean",
+      "description": "True if the action+resource has been recognized, false otherwise."
+    },
+    "time_requested": {
+      "type": "string",
+      "format": "date-time",
+      "description": "the server time that was requested (may be blank), as provided in the `time` object. This value means that the response applies at the moment in time that was requested."
+    },
+    "time_evaluated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "the server time that the query was executed at on the endpoint service, per the endpoint time."
+    },
+    "message": {
+      "type": "string",
+      "description": "additional details attached to the response about the recognition response"
+    },
+    "context": {
+      "type": "object",
+      "description": "the context object that was supplied for the query that was evaluated",
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "Time for query to use. If blank, uses current server time. RFC3339 required, using only Z (+00:00) offset."
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}
