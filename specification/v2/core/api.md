@@ -51,8 +51,8 @@ Content-Type: application/json
   "action":       "issue",
   "resource":     "country:state:driverlicense",
   "authorized":   true,
-  "time_requested":         "2025-06-25T00:42:00Z",
-  "time_evaluated":         "2025-06-19T11:30:00Z",
+  "time_requested":         "2025-06-19T11:30:00Z",
+  "time_evaluated":         "2025-06-25T00:42:00Z",
   "message":      "did:user-1234 is authorized for issue+country:state:driverlicense (action+resource) by auth-service-A."
 }
 ``` 
